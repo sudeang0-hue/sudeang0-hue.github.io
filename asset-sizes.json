@@ -69,6 +69,16 @@
       "file": "tasktown-sound.png",
       "width": 1586,
       "height": 992
+    },
+    {
+      "file": "gamelab-portfolio-cover-wide-v2.png",
+      "width": 1600,
+      "height": 690
+    },
+    {
+      "file": "tasktown-portfolio-cover-wide-v2.png",
+      "width": 1600,
+      "height": 690
     }
   ]
 }
