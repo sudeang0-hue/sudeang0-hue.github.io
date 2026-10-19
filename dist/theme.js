@@ -1,7 +1,6 @@
 (() => {
   const key = 'portfolio-color-theme';
   const root = document.documentElement;
-  const system = window.matchMedia('(prefers-color-scheme: dark)');
   const valid = value => value === 'dark' || value === 'light';
   let preference = null;
   try {
@@ -10,7 +9,7 @@
   } catch { /* 저장이 제한되어도 현재 페이지의 테마 전환은 유지합니다. */ }
 
   function applyTheme() {
-    const theme = preference || (system.matches ? 'dark' : 'light');
+    const theme = preference || 'light';
     root.dataset.theme = theme;
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#181e1b' : '#f6f5f1');
     const button = document.querySelector('[data-theme-toggle]');
@@ -32,7 +31,6 @@
       applyTheme();
     });
   }, { once: true });
-  system.addEventListener('change', () => { if (!preference) applyTheme(); });
   window.addEventListener('storage', event => {
     if (event.key !== key && event.key !== null) return;
     preference = valid(event.newValue) ? event.newValue : null;
