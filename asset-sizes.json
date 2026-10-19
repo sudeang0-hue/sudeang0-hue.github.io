@@ -1,0 +1,74 @@
+{
+  "assets": [
+    {
+      "file": "gamelab-combat.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-lobby-before.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-lobby-after.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-five-slots.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-result.mp4",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "gamelab-result-poster.png",
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "file": "gamelab-gameplay.mp4",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "ai-expansion-before.png",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "file": "ai-expansion-after.png",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "file": "tasktown-gameplay.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "tasktown-desktop.png",
+      "width": 2560,
+      "height": 1440
+    },
+    {
+      "file": "tasktown-scene.png",
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "file": "tasktown-tutorial.png",
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "file": "tasktown-sound.png",
+      "width": 1586,
+      "height": 992
+    }
+  ]
+}
