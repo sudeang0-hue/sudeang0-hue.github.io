@@ -1,0 +1,52 @@
+{
+  "title": "굿즈 기획·제작",
+  "headline": "그림을 상품으로 만들고, 구매자를 직접 만났습니다.",
+  "introduction": [
+    "직접 그린 그림을 바탕으로 굿즈를 기획·제작하고 판매했습니다. 초기 구상부터 실물 제작과 판매 현장까지, 어떤 선택을 했고 무엇을 확인했는지 정리했습니다."
+  ],
+  "projectTitle": "일러스트 굿즈 기획·제작 및 판매",
+  "status": "사진과 세부 작업 기록은 순차적으로 추가합니다.",
+  "overviewImages": [],
+  "stages": [
+    {
+      "id": "goods-planning",
+      "number": "01",
+      "title": "기획",
+      "heading": "대상과 상품 구성을 정한 과정",
+      "topics": ["구매 대상", "굿즈 품목", "기획 의도"],
+      "paragraphs": [],
+      "images": [],
+      "imagePlaceholder": "초기 그림·상품 구성안"
+    },
+    {
+      "id": "goods-production",
+      "number": "02",
+      "title": "제작",
+      "heading": "도안에서 실물로 완성한 과정",
+      "topics": ["크기·재질·수량", "샘플 확인", "제작 중 판단과 수정"],
+      "paragraphs": [],
+      "images": [],
+      "imagePlaceholder": "제작용 도안·샘플·완성품"
+    },
+    {
+      "id": "goods-sales",
+      "number": "03",
+      "title": "판매",
+      "heading": "상품을 선보이고 구매자를 만난 현장",
+      "topics": ["판매 장소·시기", "가격·진열", "구매자 반응"],
+      "paragraphs": [],
+      "images": [],
+      "imagePlaceholder": "판매대·가격표·당시 게시물"
+    },
+    {
+      "id": "goods-reflection",
+      "number": "04",
+      "title": "돌아보기",
+      "heading": "예상과 실제 반응을 비교하며 남긴 생각",
+      "topics": ["예상과 달랐던 점", "기억에 남는 반응", "다음 제작에서 바꿀 점"],
+      "paragraphs": [],
+      "images": [],
+      "imagePlaceholder": "판매 기록·메모·관련 자료"
+    }
+  ]
+}
