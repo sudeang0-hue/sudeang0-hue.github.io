@@ -39,7 +39,56 @@ const home='<div class="wrap"><section class="hero"><div><span class="eyebrow">G
 fs.writeFileSync(path.join(out,'index.html'),shell('index.html','게임 개발 포트폴리오','최희수의 게임 개발 포트폴리오. 디자인과 개발 경험을 연결한 게임랩 UI 리디자인, TaskTown 시스템 구현과 팀 기능 통합.',home));
 
 const gameHead='<div class="wrap"><header class="page-head"><p class="breadcrumb"><a href="index.html">프로젝트</a> &nbsp;/&nbsp; 01. OZ GAMELAB</p><span class="eyebrow">GAME UI · INTEGRATION · ART RESOURCES</span><h1>용사때문에 레벨업</h1><p class="subtitle">로비·전투 UI를 교체하고<br>HUD 입력 오류와 결과 연출을 다듬었습니다.</p><p class="project-intro">유닛 배치·합성으로 용사 웨이브를 막는 그리드 디펜스 로그라이크입니다. 4인 팀에서 로비·성장·전투 UI를 재설계하고, 게임 데이터 연결과 아트 리소스 통합을 맡았습니다.</p><dl class="meta-grid"><div><dt>PERIOD / TEAM</dt><dd>2026.09.02 — 10.14 · 4인</dd></div><div><dt>MY ROLE</dt><dd>UI 설계·구현·연동·연출</dd></div><div><dt>TOOLS</dt><dd>Unity · C# · uGUI · TMP · DOTween</dd></div></dl>'+projectActions('gamelab',notion.game,ghGame+'/tree/4a102b39733ccf71b7cc05c59eb54ebd7709d975','GitHub')+'</header><figure class="hero-figure"><button type="button" class="zoom-trigger" data-zoom aria-label="게임랩 전투 화면 크게 보기"><img src="assets/gamelab-combat.png" alt="그리드 전장과 스킬 HUD가 연결된 실제 전투 화면" width="1920" height="1080" fetchpriority="high"></button><figcaption>2026.10.14 Unity Play Mode 촬영 · 팀의 전투·성장·스킬 시스템에 UI를 연결한 화면 <span class="zoom-hint">이미지 확대 ↗</span></figcaption></figure><nav class="contents" aria-label="게임랩 사례 목차"><a href="#redesign">01 UI 리디자인</a><a href="#hud">02 HUD 오류 해결</a><a href="#result">03 결과 연출</a><a href="#ai">04 AI 아트 제작</a></nav>';
-const game1=section('redesign','01','UI 리디자인','<h3>화면의 분위기와 읽는 순서를 함께 정리했습니다.</h3><p>팀원과 멘토가 전달한 가독성·시선 흐름 피드백이 출발점이었습니다. 이미 적용된 게임 리소스와 UI가 어우러지도록 장식과 텍스처 밀도를 조정하고, 제목·주요 숫자·설명의 역할을 나눴습니다.</p><div class="compare">'+mini('gamelab-lobby-before.png','리디자인 이전 로비 화면','BEFORE / 이전 화면')+mini('gamelab-lobby-after.png','리디자인 적용 후 로비 화면','AFTER / 리디자인 적용')+'</div><p class="caption">동일한 로비 기능의 디자인 비교입니다. 선택 난이도·계정 레벨 등 표시 데이터는 다릅니다. 적용 후 이미지는 2026.10.05 구현 검토 화면입니다.</p><ul class="visual-notes"><li><strong>정보 배치</strong> 난이도 이름·캐릭터·설명을 카드 안의 위·중앙·아래로 나눴습니다.</li><li><strong>게임 리소스 연결</strong> 기사 삽화를 전투에 사용하는 픽셀 캐릭터로 교체했습니다.</li><li><strong>메뉴 정리</strong> 업적·특성·스킬 세팅·도감을 원형 아이콘과 공통 하단 바로 묶었습니다.</li></ul><ul><li>프레임·버튼·아이콘의 공통 기준을 정리하고 로비·전투 공용 Prefab에 적용했습니다.</li><li>스킬 분류와 호버·선택·잠금 상태를 별도로 표현했습니다.</li><li>카드의 초상화·점유 칸수·스킬·능력치를 분리하고 한글과 수치는 TMP로 표시했습니다.</li></ul>'+zoom('gamelab-five-slots.png','원형 5슬롯과 선택한 스킬의 상세 정보','2026.10.19 실제 로비 Play Mode · 화염구 1개 장착 / 빈 슬롯 2개 / 잠금 슬롯 2개')+'<p>보유 목록에서 장착 상태, 상세 정보로 시선이 이어지도록 배치했습니다. 시안 적용 후에는 버튼·장착·해금·저장·보상 연결을 함께 확인했습니다.</p>'+evidence([[ghGame+'/commit/632a136','디자인 적용 기록']]));
+const redesignDetail=(file,alt,label,crop,caption)=>'<figure><span class="figure-tag">'+label+'</span><button class="zoom-trigger redesign-crop redesign-crop--'+crop+'" type="button" data-zoom data-caption="'+alt+' · 전체 캡처" aria-label="'+alt+' 전체 캡처 크게 보기"><img src="assets/'+file+'" alt="'+alt+'" width="1920" height="1080" loading="lazy" decoding="async"></button><figcaption>'+caption+' <span class="zoom-hint">전체 캡처 ↗</span></figcaption></figure>';
+const game1=section('redesign','01','UI 리디자인',`
+<h3>실제 게임 리소스와 읽는 흐름에 맞춰 UI를 다시 설계했습니다.</h3>
+<p>초기에는 다크 판타지 디펜스의 분위기를 살리는 어두운 색감과 금속 장식 중심으로 UI를 구성했습니다. 팀은 가용한 유닛 에셋으로 개발을 진행했고, 실제 캐릭터와 UI를 함께 보니 표현 방식의 차이가 드러났습니다. 팀원과 멘토에게서 정보 가독성과 시선 흐름에 대한 피드백도 받았습니다.</p>
+<p>여러 방향의 시안을 공유하며 <strong>중세·마왕군의 분위기를 유지하면서 실제 에셋과 어우러지는 것</strong>을 기준으로 잡았습니다. 장식과 텍스처의 밀도를 조정하고, 제목·설명·주요 행동을 구분했습니다.</p>
+
+<section class="redesign-block" aria-labelledby="redesign-comparison-title">
+<h4 id="redesign-comparison-title">바꾼 기준을 로비 화면에 적용했습니다.</h4>
+<div class="compare redesign-lobby-comparison">${mini('gamelab-lobby-before.png','리디자인 이전 로비 · 기사 삽화와 장식 중심의 구성','BEFORE / 초기 다크 판타지 UI')}${mini('gamelab-lobby-after.png','리디자인 적용 로비 · 실제 픽셀 캐릭터와 제목·설명 구획','AFTER / 게임 리소스에 맞춘 구성')}</div>
+<p class="caption">동일한 로비 기능의 디자인 비교입니다. 선택 난이도·계정 레벨 등 표시 데이터는 다릅니다. 적용 후 이미지는 2026.10.05 구현 검토 화면입니다.</p>
+<ul class="visual-notes">
+<li><strong>리소스의 일관성</strong> 기사 삽화를 실제 전투에 사용하는 픽셀 캐릭터로 교체했습니다.</li>
+<li><strong>읽는 순서</strong> 난이도 이름·캐릭터·설명을 카드의 위·중앙·아래로 나눠, 내용을 확인한 뒤 전투 준비로 이어지도록 구성했습니다.</li>
+<li><strong>공통 규칙</strong> 제목은 명조, 설명은 고딕으로 구분했습니다. 하단 메뉴도 원형 아이콘과 공통 바로 묶어 형태와 배치 기준을 맞췄습니다.</li>
+</ul>
+</section>
+
+<section class="redesign-block" aria-labelledby="redesign-polish-title">
+<h4 id="redesign-polish-title">작은 돌출과 글자 조각도 실제 렌더에서 확인했습니다.</h4>
+<p>시안에서는 괜찮던 리소스도 개별 Sprite로 배치하고 늘리는 과정에서 경계가 어긋났습니다. 화면을 확대해 증상을 확인하고, 이미지 자체와 표시 구조 중 어디에서 생긴 문제인지 구분해 수정했습니다.</p>
+<article class="redesign-trouble">
+<h5>말풍선 모서리 밖으로 드러나는 배경</h5>
+<div class="compare redesign-detail-comparison">${redesignDetail('gamelab-dialogue-before.png','수정 전 말풍선 · 투명 모서리 밖으로 사각 배경이 돌출된 상태','BEFORE / 배경 돌출','dialogue','프레임 위·아래의 사각 배경 경계를 확인할 수 있습니다.')}${redesignDetail('gamelab-dialogue-after.png','수정 후 말풍선 · 배경과 프레임을 일체형으로 적용한 상태','AFTER / 경계 정리','dialogue','모서리와 꼬리 비율을 유지하도록 표시 방식을 조정했습니다.')}</div>
+<p>투명한 프레임 뒤의 사각 배경이 밖으로 보이는 문제였습니다. <strong>배경과 테두리를 일체형으로 적용하고, 말풍선이 늘어나도 모서리와 꼬리 비율이 유지되도록</strong> 수정했습니다. 업적 알림에도 같은 경계 정리 기준을 적용했습니다.</p>
+<p class="caption">2026.10.13 Game View의 말풍선 영역 확대입니다. 같은 문구를 비교하며, 전장 상태·웨이브·레벨은 다릅니다. 표시 검증용 UI 상태를 구성한 캡처입니다.</p>
+</article>
+<article class="redesign-trouble">
+<h5>결과 숫자 옆에 남는 작은 글자 조각</h5>
+<div class="compare redesign-detail-comparison">${redesignDetail('gamelab-number-before.png','수정 전 결과 숫자 · 시간값 왼쪽에 금색 글자 조각이 남은 상태','BEFORE / 잔여 글리프','number','시간값 왼쪽의 얇은 금색 조각이 표시됩니다.')}${redesignDetail('gamelab-number-after.png','수정 후 결과 숫자 · 같은 시간값 주변의 글자 조각이 사라진 상태','AFTER / 여백 보정','number','같은 결과 값에서 주변 글자 조각이 사라졌습니다.')}</div>
+<p>작은 금색 점처럼 보였지만, 원인은 글꼴의 추가 여백 설정이었습니다. <strong>옆 글자 일부가 함께 표시되는 설정을 보정하고 같은 결과 Prefab을 전후 렌더로 비교</strong>했습니다. 숫자 값과 집계 연출은 유지했습니다.</p>
+<p class="caption">2026.10.13 동일 결과 Prefab·동일 검증 데이터의 글꼴 여백 설정 전후 비교입니다. 본문은 시간값 주변 확대이며, 클릭하면 전체 렌더를 볼 수 있습니다.</p>
+<details class="redesign-technical"><summary>원인과 수정 자세히 보기</summary><p>TextMeshPro의 extraPadding이 글꼴 atlas에 확보된 여백을 넘어 읽으면서 인접 글자의 조각이 표시됐습니다. 추가 여백을 끄고 메시 여백을 갱신했습니다. 이미지 픽셀을 지워서 숨기는 방식은 사용하지 않았습니다.</p></details>
+</article>
+</section>
+
+<section class="redesign-block" aria-labelledby="redesign-reward-title">
+<h4 id="redesign-reward-title">보상을 고르기 전에 전장과 시너지를 확인하도록 바꿨습니다.</h4>
+<p>직접 플레이하며 후반 조합을 고려해 보상을 고르려는데, 카드가 전장을 가려 현재 시너지 효과를 확인하기 어려웠습니다. <strong>‘전장 보기 → 시너지 확인 → 보상 보기’</strong>로 돌아오는 흐름을 추가했습니다.</p>
+<div class="compare redesign-reward-comparison">${mini('gamelab-reward-expanded.png','개선 후 보상 화면 · 후보 카드 아래에 전장 보기 버튼 표시','01 / 보상 후보 확인')}${mini('gamelab-reward-inspection.png','개선 후 전장 보기 · 보상 카드를 접고 시너지 효과를 확인하는 화면','02 / 전장·시너지 확인')}</div>
+<p class="caption">두 이미지는 개선 후 기능의 전환 상태입니다. 2026.10.13 저장된 준비 상태에서 웨이브 클리어 기능으로 정상 보상 단계에 진입한 Game View 검증 캡처입니다.</p>
+<ul class="visual-notes">
+<li><strong>정보 확인</strong> 카드를 접으면 현재 배치와 시너지 설명을 확인할 수 있습니다.</li>
+<li><strong>선택 유지</strong> 보상 보기로 돌아와도 기존 후보와 보상 요청이 유지됩니다.</li>
+<li><strong>입력 구분</strong> 접힌 상태에서는 시너지 확인과 복귀만 허용하고, 카드 선택·리롤·전투 시작은 막았습니다.</li>
+</ul>
+</section>
+
+<div class="quote-note redesign-scope"><strong>담당과 확인 범위</strong><p>본인은 UI 구성, 리소스 선별·보정과 Unity 적용을 맡았습니다. 이미지 시안·리소스 생성에는 imagegen을 활용했고, 전투·성장·보상 규칙은 팀의 기존 시스템을 유지했습니다.</p><p>세부 마감과 전장 보기 사례는 2026.10.13 작업 후 10.14 팀 브랜치에 통합된 PR #101을 기준으로 정리했습니다. 당시 1920×1080·1366×768 표시·입력 검증 기록을 근거로 하며, 최종 플레이어 빌드 전체 검증과는 구분합니다.</p></div>
+${evidence([[ghGame+'/commit/632a136','로비 디자인 적용 기록'],[ghGame+'/pull/101','마감·전장 보기 팀 통합'],[ghGame+'/blob/8a4fa07/Docs/UI/HeraldrySupplement.md#사용자-피드백-마감-수정-2026-10-13','원인·수정·검증 기록']])}
+`);
 const game2=section('hud','02','게임 연동·HUD','<h3>움직여야 할 효과와 고정돼야 할 영역을 나눴습니다.</h3><p>쿨다운 효과가 배치 계산에 포함돼 슬롯이 흔들리고, 조준 중 이름표 위에서 입력을 놓으면 취소 대신 시전되는 문제가 있었습니다.</p><div class="facts"><div><h4>배치 흔들림</h4><p>슬롯·프레임·이름표의 고정 영역만 측정하고 불꽃·모래시계 효과는 계산에서 제외했습니다.</p></div><div><h4>입력 취소 오류</h4><p>활성 이름표의 RectTransform을 기존 조준 취소 영역에 포함해 팀원의 시전·쿨다운 흐름을 유지했습니다.</p></div></div><p>Bridge/Adapter를 통해 전투·보상·결과 데이터를 화면에 전달하고, 선택 명령은 기존 게임 시스템으로 되돌렸습니다. UI가 게임 규칙과 데이터를 중복으로 소유하지 않도록 구성했습니다.</p><div class="quote-note"><strong>검증 범위</strong><br>0~5개 장착·반복 활성화·쿨다운 중 배치를 확인했습니다. 저장된 런의 17번째 웨이브 종료부터 18번째 전투·패배 결과까지 관찰했고, 별도 격리 Play Mode 자동 입력 검사 12개를 통과했습니다. 전체 웨이브 완주·수동 전체 드래그·빌드 실행 검증과는 구분합니다.</div>'+evidence([[ghGame+'/commit/f1429e8','전투 UI 연동'],[ghGame+'/blob/f5c8f050847b217cbdd5345ddd723b70186da7eb/Docs/UI/CombatSkillHud.md','HUD 수정·검증 기록']]));
 const game3=section('result','03','결과·성장 연출','<h3>성장 과정은 순서대로, 스킵은 한 번에.</h3><p>통계 → 보상 카운트 → 경험치 흡수·레벨업 → 복귀 버튼의 순서로 결과를 보여주도록 구성했습니다. 런 시작·종료 데이터를 스냅샷으로 전달하고, DOTween으로 표시 시점을 조정했습니다.</p><div class="video-wrap"><video controls playsinline preload="metadata" poster="assets/gamelab-result-poster.png" aria-label="결과 정상 재생과 클릭 스킵 비교 영상"><source src="assets/gamelab-result.mp4" type="video/mp4">브라우저가 영상을 지원하지 않습니다. <a href="assets/gamelab-result.mp4">영상 파일 열기</a></video><p class="caption">정상 재생 / 클릭 스킵 비교 · 약 6초 · 무음<br>실제 결과 Prefab · 동일 검증 데이터 · InputSystem 자동 입력 · 실제 Scene 이동 제외</p></div><ul><li>일시정지 중에도 재생되도록 처리하고 동일 결과의 중복 재생을 막았습니다.</li><li>연출 스킵과 로비 복귀 입력을 분리해 한 번의 클릭이 다음 동작까지 진행하지 않도록 했습니다.</li><li>경험치 Fill·흡수 입자와 여러 번의 레벨업을 표시했습니다.</li></ul><div class="video-wrap"><video controls playsinline preload="none" poster="assets/gamelab-combat.png" aria-label="게임랩 전투와 스킬 보상 플레이 영상"><source src="assets/gamelab-gameplay.mp4" type="video/mp4"><a href="assets/gamelab-gameplay.mp4">게임플레이 영상 열기</a></video><p class="caption">Unity Play Mode 전시용 편집본 · 약 50초 · 2026.10.14 작업 자료<br>촬영용 유닛·스킬 구성 사용 · 공유용 720p 사본</p></div>');
 const game4=section('ai','04','AI 아트 제작','<h3>생성보다 중요한 것은, 바꿀 조건을 정하는 일이었습니다.</h3><p>팀원의 레퍼런스를 취합하고 피드백을 형태·장식 밀도·정보 영역·보존 요소로 나눠 imagegen의 제작 조건으로 정리했습니다. 시안을 선별한 뒤 필요한 부분만 수정하고 Unity에 적용했습니다.</p><div class="compare art-compare">'+mini('ai-expansion-before.png','칸 구분선이 없는 초기 L형 확장 삽화','초기 생성안')+mini('ai-expansion-after.png','3칸 경계를 표시한 수정 L형 확장 삽화','수정·적용안')+'</div><p><strong>예: L형 확장 삽화의 3칸 표시</strong><br>외곽 형태·흙 질감·더하기 기호는 유지하면서 수평선 1개와 하단 수직선 1개를 넣도록 조건을 정했습니다. 수정안의 칸 수·투명 배경·축소 표시를 확인해 Sprite에 적용했습니다.</p><div class="quote-note">이미지 생성·편집은 imagegen을 활용했습니다. 본인 담당은 수정 조건 정의, 시안 선택, 검수와 게임 적용입니다.</div>'+evidence([[ghGame+'/blob/4a102b39733ccf71b7cc05c59eb54ebd7709d975/Tools/Art/Sources/BattleCardShells_v2/ExpansionCellArtGeneration.json','부분 수정 프롬프트·검수 기록']]));

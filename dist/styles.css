@@ -281,3 +281,38 @@ body:has([data-history-carousel]){overflow-anchor:none}
 #goods-planning .case-body{min-width:0}
 
 @media(max-width:640px){.goods-return{gap:18px 20px}}
+
+/* 게임랩 리디자인: 원본 캡처를 보존하고 본문에서 오류 영역만 확대합니다. */
+#redesign .redesign-block{margin-top:40px;padding-top:28px;border-top:1px solid var(--line);min-width:0}
+#redesign .redesign-block h4{font-size:20px;line-height:1.55;margin:0 0 15px;letter-spacing:-.035em}
+#redesign .redesign-block p{font-size:14px;line-height:1.85;color:var(--muted);margin:12px 0}
+#redesign .redesign-block .caption{font-size:11px;line-height:1.75}
+#redesign .redesign-trouble{margin-top:26px;min-width:0}
+#redesign .redesign-trouble+.redesign-trouble{margin-top:36px}
+#redesign .redesign-trouble h5{font-size:16px;line-height:1.6;font-weight:650;margin:0 0 15px;letter-spacing:-.02em}
+#redesign .compare{margin:22px 0 14px}
+#redesign .compare>figure{min-width:0}
+#redesign .compare img{display:block;width:100%;height:auto}
+#redesign .compare figcaption{font-size:11px;line-height:1.75;margin-top:10px}
+#redesign .redesign-crop{position:relative;overflow:hidden;background:var(--media);isolation:isolate}
+#redesign .redesign-crop img{position:absolute;max-width:none;height:auto}
+#redesign .redesign-crop--dialogue{aspect-ratio:840/230}
+#redesign .redesign-crop--dialogue img{width:228.5714286%;left:-90.4761905%;top:-260.8695652%}
+#redesign .redesign-crop--number{aspect-ratio:230/80}
+#redesign .redesign-crop--number img{width:834.7826087%;left:-450%;top:-506.25%}
+#redesign .redesign-technical{margin:18px 0 0;padding:13px 16px;border:1px solid var(--line);font-size:13px;color:var(--muted)}
+#redesign .redesign-technical summary{cursor:pointer;color:var(--ink);font-size:13px;line-height:1.7}
+#redesign .redesign-technical p{font-size:13px;margin:12px 0 0}
+#redesign .redesign-scope p{margin-top:9px}
+#redesign .redesign-scope strong{display:block;margin-bottom:3px}
+@media(max-width:640px){
+ #redesign .redesign-block{margin-top:30px;padding-top:22px}
+ #redesign .redesign-block h4{font-size:19px}
+ #redesign .redesign-trouble h5{font-size:16px}
+ #redesign .redesign-scope{font-size:12px;line-height:1.85}
+ #redesign .redesign-detail-comparison{gap:20px}
+}
+@media print{
+ #redesign .redesign-trouble,#redesign .compare{break-inside:avoid}
+ #redesign .redesign-crop{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}

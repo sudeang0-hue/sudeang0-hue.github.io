@@ -239,6 +239,36 @@
       "file": "goods-i009.jpg",
       "width": 1440,
       "height": 1080
+    },
+    {
+      "file": "gamelab-dialogue-before.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-dialogue-after.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-number-before.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-number-after.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-reward-expanded.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-reward-inspection.png",
+      "width": 1920,
+      "height": 1080
     }
   ]
 }
