@@ -316,3 +316,34 @@ body:has([data-history-carousel]){overflow-anchor:none}
  #redesign .redesign-trouble,#redesign .compare{break-inside:avoid}
  #redesign .redesign-crop{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
+
+/* Figma 초기 흐름 설계와 재생 영역은 게임랩 페이지에서만 사용합니다. */
+#flow .case-label,#flow .case-body{min-width:0}
+#flow .figma-player{margin:30px 0 18px;border:1px solid var(--line);background:var(--surface);min-width:0}
+#flow .figma-player-bar{padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+#flow .figma-player-bar h4{font-size:15px;font-weight:650;margin:0;line-height:1.6}
+#flow .figma-flow-options{display:flex;flex-wrap:wrap;gap:8px}
+#flow .figma-flow-options button{background:transparent;border:1px solid var(--line);padding:9px 13px;min-height:44px;font-size:12px;line-height:1.4;color:var(--muted)}
+#flow .figma-flow-options button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--inverse)}
+#flow .figma-player-stage{position:relative;width:100%;aspect-ratio:16/10;min-height:320px;background:var(--paper);overflow:hidden}
+#flow .figma-player-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:24px}
+#flow .figma-play-mark{font-size:38px;color:var(--green);line-height:1}
+#flow .figma-player-placeholder p{font-size:14px;line-height:1.8;color:var(--muted);max-width:340px}
+#flow .figma-player-placeholder .btn-quiet{min-height:44px;border-color:var(--green);color:var(--green)}
+#flow .figma-player-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000}
+#flow .figma-player-status{padding:14px 20px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+#flow .figma-player-status p{font-size:12px;line-height:1.8;color:var(--muted);flex:1 1 260px;margin:0}
+#flow .figma-player-status button{min-height:44px;font-size:11px;flex-shrink:0}
+#flow [hidden]{display:none!important}
+#flow .figma-player-links{margin-top:16px;gap:15px 24px}
+#flow .figma-player-links a{min-height:44px}
+#flow .figma-flow-options button:focus-visible,#flow .figma-player button:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+@media(max-width:640px){
+ #flow .figma-player-bar{padding:15px 16px;gap:12px}
+ #flow .figma-player-stage{min-height:280px}
+ #flow .figma-player-placeholder{padding:20px}
+ #flow .figma-player-status{padding:13px 16px}
+ #flow .figma-player-links{align-items:flex-start;flex-direction:column;gap:8px}
+ #flow .figma-player-links a{font-size:13px}
+}
+@media print{#flow .figma-player{display:none}#flow .media{break-inside:avoid}}

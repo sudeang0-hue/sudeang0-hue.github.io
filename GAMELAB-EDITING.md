@@ -1,4 +1,4 @@
-# 게임랩 UI 리디자인 사례 편집 안내
+# 게임랩 Figma 흐름 설계·UI 리디자인 편집 안내
 
 ## 범위
 
@@ -46,3 +46,29 @@
 이번 편집 전 사이트 기준 커밋은 `0c0b8bb8ba8d54d42ff1a397b11ac3dfe520510f`입니다. 전체 소스 ZIP 및 변경 전 파일 사본은 별도 비공개 작업 폴더에 보관합니다. 백업과 원본 검증 기록은 공개 저장소에 추가하지 않습니다.
 
 공개 후 되돌릴 때는 이번 사이트 변경 커밋만 `git revert <해당 커밋>`으로 취소하는 새 커밋을 만들어 검토 후 올리면 자동 배포됩니다. 이후 다른 작업을 덮어쓰는 전체 초기화는 사용하지 않습니다.
+
+
+## 01 Figma UI 흐름 설계 추가 — 2026.10.21
+
+- 새 `#flow` 절을 기존 리디자인 앞에 배치했습니다. `#redesign/#hud/#result/#ai` 주소는 보존하고 화면 번호는 02/03/04/05로 변경했습니다.
+- `gamelab-figma-flow.png`는 사용자가 제공한 초기 프로토타입 연결 캔버스(1264×804) 그대로입니다. 원본에 참고 게임 화면과 메모가 함께 있습니다. 실제 게임 완성 화면이나 새로 생성한 구조도로 소개하지 않습니다.
+- Figma 파일의 실제 시작점은 `3:2`(Flow 1, Game Main Loby)와 `31:8`(Flow 2, Game Play - 대기)입니다. 원본의 `flowStartingPoints`와 클릭/오버레이/복귀 연결을 읽기 전용으로 확인했습니다. Figma 파일·공유 설정을 수정하지 않았습니다.
+- 로비의 특성·스킬 세팅·도감·설정은 `OVERLAY`, 전투 준비는 `NAVIGATE`입니다. 전투 결과 `95:889`/`95:900`의 로비 복귀 연결은 `3:2`입니다. 증강 선택·확률 설명·설정의 닫기 연결도 있습니다.
+- 초기 프로토타입에는 `Game Loby - 미정`과 예시 수치가 있습니다. 게임 규칙·저장·전투 전체를 검증했다는 의미로 확대하지 않습니다.
+
+### 재생·설정
+
+`generate.mjs`의 `figmaFlowURLs`와 `figmaLobby/figmaBattle`이 원본 파일 키와 시작점을 관리합니다. 버튼의 데이터 속성이 iframe 주소와 외부 재생 링크를 함께 제공합니다. `dist/figma-prototype.js`는 재생 요청 전에는 iframe 주소를 설정하지 않고, 재생·시작점 전환·선택 흐름 재시작만 담당합니다.
+
+공식 URL은 `https://embed.figma.com/proto/<fileKey>?node-id=...&starting-point-node-id=...&embed-host=sudeang-portfolio`를 사용합니다. 별도 OAuth 앱 등록이나 토큰은 사용하지 않습니다. Figma의 원본 공개 권한을 그대로 따르며 공유 설정을 우회하지 않습니다. 외부 재생·원본 링크는 iframe과 별도로 유지합니다.
+
+- [Figma 공식 프로토타입 임베드](https://developers.figma.com/docs/embeds/embed-figma-prototype/)
+- [임베드 접근 규칙](https://developers.figma.com/docs/embeds/security-access/)
+- [임베드 문제 해결](https://developers.figma.com/docs/embeds/troubleshooting/)
+- [설계 원본](https://www.figma.com/design/Kz3TNcpjEhLXT7lGoCWinf?node-id=0-1)
+
+사용자가 재생을 요청하면 Figma 콘텐츠를 외부에서 불러옵니다. 해당 서비스의 쿠키·접근 정책이나 브라우저 설정에 따라 재생 화면이 열리지 않을 수 있으므로 외부 재생 링크를 지우지 않습니다. 초기 공개 검수에서는 로그인 없는 로비와 전투 시작 화면·임베드 표시를 직접 확인합니다. iframe의 load 이벤트만으로 정상 재생을 판정하지 않습니다.
+
+### 원본 보존
+
+추가 전 사이트 기준은 `89a8793d8ae745a3350b02bdb3a443e87a45ef5b`입니다. 전체 소스 ZIP과 수정 전 파일은 별도 비공개 작업 폴더에 보관합니다. 이미지·문구와 시작점을 바꿀 때에는 링크·선택 상태·재시작·PC/390px/320px·라이트/다크·원본 이미지 확대를 확인합니다. 기존 UI 리디자인 본문과 검증 이미지는 유지합니다.
