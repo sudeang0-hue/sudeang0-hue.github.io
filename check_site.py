@@ -44,3 +44,8 @@ history=(root/'history.html').read_text(encoding='utf-8')
 assert history.index('id="work"') < history.index('id="education"') < history.index('id="activities"')
 assert 'href="history.html" aria-current="page"' in history
 assert '게임개발 세부 메뉴' not in history
+
+assert 'src="history-carousel.js"' in history
+assert history.count('data-history-select=') == 3
+assert 'data-history-carousel' in history and 'class="history-track"' in history
+assert 'history-side' not in history
