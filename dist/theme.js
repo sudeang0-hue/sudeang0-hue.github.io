@@ -15,7 +15,6 @@
     const button = document.querySelector('[data-theme-toggle]');
     if (!button) return;
     const label = theme === 'dark' ? '라이트 모드' : '다크 모드';
-    button.querySelector('[data-theme-label]').textContent = label;
     button.setAttribute('aria-label', label + '로 전환');
     button.title = label + '로 전환';
     button.hidden = false;

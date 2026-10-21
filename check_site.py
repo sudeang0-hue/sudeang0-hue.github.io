@@ -31,7 +31,7 @@ for file in sorted(root.glob('*.html')):
 print(json.dumps(results,ensure_ascii=False,indent=2))
 (Path(__file__).parent/'qa').mkdir(exist_ok=True)
 (Path(__file__).parent/'qa'/'static-checks.json').write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding='utf-8')
-assert len(results)==4
+assert len(results)==6
 assert not any(r['errors'] for r in results)
 
 

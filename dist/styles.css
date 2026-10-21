@@ -59,3 +59,36 @@
 @media screen and (max-width:640px){
  .hero-copy,.project-intro,.resume-item p,.resume-item li,.resume-note p,.resume-skills p,.cert-list li,.facts p{font-size:14px}
 }
+
+/* 상위 분야와 게임개발 세부 메뉴의 위계를 구분합니다. */
+html{scroll-padding-top:155px}
+.theme-toggle{width:44px;height:44px;padding:0;border-radius:50%}
+.theme-toggle svg{width:19px;height:19px}
+.nav>nav{gap:28px}
+.nav>nav a{white-space:nowrap;min-height:44px;display:inline-flex;align-items:center}
+.category-subnav{border-top:1px solid var(--line)}
+.category-subnav nav{gap:25px;font-size:12px;min-height:44px;color:var(--muted)}
+.category-subnav a{padding:9px 0}
+.category-subnav a[aria-current=page]{color:var(--ink)}
+.category-head{padding:68px 0 44px}
+.category-head h1{font-size:clamp(34px,4vw,48px)}
+.category-head .subtitle{margin-top:18px;font-size:18px;color:var(--muted)}
+.category-pending{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:48px 0;display:flex;align-items:flex-start;gap:24px}
+.pending-mark{width:44px;height:44px;flex:0 0 44px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;font-size:22px;color:var(--green)}
+.category-pending h2{font-size:23px}
+.category-pending p{font-size:15px;color:var(--muted);margin-top:12px}
+.category-return{display:flex;gap:26px;flex-wrap:wrap;padding:28px 0 70px}
+@media(max-width:900px){.nav>nav{gap:20px}}
+@media(max-width:640px){
+ html{scroll-padding-top:165px}
+ .nav{gap:5px 12px;padding:10px 0 0}
+ .nav>nav{justify-content:space-between;gap:12px;font-size:12px}
+ .nav>nav a{padding:8px 0}
+ .category-subnav nav{justify-content:flex-start;gap:22px;font-size:11px}
+ .category-head{padding:36px 0 28px}
+ .category-head .subtitle{font-size:16px}
+ .category-pending{padding:30px 0;gap:15px}
+ .category-pending h2{font-size:20px}
+ .category-pending p{font-size:14px}
+ .category-return{padding-bottom:44px}
+}
