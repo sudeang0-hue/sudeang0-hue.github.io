@@ -335,7 +335,8 @@ body:has([data-history-carousel]){overflow-anchor:none}
 #flow .figma-player-status p{font-size:12px;line-height:1.8;color:var(--muted);flex:1 1 260px;margin:0}
 #flow .figma-player-status button{min-height:44px;font-size:11px;flex-shrink:0}
 #flow [hidden]{display:none!important}
-#flow .figma-player-links{margin-top:16px;gap:15px 24px}
+#flow .figma-player-links{margin:0;padding:12px 20px;border-bottom:1px solid var(--line);gap:12px 24px}
+#flow .flow-next{margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
 #flow .figma-player-links a{min-height:44px}
 #flow .figma-flow-options button:focus-visible,#flow .figma-player button:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
 @media(max-width:640px){
@@ -343,7 +344,7 @@ body:has([data-history-carousel]){overflow-anchor:none}
  #flow .figma-player-stage{min-height:280px}
  #flow .figma-player-placeholder{padding:20px}
  #flow .figma-player-status{padding:13px 16px}
- #flow .figma-player-links{align-items:flex-start;flex-direction:column;gap:8px}
+ #flow .figma-player-links{padding:10px 16px;align-items:flex-start;flex-direction:column;gap:4px}
  #flow .figma-player-links a{font-size:13px}
 }
-@media print{#flow .figma-player{display:none}#flow .media{break-inside:avoid}}
+@media print{#flow .figma-player{display:block;border:0;background:none;margin:0}#flow .figma-player-bar,#flow .figma-player-stage,#flow .figma-player-status{display:none}#flow .figma-player-links{border:0;padding:0}#flow .media{break-inside:avoid}}
