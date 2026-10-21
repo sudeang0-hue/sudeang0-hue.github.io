@@ -31,7 +31,16 @@ for file in sorted(root.glob('*.html')):
 print(json.dumps(results,ensure_ascii=False,indent=2))
 (Path(__file__).parent/'qa').mkdir(exist_ok=True)
 (Path(__file__).parent/'qa'/'static-checks.json').write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding='utf-8')
-assert len(results)==6
+assert {r['page'] for r in results} == {'index.html','gamelab.html','tasktown.html','resume.html','planning.html','design.html','history.html'}
 assert not any(r['errors'] for r in results)
 
 
+
+# 공통 메뉴와 연혁의 구분 순서가 모든 페이지에서 유지되는지 확인합니다.
+for file in sorted(root.glob('*.html')):
+    raw=file.read_text(encoding='utf-8')
+    assert 'href="history.html"' in raw, f'Missing history navigation: {file.name}'
+history=(root/'history.html').read_text(encoding='utf-8')
+assert history.index('id="work"') < history.index('id="education"') < history.index('id="activities"')
+assert 'href="history.html" aria-current="page"' in history
+assert '게임개발 세부 메뉴' not in history

@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { renderHistory } from './history.mjs';
 const out=path.join(import.meta.dirname,'dist');
 const notion={main:'https://app.notion.com/p/5108337d16328272a5ea8175a56bbb89',intro:'https://app.notion.com/p/3948337d163280b198b5e08dfede269f',game:'https://app.notion.com/p/3f98337d163280e1b8faf226e7e62f92',task:'https://app.notion.com/p/3c98337d163281f8afbbec96f80933b9'};
 const ghGame='https://github.com/OZ-GAME-LAB/OZGL2_1';
@@ -26,11 +27,11 @@ const zoom=(file,alt,caption='',className='')=>'<figure class="media '+className
 const mini=(file,alt,label)=>'<figure><span class="figure-tag">'+label+'</span><button class="zoom-trigger" type="button" data-zoom aria-label="'+alt+' 크게 보기"><img src="assets/'+file+'" alt="'+alt+'" loading="lazy"></button></figure>';
 const section=(id,num,label,body)=>'<section class="case" id="'+id+'"><div class="case-label"><span class="num">'+num+'</span><h2>'+label+'</h2></div><div class="case-body">'+body+'</div></section>';
 const evidence=(links)=>'<div class="evidence">'+links.map(([url,text])=>ext(url,text,'')).join('')+'</div>';
-const footer='<section class="contact wrap"><div><h2>함께 만들 게임의 이야기를 기다립니다.</h2><p>최희수 · Portfolio</p></div><div class="links"><a class="text-link" href="mailto:sudeang_@naver.com">이메일 <span aria-hidden="true">↗</span></a>'+ext('https://github.com/sudeang0-hue','GitHub')+'</div></section><footer class="site-footer"><div class="wrap"><p>© 2026 최희수 · Portfolio</p><p>내용 기준 2026.10.19</p></div></footer>';
+const footer='<section class="contact wrap"><div><h2>함께 만들 게임의 이야기를 기다립니다.</h2><p>최희수 · Portfolio</p></div><div class="links"><a class="text-link" href="mailto:sudeang_@naver.com">이메일 <span aria-hidden="true">↗</span></a>'+ext('https://github.com/sudeang0-hue','GitHub')+'</div></section><footer class="site-footer"><div class="wrap"><p>© 2026 최희수 · Portfolio</p><p>내용 기준 2026.10.21</p></div></footer>';
 const dialog='<dialog class="modal" id="image-dialog" aria-label="확대 이미지 보기"><div class="modal-bar"><span data-image-caption></span><div class="modal-actions"><button type="button" data-original aria-pressed="false">원본 크기</button><button type="button" class="modal-close" aria-label="확대 이미지 닫기">닫기 ×</button></div></div><div class="modal-image-wrap" tabindex="0" aria-label="확대 이미지를 좌우와 위아래로 이동"><img alt=""></div></dialog>';
 function shell(page,title,description,body){
- const nav=[['index.html','게임개발'],['planning.html','굿즈 기획·제작'],['design.html','디자인 및 홍보']];
- const category=['planning.html','design.html'].includes(page)?page:'index.html';
+ const nav=[['index.html','게임개발'],['planning.html','굿즈 기획·제작'],['design.html','디자인 및 홍보'],['history.html','연혁']];
+ const category=['planning.html','design.html','history.html'].includes(page)?page:'index.html';
  const gameNav=category==='index.html'?'<div class="category-subnav wrap"><nav aria-label="게임개발 세부 메뉴">'+[['index.html','전체 프로젝트'],['gamelab.html','게임랩'],['tasktown.html','TaskTown'],['resume.html','이력서']].map(([href,text])=>'<a href="'+href+'"'+(href===page?' aria-current="page"':'')+'>'+text+'</a>').join('')+'</nav></div>':'';
  return '<!doctype html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#f6f5f1"><title>'+title+' · 최희수</title><meta name="description" content="'+description+'"><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="theme.js"></script><link rel="stylesheet" href="styles.css"><script src="app.js" defer></script></head><body><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="nav wrap"><a class="brand" href="index.html">최희수<span>PORTFOLIO</span></a><nav aria-label="주요 메뉴">'+nav.map(([href,text])=>'<a href="'+href+'"'+(href===category?' aria-current="page"':'')+'>'+text+'</a>').join('')+'</nav><button type="button" class="theme-toggle" data-theme-toggle hidden><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4A8.7 8.7 0 0 1 10.6 3.4 8.7 8.7 0 1 0 20.6 13.4Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></div>'+gameNav+'</header><main id="main">'+body+'</main>'+footer+dialog+'</body></html>';
 }
@@ -80,12 +81,14 @@ const goodsHeader='<div class="wrap"><header class="category-head goods-head"><s
 const goodsCases=goods.stages.map(stage=>section(escapeHtml(stage.id),escapeHtml(stage.number),escapeHtml(stage.title),'<h3>'+escapeHtml(stage.heading)+'</h3>'+(stage.paragraphs.length?goodsParagraphs(stage.paragraphs):'<p class="goods-record-pending">세부 작업 기록을 정리하고 있습니다.</p>')+'<ul class="goods-topics" aria-label="'+escapeHtml(stage.title)+' 정리 항목">'+stage.topics.map(topic=>'<li>'+escapeHtml(topic)+'</li>').join('')+'</ul>'+goodsPhotos(stage.images,stage.imagePlaceholder))).join('');
 const goodsEnd='<div class="category-return"><a class="text-link" href="index.html">게임개발 프로젝트 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="design.html">디자인 및 홍보 보기 <span aria-hidden="true">↗</span></a></div></div>';
 fs.writeFileSync(path.join(out,'planning.html'),shell('planning.html',goods.title,'직접 그린 그림을 바탕으로 굿즈를 기획·제작하고 판매한 경험. 기획, 제작, 판매와 돌아보기를 정리합니다.',goodsHeader+goodsCases+goodsEnd));
-console.log('6 pages generated.');
+const history=JSON.parse(fs.readFileSync(new URL('./history-content.json',import.meta.url),'utf8'));
+fs.writeFileSync(path.join(out,'history.html'),shell('history.html',history.title,'최희수의 근무·교육·활동 연혁. 매장 운영과 디자인·웹툰 제작, 게임 개발 교육의 경험을 정리합니다.',renderHistory(history)));
+console.log('7 pages generated.');
 
 
 // Reserve image space before lazy loading to keep section anchors stable.
 const mediaSizes=new Map(JSON.parse(fs.readFileSync(path.join(import.meta.dirname,'asset-sizes.json'),'utf8')).assets.map(a=>[a.file,a]));
-for(const file of ['index.html','gamelab.html','tasktown.html','resume.html','planning.html','design.html']){
+for(const file of ['index.html','gamelab.html','tasktown.html','resume.html','planning.html','design.html','history.html']){
  let html=fs.readFileSync(path.join(out,file),'utf8');
  html=html.replace(/<img\b[^>]*src="assets\/([^"]+)"[^>]*>/g,(tag,file)=>{const a=mediaSizes.get(file);return !a?.width||/\bwidth=/.test(tag)?tag:tag.slice(0,-1)+' width="'+a.width+'" height="'+a.height+'">'});
  fs.writeFileSync(path.join(out,file),html);

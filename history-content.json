@@ -1,0 +1,128 @@
+{
+  "title": "연혁",
+  "introduction": "매장 운영과 콘텐츠 제작, 게임 개발 교육을 거치며 쌓은 경험입니다.",
+  "updatedAt": "2026-10-21",
+  "sections": [
+    {
+      "id": "work",
+      "title": "근무",
+      "label": "WORK EXPERIENCE",
+      "items": [
+        {
+          "id": "paik-coffee",
+          "start": "2025-04",
+          "end": "2026-01",
+          "organization": "빽다방 신림대학점",
+          "role": "마감 매니저",
+          "description": "매장과 스태프를 관리하고 근무 스케줄을 조정했습니다. 물류 발주와 음료 제조를 함께 맡았습니다."
+        },
+        {
+          "id": "twosome",
+          "start": "2024-06",
+          "end": "2025-02",
+          "organization": "투썸플레이스 아름제일여성병원점",
+          "role": "마감 매니저",
+          "description": "고객 응대와 음료 제조, 매장 스태프 관리를 담당했습니다."
+        },
+        {
+          "id": "gwangjin-webtoon",
+          "start": "2022-04",
+          "end": "2024-01",
+          "organization": "광진구청 홍보담당관",
+          "role": "PR전문 웹툰크리에이터",
+          "description": "뉴딜일자리사업에 참여해 주민 편의·문화·축제 등 구청 사업의 안내 사항을 웹툰으로 구성했습니다. Photoshop과 Illustrator로 홍보용 캐릭터 일러스트도 제작했습니다."
+        },
+        {
+          "id": "salady",
+          "start": "2021-06",
+          "end": "2022-04",
+          "organization": "샐러디 보라매점",
+          "role": "제조·고객 응대",
+          "description": "샐러드 제조, 고객 응대와 물류 정리를 담당했습니다."
+        },
+        {
+          "id": "gelati",
+          "start": "2020-09",
+          "end": "2020-12",
+          "organization": "젤라띠젤라띠 홍대 본점",
+          "role": "오픈·판매",
+          "description": "매장 오픈과 판매를 준비하고 젤라또를 판매했습니다. 에스프레소 추출과 블렌더 음료 제조도 맡았습니다."
+        },
+        {
+          "id": "dunkin",
+          "start": "2020-01",
+          "end": "2020-06",
+          "organization": "던킨도너츠 교대법원점",
+          "role": "음료·베이커리 제조",
+          "description": "커피와 간단한 베이커리를 제조하고 매장을 정리했습니다. 재고의 유통기한과 보관일을 관리했습니다."
+        },
+        {
+          "id": "megazone-cafe",
+          "start": "2019-07",
+          "end": "2019-11",
+          "organization": "강남 메가존 클라우드 카페",
+          "role": "음료 제조·매장 관리",
+          "description": "커피 추출·판매, 우유 스팀과 블렌더를 이용한 음료 제조, 매장 관리를 담당했습니다."
+        },
+        {
+          "id": "open-art",
+          "start": "2018-02",
+          "end": "2018-04",
+          "organization": "열린아트",
+          "role": "일러스트 디자인",
+          "description": "항공기 비상안내도 브로슈어의 일러스트를 디자인했습니다."
+        },
+        {
+          "id": "chicken-store",
+          "start": "2017-06",
+          "end": "2018-04",
+          "organization": "짱닭치킨 봉일시장점",
+          "role": "매장 아르바이트",
+          "description": "POS 조작과 서빙, 청소와 진열 정리를 담당했습니다."
+        }
+      ]
+    },
+    {
+      "id": "education",
+      "title": "교육",
+      "label": "EDUCATION",
+      "items": [
+        {
+          "id": "oz-gamelab",
+          "start": "2026-09",
+          "end": "2026-10",
+          "organization": "OZ GAMELAB 2기",
+          "role": "교육·프로젝트 참여",
+          "description": "오즈코딩스쿨·넥스트러너스의 4인 협업 프로젝트에서 UI 설계·구현과 아트 리소스 통합을 맡았습니다. 피드백을 반영한 리디자인, HUD 연동과 결과 연출을 구현했습니다.",
+          "link": {"href": "gamelab.html", "label": "게임랩 작업 보기"}
+        },
+        {
+          "id": "oz-bootcamp",
+          "start": "2026-02",
+          "end": "2026-08",
+          "organization": "오즈코딩스쿨 게임 개발 부트캠프 5기",
+          "role": "게임 개발 교육",
+          "description": "C#·Unity를 학습하며 2인·5인 협업 프로젝트를 수행했습니다. TaskTown의 Unity 개발 팀장으로 Scene 전환·Tutorial·공용 사운드 구현과 팀 기능 통합을 맡았습니다.",
+          "link": {"href": "tasktown.html", "label": "TaskTown 작업 보기"}
+        },
+        {
+          "id": "hangang-school",
+          "start": "2016-03",
+          "end": "2019-02",
+          "organization": "한강미디어고등학교",
+          "role": "산업디자인과 · 졸업",
+          "description": "산업디자인과를 졸업했습니다."
+        }
+      ]
+    },
+    {
+      "id": "activities",
+      "title": "활동",
+      "label": "ACTIVITIES",
+      "items": [],
+      "emptyTitle": "활동 기록을 준비하고 있습니다.",
+      "emptyDescription": "온리전 참여와 굿즈 제작·판매 등 활동의 시기와 작업 자료를 차례로 정리할 예정입니다.",
+      "link": {"href": "planning.html", "label": "굿즈 기획·제작 보기"}
+    }
+  ]
+}
