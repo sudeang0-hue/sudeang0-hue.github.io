@@ -82,7 +82,7 @@ const goodsCases=goods.stages.map(stage=>section(escapeHtml(stage.id),escapeHtml
 const goodsEnd='<div class="category-return"><a class="text-link" href="index.html">게임개발 프로젝트 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="design.html">디자인 및 홍보 보기 <span aria-hidden="true">↗</span></a></div></div>';
 fs.writeFileSync(path.join(out,'planning.html'),shell('planning.html',goods.title,'직접 그린 그림을 바탕으로 굿즈를 기획·제작하고 판매한 경험. 기획, 제작, 판매와 돌아보기를 정리합니다.',goodsHeader+goodsCases+goodsEnd));
 const history=JSON.parse(fs.readFileSync(new URL('./history-content.json',import.meta.url),'utf8'));
-fs.writeFileSync(path.join(out,'history.html'),shell('history.html',history.title,'최희수의 근무·교육·활동 연혁. 매장 운영과 디자인·웹툰 제작, 게임 개발 교육의 경험을 정리합니다.',renderHistory(history)));
+fs.writeFileSync(path.join(out,'history.html'),shell('history.html',history.title,'최희수의 근무·교육 및 자격·활동 연혁. 매장 운영과 디자인·웹툰 제작, 게임 개발 교육과 자격 취득 내역을 정리합니다.',renderHistory(history)));
 console.log('7 pages generated.');
 
 

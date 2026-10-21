@@ -3,6 +3,8 @@
   if (!root) return;
   const viewport = root.querySelector('.history-viewport');
   const track = root.querySelector('.history-track');
+  const toolbar = root.querySelector('.history-controls');
+  const siteHeader = document.querySelector('.site-header');
   const panels = [...track.children];
   const controls = [...root.querySelectorAll('[data-history-select]')];
   const status = root.querySelector('[data-history-status]');
@@ -18,6 +20,18 @@
   const visibleCount = () => Number(getComputedStyle(viewport).getPropertyValue('--history-columns')) || 1;
   const step = () => panels[0].getBoundingClientRect().width + (parseFloat(getComputedStyle(track).gap) || 0);
   const offset = x => { track.style.transform = `translateX(${x}px)`; };
+
+  function measureHeader() {
+    root.style.setProperty('--history-header-height', `${Math.ceil(siteHeader?.getBoundingClientRect().height || 0)}px`);
+  }
+
+  function revealPanelStart() {
+    const top = viewport.getBoundingClientRect().top;
+    const clearance = (siteHeader?.getBoundingClientRect().height || 0) + toolbar.getBoundingClientRect().height + 24;
+    if (top < clearance - 1) {
+      window.scrollTo({top: Math.max(0, window.scrollY + top - clearance), behavior: reducedMotion.matches ? 'instant' : 'smooth'});
+    }
+  }
 
   function resizeHeight() {
     if (motion) return;
@@ -47,7 +61,10 @@
     current = index;
     motion = null;
     sync(true);
-    if (updateHash) history.replaceState(null, '', `#${panels[current].id}`);
+    if (updateHash) {
+      history.replaceState(null, '', `#${panels[current].id}`);
+      revealPanelStart();
+    }
     if (pending !== null) {
       const next = pending;
       pending = null;
@@ -77,7 +94,7 @@
 
   function select(index) {
     if (motion || pointer) { pending = index; return; }
-    if (index === current) return;
+    if (index === current) { revealPanelStart(); return; }
     prepare(wrap(index - current) === 1 ? 1 : -1);
     animate(true);
   }
@@ -160,6 +177,7 @@
     if (event.target === track && event.propertyName === 'transform') motion?.complete?.();
   });
   window.addEventListener('resize', () => {
+    measureHeader();
     if (pointer) {
       const capturedId = pointer.id;
       pointer = null;
@@ -177,6 +195,9 @@
     panels.forEach(panel => { track.append(panel); panel.inert = false; panel.removeAttribute('aria-hidden'); });
   });
   window.addEventListener('afterprint', () => { while (track.firstElementChild !== panels[current]) track.append(track.firstElementChild); sync(); });
+  measureHeader();
+  const headerObserver = new ResizeObserver(measureHeader);
+  if (siteHeader) headerObserver.observe(siteHeader);
   root.dataset.ready = 'true';
   const initial = fromHash();
   if (initial > 0) { while (track.firstElementChild !== panels[initial]) track.append(track.firstElementChild); current = initial; }

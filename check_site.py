@@ -49,3 +49,10 @@ assert 'src="history-carousel.js"' in history
 assert history.count('data-history-select=') == 3
 assert 'data-history-carousel' in history and 'class="history-track"' in history
 assert 'history-side' not in history
+
+# 자격 6개가 학교 항목 위에 표시되는지 확인합니다.
+assert '교육 및 자격' in history
+assert history.count('data-history-type="certificate"') == 6
+school_index=history.index('id="history-hangang-school"')
+for cert_id in ('cert-computer-graphics','cert-itq-excel','cert-itq-powerpoint','cert-itq-hangul','cert-gtq-illustrator','cert-gtq-photoshop'):
+    assert history.index(f'id="history-{cert_id}"') < school_index

@@ -84,8 +84,8 @@
     },
     {
       "id": "education",
-      "title": "교육",
-      "label": "EDUCATION",
+      "title": "교육 및 자격",
+      "label": "EDUCATION & QUALIFICATIONS",
       "items": [
         {
           "id": "oz-gamelab",
@@ -94,7 +94,10 @@
           "organization": "OZ GAMELAB 2기",
           "role": "교육·프로젝트 참여",
           "description": "오즈코딩스쿨·넥스트러너스의 4인 협업 프로젝트에서 UI 설계·구현과 아트 리소스 통합을 맡았습니다. 피드백을 반영한 리디자인, HUD 연동과 결과 연출을 구현했습니다.",
-          "link": {"href": "gamelab.html", "label": "게임랩 작업 보기"}
+          "link": {
+            "href": "gamelab.html",
+            "label": "게임랩 작업 보기"
+          }
         },
         {
           "id": "oz-bootcamp",
@@ -103,7 +106,52 @@
           "organization": "오즈코딩스쿨 게임 개발 부트캠프 5기",
           "role": "게임 개발 교육",
           "description": "C#·Unity를 학습하며 2인·5인 협업 프로젝트를 수행했습니다. TaskTown의 Unity 개발 팀장으로 Scene 전환·Tutorial·공용 사운드 구현과 팀 기능 통합을 맡았습니다.",
-          "link": {"href": "tasktown.html", "label": "TaskTown 작업 보기"}
+          "link": {
+            "href": "tasktown.html",
+            "label": "TaskTown 작업 보기"
+          }
+        },
+        {
+          "id": "cert-computer-graphics",
+          "type": "certificate",
+          "acquiredAt": "2018-07",
+          "organization": "컴퓨터그래픽스운용기능사",
+          "issuer": "한국산업인력공단"
+        },
+        {
+          "id": "cert-itq-excel",
+          "type": "certificate",
+          "acquiredAt": "2017-12",
+          "organization": "ITQ 엑셀 B급",
+          "issuer": "한국생산성본부(KPC)"
+        },
+        {
+          "id": "cert-itq-powerpoint",
+          "type": "certificate",
+          "acquiredAt": "2017-12",
+          "organization": "ITQ 파워포인트 C급",
+          "issuer": "한국생산성본부(KPC)"
+        },
+        {
+          "id": "cert-itq-hangul",
+          "type": "certificate",
+          "acquiredAt": "2017-06",
+          "organization": "ITQ 아래한글 A급",
+          "issuer": "한국생산성본부(KPC)"
+        },
+        {
+          "id": "cert-gtq-illustrator",
+          "type": "certificate",
+          "acquiredAt": "2017-05",
+          "organization": "GTQ 일러스트 1급",
+          "issuer": "한국생산성본부(KPC)"
+        },
+        {
+          "id": "cert-gtq-photoshop",
+          "type": "certificate",
+          "acquiredAt": "2016-03",
+          "organization": "GTQ(그래픽기술자격) 1급",
+          "issuer": "한국생산성본부(KPC)"
         },
         {
           "id": "hangang-school",
@@ -113,7 +161,8 @@
           "role": "산업디자인과 · 졸업",
           "description": "산업디자인과를 졸업했습니다."
         }
-      ]
+      ],
+      "itemLabel": "교육"
     },
     {
       "id": "activities",
@@ -122,7 +171,10 @@
       "items": [],
       "emptyTitle": "활동 기록을 준비하고 있습니다.",
       "emptyDescription": "온리전 참여와 굿즈 제작·판매 등 활동의 시기와 작업 자료를 차례로 정리할 예정입니다.",
-      "link": {"href": "planning.html", "label": "굿즈 기획·제작 보기"}
+      "link": {
+        "href": "planning.html",
+        "label": "굿즈 기획·제작 보기"
+      }
     }
   ]
 }
