@@ -222,3 +222,31 @@ body:has([data-history-carousel]){overflow-anchor:none}
 #goods-project-title{scroll-margin-top:120px}
 @media(max-width:800px){.goods-event-list{grid-template-columns:1fr}.goods-roles{gap:24px}.goods-event{padding-top:20px}}
 @media(max-width:640px){.goods-roles{grid-template-columns:1fr;gap:22px;padding:22px 0}.goods-comparison{grid-template-columns:1fr;gap:28px}.goods-comparison img{max-height:490px}.goods-events{padding:36px 0}.goods-events h2{font-size:25px}.goods-event-list{margin-top:24px}.goods-photos figcaption{font-size:12px}}
+
+/* 굿즈 자료는 대표 이미지와 접는 갤러리를 나눠 긴 모바일 페이지를 정리합니다. */
+.goods-tiles{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start}
+.goods-tiles .zoom-trigger{background:var(--media)}
+.goods-tiles img{width:100%;aspect-ratio:4/3;object-fit:contain}
+.goods-block{margin-top:32px}
+.goods-block h4{font-size:16px;font-weight:600;line-height:1.6;margin:0 0 18px;color:var(--ink)}
+.goods-block p{font-size:14px;color:var(--muted)}
+.goods-gallery{margin:28px 0 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.goods-gallery summary{padding:16px 0;font-size:13px;font-weight:600;cursor:pointer;color:var(--green);min-height:48px}
+.goods-gallery[open]>.goods-photos{padding:8px 0 22px}
+.goods-gallery .figure-tag{font-size:10px;letter-spacing:.02em}
+.goods-gallery figcaption{font-size:11px}
+.goods-event>.goods-photos{margin:22px 0}
+.goods-event .goods-gallery{margin:0 0 22px}
+.goods-event .goods-tiles{grid-template-columns:1fr}
+.goods-event .goods-gallery summary{font-size:12px}
+.goods-event .goods-photos .figure-tag{font-size:10px}
+.history-photo-link{display:block;margin:20px 0 18px}
+.history-photo{margin:0}
+.history-photo img{width:100%;max-width:360px;height:auto;object-fit:contain;object-position:left;background:var(--media)}
+.history-photo figcaption{font-size:11px;margin-top:8px}
+.history-photo-link:hover img{outline:1px solid var(--green)}
+@media(max-width:900px){.goods-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.goods-tiles{grid-template-columns:1fr;gap:28px}.goods-gallery .goods-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 14px}.goods-gallery .goods-comparison{grid-template-columns:1fr}.goods-event .goods-gallery .goods-tiles{grid-template-columns:1fr}.goods-gallery .figure-tag{font-size:10px;line-height:1.6}.goods-block{margin-top:28px}.goods-block h4{font-size:15px}}
+@media print{.goods-gallery:not([open]){display:none}}
+
+.goods-gallery .goods-tiles>.media:only-child{grid-column:1/-1}

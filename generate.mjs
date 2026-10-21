@@ -69,7 +69,7 @@ const goodsParagraphs=paragraphs=>paragraphs.map(text=>'<p>'+escapeHtml(text)+'<
 const goodsPlaceholder=label=>'<div class="goods-placeholder"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="4" width="26" height="24" rx="2"/><circle cx="11" cy="12" r="2"/><path d="m5 25 8-8 5 5 5-7 6 10"/></svg><span>'+escapeHtml(label)+'</span><small>자료 준비 중</small></div>';
 function goodsPhotos(images,placeholder,layout=''){
  if(!images.length)return placeholder?goodsPlaceholder(placeholder):'';
- return '<div class="goods-photos'+(layout==='comparison'?' goods-comparison':'')+'">'+images.map(photo=>{
+ return '<div class="goods-photos'+(layout==='comparison'?' goods-comparison':layout==='tiles'?' goods-tiles':'')+'">'+images.map(photo=>{
   if(!photo.file||!photo.alt)throw new Error('굿즈 이미지에 file과 alt가 필요합니다.');
   const assetRoot=path.resolve(out,'assets');
   const assetPath=path.resolve(assetRoot,photo.file);
@@ -78,13 +78,21 @@ function goodsPhotos(images,placeholder,layout=''){
   return photo.label?figure.replace('<button class="zoom-trigger"','<span class="figure-tag">'+escapeHtml(photo.label)+'</span><button class="zoom-trigger"'):figure;
  }).join('')+'</div>';
 }
+// 추가 자료는 기본 details로 열고 닫으며 이미지마다 담당 범위와 설명을 표시합니다.
+function goodsGallery(gallery){
+ if(!gallery?.images?.length)return '';
+ return '<details class="goods-gallery"><summary>'+escapeHtml(gallery.title)+'</summary>'+goodsPhotos(gallery.images,'',gallery.imageLayout||'tiles')+'</details>';
+}
+function goodsBlocks(blocks=[]){
+ return blocks.map(block=>'<div class="goods-block"><h4>'+escapeHtml(block.title)+'</h4>'+goodsParagraphs(block.paragraphs||[])+goodsPhotos(block.images,'',block.imageLayout)+'</div>').join('');
+}
 const goodsRoles='<section class="goods-roles" aria-label="봉래제 작업 범위">'+goods.responsibilities.map(role=>'<div><h3>'+escapeHtml(role.title)+'</h3><p>'+escapeHtml(role.body)+'</p></div>').join('')+'</section>';
 const goodsHeader='<div class="wrap"><header class="category-head goods-head"><span class="eyebrow">PORTFOLIO / '+escapeHtml(goods.title)+'</span><h1>'+escapeHtml(goods.title)+'</h1><p class="subtitle goods-headline">'+escapeHtml(goods.headline)+'</p><div class="goods-introduction">'+goodsParagraphs(goods.introduction)+'</div></header><section class="goods-overview" aria-labelledby="goods-project-title"><div><span class="eyebrow">FEATURED / 대표 사례</span><h2 id="goods-project-title">'+escapeHtml(goods.projectTitle)+'</h2><p class="goods-date">'+escapeHtml(goods.date)+'</p><p class="goods-role">'+escapeHtml(goods.role)+'</p><p class="goods-status">'+escapeHtml(goods.status)+'</p></div>'+goodsPhotos(goods.overviewImages,'굿즈 실물·대표 사진')+'</section>'+goodsRoles+'<nav class="contents" aria-label="굿즈 사례 목차">'+goods.stages.map(stage=>'<a href="#'+escapeHtml(stage.id)+'">'+escapeHtml(stage.number)+' '+escapeHtml(stage.title)+'</a>').join('')+'<a href="#goods-events">참가 활동</a></nav>';
-const goodsCases=goods.stages.map(stage=>section(escapeHtml(stage.id),escapeHtml(stage.number),escapeHtml(stage.title),'<h3>'+escapeHtml(stage.heading)+'</h3>'+goodsParagraphs(stage.paragraphs)+'<ul class="goods-topics" aria-label="'+escapeHtml(stage.title)+' 정리 항목">'+stage.topics.map(topic=>'<li>'+escapeHtml(topic)+'</li>').join('')+'</ul>'+goodsPhotos(stage.images,stage.imagePlaceholder,stage.imageLayout))).join('');
+const goodsCases=goods.stages.map(stage=>section(escapeHtml(stage.id),escapeHtml(stage.number),escapeHtml(stage.title),'<h3>'+escapeHtml(stage.heading)+'</h3>'+goodsParagraphs(stage.paragraphs)+'<ul class="goods-topics" aria-label="'+escapeHtml(stage.title)+' 정리 항목">'+stage.topics.map(topic=>'<li>'+escapeHtml(topic)+'</li>').join('')+'</ul>'+goodsPhotos(stage.images,stage.imagePlaceholder,stage.imageLayout)+goodsBlocks(stage.blocks)+goodsGallery(stage.gallery))).join('');
 const goodsEvents='<section class="goods-events" id="goods-events" aria-labelledby="goods-events-title"><header><span class="eyebrow">EVENTS / 활동 기록</span><h2 id="goods-events-title">행사별 참여 범위</h2><p>행사별 담당 범위와 판매 방식을 구분해 정리했습니다.</p></header><div class="goods-event-list">'+goods.events.map(event=>{
  const url=new URL(event.source);
  if(url.protocol!=='https:'||url.hostname!=='www.instagram.com')throw new Error('활동 출처 주소를 확인하세요.');
- return '<article class="goods-event" id="'+escapeHtml(event.id)+'"><p class="goods-event-date">'+escapeHtml(event.date)+'</p><h3>'+escapeHtml(event.title)+'</h3><p class="goods-event-role">'+escapeHtml(event.role)+'</p><p>'+escapeHtml(event.body)+'</p>'+ext(escapeHtml(url.href),'당시 SNS 게시물','text-link')+'</article>';
+ return '<article class="goods-event" id="'+escapeHtml(event.id)+'"><p class="goods-event-date">'+escapeHtml(event.date)+'</p><h3>'+escapeHtml(event.title)+'</h3><p class="goods-event-role">'+escapeHtml(event.role)+'</p><p>'+escapeHtml(event.body)+'</p>'+goodsPhotos(event.images||[],'')+goodsGallery(event.gallery)+ext(escapeHtml(url.href),'당시 SNS 게시물','text-link')+'</article>';
 }).join('')+'</div></section>';
 const goodsEnd='<div class="category-return"><a class="text-link" href="history.html#activities">활동 연혁 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="design.html">디자인 및 홍보 보기 <span aria-hidden="true">↗</span></a></div></div>';
 fs.writeFileSync(path.join(out,'planning.html'),shell('planning.html',goods.title,'봉래제와 온리전 참가 경험. 본인 일러스트·팀원 시안 피드백, 굿즈 제작·현장 판매와 온라인 판매·발송 과정.',goodsHeader+goodsCases+goodsEvents+goodsEnd));

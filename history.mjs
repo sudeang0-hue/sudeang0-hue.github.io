@@ -10,6 +10,14 @@ function action(link) {
   return `<a class="history-link" href="${escapeHtml(link.href)}">${escapeHtml(link.label)} <span aria-hidden="true">↗</span></a>`;
 }
 
+function activityImage(item) {
+  if (!item.image) return '';
+  const {file, alt, caption} = item.image;
+  if (!/^[a-z0-9-]+\.(?:png|jpg|webp)$/.test(file) || !alt || !caption) throw new Error(`활동 ${item.id}: 사진 파일과 설명을 확인하세요.`);
+  const image = `<figure class="history-photo"><img src="assets/${escapeHtml(file)}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async"><figcaption>${escapeHtml(caption)}</figcaption></figure>`;
+  return item.link ? `<a class="history-photo-link" href="${escapeHtml(item.link.href)}" aria-label="${escapeHtml(item.organization)} 사진과 상세 기록 보기">${image}</a>` : image;
+}
+
 function period(item) {
   if (item.occurredAt) {
     if (!/^\d{4}-(0[1-9]|1[0-2])(?:-(0[1-9]|[12]\d|3[01]))?$/.test(item.occurredAt)) throw new Error(`활동 ${item.id}: 날짜는 YYYY-MM 또는 YYYY-MM-DD로 입력하세요.`);
@@ -33,7 +41,7 @@ function timelineItem(item, title, ids) {
   const certificate = item.type === 'certificate';
   if (!item.organization || (certificate ? !item.issuer : !item.role || !item.description)) throw new Error(`연혁 ${item.id}: 이름과 담당 역할·설명 또는 자격 발급기관이 필요합니다.`);
   const badge = certificate ? '자격' : title;
-  return `<li class="history-item"${certificate ? ' data-history-type="certificate"' : ''} id="history-${item.id}"><div class="history-item-meta"><span class="history-date">${period(item)}</span><span class="history-badge">${escapeHtml(badge)}</span></div><h3>${escapeHtml(item.organization)}</h3><p class="history-role">${escapeHtml(certificate ? item.issuer : item.role)}</p>${item.description ? `<p class="history-description">${escapeHtml(item.description)}</p>` : ''}${action(item.link)}</li>`;
+  return `<li class="history-item"${certificate ? ' data-history-type="certificate"' : ''} id="history-${item.id}"><div class="history-item-meta"><span class="history-date">${period(item)}</span><span class="history-badge">${escapeHtml(badge)}</span></div><h3>${escapeHtml(item.organization)}</h3><p class="history-role">${escapeHtml(certificate ? item.issuer : item.role)}</p>${item.description ? `<p class="history-description">${escapeHtml(item.description)}</p>` : ''}${activityImage(item)}${action(item.link)}</li>`;
 }
 
 function historySection(section, ids) {
