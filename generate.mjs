@@ -67,16 +67,24 @@ const goods=JSON.parse(fs.readFileSync(new URL('./goods-content.json',import.met
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const goodsParagraphs=paragraphs=>paragraphs.map(text=>'<p>'+escapeHtml(text)+'</p>').join('');
 const goodsPlaceholder=label=>'<div class="goods-placeholder"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="4" width="26" height="24" rx="2"/><circle cx="11" cy="12" r="2"/><path d="m5 25 8-8 5 5 5-7 6 10"/></svg><span>'+escapeHtml(label)+'</span><small>자료 준비 중</small></div>';
-function goodsPhotos(images,placeholder,layout=''){
+function goodsPhoto(photo,captionLabel=false){
+ if(!photo.file||!photo.alt)throw new Error('굿즈 이미지에 file과 alt가 필요합니다.');
+ const assetRoot=path.resolve(out,'assets');
+ const assetPath=path.resolve(assetRoot,photo.file);
+ if(!assetPath.startsWith(assetRoot+path.sep)||!fs.statSync(assetPath).isFile())throw new Error('굿즈 이미지 경로를 확인하세요.');
+ const label=photo.label?'<span class="'+(captionLabel?'goods-slide-owner':'figure-tag')+'">'+escapeHtml(photo.label)+'</span>':'';
+ const figure=zoom(escapeHtml(photo.file),escapeHtml(photo.alt),(captionLabel?label:'')+escapeHtml(photo.caption||''));
+ return !captionLabel&&label?figure.replace('<button class="zoom-trigger"',label+'<button class="zoom-trigger"'):figure;
+}
+function goodsPhotos(images,placeholder,layout='',slider){
  if(!images.length)return placeholder?goodsPlaceholder(placeholder):'';
- return '<div class="goods-photos'+(layout==='comparison'?' goods-comparison':layout==='tiles'?' goods-tiles':'')+'">'+images.map(photo=>{
-  if(!photo.file||!photo.alt)throw new Error('굿즈 이미지에 file과 alt가 필요합니다.');
-  const assetRoot=path.resolve(out,'assets');
-  const assetPath=path.resolve(assetRoot,photo.file);
-  if(!assetPath.startsWith(assetRoot+path.sep)||!fs.statSync(assetPath).isFile())throw new Error('굿즈 이미지 경로를 확인하세요.');
-  const figure=zoom(escapeHtml(photo.file),escapeHtml(photo.alt),escapeHtml(photo.caption||''));
-  return photo.label?figure.replace('<button class="zoom-trigger"','<span class="figure-tag">'+escapeHtml(photo.label)+'</span><button class="zoom-trigger"'):figure;
- }).join('')+'</div>';
+ if(layout==='slider')return goodsSlider(images,slider);
+ return '<div class="goods-photos'+(layout==='comparison'?' goods-comparison':layout==='tiles'?' goods-tiles':'')+'">'+images.map(photo=>goodsPhoto(photo)).join('')+'</div>';
+}
+function goodsSlider(images,config){
+ if(!config||!/^goods-[a-z-]+$/.test(config.id)||!config.label||!config.heading||![0,2000].includes(config.interval))throw new Error('굿즈 슬라이드 설정을 확인하세요.');
+ const slides=images.map(photo=>goodsPhoto(photo,true).replace('class="media "','class="media goods-slide"')).join('');
+ return '<section class="goods-slider" id="'+escapeHtml(config.id)+'" data-goods-slider data-interval="'+config.interval+'" role="region" aria-roledescription="슬라이드" aria-label="'+escapeHtml(config.label)+'"><p class="figure-tag">'+escapeHtml(config.heading)+'</p><div class="goods-slider-window" tabindex="0" aria-label="'+escapeHtml(config.label)+' · 좌우 방향키로 이동"><div class="goods-slider-track">'+slides+'</div></div><div class="goods-slider-controls" hidden><div class="goods-slider-buttons"><button type="button" data-slide-prev aria-label="'+escapeHtml(config.label)+' 이전 사진">←</button><button type="button" data-slide-next aria-label="'+escapeHtml(config.label)+' 다음 사진">→</button>'+ (config.interval?'<button type="button" data-slide-play aria-label="자동 넘김 일시정지" aria-pressed="true"><span data-play-icon aria-hidden="true">Ⅱ</span></button>':'')+'</div><span class="goods-slider-count" data-slide-count aria-hidden="true">1 / '+images.length+'</span></div><p class="sr-only" data-slide-status role="status" aria-live="polite" aria-atomic="true"></p></section>';
 }
 // 추가 자료는 기본 details로 열고 닫으며 이미지마다 담당 범위와 설명을 표시합니다.
 function goodsGallery(gallery){
@@ -87,14 +95,12 @@ function goodsBlocks(blocks=[]){
  return blocks.map(block=>'<div class="goods-block"><h4>'+escapeHtml(block.title)+'</h4>'+goodsParagraphs(block.paragraphs||[])+goodsPhotos(block.images,'',block.imageLayout)+'</div>').join('');
 }
 const goodsRoles='<section class="goods-roles" aria-label="봉래제 작업 범위">'+goods.responsibilities.map(role=>'<div><h3>'+escapeHtml(role.title)+'</h3><p>'+escapeHtml(role.body)+'</p></div>').join('')+'</section>';
-const goodsHeader='<div class="wrap"><header class="category-head goods-head"><span class="eyebrow">PORTFOLIO / '+escapeHtml(goods.title)+'</span><h1>'+escapeHtml(goods.title)+'</h1><p class="subtitle goods-headline">'+escapeHtml(goods.headline)+'</p><div class="goods-introduction">'+goodsParagraphs(goods.introduction)+'</div></header><section class="goods-overview" aria-labelledby="goods-project-title"><div><span class="eyebrow">FEATURED / 대표 사례</span><h2 id="goods-project-title">'+escapeHtml(goods.projectTitle)+'</h2><p class="goods-date">'+escapeHtml(goods.date)+'</p><p class="goods-role">'+escapeHtml(goods.role)+'</p><p class="goods-status">'+escapeHtml(goods.status)+'</p></div>'+goodsPhotos(goods.overviewImages,'굿즈 실물·대표 사진')+'</section>'+goodsRoles+'<nav class="contents" aria-label="굿즈 사례 목차">'+goods.stages.map(stage=>'<a href="#'+escapeHtml(stage.id)+'">'+escapeHtml(stage.number)+' '+escapeHtml(stage.title)+'</a>').join('')+'<a href="#goods-events">참가 활동</a></nav>';
-const goodsCases=goods.stages.map(stage=>section(escapeHtml(stage.id),escapeHtml(stage.number),escapeHtml(stage.title),'<h3>'+escapeHtml(stage.heading)+'</h3>'+goodsParagraphs(stage.paragraphs)+'<ul class="goods-topics" aria-label="'+escapeHtml(stage.title)+' 정리 항목">'+stage.topics.map(topic=>'<li>'+escapeHtml(topic)+'</li>').join('')+'</ul>'+goodsPhotos(stage.images,stage.imagePlaceholder,stage.imageLayout)+goodsBlocks(stage.blocks)+goodsGallery(stage.gallery))).join('');
+const goodsHeader='<div class="wrap"><header class="category-head goods-head" id="goods-top" tabindex="-1"><span class="eyebrow">PORTFOLIO / '+escapeHtml(goods.title)+'</span><h1>'+escapeHtml(goods.title)+'</h1><p class="subtitle goods-headline">'+escapeHtml(goods.headline)+'</p><div class="goods-introduction">'+goodsParagraphs(goods.introduction)+'</div></header><section class="goods-overview" aria-labelledby="goods-project-title"><div><span class="eyebrow">FEATURED / 대표 사례</span><h2 id="goods-project-title">'+escapeHtml(goods.projectTitle)+'</h2><p class="goods-date">'+escapeHtml(goods.date)+'</p><p class="goods-role">'+escapeHtml(goods.role)+'</p><p class="goods-status">'+escapeHtml(goods.status)+'</p></div>'+goodsSlider(goods.overviewImages,goods.overviewSlider)+'</section>'+goodsRoles+'<nav class="contents" aria-label="굿즈 사례 목차">'+goods.stages.map(stage=>'<a href="#'+escapeHtml(stage.id)+'">'+escapeHtml(stage.number)+' '+escapeHtml(stage.title)+'</a>').join('')+'<a href="#goods-events">참가 활동</a></nav>';
+const goodsCases=goods.stages.map(stage=>section(escapeHtml(stage.id),escapeHtml(stage.number),escapeHtml(stage.title),'<h3>'+escapeHtml(stage.heading)+'</h3>'+goodsParagraphs(stage.paragraphs)+'<ul class="goods-topics" aria-label="'+escapeHtml(stage.title)+' 정리 항목">'+stage.topics.map(topic=>'<li>'+escapeHtml(topic)+'</li>').join('')+'</ul>'+goodsPhotos(stage.images,stage.imagePlaceholder,stage.imageLayout,stage.slider)+goodsBlocks(stage.blocks)+goodsGallery(stage.gallery))).join('');
 const goodsEvents='<section class="goods-events" id="goods-events" aria-labelledby="goods-events-title"><header><span class="eyebrow">EVENTS / 활동 기록</span><h2 id="goods-events-title">행사별 참여 범위</h2><p>행사별 담당 범위와 판매 방식을 구분해 정리했습니다.</p></header><div class="goods-event-list">'+goods.events.map(event=>{
- const url=new URL(event.source);
- if(url.protocol!=='https:'||url.hostname!=='www.instagram.com')throw new Error('활동 출처 주소를 확인하세요.');
- return '<article class="goods-event" id="'+escapeHtml(event.id)+'"><p class="goods-event-date">'+escapeHtml(event.date)+'</p><h3>'+escapeHtml(event.title)+'</h3><p class="goods-event-role">'+escapeHtml(event.role)+'</p><p>'+escapeHtml(event.body)+'</p>'+goodsPhotos(event.images||[],'')+goodsGallery(event.gallery)+ext(escapeHtml(url.href),'당시 SNS 게시물','text-link')+'</article>';
+ return '<article class="goods-event" id="'+escapeHtml(event.id)+'"><p class="goods-event-date">'+escapeHtml(event.date)+'</p><h3>'+escapeHtml(event.title)+'</h3><p class="goods-event-role">'+escapeHtml(event.role)+'</p><p>'+escapeHtml(event.body)+'</p>'+goodsPhotos(event.images||[],'')+goodsGallery(event.gallery)+'</article>';
 }).join('')+'</div></section>';
-const goodsEnd='<div class="category-return"><a class="text-link" href="history.html#activities">활동 연혁 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="design.html">디자인 및 홍보 보기 <span aria-hidden="true">↗</span></a></div></div>';
+const goodsEnd='<div class="category-return goods-return"><a class="text-link" href="history.html#activities">활동 연혁 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="design.html">디자인 및 홍보 보기 <span aria-hidden="true">↗</span></a><a class="text-link goods-back-top" href="#goods-top" data-goods-top>맨 위로 <span aria-hidden="true">↑</span></a></div></div><script src="goods-slider.js" defer></script>';
 fs.writeFileSync(path.join(out,'planning.html'),shell('planning.html',goods.title,'봉래제와 온리전 참가 경험. 본인 일러스트·팀원 시안 피드백, 굿즈 제작·현장 판매와 온라인 판매·발송 과정.',goodsHeader+goodsCases+goodsEvents+goodsEnd));
 const history=JSON.parse(fs.readFileSync(new URL('./history-content.json',import.meta.url),'utf8'));
 fs.writeFileSync(path.join(out,'history.html'),shell('history.html',history.title,'최희수의 근무·교육 및 자격·활동 연혁. 매장 운영과 디자인·웹툰 제작, 게임 개발 교육과 자격 취득 내역을 정리합니다.',renderHistory(history)));
