@@ -11,6 +11,10 @@ function action(link) {
 }
 
 function period(item) {
+  if (item.occurredAt) {
+    if (!/^\d{4}-(0[1-9]|1[0-2])(?:-(0[1-9]|[12]\d|3[01]))?$/.test(item.occurredAt)) throw new Error(`활동 ${item.id}: 날짜는 YYYY-MM 또는 YYYY-MM-DD로 입력하세요.`);
+    return `<time datetime="${item.occurredAt}">${item.occurredAt.replaceAll('-', '.')}</time>`;
+  }
   if (item.type === 'certificate') {
     if (!monthPattern.test(item.acquiredAt)) throw new Error(`자격 ${item.id}: 취득 월은 YYYY-MM 형식으로 입력하세요.`);
     return `<time datetime="${item.acquiredAt}">${item.acquiredAt.replace('-', '.')}</time>`;
@@ -35,7 +39,7 @@ function timelineItem(item, title, ids) {
 function historySection(section, ids) {
   if (!Array.isArray(section.items)) throw new Error(`연혁 ${section.id}: items 배열이 필요합니다.`);
   const count = section.items.length;
-  const items = [...section.items].sort((a,b) => (b.acquiredAt || b.start || '').localeCompare(a.acquiredAt || a.start || ''));
+  const items = [...section.items].sort((a,b) => (b.acquiredAt || b.occurredAt || b.start || '').localeCompare(a.acquiredAt || a.occurredAt || a.start || ''));
   const body = count
     ? `<ol class="history-timeline">${items.map(item => timelineItem(item, section.itemLabel || section.title, ids)).join('')}</ol>`
     : `<div class="history-empty"><span class="history-empty-dot" aria-hidden="true"></span><h3>${escapeHtml(section.emptyTitle || '기록을 준비하고 있습니다.')}</h3><p>${escapeHtml(section.emptyDescription || '')}</p>${action(section.link)}</div>`;

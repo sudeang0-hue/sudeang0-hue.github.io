@@ -1,6 +1,6 @@
 {
   "title": "연혁",
-  "introduction": "매장 운영과 콘텐츠 제작, 게임 개발 교육을 거치며 쌓은 경험입니다.",
+  "introduction": "매장 운영과 콘텐츠 제작, 게임 개발 교육과 굿즈 행사 참여를 통해 쌓은 경험입니다.",
   "updatedAt": "2026-10-21",
   "sections": [
     {
@@ -168,13 +168,41 @@
       "id": "activities",
       "title": "활동",
       "label": "ACTIVITIES",
-      "items": [],
-      "emptyTitle": "활동 기록을 준비하고 있습니다.",
-      "emptyDescription": "온리전 참여와 굿즈 제작·판매 등 활동의 시기와 작업 자료를 차례로 정리할 예정입니다.",
-      "link": {
-        "href": "planning.html",
-        "label": "굿즈 기획·제작 보기"
-      }
+      "items": [
+        {
+          "id": "hourai-goods",
+          "occurredAt": "2023-02-18",
+          "organization": "제2회 봉래제",
+          "role": "팀 공동 부스 · 굿즈 기획·제작·판매",
+          "description": "그림과 시안 피드백, 상품 구성·제작 발주·포장·현장 판매·SNS 홍보를 맡았습니다. 행사 후 온라인 판매 양식을 제작하고 상품을 발송했습니다.",
+          "link": {
+            "href": "planning.html#goods-project-title",
+            "label": "봉래제 제작·판매 과정 보기"
+          }
+        },
+        {
+          "id": "dife-goods",
+          "occurredAt": "2022-01",
+          "organization": "디.페스타(디페)",
+          "role": "공동 부스 참가 · 개별 굿즈 기획·제작·판매",
+          "description": "참가자들과 부스를 공유하고 각자의 상품을 준비했습니다. 본인 상품의 일러스트·구성·제작 발주·포장·현장 판매를 직접 진행했습니다.",
+          "link": {
+            "href": "planning.html#goods-dife",
+            "label": "디페 참가 기록 보기"
+          }
+        },
+        {
+          "id": "piapro-goods",
+          "occurredAt": "2020-07",
+          "organization": "피아프로 스타즈 온리전",
+          "role": "첫 오프라인 행사 · 굿즈 제작·현장 판매",
+          "description": "일러스트 굿즈를 준비해 처음 오프라인 행사에 참가하고 현장에서 판매했습니다.",
+          "link": {
+            "href": "planning.html#goods-piapro",
+            "label": "첫 행사 참가 기록 보기"
+          }
+        }
+      ]
     }
   ]
 }

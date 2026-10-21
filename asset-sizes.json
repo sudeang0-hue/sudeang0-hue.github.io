@@ -79,6 +79,26 @@
       "file": "tasktown-portfolio-cover-wide-v2.png",
       "width": 1600,
       "height": 690
+    },
+    {
+      "file": "hourai-products.jpg",
+      "width": 1440,
+      "height": 1080
+    },
+    {
+      "file": "hourai-teammate-rough.png",
+      "width": 351,
+      "height": 721
+    },
+    {
+      "file": "hourai-feedback.jpg",
+      "width": 351,
+      "height": 721
+    },
+    {
+      "file": "hourai-keyrings.jpg",
+      "width": 1440,
+      "height": 1080
     }
   ]
 }
