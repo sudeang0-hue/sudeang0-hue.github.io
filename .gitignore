@@ -6,3 +6,4 @@ node_modules/
 .sources/
 .env
 .env.*
+.openai/
