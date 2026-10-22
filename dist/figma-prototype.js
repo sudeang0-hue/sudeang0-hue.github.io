@@ -5,7 +5,6 @@ if(figmaPlayer){
  const placeholder=figmaPlayer.querySelector('[data-figma-placeholder]');
  const loadButton=figmaPlayer.querySelector('[data-figma-load]');
  const resetButton=figmaPlayer.querySelector('[data-figma-reset]');
- const status=figmaPlayer.querySelector('[data-figma-status]');
  const external=document.querySelector('[data-figma-external]');
  const buttons=[...figmaPlayer.querySelectorAll('[data-figma-flow]')];
  let selected=buttons.find(button=>button.getAttribute('aria-pressed')==='true')||buttons[0];
@@ -21,7 +20,6 @@ if(figmaPlayer){
   frame.title='게임랩 초기 UI 프로토타입 · '+label;
   external.href=checkedURL(selected.dataset.figmaHref,'www.figma.com');
   external.setAttribute('aria-label','Figma에서 '+label+' 크게 재생');
-  status.textContent=label+' · '+selected.dataset.figmaDescription;
   if(started) frame.src=checkedURL(selected.dataset.figmaSrc,'embed.figma.com');
  }
  buttons.forEach(button=>button.addEventListener('click',()=>{

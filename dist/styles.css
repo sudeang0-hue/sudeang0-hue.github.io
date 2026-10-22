@@ -431,3 +431,15 @@ body:has(.goods-subnav,.case-subnav) :is(.case,.goods-events,.goods-event,#goods
  .redesign-screen-comparison[data-ready] .redesign-screen-slide[aria-hidden=false]{display:block}
  .redesign-screen-row{break-inside:avoid}
 }
+
+/* 하위 카테고리 메뉴가 경계에 붙지 않도록 같은 안쪽 여백을 사용합니다. */
+.site-header .category-subnav{padding-inline:30px}
+@media(max-width:640px){
+ .site-header .category-subnav{width:100%;padding-inline:30px 20px}
+ .site-header .nav>nav{padding-inline:10px}
+}
+@media(max-width:360px){.project-subnav nav{column-gap:9px}}
+@media print{
+ #flow .figma-player-status{display:block;border:0;padding:10px 0 0}
+ #flow .figma-player-status button{display:none}
+}

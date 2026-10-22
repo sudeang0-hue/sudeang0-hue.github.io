@@ -65,18 +65,17 @@ ${zoom('gamelab-figma-flow-overview.png','Figma 초기 UI 흐름 설계 · 로�
 
 <div class="figma-player" data-figma-player>
 <div class="figma-player-bar"><h4>Figma 프로토타입 직접 살펴보기</h4><div class="figma-flow-options" role="group" aria-label="프로토타입 시작 화면" data-figma-controls hidden>
-<button type="button" data-figma-flow data-figma-label="로비 흐름" data-figma-description="특성·스킬 세팅·도감 팝업을 열고 닫거나 전투 준비로 이동해 보세요." data-figma-src="${figmaLobby.embed.replaceAll('&','&amp;')}" data-figma-href="${figmaLobby.external.replaceAll('&','&amp;')}" aria-pressed="true">로비 흐름</button>
-<button type="button" data-figma-flow data-figma-label="전투 흐름" data-figma-description="전투 시작과 증강·승리·패배의 연결 지점을 확인해 보세요." data-figma-src="${figmaBattle.embed.replaceAll('&','&amp;')}" data-figma-href="${figmaBattle.external.replaceAll('&','&amp;')}" aria-pressed="false">전투 흐름</button>
+<button type="button" data-figma-flow data-figma-label="로비 흐름" data-figma-src="${figmaLobby.embed.replaceAll('&','&amp;')}" data-figma-href="${figmaLobby.external.replaceAll('&','&amp;')}" aria-pressed="true">로비 흐름</button>
+<button type="button" data-figma-flow data-figma-label="전투 흐름" data-figma-src="${figmaBattle.embed.replaceAll('&','&amp;')}" data-figma-href="${figmaBattle.external.replaceAll('&','&amp;')}" aria-pressed="false">전투 흐름</button>
 </div></div>
 <div class="links figma-player-links"><a class="text-link external-link" data-figma-external href="${figmaLobby.external}" target="_blank" rel="noopener noreferrer">Figma에서 크게 재생 <span aria-hidden="true">↗</span></a>${ext('https://www.figma.com/design/Kz3TNcpjEhLXT7lGoCWinf?node-id=0-1','흐름 설계 원본 보기')}</div>
 <div class="figma-player-stage"><div class="figma-player-placeholder" data-figma-placeholder><span class="figma-play-mark" aria-hidden="true">▷</span><p>시작 화면을 고른 뒤 재생해 보세요.</p><button type="button" class="btn-quiet" data-figma-load hidden>프로토타입 재생</button><noscript><p>Figma 링크에서 프로토타입을 재생할 수 있습니다.</p></noscript></div>
 <iframe data-figma-frame title="게임랩 초기 UI 프로토타입 · 로비 흐름" loading="lazy" allow="fullscreen" allowfullscreen tabindex="0" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe></div>
-<div class="figma-player-status"><p data-figma-status role="status" aria-live="polite">로비 흐름 · 특성·스킬 세팅·도감 팝업을 열고 닫거나 전투 준비로 이동해 보세요.</p><button type="button" class="btn-quiet" data-figma-reset hidden>선택한 흐름 처음부터</button></div>
+<div class="figma-player-status"><p data-figma-note>화면 전환을 확인하는 초기 프로토타입으로, 예시 수치와 미정 화면이 포함되어 있습니다. 최종 디자인과 실제 게임 동작은 다음 Unity 구현 사례에서 확인할 수 있습니다. 작은 화면에서는 ‘크게 재생’을 이용해 주세요.</p><button type="button" class="btn-quiet" data-figma-reset hidden>선택한 흐름 처음부터</button></div>
 </div>
 
-<p class="caption">화면 전환을 확인하는 초기 프로토타입으로, 예시 수치와 미정 화면이 포함되어 있습니다. 최종 디자인과 실제 게임 동작은 다음 Unity 구현 사례에서 확인할 수 있습니다. 작은 화면에서는 ‘크게 재생’을 이용해 주세요.</p>
 
-`)+ '<script src="figma-prototype.js" defer></script>';
+`)+ '<script src="'+assetURL('figma-prototype.js')+'" defer></script>';
 const redesignDetail=(file,alt,label,crop,caption)=>'<figure><span class="figure-tag">'+label+'</span><button class="zoom-trigger redesign-crop redesign-crop--'+crop+'" type="button" data-zoom data-caption="'+alt+' · 전체 캡처" aria-label="'+alt+' 전체 캡처 크게 보기"><img src="assets/'+file+'" alt="'+alt+'" width="1920" height="1080" loading="lazy" decoding="async"></button><figcaption>'+caption+' <span class="zoom-hint">전체 캡처 ↗</span></figcaption></figure>';
 const redesignScreens=JSON.parse(fs.readFileSync(new URL('./gamelab-comparison.json',import.meta.url),'utf8')).screens;
 if(!Array.isArray(redesignScreens)||!redesignScreens.length||new Set(redesignScreens.map(screen=>screen.id)).size!==redesignScreens.length)throw new Error('리디자인 비교 화면 목록과 중복된 ID를 확인하세요.');
