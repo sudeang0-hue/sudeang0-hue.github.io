@@ -103,3 +103,5 @@ HTML에 `noindex,nofollow`를 적용합니다. 검색엔진이 이 설정을 읽
 게임랩 05절은 개인 MD 지침 → Git 작업 보조 → 반복 작업 도구 → 표시 검증 기록 순서로 구성합니다. 아트 비교는 하단 보조 사례로 유지합니다. 본문은 `gamelab-ai-workflow.json`, 근거·표현 범위는 `GAMELAB-AI-SOURCES.md`, 배치는 `gamelab-ai.mjs`에서 관리합니다.
 
 채용 검토에 맞춰 게임랩 05절의 기본 본문을 네 문단으로 줄이고, 실제 규칙·커밋·도구·검증 기록은 접기에서 확인하도록 정리했습니다. `gamelab-ai-workflow.json`에서 본문과 근거 제목을 함께 수정할 수 있습니다.
+
+TaskTown 04절은 연결 책임·공유 Scene을 피한 코드 수정·사운드 확인 기준을 중심으로 정리했습니다. 본문과 실제 작업 근거는 `tasktown-collaboration.json`, 수정 위치와 근거 구분은 `TASKTOWN-EDITING.md`를 참고합니다.

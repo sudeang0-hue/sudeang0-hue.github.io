@@ -1,0 +1,134 @@
+{
+  "title": "통합과 AI 협업",
+  "headline": "팀 기능을 연결할 때, 다른 작업에 미칠 영향을 먼저 확인했습니다.",
+  "intro": "입력·경제·인벤토리·마을·UI를 하나의 MainScene에 연결하는 작업을 맡았습니다.",
+  "steps": [
+    {
+      "heading": "연결 지점과 담당 범위 구분",
+      "body": "기능별 이벤트·데이터·Prefab 참조를 확인해 연결할 지점과 각 기능의 책임을 구분했습니다.",
+      "detailLabel": "통합 기준과 적용 기록",
+      "details": [
+        "입력 보상·뽑기·생산·배치·저장 기능이 제공하는 이벤트와 데이터를 Tutorial·SceneFlow·공용 사운드에 연결했습니다.",
+        "MainScene 통합 PR #43에는 Bootstrap→Logo→Title→Main 흐름과 사운드 UI·버튼음·Build Settings 연결을 정리했습니다. 전환·BGM·버튼음 확인 항목과 후속 리뷰 의견을 함께 남겼습니다.",
+        "2026.10.22 확인 기준 README의 전체 EditMode·수동 E2E·성능 결과 표는 Not Checked입니다. 당시 개별 리뷰와 저장소 전체 검증 결과는 구분합니다."
+      ],
+      "bullets": [
+        {
+          "label": "Input·Window",
+          "text": "입력 보상·축소 모드·투명창 제어를 Tutorial 입력 제한과 Scene별 창 정책에 연결했습니다."
+        },
+        {
+          "label": "Gacha·Production",
+          "text": "뽑기 결과·인벤토리 연결·생산량 갱신을 Tutorial 완료 조건과 MainScene 참조에 연결했습니다."
+        },
+        {
+          "label": "Inventory·UI",
+          "text": "버튼·탭·슬롯 이벤트와 공용 Prefab을 Tutorial 대상과 이벤트 연결 기준에 맞췄습니다."
+        },
+        {
+          "label": "Village·Placement",
+          "text": "주민 ID·확정 배치 목록을 배치 저장·복원과 Scene 통합에 연결했습니다."
+        },
+        {
+          "label": "Save·Sound",
+          "text": "공용 저장 형식과 볼륨·BGM 상태를 Tutorial·배치 데이터 호환성과 Option UI에 연결했습니다."
+        }
+      ],
+      "sourceIds": [
+        "integrationPR",
+        "integrationReview",
+        "readme"
+      ]
+    },
+    {
+      "heading": "공유 Scene을 피한 코드 수정",
+      "body": "팀원이 MainScene을 작업 중인 점을 고려해, 줄바꿈 개선은 Scene을 저장하지 않는 코드 수정으로 범위를 정했습니다. 어절과 수동 개행이 유지되는지를 검토 조건으로 삼았습니다.",
+      "detailLabel": "수정 범위와 줄바꿈 검토 기록",
+      "details": [
+        "2026.08.07 작업의 줄바꿈 전용 커밋은 TutorialBubbleView·줄바꿈 유틸리티·Editor 테스트와 관련 Meta만 포함하며, Scene·Prefab은 변경하지 않았습니다.",
+        "어절 유지·긴 단어·수동 개행을 확인하는 테스트 코드를 추가했습니다. 테스트용 측정 함수를 사용하는 코드이며, 실제 TMP 렌더나 전체 빌드의 검사 결과는 아닙니다.",
+        "PR #140의 실행 검사는 Not Checked로 남아 있습니다. 팀 리뷰에서 단어 끊김이 없음을 확인한 내용과 폰트 누락을 보완한 기록을 별도로 구분했습니다."
+      ],
+      "sourceIds": [
+        "lineBreakCommit",
+        "lineBreakTests",
+        "lineBreakPR",
+        "lineBreakReview"
+      ]
+    },
+    {
+      "heading": "설정 저장·복원까지 확인 항목으로",
+      "body": "사운드 컴포넌트를 옮길 때는 참조·Mixer 연결과 함께 재생·볼륨 변경·설정 저장·재시작 후 복원을 확인 항목으로 정했습니다.",
+      "detailLabel": "사운드 참조와 리뷰 기준",
+      "details": [
+        "2026.07.10 SoundSettingsApplier의 위치를 옮기며 SoundManager·설정 패널의 참조와 Mixer 연결을 다시 정리했습니다. 저장된 볼륨을 시작·재생 직전에 적용하는 변경도 포함했습니다.",
+        "PR #20의 리뷰에서는 재생·저장값·실시간 볼륨·재실행 복원을 확인하고, 설정창의 미연결 클릭음도 지적했습니다. 확인 항목과 리뷰 결과를 구분해 남겼습니다."
+      ],
+      "sourceIds": [
+        "soundCommit",
+        "soundPR",
+        "soundReview"
+      ]
+    }
+  ],
+  "tools": "Codex는 코드 조사·수정안·검사 코드와 기록 정리에, Unity MCP는 컴포넌트·참조 확인에 활용했습니다.",
+  "scope": "개별 수정·리뷰 기록이며, 전체 테스트 통과나 성능 개선을 뜻하지 않습니다.",
+  "verificationNote": "2026.10.22 확인 기준 README의 전체 EditMode·수동 E2E·성능 결과는 Not Checked입니다. 개별 구현·리뷰 기록과 구분합니다.",
+  "sources": {
+    "integrationPR": {
+      "label": "MainScene 통합 · PR #43",
+      "url": "https://github.com/sudeang0-hue/NookDuck_TaskTown/pull/43",
+      "checked": "2026-10-22",
+      "recorded": "2026-07-16"
+    },
+    "integrationReview": {
+      "label": "통합 리뷰와 후속 의견",
+      "url": "https://github.com/sudeang0-hue/NookDuck_TaskTown/pull/43#issuecomment-4988152437",
+      "checked": "2026-10-22"
+    },
+    "lineBreakCommit": {
+      "label": "Scene 변경 없는 줄바꿈 전용 커밋",
+      "url": "https://github.com/sudeang0-hue/NookDuck_TaskTown/commit/271c44d573e2621443b3cfe119b9c6728fcff18c",
+      "checked": "2026-10-22",
+      "recorded": "2026-08-07"
+    },
+    "lineBreakTests": {
+      "label": "줄바꿈 검사 코드",
+      "url": "https://github.com/sudeang0-hue/NookDuck_TaskTown/blob/271c44d573e2621443b3cfe119b9c6728fcff18c/Assets/00.Project/Editor/Tests/Tutorial/TutorialTextLineBreakUtilityTests.cs#L10",
+      "checked": "2026-10-22"
+    },
+    "lineBreakPR": {
+      "label": "줄바꿈 반영과 검사 상태 · PR #140",
+      "url": "https://github.com/sudeang0-hue/NookDuck_TaskTown/pull/140",
+      "checked": "2026-10-22",
+      "recorded": "2026-08-07"
+    },
+    "lineBreakReview": {
+      "label": "단어 끊김·폰트 리뷰",
+      "url": "https://github.com/sudeang0-hue/NookDuck_TaskTown/pull/140#issuecomment-5215717725",
+      "checked": "2026-10-22"
+    },
+    "soundCommit": {
+      "label": "사운드 참조 재연결 커밋",
+      "url": "https://github.com/sudeang0-hue/NookDuck_TaskTown/commit/0531ecbdb92a59701ee421fb1cc3c140caf7be86",
+      "checked": "2026-10-22",
+      "recorded": "2026-07-10"
+    },
+    "soundPR": {
+      "label": "사운드 적용·확인 항목 · PR #20",
+      "url": "https://github.com/sudeang0-hue/NookDuck_TaskTown/pull/20",
+      "checked": "2026-10-22",
+      "recorded": "2026-07-10"
+    },
+    "soundReview": {
+      "label": "재생·설정 복원 리뷰",
+      "url": "https://github.com/sudeang0-hue/NookDuck_TaskTown/pull/20#issuecomment-4933950235",
+      "checked": "2026-10-22"
+    },
+    "readme": {
+      "label": "전체 검증 상태와 재현 절차",
+      "url": "https://github.com/sudeang0-hue/NookDuck_TaskTown/blob/04446f3d036fffe5acb47aa10f74570fdc52bcb3/README.md#L256",
+      "checked": "2026-10-22"
+    }
+  }
+}
