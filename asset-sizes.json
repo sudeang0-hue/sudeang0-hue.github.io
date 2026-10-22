@@ -274,6 +274,31 @@
       "file": "gamelab-figma-flow.png",
       "width": 1264,
       "height": 804
+    },
+    {
+      "file": "gamelab-ui-before-combat.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-ui-before-codex.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-ui-after-codex.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-ui-before-skills.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-ui-after-skills.png",
+      "width": 1920,
+      "height": 1080
     }
   ]
 }

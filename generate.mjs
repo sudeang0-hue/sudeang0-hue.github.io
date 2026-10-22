@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { renderHistory } from './history.mjs';
 const out=path.join(import.meta.dirname,'dist');
+const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const notion={main:'https://app.notion.com/p/5108337d16328272a5ea8175a56bbb89',intro:'https://app.notion.com/p/3948337d163280b198b5e08dfede269f',game:'https://app.notion.com/p/3f98337d163280e1b8faf226e7e62f92',task:'https://app.notion.com/p/3c98337d163281f8afbbec96f80933b9'};
 const ghGame='https://github.com/OZ-GAME-LAB/OZGL2_1';
 const ghTask='https://github.com/sudeang0-hue/NookDuck_TaskTown';
@@ -66,18 +67,30 @@ ${zoom('gamelab-figma-flow.png','Figma 초기 UI 흐름 설계 · 로비와 전�
 </div>
 
 <p class="caption">화면 전환을 확인하는 초기 프로토타입으로, 예시 수치와 미정 화면이 포함되어 있습니다. 최종 디자인과 실제 게임 동작은 다음 Unity 구현 사례에서 확인할 수 있습니다. 작은 화면에서는 ‘크게 재생’을 이용해 주세요.</p>
-<p class="flow-next">이동 경로를 잡은 뒤에는 실제 게임에 맞는 시각 표현을 다듬었습니다. <a class="text-link" href="#redesign">다음: UI 리디자인 <span aria-hidden="true">↓</span></a></p>
+
 `)+ '<script src="figma-prototype.js" defer></script>';
 const redesignDetail=(file,alt,label,crop,caption)=>'<figure><span class="figure-tag">'+label+'</span><button class="zoom-trigger redesign-crop redesign-crop--'+crop+'" type="button" data-zoom data-caption="'+alt+' · 전체 캡처" aria-label="'+alt+' 전체 캡처 크게 보기"><img src="assets/'+file+'" alt="'+alt+'" width="1920" height="1080" loading="lazy" decoding="async"></button><figcaption>'+caption+' <span class="zoom-hint">전체 캡처 ↗</span></figcaption></figure>';
+const redesignScreens=JSON.parse(fs.readFileSync(new URL('./gamelab-comparison.json',import.meta.url),'utf8')).screens;
+if(!Array.isArray(redesignScreens)||redesignScreens.length!==4||new Set(redesignScreens.map(screen=>screen.id)).size!==4)throw new Error('리디자인 비교 화면 4개가 필요합니다.');
+for(const screen of redesignScreens){
+ if(!/^[a-z]+$/.test(screen.id)||!screen.title||!screen.note)throw new Error('비교 화면의 이름과 설명을 확인하세요.');
+ for(const side of ['before','after'])if(!/^[a-z0-9-]+\.png$/.test(screen[side]?.file)||!screen[side].alt||!screen[side].caption)throw new Error('전후 비교 이미지와 캡션을 확인하세요.');
+}
+const redesignComparison=()=>{
+ const controls='<div class="redesign-screen-controls" data-comparison-controls hidden><div class="redesign-screen-options" role="group" aria-label="비교할 게임 화면">'+redesignScreens.map((screen,index)=>'<button type="button" data-comparison-select="'+screen.id+'" aria-controls="redesign-before-screen redesign-after-screen" aria-pressed="'+(index===0)+'">'+escapeHtml(screen.title)+'</button>').join('')+'</div><div class="redesign-screen-arrows"><button type="button" data-comparison-prev aria-label="이전 전후 비교 화면">←</button><button type="button" data-comparison-next aria-label="다음 전후 비교 화면">→</button><span data-comparison-count>1 / 4 · 로비</span></div></div>';
+ const rows=['before','after'].map(side=>'<section class="redesign-screen-row" aria-label="'+(side==='before'?'Before 초기 화면':'After 리디자인 적용 화면')+'"><div class="redesign-screen-label"><span class="figure-tag">'+(side==='before'?'BEFORE / 초기 구성':'AFTER / 리디자인 적용')+'</span><span class="redesign-screen-zoom">클릭하면 원본 확대 ↗</span></div><div class="redesign-screen-window" data-comparison-viewport id="redesign-'+side+'-screen" tabindex="0" aria-label="'+(side==='before'?'Before':'After')+' 화면 · 좌우 방향키로 함께 넘기기"><div class="redesign-screen-track" data-comparison-track>'+redesignScreens.map(screen=>'<figure class="redesign-screen-slide"><button type="button" class="zoom-trigger redesign-screen-frame" data-zoom data-caption="'+escapeHtml(screen[side].alt)+'" aria-label="'+escapeHtml(screen[side].alt)+' 원본 크게 보기"><img src="assets/'+screen[side].file+'" alt="'+escapeHtml(screen[side].alt)+'" width="1920" height="1080" loading="lazy" decoding="async"></button><figcaption>'+escapeHtml(screen[side].caption)+'</figcaption></figure>').join('')+'</div></div></section>').join('');
+ return '<div class="redesign-screen-comparison" data-redesign-comparison role="region" aria-label="UI 리디자인 전후 화면 비교">'+controls+redesignScreens.map((screen,index)=>'<p class="redesign-screen-note" data-comparison-note'+(index?' hidden':'')+'>'+escapeHtml(screen.note)+'</p>').join('')+rows+'<p class="sr-only" data-comparison-status role="status" aria-live="polite" aria-atomic="true"></p></div>';
+};
 const game1=section('redesign','02','UI 리디자인',`
 <h3>실제 게임 리소스와 읽는 흐름에 맞춰 UI를 다시 설계했습니다.</h3>
-<p>초기 UI는 어두운 색감과 금속 장식으로 다크 판타지 분위기를 표현했습니다. 팀에서 가용한 유닛 에셋을 적용하자 UI와 캐릭터의 표현 차이가 드러났고, 팀원·멘토에게서 가독성과 시선 흐름에 관한 피드백도 받았습니다.</p>
-<p>중세·마왕군의 분위기는 유지하면서 장식·텍스처 밀도를 조정하고, 제목·설명·주요 행동을 구분했습니다.</p>
+<p>초기에는 마왕군을 조종해 용사군을 막는 다크 판타지 디펜스 기획에 맞춰, 어두운 색감과 금속 장식 중심으로 UI를 구성했습니다. 기성 UI 에셋을 조합할 때의 어색함을 줄이기 위해 AI 이미지 생성으로 시안을 만들고 필요한 부분을 다듬었습니다.</p>
+<p>팀은 가용한 유닛 에셋으로 개발을 진행했고, 실제 캐릭터와 UI를 함께 보니 표현 방식의 차이가 드러났습니다. 팀원과 멘토에게서 정보 가독성과 시선 흐름에 대한 피드백도 받았습니다.</p>
+<p>여러 방향의 시안을 팀에 공유하며 중세·마왕군의 분위기를 유지하면서 실제 에셋과 어우러지는 것을 기준으로 잡았습니다. 장식과 텍스처의 밀도를 조정하고, 제목·설명·주요 행동을 구분했습니다.</p>
 
 <section class="redesign-block" aria-labelledby="redesign-comparison-title">
-<h4 id="redesign-comparison-title">바꾼 기준을 로비 화면에 적용했습니다.</h4>
-<div class="compare redesign-lobby-comparison">${mini('gamelab-lobby-before.png','리디자인 이전 로비 · 기사 삽화와 장식 중심의 구성','BEFORE / 초기 다크 판타지 UI')}${mini('gamelab-lobby-after.png','리디자인 적용 로비 · 실제 픽셀 캐릭터와 제목·설명 구획','AFTER / 게임 리소스에 맞춘 구성')}</div>
-<p class="caption">동일한 로비 기능의 디자인 비교입니다. 선택 난이도·계정 레벨 등 표시 데이터는 다릅니다. 적용 후 이미지는 2026.10.05 구현 검토 화면입니다.</p>
+<h4 id="redesign-comparison-title">로비·전투·세부 화면에 같은 디자인 기준을 적용했습니다.</h4>
+${redesignComparison()}
+<p class="caption">위 Before와 아래 After는 같은 화면 종류로 함께 넘어갑니다. 같은 기능의 시각 구성 비교이며, 촬영 시점과 계정·전투 상태가 달라 표시 값과 배경에는 차이가 있습니다. 로비·도감·스킬의 적용 후 이미지는 2026.10.05 구현 검토, 전투는 2026.10.14 Play Mode 촬영입니다.</p>
 <ul class="visual-notes">
 <li><strong>리소스의 일관성</strong> 기사 삽화를 실제 전투에 사용하는 픽셀 캐릭터로 교체했습니다.</li>
 <li><strong>읽는 순서</strong> 난이도 이름·캐릭터·설명을 카드의 위·중앙·아래로 나눠, 내용을 확인한 뒤 전투 준비로 이어지도록 구성했습니다.</li>
@@ -86,17 +99,18 @@ const game1=section('redesign','02','UI 리디자인',`
 </section>
 
 <section class="redesign-block" aria-labelledby="redesign-polish-title">
-<h4 id="redesign-polish-title">작은 돌출과 글자 조각도 실제 렌더에서 확인했습니다.</h4>
+<h4 id="redesign-polish-title">사소한 문제와 시각적 오류도 캐치하여 고칩니다.</h4>
 <p>시안에서는 괜찮던 리소스도 개별 Sprite로 배치하고 늘리는 과정에서 경계가 어긋났습니다. 화면을 확대해 증상을 확인하고, 이미지 자체와 표시 구조 중 어디에서 생긴 문제인지 구분해 수정했습니다.</p>
 <article class="redesign-trouble">
 <h5>말풍선 모서리 밖으로 드러나는 배경</h5>
 <div class="compare redesign-detail-comparison">${redesignDetail('gamelab-dialogue-before.png','수정 전 말풍선 · 투명 모서리 밖으로 사각 배경이 돌출된 상태','BEFORE / 배경 돌출','dialogue','프레임 위·아래의 사각 배경 경계를 확인할 수 있습니다.')}${redesignDetail('gamelab-dialogue-after.png','수정 후 말풍선 · 배경과 프레임을 일체형으로 적용한 상태','AFTER / 경계 정리','dialogue','모서리와 꼬리 비율을 유지하도록 표시 방식을 조정했습니다.')}</div>
-<p>투명한 프레임 뒤의 사각 배경이 밖으로 보이는 문제였습니다. <strong>배경과 테두리를 일체형으로 적용하고, 말풍선이 늘어나도 모서리와 꼬리 비율이 유지되도록</strong> 수정했습니다. 업적 알림에도 같은 경계 정리 기준을 적용했습니다.</p>
+<p>기존 프로토타입에 새 Sprite 리소스를 하나씩 적용하는 과정에서 말풍선 배경이 테두리 밖으로 드러났습니다. 처음에는 테두리만 교체하기 쉽도록 배경·프레임·꼬리를 나눴지만, 화면 위치와 좌우 방향이 바뀌고 문구에 따라 크기가 늘어나면서 조각 간 경계와 비율을 함께 맞춰야 했습니다. 교체 편의보다 경계를 조정하는 부담이 커졌습니다.</p>
+<p>튜토리얼 말풍선의 사용 범위를 고려해 <strong>배경·테두리·꼬리를 일체형으로 정리하고, 크기가 늘어나도 모서리와 꼬리 비율은 유지되도록</strong> 표시 방식을 수정했습니다. 좌우 방향은 같은 그림을 반전해 대응하고 본문 여백도 맞췄습니다. 업적 알림에도 배경을 포함한 일체형 패널을 적용해 모서리 밖으로 배경이 보이지 않도록 정리했습니다. 기존 튜토리얼 진행과 업적 알림 동작은 유지했습니다.</p>
 <p class="caption">2026.10.13 Game View의 말풍선 영역 확대입니다. 같은 문구를 비교하며, 전장 상태·웨이브·레벨은 다릅니다. 표시 검증용 UI 상태를 구성한 캡처입니다.</p>
 </article>
 <article class="redesign-trouble">
 <h5>결과 숫자 옆에 남는 작은 글자 조각</h5>
-<div class="compare redesign-detail-comparison">${redesignDetail('gamelab-number-before.png','수정 전 결과 숫자 · 시간값 왼쪽에 금색 글자 조각이 남은 상태','BEFORE / 잔여 글리프','number','시간값 왼쪽의 얇은 금색 조각이 표시됩니다.')}${redesignDetail('gamelab-number-after.png','수정 후 결과 숫자 · 같은 시간값 주변의 글자 조각이 사라진 상태','AFTER / 여백 보정','number','같은 결과 값에서 주변 글자 조각이 사라졌습니다.')}</div>
+<div class="compare redesign-detail-comparison">${redesignDetail('gamelab-number-before.png','수정 전 결과 숫자 · 시간값 왼쪽에 금색 글자 조각이 남은 상태','BEFORE / 잔여 글리프','number','시간값 왼쪽에 얇은 글자 깨짐이 있었습니다.')}${redesignDetail('gamelab-number-after.png','수정 후 결과 숫자 · 같은 시간값 주변의 글자 조각이 사라진 상태','AFTER / 여백 보정','number','같은 결과값에서 글자 깨짐이 없어졌습니다.')}</div>
 <p>작은 금색 점처럼 보였지만, TextMeshPro의 추가 여백(extraPadding)이 글꼴 아틀라스에 확보된 공간을 넘어 인접 글자의 일부까지 표시한 것이 원인이었습니다. <strong>추가 여백을 끄고 메시 여백을 갱신한 뒤, 같은 결과 Prefab과 검증 데이터로 전후 렌더를 비교</strong>해 글자 조각이 사라진 것을 확인했습니다. 숫자 값과 집계 연출은 유지했습니다.</p>
 <p class="caption">2026.10.13 동일 결과 Prefab·동일 검증 데이터의 글꼴 여백 설정 전후 비교입니다. 본문은 시간값 주변 확대이며, 클릭하면 전체 렌더를 볼 수 있습니다.</p>
 </article>
@@ -120,7 +134,7 @@ ${evidence([[ghGame+'/commit/632a136','로비 디자인 적용 기록'],[ghGame+
 const game2=section('hud','03','게임 연동·HUD','<h3>움직여야 할 효과와 고정돼야 할 영역을 나눴습니다.</h3><p>쿨다운 효과가 배치 계산에 포함돼 슬롯이 흔들리고, 조준 중 이름표 위에서 입력을 놓으면 취소 대신 시전되는 문제가 있었습니다.</p><div class="facts"><div><h4>배치 흔들림</h4><p>슬롯·프레임·이름표의 고정 영역만 측정하고 불꽃·모래시계 효과는 계산에서 제외했습니다.</p></div><div><h4>입력 취소 오류</h4><p>활성 이름표의 RectTransform을 기존 조준 취소 영역에 포함해 팀원의 시전·쿨다운 흐름을 유지했습니다.</p></div></div><p>Bridge/Adapter를 통해 전투·보상·결과 데이터를 화면에 전달하고, 선택 명령은 기존 게임 시스템으로 되돌렸습니다. UI가 게임 규칙과 데이터를 중복으로 소유하지 않도록 구성했습니다.</p><div class="quote-note"><strong>검증 범위</strong><br>0~5개 장착·반복 활성화·쿨다운 중 배치를 확인했습니다. 저장된 런의 17번째 웨이브 종료부터 18번째 전투·패배 결과까지 관찰했고, 별도 격리 Play Mode 자동 입력 검사 12개를 통과했습니다. 전체 웨이브 완주·수동 전체 드래그·빌드 실행 검증과는 구분합니다.</div>'+evidence([[ghGame+'/commit/f1429e8','전투 UI 연동'],[ghGame+'/blob/f5c8f050847b217cbdd5345ddd723b70186da7eb/Docs/UI/CombatSkillHud.md','HUD 수정·검증 기록']]));
 const game3=section('result','04','결과·성장 연출','<h3>성장 과정은 순서대로, 스킵은 한 번에.</h3><p>통계 → 보상 카운트 → 경험치 흡수·레벨업 → 복귀 버튼의 순서로 결과를 보여주도록 구성했습니다. 런 시작·종료 데이터를 스냅샷으로 전달하고, DOTween으로 표시 시점을 조정했습니다.</p><div class="video-wrap"><video controls playsinline preload="metadata" poster="assets/gamelab-result-poster.png" aria-label="결과 정상 재생과 클릭 스킵 비교 영상"><source src="assets/gamelab-result.mp4" type="video/mp4">브라우저가 영상을 지원하지 않습니다. <a href="assets/gamelab-result.mp4">영상 파일 열기</a></video><p class="caption">정상 재생 / 클릭 스킵 비교 · 약 6초 · 무음<br>실제 결과 Prefab · 동일 검증 데이터 · InputSystem 자동 입력 · 실제 Scene 이동 제외</p></div><ul><li>일시정지 중에도 재생되도록 처리하고 동일 결과의 중복 재생을 막았습니다.</li><li>연출 스킵과 로비 복귀 입력을 분리해 한 번의 클릭이 다음 동작까지 진행하지 않도록 했습니다.</li><li>경험치 Fill·흡수 입자와 여러 번의 레벨업을 표시했습니다.</li></ul><div class="video-wrap"><video controls playsinline preload="none" poster="assets/gamelab-combat.png" aria-label="게임랩 전투와 스킬 보상 플레이 영상"><source src="assets/gamelab-gameplay.mp4" type="video/mp4"><a href="assets/gamelab-gameplay.mp4">게임플레이 영상 열기</a></video><p class="caption">Unity Play Mode 전시용 편집본 · 약 50초 · 2026.10.14 작업 자료<br>촬영용 유닛·스킬 구성 사용 · 공유용 720p 사본</p></div>');
 const game4=section('ai','05','AI 아트 제작','<h3>생성보다 중요한 것은, 바꿀 조건을 정하는 일이었습니다.</h3><p>팀원의 레퍼런스를 취합하고 피드백을 형태·장식 밀도·정보 영역·보존 요소로 나눠 imagegen의 제작 조건으로 정리했습니다. 시안을 선별한 뒤 필요한 부분만 수정하고 Unity에 적용했습니다.</p><div class="compare art-compare">'+mini('ai-expansion-before.png','칸 구분선이 없는 초기 L형 확장 삽화','초기 생성안')+mini('ai-expansion-after.png','3칸 경계를 표시한 수정 L형 확장 삽화','수정·적용안')+'</div><p><strong>예: L형 확장 삽화의 3칸 표시</strong><br>외곽 형태·흙 질감·더하기 기호는 유지하면서 수평선 1개와 하단 수직선 1개를 넣도록 조건을 정했습니다. 수정안의 칸 수·투명 배경·축소 표시를 확인해 Sprite에 적용했습니다.</p><div class="quote-note">이미지 생성·편집은 imagegen을 활용했습니다. 본인 담당은 수정 조건 정의, 시안 선택, 검수와 게임 적용입니다.</div>'+evidence([[ghGame+'/blob/4a102b39733ccf71b7cc05c59eb54ebd7709d975/Tools/Art/Sources/BattleCardShells_v2/ExpansionCellArtGeneration.json','부분 수정 프롬프트·검수 기록']]));
-const gameEnd='<div class="next-project"><span>NEXT PROJECT</span><a href="tasktown.html">TaskTown <span aria-hidden="true">↗</span></a></div></div>';
+const gameEnd='<script src="redesign-comparison.js" defer></script><div class="next-project"><span>NEXT PROJECT</span><a href="tasktown.html">TaskTown <span aria-hidden="true">↗</span></a></div></div>';
 fs.writeFileSync(path.join(out,'gamelab.html'),shell('gamelab.html','용사때문에 레벨업','팀 피드백을 반영한 게임 UI 리디자인, HUD 오류 해결, 결과 연출과 AI 아트 리소스 통합.',gameHead+gameFlow+game1+game2+game3+game4+gameEnd));
 
 const taskHead='<div class="wrap"><header class="page-head"><p class="breadcrumb"><a href="index.html">프로젝트</a> &nbsp;/&nbsp; 02. TASKTOWN</p><span class="eyebrow">UNITY CLIENT · SYSTEM INTEGRATION</span><h1>TaskTown</h1><p class="subtitle">Scene 전환과 Tutorial 상태를 설계하고<br>공용 사운드와 팀 기능을 연결했습니다.</p><p class="project-intro">클릭과 타이핑을 재화와 마을 성장으로 연결한 Windows 데스크톱 컴패니언 게임입니다. 5인 팀의 개발 팀장으로 SceneFlow·Tutorial·Sound/BGM을 구현하고, 담당자가 다른 기능을 MainScene과 빌드에 통합했습니다.</p><dl class="meta-grid"><div><dt>PERIOD / TEAM</dt><dd>2026.06.29 — 08.12 · 5인</dd></div><div><dt>MY ROLE</dt><dd>Unity 클라이언트 개발 팀장</dd></div><div><dt>TOOLS</dt><dd>Unity · C# · Win32 · AudioMixer</dd></div></dl>'+projectActions('tasktown',notion.task,ghTask)+'<p class="caption">팀 출시 현황: STOVE 2026.09.07 출시 · Steam 출시 예정 · 2026.10.19 확인</p></header><figure class="hero-figure"><button type="button" class="zoom-trigger" data-zoom aria-label="TaskTown 실제 실행 화면 크게 보기"><img src="assets/tasktown-gameplay.png" alt="Windows 데스크톱 아래에 배치된 TaskTown 마을과 동물 주민들" width="2560" height="1440" fetchpriority="high"></button><figcaption>2026.08.25 실제 실행 캡처 · Windows 화면 위에서 함께 동작하는 데스크톱 게임 <span class="zoom-hint">이미지 확대 ↗</span></figcaption></figure>';
@@ -141,7 +155,6 @@ for(const [file,title,headline,description] of categories){
 }
 // 굿즈 사례는 사진과 본문을 별도 자료 파일에서 추가합니다.
 const goods=JSON.parse(fs.readFileSync(new URL('./goods-content.json',import.meta.url),'utf8'));
-const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const goodsParagraphs=paragraphs=>paragraphs.map(text=>'<p>'+escapeHtml(text)+'</p>').join('');
 const goodsPlaceholder=label=>'<div class="goods-placeholder"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="4" width="26" height="24" rx="2"/><circle cx="11" cy="12" r="2"/><path d="m5 25 8-8 5 5 5-7 6 10"/></svg><span>'+escapeHtml(label)+'</span><small>자료 준비 중</small></div>';
 function goodsPhoto(photo,captionLabel=false){
