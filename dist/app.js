@@ -13,14 +13,14 @@ document.querySelector('[data-print]')?.addEventListener('click',()=>window.prin
 function showStatus(message,ms=2500){document.querySelector('.toast')?.remove();const note=document.createElement('div');note.className='toast';note.setAttribute('role','status');note.textContent=message;document.body.append(note);setTimeout(()=>note.remove(),ms)}
 document.querySelectorAll('[data-copy-email]').forEach(button=>button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText('sudeang_@naver.com');showStatus('이메일 주소를 복사했습니다.')}catch{showStatus('주소를 직접 복사해 주세요: sudeang_@naver.com',6000)}}));
 
-// 굿즈 하위 메뉴가 여러 줄로 바뀌어도 이동한 제목이 고정 헤더에 가리지 않게 합니다.
-const goodsNavigation=document.querySelector('.goods-subnav');
-if(goodsNavigation){
- const header=goodsNavigation.closest('.site-header');
- const sections=[...goodsNavigation.querySelectorAll('a[href^="#"]')].map(link=>({link,section:document.getElementById(link.hash.slice(1))})).filter(item=>item.section);
+// 사례 목차가 여러 줄로 바뀌어도 이동한 제목이 고정 헤더에 가리지 않게 합니다.
+const sectionNavigation=document.querySelector('.goods-subnav, .case-subnav');
+if(sectionNavigation){
+ const header=sectionNavigation.closest('.site-header');
+ const sections=[...sectionNavigation.querySelectorAll('a[href^="#"]')].map(link=>({link,section:document.getElementById(link.hash.slice(1))})).filter(item=>item.section);
  let headerHeight=0;
  let selectionFrame=null;
- function updateGoodsSelection(){
+ function updateSectionSelection(){
   selectionFrame=null;
   // 고정 메뉴 바로 아래의 읽기 기준선을 통과한 마지막 항목을 표시합니다.
   const readingLine=headerHeight+21;
@@ -34,20 +34,21 @@ if(goodsNavigation){
    else link.removeAttribute('aria-current');
   }
  }
- function scheduleGoodsSelection(){
-  if(selectionFrame===null)selectionFrame=requestAnimationFrame(updateGoodsSelection);
+ function scheduleSectionSelection(){
+  if(selectionFrame===null)selectionFrame=requestAnimationFrame(updateSectionSelection);
  }
- function measureGoodsHeader(){
+ function measureSectionHeader(){
   headerHeight=Math.ceil(header?.getBoundingClientRect().height||0);
+  document.documentElement.style.setProperty('--section-header-height',`${headerHeight}px`);
   document.documentElement.style.setProperty('--goods-header-height',`${headerHeight}px`);
-  scheduleGoodsSelection();
+  scheduleSectionSelection();
  }
- measureGoodsHeader();
- const goodsLayoutObserver=new ResizeObserver(measureGoodsHeader);
- if(header)goodsLayoutObserver.observe(header);
- sections.forEach(({section})=>goodsLayoutObserver.observe(section));
- window.addEventListener('scroll',scheduleGoodsSelection,{passive:true});
- window.addEventListener('hashchange',scheduleGoodsSelection);
- window.addEventListener('pageshow',scheduleGoodsSelection);
- document.fonts?.ready.then(scheduleGoodsSelection);
+ measureSectionHeader();
+ const sectionLayoutObserver=new ResizeObserver(measureSectionHeader);
+ if(header)sectionLayoutObserver.observe(header);
+ sections.forEach(({section})=>sectionLayoutObserver.observe(section));
+ window.addEventListener('scroll',scheduleSectionSelection,{passive:true});
+ window.addEventListener('hashchange',scheduleSectionSelection);
+ window.addEventListener('pageshow',scheduleSectionSelection);
+ document.fonts?.ready.then(scheduleSectionSelection);
 }

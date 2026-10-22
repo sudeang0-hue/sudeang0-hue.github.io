@@ -350,14 +350,22 @@ body:has([data-history-carousel]){overflow-anchor:none}
 @media print{#flow .figma-player{display:block;border:0;background:none;margin:0}#flow .figma-player-bar,#flow .figma-player-stage,#flow .figma-player-status{display:none}#flow .figma-player-links{border:0;padding:0}#flow .media{break-inside:avoid}}
 
 /* 굿즈 목차를 상단 하위 메뉴로 옮기고 실제 헤더 높이만큼 이동 여백을 둡니다. */
-html:has(.goods-subnav){scroll-padding-top:calc(var(--goods-header-height,134px) + 20px)}
+html:has(.goods-subnav,.case-subnav){scroll-padding-top:calc(var(--section-header-height,var(--goods-header-height,178px)) + 20px)}
 .goods-subnav nav{flex-wrap:wrap;gap:0 24px}
 .goods-subnav a{display:inline-flex;align-items:center;min-height:44px;white-space:nowrap}
-body:has(.goods-subnav) :is(.case,.goods-events,.goods-event,#goods-project-title,#goods-top){scroll-margin-top:0}
+body:has(.goods-subnav,.case-subnav) :is(.case,.goods-events,.goods-event,#goods-project-title,#goods-top){scroll-margin-top:0}
 @media(max-width:640px){
  .goods-subnav nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 12px;padding:4px 0;font-size:11px}
 }
 @media(max-width:360px){.goods-subnav nav{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
-/* 현재 읽는 굿즈 영역은 색과 밑줄을 함께 표시해 구분합니다. */
-.goods-subnav a[aria-current=location]{color:var(--green);border-bottom-color:var(--green);box-shadow:inset 0 -1px 0 var(--green)}
+/* 현재 읽는 사례 영역은 색과 밑줄을 함께 표시해 구분합니다. */
+:is(.goods-subnav,.case-subnav) a[aria-current=location]{color:var(--green);border-bottom-color:var(--green);box-shadow:inset 0 -1px 0 var(--green)}
+
+/* 게임 프로젝트 이동 메뉴 아래에서 각 페이지의 사례 목차를 유지합니다. */
+.case-subnav nav{flex-wrap:wrap;gap:0 24px}
+.case-subnav a{display:flex;align-items:center;min-height:44px;line-height:1.55}
+@media(max-width:640px){
+ .case-subnav nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 12px;padding:4px 0;font-size:11px}
+ .case-subnav a{white-space:normal;word-break:keep-all}
+}
