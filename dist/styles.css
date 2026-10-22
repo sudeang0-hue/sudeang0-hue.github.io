@@ -446,7 +446,6 @@ body:has(.goods-subnav,.case-subnav) :is(.case,.goods-events,.goods-event,#goods
 
 /* AI 작업 기준과 실제 기록을 기존 사례의 글·구분선 위계에 맞춥니다. */
 .ai-workflow-intro,.ai-workflow-step p{font-size:14px;line-height:1.9;color:var(--muted)}
-.ai-workflow-path{display:flex;flex-wrap:wrap;gap:8px 28px;padding:16px 0 16px 20px;margin:26px 0;border-block:1px solid var(--line);font-size:12px;color:var(--green)}
 .ai-workflow-steps{margin-top:30px}
 .ai-workflow-step{display:grid;grid-template-columns:28px minmax(0,1fr);gap:16px;padding:25px 0;border-bottom:1px solid var(--line);min-width:0}
 .ai-workflow-step:first-child{padding-top:0}
@@ -457,8 +456,6 @@ body:has(.goods-subnav,.case-subnav) :is(.case,.goods-events,.goods-event,#goods
 .ai-workflow-step h5{font-size:12px;margin:0 0 12px;color:var(--ink)}
 .ai-workflow-step .caption{font-size:11px;line-height:1.8;margin-top:12px}
 .ai-workflow-step code{overflow-wrap:anywhere;word-break:break-word}
-.ai-scope-example{border-left:2px solid var(--note);padding-left:14px}
-.ai-scope-example strong{display:block;font-size:12px;margin-bottom:3px}
 .ai-rule-excerpt{background:var(--wash);padding:18px 20px;margin-top:20px}
 .ai-rule-excerpt ul{font-size:12px;line-height:1.8;margin:0;padding-left:17px}
 .ai-rule-excerpt li{margin:6px 0}
@@ -489,5 +486,25 @@ body:has(.goods-subnav,.case-subnav) :is(.case,.goods-events,.goods-event,#goods
  .ai-git-example pre{padding:14px;font-size:11px}
  .ai-validation-metrics{gap:8px}
  .ai-validation-metrics dd{font-size:24px}
- .ai-workflow-path{gap:7px 24px}
+}
+
+/* 본문에서는 판단을 먼저 읽고 실제 기록은 선택해 확인합니다. */
+.ai-proof-detail{margin-top:16px;border:1px solid var(--line);padding:0 14px;min-width:0}
+.ai-proof-detail>summary{padding:11px 0;cursor:pointer;font-size:13px;font-weight:600;line-height:1.7;color:var(--green)}
+.ai-proof-content{padding-bottom:14px;min-width:0}
+.ai-proof-content>.ai-rule-excerpt:first-child,.ai-proof-content>.ai-git-example:first-child,.ai-proof-content>.ai-validation-report:first-child{margin-top:0}
+.ai-proof-content>.ai-automation-tasks:first-child{margin-top:0}
+.ai-proof-content>.evidence:last-child{margin-bottom:0}
+.ai-workflow-step .ai-git-reference{font-size:12px;line-height:1.8}
+.ai-git-reference code{font-size:12px}
+.ai-workflow-step .ai-validation-scope{font-size:12px}
+@media(max-width:640px){
+ .ai-proof-detail{padding-inline:12px}
+ .ai-proof-content .ai-rule-excerpt,.ai-proof-content .ai-validation-report{padding:14px 10px}
+}
+
+@media(max-width:640px){
+ .ai-proof-content .ai-validation-metrics{grid-template-columns:1fr;gap:7px}
+ .ai-proof-content .ai-validation-metrics>div{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+ .ai-proof-content .ai-validation-metrics dd{margin:0;white-space:nowrap}
 }
