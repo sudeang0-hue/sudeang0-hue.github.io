@@ -103,9 +103,9 @@
 
 ## 최신 화면·두 화면 동시 표시 (2026.10.22)
 
-현재 적용 후 로비·도감·스킬은 `gamelab-ui-latest-lobby.png`, `gamelab-ui-latest-codex.png`, `gamelab-ui-latest-skills.png`입니다. 2026.10.22 Unity MCP에서 현재 `Builds/Lobby`를 실제 실행하고 기존 화면 열기 경로로 촬영한 1920×1080 원본을 그대로 사용합니다. 전투는 사용자 요청에 따라 기존 `gamelab-combat.png`를 유지합니다. 기존 전투 원본은 2026.10.14 `Recordings/STOVE_Showcase_20261014/Delivery/Images/01_Combat.png`이며 새 촬영으로 표현하지 않습니다. 상세 촬영 상태와 원본 경로는 비공개 검수 기록에서 관리하며, 이전 10월 5일 검토 화면은 위 과거 기록으로 보존합니다. 화면에 날짜·3슬롯/5슬롯 구분이나 긴 상태 설명은 표시하지 않습니다.
+현재 적용 후 로비·도감·스킬·업적은 `gamelab-ui-latest-lobby.png`, `gamelab-ui-latest-codex.png`, `gamelab-ui-latest-skills.png`, `gamelab-ui-latest-achievements.png`입니다. 2026.10.22 Unity MCP에서 현재 `Builds/Lobby`를 실제 실행하고 기존 화면 열기 경로로 촬영한 1920×1080 원본을 그대로 사용합니다. 전투는 사용자 요청에 따라 기존 `gamelab-combat.png`를 유지합니다. 기존 전투 원본은 2026.10.14 `Recordings/STOVE_Showcase_20261014/Delivery/Images/01_Combat.png`이며 새 촬영으로 표현하지 않습니다. 상세 촬영 상태와 원본 경로는 비공개 검수 기록에서 관리하며, 이전 10월 5일 검토 화면은 위 과거 기록으로 보존합니다. 화면에 날짜·3슬롯/5슬롯 구분이나 긴 상태 설명은 표시하지 않습니다.
 
-PC에서는 각 Before/After 줄에 로비·전투 두 종류, 다음 장에 도감·스킬 세팅 두 종류가 나타납니다. 640px 이하에서는 한 종류씩 표시합니다. 기존 종류 선택 버튼은 제거하고 좌우 화살표·드래그·방향키·Home/End를 사용합니다. 위아래는 같은 종류로 함께 이동하며, 화면 폭을 바꿔도 보고 있던 화면이 포함된 묶음을 유지합니다. 사진 클릭은 원본 확대입니다. 자동 재생은 하지 않습니다.
+PC에서는 각 Before/After 줄에 로비·전투 두 종류, 다음 장에 도감·스킬 세팅 두 종류, 마지막 장에 업적 한 종류가 나타납니다. 마지막 한 장도 같은 크기로 왼쪽에 배치하며 처음·마지막 묶음이 순환합니다. 640px 이하에서는 한 종류씩 표시합니다. 기존 종류 선택 버튼은 제거하고 좌우 화살표·드래그·방향키·Home/End를 사용합니다. 위아래는 같은 종류로 함께 이동하며, 화면 폭을 바꿔도 보고 있던 화면이 포함된 묶음을 유지합니다. 사진 클릭은 원본 확대입니다. 자동 재생은 하지 않습니다.
 
 이 변경 전 사이트 기준은 `b24607e2c64333c574fa864709ff383411a5f072`이며 수정 전 전체 ZIP은 별도 비공개 작업 폴더에 보관합니다.
 
@@ -125,3 +125,11 @@ PC에서는 각 Before/After 줄에 로비·전투 두 종류, 다음 장에 도
 문장마다 `<br>`를 넣으면 모바일에서 한 줄이 다시 나뉘어 빈틈이 생길 수 있습니다. 대부분은 자동 줄바꿈에 맡기고, 의미가 바뀌는 곳은 새 `<p>`로 나누는 것을 권장합니다. 비교 사진의 제목·캡션은 [`gamelab-comparison.json`](https://github.com/sudeang0-hue/sudeang0-hue.github.io/blob/main/gamelab-comparison.json)에서 수정합니다. JSON 캡션 안의 `<br>`는 텍스트로 표시되므로 넣지 않습니다.
 
 `dist/gamelab.html`은 생성 결과이므로 직접 수정하지 않습니다. 로컬에서 편집한 뒤 `node generate.mjs`, `python check_site.py`를 실행하고 `node preview.mjs`로 PC·390px·320px의 줄바꿈과 정렬을 확인합니다. GitHub에서 원본을 편집해 `main`에 저장하면 자동 배포 과정이 페이지를 다시 생성합니다. 수정을 되돌리려면 해당 변경 커밋을 취소하는 새 커밋으로 복원합니다.
+
+
+## 업적 전후 화면 추가 — 2026.10.22
+
+- 비교 순서는 로비·전투·도감·스킬 세팅·업적입니다. PC 두 화면 묶음과 모바일 한 화면 전환을 유지합니다.
+- Before는 기존 초기 자료 팩의 `Lobby/05_Lobby_Achievements.png`, After는 현재 `Builds/Lobby` Play Mode에서 기존 `ReservedButton → UILobbyOverlayView.OpenOverlayPopup` 경로로 연 업적 화면을 Unity MCP로 새로 촬영했습니다. 두 공개 PNG는 1920×1080 원본과 바이트가 같습니다.
+- 현재 업적은 실제 계정의 달성 상태 그대로입니다. 완료 수치·진행 값이 같은 조건의 전후 시험이라는 주장을 하지 않으며 초기 사진의 최초 촬영일은 확정하지 않습니다.
+- 자료 출처·SHA256은 비공개 검수 기록에 남깁니다. 이번 추가 전 기준 커밋은 `b64727442db02c95c7905c92352d167a21c3c47d`이며 별도 전체 ZIP 백업을 보관합니다.

@@ -59,6 +59,21 @@
         "alt": "리디자인 적용 스킬 세팅 · 공통 프레임과 장착 구획",
         "caption": "보유 목록·장착 슬롯·상세 설명을 구획으로 나눈 스킬 세팅."
       }
+    },
+    {
+      "id": "achievements",
+      "title": "업적",
+      "note": "달성 현황과 업적 카드의 정보 위계를 구분하고, 공통 프레임·아이콘·진행 바의 표현을 정리했습니다.",
+      "before": {
+        "file": "gamelab-ui-before-achievements.png",
+        "alt": "초기 업적 화면 · 붉은 장식과 텍스처 중심의 카드 구성",
+        "caption": "초기 업적 UI · 장식과 텍스처 중심의 카드 구성."
+      },
+      "after": {
+        "file": "gamelab-ui-latest-achievements.png",
+        "alt": "리디자인 적용 업적 화면 · 공통 프레임과 아이콘·진행 바",
+        "caption": "공통 프레임 안에서 제목·설명·달성 상태를 구분한 업적 목록."
+      }
     }
   ]
 }

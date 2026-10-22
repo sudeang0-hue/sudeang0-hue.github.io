@@ -314,6 +314,16 @@
       "file": "gamelab-ui-latest-skills.png",
       "width": 1920,
       "height": 1080
+    },
+    {
+      "file": "gamelab-ui-before-achievements.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-ui-latest-achievements.png",
+      "width": 1920,
+      "height": 1080
     }
   ]
 }

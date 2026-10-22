@@ -9,17 +9,22 @@ document.querySelectorAll('[data-redesign-comparison]').forEach(root=>{
  const length=tracks[0]?.children.length??0;
  if(tracks.length!==2||!length||tracks[1].children.length!==length||!controls||!status||!count)return;
  let index=0;
+ let anchor=0;
  let visible=window.matchMedia('(max-width:640px)').matches?1:2;
  let drag=null;
  let resizeFrame=0;
  let suppressClickUntil=0;
- const wrap=value=>(value%length+length)%length;
- function show(value,announce=true,instant=false){
-  const next=Math.floor(wrap(value)/visible)*visible;
-  const wrapped=value<0||value>=length;
-  index=next;
+ const pageCount=()=>Math.ceil(length/visible);
+ function showPage(value,announce=true,instant=false,preserveAnchor=false){
+  const pages=pageCount();
+  const page=(value%pages+pages)%pages;
+  const wrapped=value<0||value>=pages;
+  index=page*visible;
+  if(!preserveAnchor)anchor=index;
+  const shownCount=Math.min(visible,length-index);
   root.dataset.comparisonIndex=String(index);
-  root.dataset.comparisonVisible=String(visible);
+  root.dataset.comparisonVisible=String(shownCount);
+  root.dataset.comparisonCapacity=String(visible);
   tracks.forEach(track=>{
    track.style.transitionDuration=wrapped||instant?'0s':'';
    const slides=[...track.children];
@@ -35,17 +40,17 @@ document.querySelectorAll('[data-redesign-comparison]').forEach(root=>{
    });
   });
   observations.forEach((note,i)=>note.hidden=i<index||i>=index+visible);
-  count.textContent=`${index+1}${visible>1?'–'+Math.min(index+visible,length):''} / ${length}`;
+  count.textContent=`${index+1}${shownCount>1?'–'+(index+shownCount):''} / ${length}`;
   if(announce)status.textContent=[...tracks[0].children].slice(index,index+visible).map(slide=>slide.dataset.comparisonTitle).join(' · ')+' 비교';
  }
- root.querySelector('[data-comparison-prev]')?.addEventListener('click',()=>show(index-visible));
- root.querySelector('[data-comparison-next]')?.addEventListener('click',()=>show(index+visible));
+ root.querySelector('[data-comparison-prev]')?.addEventListener('click',()=>showPage(Math.floor(index/visible)-1));
+ root.querySelector('[data-comparison-next]')?.addEventListener('click',()=>showPage(Math.floor(index/visible)+1));
  viewports.forEach(viewport=>{
   viewport.addEventListener('keydown',event=>{
    if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)||event.altKey||event.ctrlKey||event.metaKey)return;
    event.preventDefault();
    if(event.target!==viewport)viewport.focus({preventScroll:true});
-   show(event.key==='Home'?0:event.key==='End'?length-visible:index+(event.key==='ArrowRight'?visible:-visible));
+   showPage(event.key==='Home'?0:event.key==='End'?pageCount()-1:Math.floor(index/visible)+(event.key==='ArrowRight'?1:-1));
   });
   viewport.addEventListener('pointerdown',event=>{
    if(!event.isPrimary||event.button!==0||event.target.closest('figcaption'))return;
@@ -74,7 +79,7 @@ document.querySelectorAll('[data-redesign-comparison]').forEach(root=>{
   const threshold=Math.max(32,Math.min(60,gesture.viewport.clientWidth*.12));
   const swiped=event.type!=='pointercancel'&&Math.abs(dx)>=threshold&&Math.abs(dx)>Math.abs(dy)*1.25;
   if(gesture.captured||swiped)suppressClickUntil=performance.now()+350;
-  if(swiped)show(index+(dx<0?visible:-visible));
+  if(swiped)showPage(Math.floor(index/visible)+(dx<0?1:-1));
  }
  window.addEventListener('pointerup',release);
  window.addEventListener('pointercancel',release);
@@ -84,10 +89,10 @@ document.querySelectorAll('[data-redesign-comparison]').forEach(root=>{
    resizeFrame=0;
    visible=window.matchMedia('(max-width:640px)').matches?1:2;
    // 이동 중 폭이 바뀌어도 기존 화면이 포함된 묶음을 보여줍니다.
-   show(index,false,true);
+   showPage(Math.floor(anchor/visible),false,true,true);
   });
  });
  controls.hidden=false;
  root.dataset.ready='';
- show(0,false);
+ showPage(0,false);
 });
