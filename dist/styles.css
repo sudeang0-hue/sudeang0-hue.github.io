@@ -348,3 +348,13 @@ body:has([data-history-carousel]){overflow-anchor:none}
  #flow .figma-player-links a{font-size:13px}
 }
 @media print{#flow .figma-player{display:block;border:0;background:none;margin:0}#flow .figma-player-bar,#flow .figma-player-stage,#flow .figma-player-status{display:none}#flow .figma-player-links{border:0;padding:0}#flow .media{break-inside:avoid}}
+
+/* 굿즈 목차를 상단 하위 메뉴로 옮기고 실제 헤더 높이만큼 이동 여백을 둡니다. */
+html:has(.goods-subnav){scroll-padding-top:calc(var(--goods-header-height,134px) + 20px)}
+.goods-subnav nav{flex-wrap:wrap;gap:0 24px}
+.goods-subnav a{display:inline-flex;align-items:center;min-height:44px;white-space:nowrap}
+body:has(.goods-subnav) :is(.case,.goods-events,.goods-event,#goods-project-title,#goods-top){scroll-margin-top:0}
+@media(max-width:640px){
+ .goods-subnav nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 12px;padding:4px 0;font-size:11px}
+}
+@media(max-width:360px){.goods-subnav nav{grid-template-columns:repeat(2,minmax(0,1fr))}}

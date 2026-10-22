@@ -12,3 +12,12 @@ if(dialog){
 document.querySelector('[data-print]')?.addEventListener('click',()=>window.print());
 function showStatus(message,ms=2500){document.querySelector('.toast')?.remove();const note=document.createElement('div');note.className='toast';note.setAttribute('role','status');note.textContent=message;document.body.append(note);setTimeout(()=>note.remove(),ms)}
 document.querySelectorAll('[data-copy-email]').forEach(button=>button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText('sudeang_@naver.com');showStatus('이메일 주소를 복사했습니다.')}catch{showStatus('주소를 직접 복사해 주세요: sudeang_@naver.com',6000)}}));
+
+// 굿즈 하위 메뉴가 여러 줄로 바뀌어도 이동한 제목이 고정 헤더에 가리지 않게 합니다.
+const goodsNavigation=document.querySelector('.goods-subnav');
+if(goodsNavigation){
+ const header=goodsNavigation.closest('.site-header');
+ const measureGoodsHeader=()=>document.documentElement.style.setProperty('--goods-header-height',`${Math.ceil(header.getBoundingClientRect().height)}px`);
+ measureGoodsHeader();
+ new ResizeObserver(measureGoodsHeader).observe(header);
+}
