@@ -11,9 +11,10 @@ export function renderAIWorkflow(data,record,{mini,evidence}){
  const steps=data.steps.map((step,index)=>{
   const tasks=step.tasks?'<ul class="ai-automation-tasks">'+step.tasks.map(task=>'<li><strong>'+escape(task.name)+'</strong> '+escape(task.text)+'</li>').join('')+'</ul>':'';
   const proof=step.id==='rules'?rules:step.id==='git'?gitExample:step.id==='validation'?report:tasks;
+  const proofBody=step.proofBody?'<p>'+escape(step.proofBody)+'</p>':'';
   const gitReference=step.id==='git'?'<p class="ai-git-reference">적용 예: <code>'+escape(git.branch)+'</code> · 커밋 '+escape(git.commit.slice(0,7))+' · PR '+escape(git.mergedPR)+'</p>':'';
   const scope=step.id==='validation'?'<p class="caption ai-validation-scope">'+escape(data.validationScope)+'</p>':'';
-  return '<section class="ai-workflow-step" aria-labelledby="ai-'+escape(step.id)+'-title"><span class="ai-step-number">'+String(index+1).padStart(2,'0')+'</span><div><h4 id="ai-'+escape(step.id)+'-title">'+escape(step.heading)+'</h4><p>'+escape(step.body)+'</p>'+gitReference+scope+'<details class="ai-proof-detail"><summary>'+escape(step.detailLabel)+'</summary><div class="ai-proof-content">'+proof+sources(step.sourceIds)+'</div></details></div></section>';
+  return '<section class="ai-workflow-step" aria-labelledby="ai-'+escape(step.id)+'-title"><span class="ai-step-number">'+String(index+1).padStart(2,'0')+'</span><div><h4 id="ai-'+escape(step.id)+'-title">'+escape(step.heading)+'</h4><p>'+escape(step.body)+'</p>'+gitReference+scope+'<details class="ai-proof-detail"><summary>'+escape(step.detailLabel)+'</summary><div class="ai-proof-content">'+proof+proofBody+sources(step.sourceIds)+'</div></details></div></section>';
  }).join('');
  const art='<details class="ai-art-support"><summary>'+escape(data.art.heading)+'</summary><p>'+escape(data.art.body)+'</p><div class="compare art-compare">'+mini('ai-expansion-before.png','칸 구분선이 없는 초기 L형 확장 삽화','초기 생성안')+mini('ai-expansion-after.png','3칸 경계를 표시한 수정 L형 확장 삽화','수정·적용안')+'</div>'+sources(data.art.sourceIds)+'</details>';
  return '<div class="ai-workflow"><h3>'+escape(data.headline)+'</h3><p class="ai-workflow-intro">'+escape(data.intro)+'</p><div class="ai-workflow-steps">'+steps+'</div>'+art+'</div>';
