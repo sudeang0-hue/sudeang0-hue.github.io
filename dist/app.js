@@ -17,7 +17,37 @@ document.querySelectorAll('[data-copy-email]').forEach(button=>button.addEventLi
 const goodsNavigation=document.querySelector('.goods-subnav');
 if(goodsNavigation){
  const header=goodsNavigation.closest('.site-header');
- const measureGoodsHeader=()=>document.documentElement.style.setProperty('--goods-header-height',`${Math.ceil(header.getBoundingClientRect().height)}px`);
+ const sections=[...goodsNavigation.querySelectorAll('a[href^="#"]')].map(link=>({link,section:document.getElementById(link.hash.slice(1))})).filter(item=>item.section);
+ let headerHeight=0;
+ let selectionFrame=null;
+ function updateGoodsSelection(){
+  selectionFrame=null;
+  // 고정 메뉴 바로 아래의 읽기 기준선을 통과한 마지막 항목을 표시합니다.
+  const readingLine=headerHeight+21;
+  let current=null;
+  for(const item of sections){
+   if(item.section.getBoundingClientRect().top>readingLine)break;
+   current=item.link;
+  }
+  for(const {link} of sections){
+   if(link===current)link.setAttribute('aria-current','location');
+   else link.removeAttribute('aria-current');
+  }
+ }
+ function scheduleGoodsSelection(){
+  if(selectionFrame===null)selectionFrame=requestAnimationFrame(updateGoodsSelection);
+ }
+ function measureGoodsHeader(){
+  headerHeight=Math.ceil(header?.getBoundingClientRect().height||0);
+  document.documentElement.style.setProperty('--goods-header-height',`${headerHeight}px`);
+  scheduleGoodsSelection();
+ }
  measureGoodsHeader();
- new ResizeObserver(measureGoodsHeader).observe(header);
+ const goodsLayoutObserver=new ResizeObserver(measureGoodsHeader);
+ if(header)goodsLayoutObserver.observe(header);
+ sections.forEach(({section})=>goodsLayoutObserver.observe(section));
+ window.addEventListener('scroll',scheduleGoodsSelection,{passive:true});
+ window.addEventListener('hashchange',scheduleGoodsSelection);
+ window.addEventListener('pageshow',scheduleGoodsSelection);
+ document.fonts?.ready.then(scheduleGoodsSelection);
 }
