@@ -1,5 +1,5 @@
 const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-const sectionIds = ['work', 'education', 'activities'];
+const sectionIds = ['education', 'activities', 'work'];
 const monthPattern = /^\d{4}-(0[1-9]|1[0-2])$/;
 
 function action(link) {
@@ -56,9 +56,9 @@ function historySection(section, ids) {
 
 export function renderHistory(data) {
   if (!data.title || !data.introduction || !/^\d{4}-\d{2}-\d{2}$/.test(data.updatedAt)) throw new Error('연혁 제목·소개·갱신일을 확인하세요.');
-  if (JSON.stringify(data.sections?.map(section => section.id)) !== JSON.stringify(sectionIds)) throw new Error('연혁은 근무·교육 및 자격·활동 순서로 구성합니다.');
+  if (JSON.stringify(data.sections?.map(section => section.id)) !== JSON.stringify(sectionIds)) throw new Error('연혁은 교육 및 자격·활동·근무 순서로 구성합니다.');
   const ids = new Set();
   const sections = data.sections.map(section => historySection(section, ids));
   const controls = data.sections.map((section, index) => `<button type="button" data-history-select="${escapeHtml(section.id)}" aria-controls="${escapeHtml(section.id)}" aria-pressed="${index === 0}">${escapeHtml(section.title)}</button>`).join('');
-  return `<div class="history-page" data-history-carousel><div class="wrap"><header class="category-head history-head"><span class="eyebrow">EXPERIENCE / 지나온 기록</span><h1>${escapeHtml(data.title)}</h1><p class="history-lead">${escapeHtml(data.introduction)}</p><p class="history-updated">업데이트 <time datetime="${data.updatedAt}">${data.updatedAt.replaceAll('-', '.')}</time></p></header><div class="history-controls"><nav class="history-index" aria-label="연혁 항목 선택">${controls}</nav></div><p class="history-help" id="history-help"><span aria-hidden="true">↔</span> 좌우로 드래그하거나 항목을 선택해 보세요.</p><div class="history-viewport" tabindex="0" role="region" aria-roledescription="캐러셀" aria-label="근무·교육 및 자격·활동 연혁" aria-describedby="history-help"><div class="history-track">${sections.join('')}</div></div><p class="sr-only" data-history-status role="status" aria-live="polite" aria-atomic="true"></p><noscript><p class="history-nojs">자바스크립트가 꺼져 있어 전체 연혁을 순서대로 표시합니다.</p></noscript><div class="category-return"><a class="text-link" href="resume.html">이력서 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="index.html">게임개발 프로젝트 보기 <span aria-hidden="true">↗</span></a></div></div></div><script src="history-carousel.js" defer></script>`;
+  return `<div class="history-page" data-history-carousel><div class="wrap"><header class="category-head history-head"><span class="eyebrow">EXPERIENCE / 지나온 기록</span><h1>${escapeHtml(data.title)}</h1><p class="history-lead">${escapeHtml(data.introduction)}</p><p class="history-updated">업데이트 <time datetime="${data.updatedAt}">${data.updatedAt.replaceAll('-', '.')}</time></p></header><div class="history-controls"><nav class="history-index" aria-label="연혁 항목 선택">${controls}</nav></div><p class="history-help" id="history-help"><span aria-hidden="true">↔</span> 좌우로 드래그하거나 항목을 선택해 보세요.</p><div class="history-viewport" tabindex="0" role="region" aria-roledescription="캐러셀" aria-label="교육 및 자격·활동·근무 연혁" aria-describedby="history-help"><div class="history-track">${sections.join('')}</div></div><p class="sr-only" data-history-status role="status" aria-live="polite" aria-atomic="true"></p><noscript><p class="history-nojs">자바스크립트가 꺼져 있어 전체 연혁을 순서대로 표시합니다.</p></noscript><div class="category-return"><a class="text-link" href="resume.html">이력서 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="index.html">게임개발 프로젝트 보기 <span aria-hidden="true">↗</span></a></div></div></div><script src="history-carousel.js" defer></script>`;
 }

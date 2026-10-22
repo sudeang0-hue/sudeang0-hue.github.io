@@ -1,87 +1,8 @@
 {
   "title": "연혁",
   "introduction": "매장 운영과 콘텐츠 제작, 게임 개발 교육과 굿즈 행사 참여를 통해 쌓은 경험입니다.",
-  "updatedAt": "2026-10-21",
+  "updatedAt": "2026-10-22",
   "sections": [
-    {
-      "id": "work",
-      "title": "근무",
-      "label": "WORK EXPERIENCE",
-      "items": [
-        {
-          "id": "paik-coffee",
-          "start": "2025-04",
-          "end": "2026-01",
-          "organization": "빽다방 신림대학점",
-          "role": "매니저",
-          "description": "매장과 스태프를 관리하고 근무 스케줄을 조정했습니다. 물류 발주와 음료 제조를 함께 맡았습니다."
-        },
-        {
-          "id": "twosome",
-          "start": "2024-06",
-          "end": "2025-02",
-          "organization": "투썸플레이스 아름제일여성병원점",
-          "role": "매니저",
-          "description": "고객 응대와 음료 제조, 매장 스태프 관리를 담당했습니다."
-        },
-        {
-          "id": "gwangjin-webtoon",
-          "start": "2022-04",
-          "end": "2024-01",
-          "organization": "광진구청 홍보담당관",
-          "role": "PR전문 웹툰크리에이터",
-          "description": "뉴딜일자리사업에 참여해 주민 편의·문화·축제 등 구청 사업의 안내 사항을 웹툰으로 구성했습니다. Photoshop과 Illustrator로 홍보용 캐릭터 일러스트도 제작했습니다."
-        },
-        {
-          "id": "salady",
-          "start": "2021-06",
-          "end": "2022-04",
-          "organization": "샐러디 보라매점",
-          "role": "사원 - 제조·고객 응대",
-          "description": "샐러드 제조, 고객 응대와 물류 정리를 담당했습니다."
-        },
-        {
-          "id": "gelati",
-          "start": "2020-09",
-          "end": "2020-12",
-          "organization": "젤라띠젤라띠 홍대 본점",
-          "role": "사원 - 오픈·판매",
-          "description": "매장 오픈과 판매를 준비하고 젤라또를 판매했습니다. 에스프레소 추출과 블렌더 음료 제조도 맡았습니다."
-        },
-        {
-          "id": "dunkin",
-          "start": "2020-01",
-          "end": "2020-06",
-          "organization": "던킨도너츠 교대법원점",
-          "role": "사원 - 음료·베이커리 제조",
-          "description": "커피와 간단한 베이커리를 제조하고 매장을 정리했습니다. 재고의 유통기한과 보관일을 관리했습니다."
-        },
-        {
-          "id": "megazone-cafe",
-          "start": "2019-07",
-          "end": "2019-11",
-          "organization": "강남 메가존 클라우드 카페",
-          "role": "사원 - 음료 제조·매장 관리",
-          "description": "커피 추출·판매, 우유 스팀과 블렌더를 이용한 음료 제조, 매장 관리를 담당했습니다."
-        },
-        {
-          "id": "open-art",
-          "start": "2018-02",
-          "end": "2018-04",
-          "organization": "열린아트",
-          "role": "외주 작업 - 일러스트 디자인",
-          "description": "항공기 비상안내도 브로슈어의 일러스트를 디자인했습니다."
-        },
-        {
-          "id": "chicken-store",
-          "start": "2017-06",
-          "end": "2018-04",
-          "organization": "짱닭치킨 봉일시장점",
-          "role": "사원 - 매장 아르바이트",
-          "description": "POS 조작과 서빙, 청소와 진열 정리를 담당했습니다."
-        }
-      ]
-    },
     {
       "id": "education",
       "title": "교육 및 자격",
@@ -219,6 +140,85 @@
             "label": "행사 참가",
             "caption": "피아프로 스타즈 · 첫 행사 참가 기록"
           }
+        }
+      ]
+    },
+    {
+      "id": "work",
+      "title": "근무",
+      "label": "WORK EXPERIENCE",
+      "items": [
+        {
+          "id": "paik-coffee",
+          "start": "2025-04",
+          "end": "2026-01",
+          "organization": "빽다방 신림대학점",
+          "role": "매니저",
+          "description": "매장과 스태프를 관리하고 근무 스케줄을 조정했습니다. 물류 발주와 음료 제조를 함께 맡았습니다."
+        },
+        {
+          "id": "twosome",
+          "start": "2024-06",
+          "end": "2025-02",
+          "organization": "투썸플레이스 아름제일여성병원점",
+          "role": "매니저",
+          "description": "고객 응대와 음료 제조, 매장 스태프 관리를 담당했습니다."
+        },
+        {
+          "id": "gwangjin-webtoon",
+          "start": "2022-04",
+          "end": "2024-01",
+          "organization": "광진구청 홍보담당관",
+          "role": "PR전문 웹툰크리에이터",
+          "description": "뉴딜일자리사업에 참여해 주민 편의·문화·축제 등 구청 사업의 안내 사항을 웹툰으로 구성했습니다. Photoshop과 Illustrator로 홍보용 캐릭터 일러스트도 제작했습니다."
+        },
+        {
+          "id": "salady",
+          "start": "2021-06",
+          "end": "2022-04",
+          "organization": "샐러디 보라매점",
+          "role": "사원 - 제조·고객 응대",
+          "description": "샐러드 제조, 고객 응대와 물류 정리를 담당했습니다."
+        },
+        {
+          "id": "gelati",
+          "start": "2020-09",
+          "end": "2020-12",
+          "organization": "젤라띠젤라띠 홍대 본점",
+          "role": "사원 - 오픈·판매",
+          "description": "매장 오픈과 판매를 준비하고 젤라또를 판매했습니다. 에스프레소 추출과 블렌더 음료 제조도 맡았습니다."
+        },
+        {
+          "id": "dunkin",
+          "start": "2020-01",
+          "end": "2020-06",
+          "organization": "던킨도너츠 교대법원점",
+          "role": "사원 - 음료·베이커리 제조",
+          "description": "커피와 간단한 베이커리를 제조하고 매장을 정리했습니다. 재고의 유통기한과 보관일을 관리했습니다."
+        },
+        {
+          "id": "megazone-cafe",
+          "start": "2019-07",
+          "end": "2019-11",
+          "organization": "강남 메가존 클라우드 카페",
+          "role": "사원 - 음료 제조·매장 관리",
+          "description": "커피 추출·판매, 우유 스팀과 블렌더를 이용한 음료 제조, 매장 관리를 담당했습니다."
+        },
+        {
+          "id": "open-art",
+          "start": "2018-02",
+          "end": "2018-04",
+          "organization": "열린아트",
+          "role": "외주 작업 - 일러스트 디자인",
+          "description": "항공기 비상안내도 브로슈어의 일러스트를 디자인했습니다."
+        },
+        {
+          "id": "chicken-store",
+          "start": "2017-06",
+          "end": "2018-04",
+          "organization": "짱닭치킨 봉일시장점",
+          "role": "사원 - 매장 아르바이트",
+          "description": "POS 조작과 서빙, 청소와 진열 정리를 담당했습니다."
         }
       ]
     }

@@ -41,7 +41,8 @@ for file in sorted(root.glob('*.html')):
     raw=file.read_text(encoding='utf-8')
     assert 'href="history.html"' in raw, f'Missing history navigation: {file.name}'
 history=(root/'history.html').read_text(encoding='utf-8')
-assert history.index('id="work"') < history.index('id="education"') < history.index('id="activities"')
+assert history.index('id="education"') < history.index('id="activities"') < history.index('id="work"')
+assert 'data-history-select="education" aria-controls="education" aria-pressed="true"' in history
 assert 'href="history.html" aria-current="page"' in history
 assert '게임개발 세부 메뉴' not in history
 
