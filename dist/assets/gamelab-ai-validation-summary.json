@@ -1,0 +1,37 @@
+{
+  "title": "게임랩 보조 UI 표시 검증 기록 발췌",
+  "recordedDate": "2026-10-13",
+  "excerptPreparedDate": "2026-10-22",
+  "sourceFile": "Builds/HeraldrySupplement_20261013/Preview_1080p/validation.json",
+  "sourceSHA256": "b6985d742763cda74456ee765878c4ece3397684051d9fcd0f43f5efbcc84211",
+  "sourceIsGitIgnored": true,
+  "mode": "EditModeActualDisplayMethods",
+  "layoutScreen": {
+    "width": 1920.0,
+    "height": 1080.0
+  },
+  "outputSizes": [
+    [
+      1920,
+      1080
+    ],
+    [
+      1280,
+      720
+    ]
+  ],
+  "results": {
+    "capturedImageCount": 30,
+    "textOverflowCount": 0,
+    "missingFontCount": 0,
+    "missingFrameCount": 0,
+    "missingStyleReferenceCount": 0,
+    "originalSceneRestored": true,
+    "savedSceneOrPrefab": false,
+    "gameProgressInvoked": false
+  },
+  "scope": "2026.10.13 · 1920×1080 배치의 Edit Mode 표시 메서드 검사 기록에서 발췌했습니다. PNG 30장은 여러 표시 상태와 두 출력 크기(1920×1080·1280×720)를 포함한 캡처 수입니다. 실제 플레이·플레이어 빌드 전체 검증과 구분합니다.",
+  "publicGuide": "https://github.com/OZ-GAME-LAB/OZGL2_1/blob/8a4fa074257c1b0e784ce36943e51f82b9805da2/Docs/UI/HeraldrySupplement.md#L53",
+  "publicImplementation": "https://github.com/OZ-GAME-LAB/OZGL2_1/blob/8a4fa074257c1b0e784ce36943e51f82b9805da2/Assets/Editor/HeraldrySupplementPreviewValidator.cs#L42",
+  "fullOriginalIncluded": false
+}

@@ -443,3 +443,51 @@ body:has(.goods-subnav,.case-subnav) :is(.case,.goods-events,.goods-event,#goods
  #flow .figma-player-status{display:block;border:0;padding:10px 0 0}
  #flow .figma-player-status button{display:none}
 }
+
+/* AI 작업 기준과 실제 기록을 기존 사례의 글·구분선 위계에 맞춥니다. */
+.ai-workflow-intro,.ai-workflow-step p{font-size:14px;line-height:1.9;color:var(--muted)}
+.ai-workflow-path{display:flex;flex-wrap:wrap;gap:8px 28px;padding:16px 0 16px 20px;margin:26px 0;border-block:1px solid var(--line);font-size:12px;color:var(--green)}
+.ai-workflow-steps{margin-top:30px}
+.ai-workflow-step{display:grid;grid-template-columns:28px minmax(0,1fr);gap:16px;padding:25px 0;border-bottom:1px solid var(--line);min-width:0}
+.ai-workflow-step:first-child{padding-top:0}
+.ai-workflow-step:last-child{border-bottom:0}
+.ai-step-number{font:italic 19px var(--serif);color:var(--green);line-height:1.7;white-space:nowrap;align-self:start}
+.ai-workflow-step h4{font-size:17px;line-height:1.6;margin:0 0 10px;letter-spacing:-.025em}
+.ai-workflow-step p+p{margin-top:12px}
+.ai-workflow-step h5{font-size:12px;margin:0 0 12px;color:var(--ink)}
+.ai-workflow-step .caption{font-size:11px;line-height:1.8;margin-top:12px}
+.ai-workflow-step code{overflow-wrap:anywhere;word-break:break-word}
+.ai-scope-example{border-left:2px solid var(--note);padding-left:14px}
+.ai-scope-example strong{display:block;font-size:12px;margin-bottom:3px}
+.ai-rule-excerpt{background:var(--wash);padding:18px 20px;margin-top:20px}
+.ai-rule-excerpt ul{font-size:12px;line-height:1.8;margin:0;padding-left:17px}
+.ai-rule-excerpt li{margin:6px 0}
+.ai-git-example{margin-top:20px}
+.ai-git-example>p:first-child{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 16px;margin-bottom:10px}
+.ai-git-example>p>span{font-size:11px}
+.ai-git-example code{font-size:12px}
+.ai-git-example pre{background:var(--wash);border-left:2px solid var(--note);padding:17px 19px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;line-height:1.9;margin:0}
+.ai-automation-tasks{font-size:13px!important;line-height:1.8}
+.ai-automation-tasks strong{display:block;font-size:12px}
+.ai-validation-report{margin-top:20px;padding:18px 20px;background:var(--wash)}
+.ai-validation-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:0 0 17px}
+.ai-validation-metrics dt{font-size:11px;line-height:1.6;color:var(--muted)}
+.ai-validation-metrics dd{font-size:28px;line-height:1.4;margin:5px 0 0;font-weight:600;letter-spacing:-.04em}
+.ai-validation-metrics small{font-size:11px;font-weight:400;letter-spacing:0;margin-left:5px}
+.ai-validation-state{list-style:none!important;padding:13px 0 0!important;margin:0!important;border-top:1px solid var(--line);font-size:12px!important}
+.ai-validation-state li{margin:5px 0}
+.ai-record-download{font-size:11px;margin-top:15px}
+.ai-art-support{margin-top:28px;border-block:1px solid var(--line);padding:14px 0}
+.ai-art-support summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--ink);line-height:1.7}
+.ai-art-support>p{font-size:13px;line-height:1.9;color:var(--muted);margin-top:16px}
+.ai-art-support .art-compare{padding:15px 20px;margin:20px 0}
+.ai-art-support .art-compare img{max-height:210px}
+@media(max-width:640px){
+ .ai-workflow-step{grid-template-columns:22px minmax(0,1fr);gap:10px}
+ .ai-workflow-step h4{font-size:16px}
+ .ai-rule-excerpt,.ai-validation-report{padding:16px 14px}
+ .ai-git-example pre{padding:14px;font-size:11px}
+ .ai-validation-metrics{gap:8px}
+ .ai-validation-metrics dd{font-size:24px}
+ .ai-workflow-path{gap:7px 24px}
+}

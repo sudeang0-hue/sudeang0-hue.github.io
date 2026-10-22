@@ -11,7 +11,7 @@
 ## 페이지
 
 - `dist/index.html`: 게임개발 소개와 대표 프로젝트
-- `dist/gamelab.html`: Figma UI 흐름 설계, UI 리디자인, HUD 문제 해결, 결과 연출, AI 아트 제작
+- `dist/gamelab.html`: Figma UI 흐름 설계, UI 리디자인, HUD 문제 해결, 결과 연출, AI 에이전트 활용·작업 자동화
 - `dist/tasktown.html`: SceneFlow, Tutorial, 팀 기능 통합, AI 에이전트 활용
 - `dist/resume.html`: 공통 이력서, 경력, 교육, 자격증, 연락처
 - `dist/planning.html`: 굿즈 기획·제작 소개와 기획 → 제작 → 판매 → 돌아보기 사례 구성
@@ -99,3 +99,5 @@ HTML에 `noindex,nofollow`를 적용합니다. 검색엔진이 이 설정을 읽
 게임랩 Figma 사례의 현재 캔버스는 `dist/assets/gamelab-figma-flow-overview.png`입니다. 기존 이미지는 보존하고, 구현 전 화면 구성·프로토타입 연결과 팀 공유·피드백을 설명하도록 도입을 정리했습니다. 문구는 `generate.mjs`의 `gameFlow`에서 편집합니다.
 
 공통 하위 카테고리 메뉴의 안쪽 여백은 `dist/styles.css`의 마지막 메뉴 여백 규칙에서 조정합니다. 모바일은 화면 왼쪽 30px를 기준으로 맞춥니다. Figma 초기 프로토타입 안내는 재생창 하단에 한 번만 표시하며 시작 화면을 바꿔도 유지합니다.
+
+게임랩 05절은 개인 MD 지침 → Git 작업 보조 → 반복 작업 도구 → 표시 검증 기록 순서로 구성합니다. 아트 비교는 하단 보조 사례로 유지합니다. 본문은 `gamelab-ai-workflow.json`, 근거·표현 범위는 `GAMELAB-AI-SOURCES.md`, 배치는 `gamelab-ai.mjs`에서 관리합니다.
