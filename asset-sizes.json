@@ -299,6 +299,21 @@
       "file": "gamelab-ui-after-skills.png",
       "width": 1920,
       "height": 1080
+    },
+    {
+      "file": "gamelab-ui-latest-lobby.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-ui-latest-codex.png",
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "file": "gamelab-ui-latest-skills.png",
+      "width": 1920,
+      "height": 1080
     }
   ]
 }

@@ -1,49 +1,51 @@
-// 위 Before와 아래 After를 같은 화면 종류로 함께 넘깁니다.
+// PC는 두 종류, 모바일은 한 종류의 전후 화면을 함께 넘깁니다.
 document.querySelectorAll('[data-redesign-comparison]').forEach(root=>{
  const tracks=[...root.querySelectorAll('[data-comparison-track]')];
  const viewports=[...root.querySelectorAll('[data-comparison-viewport]')];
  const controls=root.querySelector('[data-comparison-controls]');
- const selectors=[...root.querySelectorAll('[data-comparison-select]')];
  const observations=[...root.querySelectorAll('[data-comparison-note]')];
  const status=root.querySelector('[data-comparison-status]');
  const count=root.querySelector('[data-comparison-count]');
- if(tracks.length!==2||!selectors.length||!controls||!status||!count)return;
+ const length=tracks[0]?.children.length??0;
+ if(tracks.length!==2||!length||tracks[1].children.length!==length||!controls||!status||!count)return;
  let index=0;
+ let visible=window.matchMedia('(max-width:640px)').matches?1:2;
  let drag=null;
+ let resizeFrame=0;
  let suppressClickUntil=0;
- const length=selectors.length;
- const wrap=value=>(value+length)%length;
- function show(value,announce=true){
-  const next=wrap(value);
-  const wrapped=Math.abs(next-index)>1;
+ const wrap=value=>(value%length+length)%length;
+ function show(value,announce=true,instant=false){
+  const next=Math.floor(wrap(value)/visible)*visible;
+  const wrapped=value<0||value>=length;
   index=next;
   root.dataset.comparisonIndex=String(index);
+  root.dataset.comparisonVisible=String(visible);
   tracks.forEach(track=>{
-   track.style.transitionDuration=wrapped?'0s':'';
-   track.style.transform=`translateX(${-index*100}%)`;
-   [...track.children].forEach((slide,i)=>{
-    slide.inert=i!==index;
-    slide.setAttribute('aria-hidden',String(i!==index));
+   track.style.transitionDuration=wrapped||instant?'0s':'';
+   const slides=[...track.children];
+   const offset=slides[index].offsetLeft-slides[0].offsetLeft;
+   track.style.transform=`translateX(${-offset}px)`;
+   slides.forEach((slide,i)=>{
+    const shown=i>=index&&i<index+visible;
+    slide.inert=!shown;
+    slide.setAttribute('aria-hidden',String(!shown));
     slide.setAttribute('role','group');
-    slide.setAttribute('aria-label',`${i+1} / ${length}`);
+    slide.setAttribute('aria-label',`${i+1} / ${length} · ${slide.dataset.comparisonTitle}`);
+    if(shown){const image=slide.querySelector('img');if(image)image.loading='eager';}
    });
-   const image=track.children[index]?.querySelector('img');
-   if(image)image.loading='eager';
   });
-  selectors.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===index)));
-  observations.forEach((note,i)=>note.hidden=i!==index);
-  count.textContent=`${index+1} / ${length} · ${selectors[index].textContent}`;
-  if(announce)status.textContent=`${selectors[index].textContent} · 위 Before, 아래 After 표시`;
+  observations.forEach((note,i)=>note.hidden=i<index||i>=index+visible);
+  count.textContent=`${index+1}${visible>1?'–'+Math.min(index+visible,length):''} / ${length}`;
+  if(announce)status.textContent=[...tracks[0].children].slice(index,index+visible).map(slide=>slide.dataset.comparisonTitle).join(' · ')+' 비교';
  }
- selectors.forEach((button,i)=>button.addEventListener('click',()=>show(i)));
- root.querySelector('[data-comparison-prev]')?.addEventListener('click',()=>show(index-1));
- root.querySelector('[data-comparison-next]')?.addEventListener('click',()=>show(index+1));
+ root.querySelector('[data-comparison-prev]')?.addEventListener('click',()=>show(index-visible));
+ root.querySelector('[data-comparison-next]')?.addEventListener('click',()=>show(index+visible));
  viewports.forEach(viewport=>{
   viewport.addEventListener('keydown',event=>{
    if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)||event.altKey||event.ctrlKey||event.metaKey)return;
    event.preventDefault();
    if(event.target!==viewport)viewport.focus({preventScroll:true});
-   show(event.key==='Home'?0:event.key==='End'?length-1:index+(event.key==='ArrowRight'?1:-1));
+   show(event.key==='Home'?0:event.key==='End'?length-visible:index+(event.key==='ArrowRight'?visible:-visible));
   });
   viewport.addEventListener('pointerdown',event=>{
    if(!event.isPrimary||event.button!==0||event.target.closest('figcaption'))return;
@@ -72,10 +74,19 @@ document.querySelectorAll('[data-redesign-comparison]').forEach(root=>{
   const threshold=Math.max(32,Math.min(60,gesture.viewport.clientWidth*.12));
   const swiped=event.type!=='pointercancel'&&Math.abs(dx)>=threshold&&Math.abs(dx)>Math.abs(dy)*1.25;
   if(gesture.captured||swiped)suppressClickUntil=performance.now()+350;
-  if(swiped)show(index+(dx<0?1:-1));
+  if(swiped)show(index+(dx<0?visible:-visible));
  }
  window.addEventListener('pointerup',release);
  window.addEventListener('pointercancel',release);
+ window.addEventListener('resize',()=>{
+  if(resizeFrame)cancelAnimationFrame(resizeFrame);
+  resizeFrame=requestAnimationFrame(()=>{
+   resizeFrame=0;
+   visible=window.matchMedia('(max-width:640px)').matches?1:2;
+   // 이동 중 폭이 바뀌어도 기존 화면이 포함된 묶음을 보여줍니다.
+   show(index,false,true);
+  });
+ });
  controls.hidden=false;
  root.dataset.ready='';
  show(0,false);
