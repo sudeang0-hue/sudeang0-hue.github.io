@@ -369,6 +369,26 @@ body:has(.goods-subnav,.case-subnav) :is(.case,.goods-events,.goods-event,#goods
  .case-subnav a{white-space:normal;word-break:keep-all}
 }
 
+/* 사례 목차는 프로젝트 메뉴 아래에 겹쳐 펼쳐지며 고정 헤더 높이를 늘리지 않습니다. */
+.game-case-navigation{position:relative}
+.project-subnav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.project-subnav nav{min-width:0;flex-wrap:wrap}
+.case-menu-toggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:6px 10px;border:0;background:transparent;font-size:11px;color:var(--muted);white-space:nowrap;flex-shrink:0}
+.case-menu-toggle[hidden]{display:none}
+.case-menu-toggle svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.4;transition:transform .15s ease}
+.case-menu-toggle[aria-expanded=true]{color:var(--green)}
+.case-menu-toggle[aria-expanded=true] svg{transform:rotate(180deg)}
+.game-case-navigation[data-case-ready] .case-subnav{position:absolute;left:50%;top:100%;transform:translateX(-50%);z-index:1;background:var(--paper);box-shadow:0 10px 18px #00000012;border-bottom:1px solid var(--line);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .12s ease,visibility .12s ease}
+.game-case-navigation[data-case-ready][data-case-open] .case-subnav{opacity:1;visibility:visible;pointer-events:auto}
+@media(max-width:640px){
+ .project-subnav{gap:8px}
+ .project-subnav nav{gap:8px 12px;font-size:11px}
+ .case-menu-toggle{padding:6px 2px;gap:4px}
+ .case-menu-label-wide{display:none}
+}
+@media(prefers-reduced-motion:reduce){.case-menu-toggle svg,.game-case-navigation[data-case-ready] .case-subnav{transition:none}}
+@media print{.case-menu-toggle,.game-case-navigation[data-case-ready] .case-subnav{display:none}}
+
 /* 실제 전후 캡처를 위아래로 맞추고 PC 2종·모바일 1종씩 함께 넘깁니다. */
 #redesign .case-body{min-width:0}
 .redesign-screen-comparison{margin:24px 0 18px;min-width:0}

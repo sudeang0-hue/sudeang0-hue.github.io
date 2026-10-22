@@ -1,6 +1,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 import json, re
+from urllib.parse import urlsplit
 root=Path(__file__).parent/'dist'
 class Doc(HTMLParser):
     def __init__(self): super().__init__(); self.refs=[]; self.ids=[]; self.h1=0; self.imgs=[]
@@ -16,7 +17,8 @@ for file in sorted(root.glob('*.html')):
     raw=file.read_text(encoding='utf-8'); doc=Doc();doc.feed(raw); errors=[]
     for ref in doc.refs:
         if re.match(r'^(https?:|mailto:|data:)',ref):continue
-        local,_,anchor=ref.partition('#')
+        parsed=urlsplit(ref)
+        local,anchor=parsed.path,parsed.fragment
         target=root/local if local else file
         if not target.exists():errors.append('Missing '+ref)
         if anchor and target.suffix=='.html':
@@ -66,7 +68,7 @@ assert 'aria-label="굿즈 사례 목차"' not in goods
 for section_id in ('goods-planning','goods-illustration','goods-production','goods-sales','goods-reflection','goods-events'):
     assert f'href="#{section_id}"' in goods and f'id="{section_id}"' in goods
 
-# 게임 사례 목차는 프로젝트 메뉴와 함께 헤더 안에 유지합니다.
+# 게임 사례 목차는 프로젝트 메뉴에서 펼칠 수 있는 한 개의 패널로 유지합니다.
 for file_name, label, anchors in (
     ('gamelab.html','게임랩',('flow','redesign','hud','result','ai')),
     ('tasktown.html','TaskTown',('scene','tutorial','sound','collaboration')),
@@ -79,3 +81,7 @@ for file_name, label, anchors in (
     assert f'aria-label="{label} 사례 목차"' in header
     for anchor in anchors:
         assert f'href="#{anchor}"' in header and f'id="{anchor}"' in page
+
+    assert 'data-case-navigation' in header and 'data-case-toggle' in header
+    assert 'aria-controls="game-case-menu"' in header and 'id="game-case-menu"' in header
+    assert 'aria-expanded="false"' in header
