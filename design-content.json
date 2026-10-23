@@ -1,0 +1,1019 @@
+{
+  "title": "광진구청 공공홍보 콘텐츠",
+  "headline": [
+    "주민에게 필요한 정보를",
+    "만화와 그림으로 전했습니다."
+  ],
+  "introduction": [
+    "광진구청의 정책과 생활정보를 인스타툰·만화·일러스트로 제작했습니다. 주민이 알아야 할 정보를 캐릭터의 대화와 장면으로 구성했습니다.",
+    "담당한 만화는 내용 조사부터 대본·콘티, 선화·채색, 문구 편집과 수정 대응까지 전 과정을 직접 맡았습니다."
+  ],
+  "checkedAt": "2026.10.23",
+  "channels": [
+    {
+      "url": "https://www.instagram.com/gwangjin_office/",
+      "label": "광진구청 공식 인스타그램"
+    },
+    {
+      "url": "https://www.instagram.com/gwangijini/",
+      "label": "광이진이 인스타그램"
+    },
+    {
+      "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/list.do?menuNo=201398",
+      "label": "구청 광진희망툰"
+    }
+  ],
+  "totals": {
+    "comicTopics": 18,
+    "officialComicTopics": 16,
+    "officialEpisodes": 18,
+    "minimumPanels": 159,
+    "instagramComicTopics": 14,
+    "views": null
+  },
+  "heroImages": [
+    {
+      "file": "public-gj-2023-05-01.jpg",
+      "alt": "아동권리에 대해 한번 들어볼래? 1~3화 · 선택 이미지 1",
+      "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+    },
+    {
+      "file": "public-gj-2023-06-01.jpg",
+      "alt": "광진구 200가구 보듬기 · 선택 이미지 1",
+      "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+    },
+    {
+      "file": "public-gj-2022-05-01.jpg",
+      "alt": "2022 지역사회건강조사 · 선택 이미지 1",
+      "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+    }
+  ],
+  "metrics": [
+    {
+      "label": "공식 게시 확인 회차",
+      "display": "18편",
+      "note": "16개 주제 · 아동권리 1~3화는 각 1편"
+    },
+    {
+      "label": "확인 가능한 본문",
+      "display": "159컷 이상",
+      "note": "공식 게시본의 시각 확인 최소치 · 표지·독립 안내 제외"
+    },
+    {
+      "label": "만화 SNS 게시 확인",
+      "display": "14개 주제",
+      "note": "공식 인스타그램 연결 · 일러스트·이벤트는 별도"
+    },
+    {
+      "label": "공식 게시 총 조회수",
+      "display": "공개 집계 없음",
+      "note": "공개된 조회수 자료가 없어 합산하지 않았습니다.",
+      "pending": true
+    }
+  ],
+  "countNotes": [
+    "보유 자료의 만화·인스타툰은 18개 정리 항목입니다. 이 가운데 공식 게시본이 확인된 16개 주제를 대상으로, 아동권리 1~3화를 각각 계산하면 18편입니다. 청소년 지원센터 수정 컷과 공식 최종 게시본이 확인되지 않은 민관협력 작업은 공식 회차 합계에서 제외했습니다. 퀴즈 이벤트와 식목일 일러스트도 별도입니다.",
+    "본문 159컷 이상은 공식 게시본을 눈으로 확인한 최소치이며 기관이 공표한 제작량은 아닙니다. 정규 이야기 안의 정책 설명은 포함하고 표지·제목 배너·독립 이용안내·회차 끝 메시지 카드는 제외했습니다. 복합 구성이 있는 대사증후군·한파 작품은 각각 확인 가능한 최소 9개 단위만 반영했습니다. 이미지 파일 수와 컷수는 같지 않습니다.",
+    "구청 작품 게시판에는 공개 조회수 항목이 없어 총합을 산출하지 않았습니다. 관련 행사 보도자료의 조회수, 화면에 표시되지 않는 소식지 HTML 주석 값, SNS 좋아요·댓글 수는 합산하지 않았습니다. 별도 조회수 자료를 확보하면 같은 기준과 확인일을 기록해 갱신합니다."
+  ],
+  "process": [
+    {
+      "title": "내용 조사·이야기 구성",
+      "text": "정책과 생활정보를 조사하고 대본·콘티로 정리했습니다. 지원 대상·이용 방법처럼 필요한 정보를 캐릭터의 대화와 장면으로 구성했습니다."
+    },
+    {
+      "title": "작화·문구 편집",
+      "text": "콘티를 바탕으로 선화·채색을 진행하고, 그림과 함께 읽을 문구를 편집해 완성했습니다."
+    },
+    {
+      "title": "검토·수정 대응",
+      "text": "작화와 문구를 검토하고 요청된 수정에 대응했습니다. 연도별 안내와 캐릭터 변경에 따른 수정 작업도 함께 정리했습니다."
+    }
+  ],
+  "collectionNote": "웹툰·만화 18개 정리 항목과 이벤트·일러스트를 함께 소개합니다. 작품별로 선택한 이미지를 볼 수 있으며, 인스타그램과 구청 공식 게시본에서 전체 내용을 확인할 수 있습니다. 제작 연도와 실제 게시 연도는 다를 수 있습니다.",
+  "works": [
+    {
+      "id": "2023-10",
+      "title": "생활쓰레기 매일 수거제",
+      "year": "2023",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 4,
+      "minimumPanels": 4,
+      "panelDisplay": "4컷",
+      "countBasis": "긴 세로 파일1장. 제목과 마지막 배출일/시간 안내를 제외하면 독립 그림프레임4개.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "생활쓰레기 매일 수거제를 소개한 4컷 만화입니다.",
+      "detail": "2023년 12월 제작·SNS 게시 · 아차산메아리 2024년 1월호 게재.",
+      "images": [
+        {
+          "file": "public-gj-2023-10-01.jpg",
+          "alt": "생활쓰레기 매일 수거제 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangjin_office/p/C1BdBOlPSO2/",
+          "label": "공식 인스타그램"
+        },
+        {
+          "platform": "magazine",
+          "url": "https://gwangjin.newstool.co.kr/view.php?eid=8826&aid=13717",
+          "label": "아차산메아리 게시본"
+        }
+      ]
+    },
+    {
+      "id": "2023-09",
+      "title": "반려동물등록제",
+      "year": "2023",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 10,
+      "minimumPanels": 10,
+      "panelDisplay": "10컷",
+      "countBasis": "제목배너1·도입 일러스트2·마지막 등록촉구/QR안내13 제외. 3~12번 본문10장 각1프레임. 9번 가로 장면도 본문임. 마지막13까지 창작 본문으로 포함하면11프레임이지만 여기서는 독립 안내로 제외.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "반려동물 등록의 필요성과 등록 안내를 이야기로 구성했습니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2023-09-01.jpg",
+          "alt": "반려동물등록제 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-09-02.jpg",
+          "alt": "반려동물등록제 · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-09-03.jpg",
+          "alt": "반려동물등록제 · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?menuNo=201398&nttId=6184064",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/C0da-4_JUo-/",
+          "label": "공식 인스타그램 · 1부"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/C0da5dJJOa2/",
+          "label": "공식 인스타그램 · 2부"
+        },
+        {
+          "platform": "magazine",
+          "url": "https://gwangjin.newstool.co.kr/view.php?eid=8819&aid=13593",
+          "label": "아차산메아리 게시본"
+        }
+      ]
+    },
+    {
+      "id": "2023-08",
+      "title": "공동육아나눔터",
+      "year": "2023",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 10,
+      "minimumPanels": 10,
+      "panelDisplay": "10컷",
+      "countBasis": "제목배너1·도입 일러스트2·독립 이용안내13 제외. 3~12번 본문10장 각1프레임. 12번 가로 장면도 본문임.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "공동육아나눔터의 이용과 돌봄 정보를 만화로 소개했습니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2023-08-01.jpg",
+          "alt": "공동육아나눔터 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-08-02.jpg",
+          "alt": "공동육아나눔터 · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-08-03.jpg",
+          "alt": "공동육아나눔터 · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?menuNo=201398&nttId=6156086",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/CxrwliNp7W1/",
+          "label": "공식 인스타그램"
+        },
+        {
+          "platform": "magazine",
+          "url": "https://gwangjin.newstool.co.kr/view.php?eid=8808&aid=13395",
+          "label": "아차산메아리 게시본"
+        }
+      ]
+    },
+    {
+      "id": "2023-07",
+      "title": "2023년 9월 정기분 재산세 납부 안내",
+      "year": "2023",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 8,
+      "minimumPanels": 8,
+      "panelDisplay": "8컷",
+      "countBasis": "긴 세로 파일1장. 위쪽 제목/부제 제외 후 독립 프레임9개. 마지막 감사·부서문의 메시지카드1 제외 시 본문8컷. 납부방법·계산표는 작품 내 정책 설명으로 포함.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "정기분 재산세 납부 정보를 세로형 만화로 안내했습니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2023-07-01.jpg",
+          "alt": "2023년 9월 정기분 재산세 납부 안내 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?menuNo=201398&nttId=6155321",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "blog",
+          "url": "https://blog.naver.com/gwangjin_b/223208084522",
+          "label": "구청 공식 블로그"
+        }
+      ]
+    },
+    {
+      "id": "2023-06",
+      "title": "광진구 200가구 보듬기",
+      "year": "2023",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 12,
+      "minimumPanels": 12,
+      "panelDisplay": "12컷",
+      "countBasis": "제목배너1과 도입 캐리커처2 제외. 3~14번 본문12장 각1프레임. 정책 설명10~13도 이야기 안의 설명 컷으로 포함.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "200가구 보듬기 사업의 대상과 지원 내용을 인터뷰 형식으로 소개했습니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2023-06-01.jpg",
+          "alt": "광진구 200가구 보듬기 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-06-02.jpg",
+          "alt": "광진구 200가구 보듬기 · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-06-03.jpg",
+          "alt": "광진구 200가구 보듬기 · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?menuNo=201398&nttId=6100602",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "magazine",
+          "url": "https://gwangjin.newstool.co.kr/view.php?eid=8791&aid=13042",
+          "label": "아차산메아리 게시본"
+        }
+      ]
+    },
+    {
+      "id": "2023-05",
+      "title": "아동권리에 대해 한번 들어볼래? 1~3화",
+      "year": "2023",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 3,
+      "episodeDisplay": "3편",
+      "panels": 30,
+      "minimumPanels": 30,
+      "panelDisplay": "30컷",
+      "countBasis": "3회차 묶음. 각 표지1 제외. 1화 이미지2=6장면,3=6프레임(마지막 메시지카드1 포함); 2화5=6,6=5(마지막 메시지카드1 포함); 3화8=5,9=5(마지막 메시지카드1 포함). 본문프레임33개 중 회차별 독립 마무리 메시지카드3개를 제외한 서사/설명컷은11+10+9=30. 1화 도입2장면은 테두리 대신 연출로 구분. 정책 설명은 본문으로 포함.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "아동권리를 세 편의 이야기로 나누어 설명했습니다.",
+      "detail": "아동권리 1~3화 · 회차별 공식 게시 링크를 연결했습니다.",
+      "images": [
+        {
+          "file": "public-gj-2023-05-01.jpg",
+          "alt": "아동권리에 대해 한번 들어볼래? 1~3화 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-05-02.png",
+          "alt": "아동권리에 대해 한번 들어볼래? 1~3화 · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-05-03.png",
+          "alt": "아동권리에 대해 한번 들어볼래? 1~3화 · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/main/contents.do?menuNo=201728",
+          "label": "광진구청 공식 게시본 · 1화"
+        },
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/main/contents.do?menuNo=201729",
+          "label": "광진구청 공식 게시본 · 2화"
+        },
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/main/contents.do?menuNo=201730",
+          "label": "광진구청 공식 게시본 · 3화"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangjin_office/p/C0s5QeTvx0I/",
+          "label": "공식 인스타그램 · 1화"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangjin_office/p/C0vXocbvOYU/",
+          "label": "공식 인스타그램 · 2화"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangjin_office/p/C0-lJT0vhRp/",
+          "label": "공식 인스타그램 · 3화"
+        },
+        {
+          "platform": "blog",
+          "url": "https://blog.naver.com/gwangjin_b/223289213559",
+          "label": "구청 공식 블로그 · 1화"
+        },
+        {
+          "platform": "blog",
+          "url": "https://blog.naver.com/gwangjin_b/223290029600",
+          "label": "구청 공식 블로그 · 2화"
+        },
+        {
+          "platform": "blog",
+          "url": "https://blog.naver.com/gwangjin_b/223296085991",
+          "label": "구청 공식 블로그 · 3화"
+        }
+      ]
+    },
+    {
+      "id": "2023-04",
+      "title": "민관협력 사례공유회 결과보고집",
+      "year": "2023",
+      "kind": "결과보고집 컷만화",
+      "isComic": true,
+      "official": false,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": null,
+      "minimumPanels": 10,
+      "panelDisplay": "10컷 이상",
+      "countBasis": "보유 완성본3페이지지만 원본파일3장 접근 불가. 1페이지 C:체크 미리보기에서10프레임 확인. 전체 합계는 null, 확인된10컷+로만 표시 가능. 공식 출판 여부 미확인.",
+      "publicationStatus": "공식 최종본 미확인",
+      "description": "민관협력 사례를 만화로 정리한 보유 작업의 미리보기입니다.",
+      "detail": "체크용 미리보기 1쪽입니다. 전체 3페이지 원본과 공식 최종 게시본은 추가 확인이 필요합니다.",
+      "images": [
+        {
+          "file": "public-gj-2023-04-01.jpg",
+          "alt": "민관협력 사례공유회 결과보고집 · 작업 미리보기",
+          "caption": "보유 작업 · 체크용 미리보기 · 제작: 최희수"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "2023-03",
+      "title": "2023 지역사회건강조사",
+      "year": "2023",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 8,
+      "minimumPanels": 8,
+      "panelDisplay": "8컷",
+      "countBasis": "별도 표지 없이 공식 본문8장. 각1프레임이며 조사 안내도 작품의 본문으로 포함.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "2023년 지역사회건강조사를 안내하는 만화입니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2023-03-01.png",
+          "alt": "2023 지역사회건강조사 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-03-02.png",
+          "alt": "2023 지역사회건강조사 · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-03-03.png",
+          "alt": "2023 지역사회건강조사 · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?menuNo=201398&nttId=6080419",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/Cru0jLLJdLE/",
+          "label": "공식 인스타그램"
+        },
+        {
+          "platform": "blog",
+          "url": "https://blog.naver.com/gwangjin_b/223098107411",
+          "label": "구청 공식 블로그"
+        }
+      ]
+    },
+    {
+      "id": "2023-02",
+      "title": "청소년 지원센터 수정 컷",
+      "year": "2023",
+      "kind": "수정 컷 기록",
+      "isComic": true,
+      "official": false,
+      "episodes": 0,
+      "episodeDisplay": "집계 제외",
+      "panels": null,
+      "minimumPanels": null,
+      "panelDisplay": "부분 수정·별도",
+      "countBasis": "마지막 컷 수정안2종. 연속2컷 또는 전체1편으로 집계하지 않음. 공식 반영 여부 미확인.",
+      "publicationStatus": "공식 최종본 미확인",
+      "description": "청소년 지원센터 작품의 캐릭터를 교체하기 위해 제작한 수정안 기록입니다.",
+      "detail": "수정 컷 2안만 소개합니다. 전체 작품 편수와 공식 게시 확인 집계에서는 제외했습니다.",
+      "images": [
+        {
+          "file": "public-gj-2023-02-01.png",
+          "alt": "청소년 지원센터 수정 컷 · 선택 이미지 1",
+          "caption": "보유 수정안 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-02-02.png",
+          "alt": "청소년 지원센터 수정 컷 · 선택 이미지 2",
+          "caption": "보유 수정안 · 제작: 최희수"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "2023-01",
+      "title": "유기동물 입양비 지원사업",
+      "year": "2023",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 9,
+      "minimumPanels": 9,
+      "panelDisplay": "9컷",
+      "countBasis": "표지1 제외 본문2~10 각1프레임. 지원사업 안내9번은 서사 속 지원 안내로 포함.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "유기동물 입양비 지원사업을 소개한 만화입니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2023-01-01.jpg",
+          "alt": "유기동물 입양비 지원사업 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-01-02.jpg",
+          "alt": "유기동물 입양비 지원사업 · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2023-01-03.jpg",
+          "alt": "유기동물 입양비 지원사업 · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?menuNo=201398&nttId=6035386",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/CpJuHtUp7T4/",
+          "label": "공식 인스타그램"
+        }
+      ]
+    },
+    {
+      "id": "2022-10",
+      "title": "광이진이와 함께하는 안전한 겨울나기 · 한파 행동요령",
+      "year": "2022",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": null,
+      "minimumPanels": 9,
+      "panelDisplay": "9컷 이상",
+      "countBasis": "표지1 제외 본문9슬라이드. 2번은 좌우분할,5번은 화살표로 연결한 두 장면 등 장면/프레임 기준이 달라 서사컷 단정 불가. 본문 최소9개 단위.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "한파에 대비해 알아야 할 행동요령과 생활 속 주의사항을 안내했습니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2022-10-01.jpg",
+          "alt": "광이진이와 함께하는 안전한 겨울나기 · 한파 행동요령 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-10-02.jpg",
+          "alt": "광이진이와 함께하는 안전한 겨울나기 · 한파 행동요령 · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-10-03.jpg",
+          "alt": "광이진이와 함께하는 안전한 겨울나기 · 한파 행동요령 · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=6025481&menuNo=201398",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/Cl2IbB2ShrZ/",
+          "label": "공식 인스타그램"
+        },
+        {
+          "platform": "blog",
+          "url": "https://blog.naver.com/gwangjin_b/223718874214",
+          "label": "구청 공식 블로그"
+        }
+      ]
+    },
+    {
+      "id": "2022-09",
+      "title": "난 더 이상 혼자가 아니야! · 1인가구 지원센터",
+      "year": "2022",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 11,
+      "minimumPanels": 11,
+      "panelDisplay": "11컷",
+      "countBasis": "표지 없음. 시설안내10 제외. 본문1~9 중 4·5번이 각각 상하2프레임으로 9슬라이드=11프레임.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "1인가구 지원센터에서 이용할 수 있는 지원 내용을 이야기로 소개했습니다.",
+      "detail": "2022년 제작 기록 · 공식 게시일 2023.01.27.",
+      "images": [
+        {
+          "file": "public-gj-2022-09-01.jpg",
+          "alt": "난 더 이상 혼자가 아니야! · 1인가구 지원센터 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-09-02.jpg",
+          "alt": "난 더 이상 혼자가 아니야! · 1인가구 지원센터 · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-09-03.jpg",
+          "alt": "난 더 이상 혼자가 아니야! · 1인가구 지원센터 · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=6031845&menuNo=201398",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/Cn6EL7opzSe/",
+          "label": "공식 인스타그램"
+        }
+      ]
+    },
+    {
+      "id": "2022-08",
+      "title": "광이진이와 함께하는 빈칸퀴즈!",
+      "year": "2022",
+      "kind": "퀴즈 이벤트",
+      "isComic": false,
+      "official": true,
+      "episodes": 0,
+      "episodeDisplay": "집계 제외",
+      "panels": null,
+      "minimumPanels": null,
+      "panelDisplay": "부분 수정·별도",
+      "countBasis": "퀴즈 이벤트로 웹툰 편수에서 제외. 표지1+도입2슬라이드(2번의2프레임+3번의1프레임)+퀴즈/응모안내1. 관련자료2장은 별도.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "빈칸퀴즈의 문제 화면과 참여 안내를 구성한 홍보 콘텐츠입니다.",
+      "detail": "퀴즈 이벤트는 웹툰 편수·본문 컷수 집계에서 제외했습니다. 본문과 정답 발표의 공식 게시 링크를 함께 연결했습니다.",
+      "images": [
+        {
+          "file": "public-gj-2022-08-01.jpg",
+          "alt": "광이진이와 함께하는 빈칸퀴즈! · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-08-02.jpg",
+          "alt": "광이진이와 함께하는 빈칸퀴즈! · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-08-03.jpg",
+          "alt": "광이진이와 함께하는 빈칸퀴즈! · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangjin_office/p/CmDCoJ8PPnZ/",
+          "label": "공식 인스타그램 · 퀴즈 본문"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangjin_office/p/CmV30UPvwyo/",
+          "label": "공식 인스타그램 · 정답 발표"
+        },
+        {
+          "platform": "other_sns",
+          "url": "https://pf.kakao.com/_nxfzxixl/97777472",
+          "label": "구청 공식 카카오 채널 · 퀴즈 본문"
+        },
+        {
+          "platform": "other_sns",
+          "url": "https://pf.kakao.com/_nxfzxixl/97900466",
+          "label": "구청 공식 카카오 채널 · 정답 발표"
+        }
+      ]
+    },
+    {
+      "id": "2022-07",
+      "title": "대사증후군, 함께 관리해요!",
+      "year": "2022",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": null,
+      "minimumPanels": 9,
+      "panelDisplay": "9컷 이상",
+      "countBasis": "표지1 제외 본문9슬라이드. 2~5번 등 한 슬라이드 안에 테두리 없는 몽타주와 삽입 장면이 있어 실제 서사컷 단정 불가. 최소 독립 본문단위9개로만 집계 가능.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "건강검진 결과와 대사증후군 관리 제도를 주인공의 일상과 연결했습니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2022-07-01.jpg",
+          "alt": "대사증후군, 함께 관리해요! · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-07-02.jpg",
+          "alt": "대사증후군, 함께 관리해요! · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-07-03.jpg",
+          "alt": "대사증후군, 함께 관리해요! · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=6025065&menuNo=201398",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/ClS0rEOJzqb/",
+          "label": "공식 인스타그램"
+        }
+      ]
+    },
+    {
+      "id": "2022-06",
+      "title": "음쓰제로 플랫폼 · 음식물쓰레기 종량기",
+      "year": "2022",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 9,
+      "minimumPanels": 9,
+      "panelDisplay": "9컷",
+      "countBasis": "표지1과 독립 신청문의9 제외. 본문7슬라이드 중 6·7번이 각각 상하2프레임이므로 1+1+1+1+2+2+1=9프레임.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "음식물쓰레기 종량기와 음쓰제로 사업을 알리는 만화입니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2022-06-01.jpg",
+          "alt": "음쓰제로 플랫폼 · 음식물쓰레기 종량기 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-06-02.jpg",
+          "alt": "음쓰제로 플랫폼 · 음식물쓰레기 종량기 · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-06-03.jpg",
+          "alt": "음쓰제로 플랫폼 · 음식물쓰레기 종량기 · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=6017758&menuNo=201398",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/CjFLABHp4JE/",
+          "label": "공식 인스타그램"
+        }
+      ]
+    },
+    {
+      "id": "2022-05",
+      "title": "2022 지역사회건강조사",
+      "year": "2022",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 8,
+      "minimumPanels": 8,
+      "panelDisplay": "8컷",
+      "countBasis": "카탈로그가 표지1+본문8 명시. 본문 각 독립 프레임. 조사 내용·방법 등 작품 내 정책 설명은 포함.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "지역사회건강조사의 참여와 진행 정보를 안내한 만화입니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2022-05-01.jpg",
+          "alt": "2022 지역사회건강조사 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-05-02.jpg",
+          "alt": "2022 지역사회건강조사 · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-05-03.jpg",
+          "alt": "2022 지역사회건강조사 · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=6011026&menuNo=201398",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/ChEOo9iJBIR/",
+          "label": "공식 인스타그램"
+        },
+        {
+          "platform": "blog",
+          "url": "https://blog.naver.com/gwangjin_b/222846597207",
+          "label": "구청 공식 블로그"
+        }
+      ]
+    },
+    {
+      "id": "2022-04",
+      "title": "풍수해보험 · 소중한 일터를 지켜드립니다!",
+      "year": "2022",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 9,
+      "minimumPanels": 9,
+      "panelDisplay": "9컷",
+      "countBasis": "표지1 제외. 2~10번 각1프레임. 보험 설명 7~8번은 이야기 안의 정책 설명 컷으로 포함.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "풍수해보험의 필요성과 지원 내용을 이야기로 안내했습니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2022-04-01.jpg",
+          "alt": "풍수해보험 · 소중한 일터를 지켜드립니다! · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-04-02.jpg",
+          "alt": "풍수해보험 · 소중한 일터를 지켜드립니다! · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-04-03.jpg",
+          "alt": "풍수해보험 · 소중한 일터를 지켜드립니다! · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=5424520&menuNo=201398",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/CehlYI7JLN5/",
+          "label": "공식 인스타그램"
+        }
+      ]
+    },
+    {
+      "id": "2022-03",
+      "title": "아이스팩 재사용 · 청소할 때 제일 처치 곤란인 것",
+      "year": "2022",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 6,
+      "minimumPanels": 6,
+      "panelDisplay": "6컷",
+      "countBasis": "표지1 제외. 2~7번 본문 각1프레임. 6번의 재활용 설명은 작품 안의 정책 설명 컷으로 포함.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "아이스팩 수거·재사용 안내를 캐릭터의 생활 장면으로 풀었습니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2022-03-01.jpg",
+          "alt": "아이스팩 재사용 · 청소할 때 제일 처치 곤란인 것 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-03-02.jpg",
+          "alt": "아이스팩 재사용 · 청소할 때 제일 처치 곤란인 것 · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-03-03.jpg",
+          "alt": "아이스팩 재사용 · 청소할 때 제일 처치 곤란인 것 · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=5418788&menuNo=201398",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/CcjdPUZpHEY/",
+          "label": "공식 인스타그램"
+        }
+      ]
+    },
+    {
+      "id": "2022-02",
+      "title": "코로나도 이거면 문제없어! · 건강관리키트",
+      "year": "2022",
+      "kind": "인스타툰",
+      "isComic": true,
+      "official": true,
+      "episodes": 1,
+      "episodeDisplay": "1편",
+      "panels": 7,
+      "minimumPanels": 7,
+      "panelDisplay": "7컷",
+      "countBasis": "표지1 제외. 본문2~8은 각각 하나의 독립 만화 프레임. 7번의 키트 내용물 설명은 이야기 안의 정책 설명 컷으로 포함.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "건강관리키트의 구성과 이용 정보를 만화로 정리했습니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2022-02-01.jpg",
+          "alt": "코로나도 이거면 문제없어! · 건강관리키트 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-02-02.jpg",
+          "alt": "코로나도 이거면 문제없어! · 건강관리키트 · 선택 이미지 2",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        },
+        {
+          "file": "public-gj-2022-02-03.jpg",
+          "alt": "코로나도 이거면 문제없어! · 건강관리키트 · 선택 이미지 3",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=5385984&menuNo=201398",
+          "label": "광진구청 공식 게시본"
+        },
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/CcXBd3ZJrnt/",
+          "label": "공식 인스타그램"
+        }
+      ]
+    },
+    {
+      "id": "2022-01",
+      "title": "식목일 일러스트",
+      "year": "2022",
+      "kind": "일러스트",
+      "isComic": false,
+      "official": true,
+      "episodes": 0,
+      "episodeDisplay": "집계 제외",
+      "panels": null,
+      "minimumPanels": null,
+      "panelDisplay": "부분 수정·별도",
+      "countBasis": "단일 기념 일러스트 1장. 웹툰 편수와 서사 컷수에서 제외.",
+      "publicationStatus": "공식 게시본 연결",
+      "description": "식목일을 주제로 공식 캐릭터를 활용한 기념 일러스트입니다.",
+      "detail": "",
+      "images": [
+        {
+          "file": "public-gj-2022-01-01.jpg",
+          "alt": "식목일 일러스트 · 선택 이미지 1",
+          "caption": "공식 게시본의 선택 이미지 · 제작: 최희수"
+        }
+      ],
+      "links": [
+        {
+          "platform": "instagram",
+          "url": "https://www.instagram.com/gwangijini/p/Cb9jjojpqEe/",
+          "label": "공식 인스타그램"
+        }
+      ]
+    }
+  ]
+}

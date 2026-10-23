@@ -79,7 +79,7 @@ if(caseNavigation){
 }
 
 // 사례 목차가 여러 줄로 바뀌어도 이동한 제목이 고정 헤더에 가리지 않게 합니다.
-const sectionNavigation=document.querySelector('.goods-subnav, .case-subnav');
+const sectionNavigation=document.querySelector('.goods-subnav, .case-subnav, .design-subnav');
 if(sectionNavigation){
  const header=sectionNavigation.closest('.site-header');
  const sections=[...sectionNavigation.querySelectorAll('a[href^="#"]')].map(link=>({link,section:document.getElementById(link.hash.slice(1))})).filter(item=>item.section);
@@ -94,6 +94,7 @@ if(sectionNavigation){
    if(item.section.getBoundingClientRect().top>readingLine)break;
    current=item.link;
   }
+  if(!current&&sectionNavigation.classList.contains('design-subnav'))current=sections[0]?.link;
   for(const {link} of sections){
    if(link===current)link.setAttribute('aria-current','location');
    else link.removeAttribute('aria-current');
