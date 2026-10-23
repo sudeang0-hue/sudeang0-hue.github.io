@@ -4,6 +4,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { renderHistory } from './history.mjs';
 import { renderDesignPortfolio, designSections } from './design.mjs';
+import { publicReaderPath, renderPublicReader } from './public-reader.mjs';
 import { renderAIWorkflow } from './gamelab-ai.mjs';
 import { withGamelabBackground } from './gamelab-background.mjs';
 import { withTasktownBackground } from './tasktown-background.mjs';
@@ -43,13 +44,13 @@ const evidence=(links)=>'<div class="evidence">'+links.map(([url,text])=>ext(url
 const footer='<section class="contact wrap"><div><h2>함께 만들 게임의 이야기를 기다립니다.</h2><p>최희수 · Portfolio</p></div><div class="links"><a class="text-link" href="mailto:sudeang_@naver.com">이메일 <span aria-hidden="true">↗</span></a>'+ext('https://github.com/sudeang0-hue','GitHub')+'</div></section><footer class="site-footer"><div class="wrap"><p>© 2026 최희수 · Portfolio</p><p>내용 기준 2026.10.21</p></div></footer>';
 const dialog='<dialog class="modal" id="image-dialog" aria-label="확대 이미지 보기"><div class="modal-bar"><span data-image-caption></span><div class="modal-actions"><button type="button" data-original aria-pressed="false">원본 크기</button><button type="button" class="modal-close" aria-label="확대 이미지 닫기">닫기 ×</button></div></div><div class="modal-image-wrap" tabindex="0" aria-label="확대 이미지를 좌우와 위아래로 이동"><img alt=""></div></dialog>';
 const gameCaseMenus={"gamelab.html": "<a href=\"#flow\">01 Figma UI 흐름 설계</a><a href=\"#redesign\">02 UI 리디자인</a><a href=\"#hud\">03 HUD 오류 해결</a><a href=\"#result\">04 결과 연출</a><a href=\"#ai\">05 AI 활용·자동화</a>", "tasktown.html": "<a href=\"#scene\">01 SceneFlow</a><a href=\"#tutorial\">02 Tutorial</a><a href=\"#sound\">03 Sound / BGM</a><a href=\"#collaboration\">04 통합과 AI 협업</a>"};
-function shell(page,title,description,body){
+function shell(page,title,description,body,readerWork=null){
  const nav=[['index.html','게임 개발'],['design.html','디자인 및 홍보'],['planning.html','굿즈 기획·제작'],['history.html','연혁']];
- const category=['planning.html','design.html','history.html'].includes(page)?page:'index.html';
+ const category=readerWork?'design.html':['planning.html','design.html','history.html'].includes(page)?page:'index.html';
  const hasCaseMenu=Boolean(gameCaseMenus[page]);
  const caseLabel=page==='gamelab.html'?'게임랩':'TaskTown';
  const caseToggle=hasCaseMenu?'<button type="button" class="case-menu-toggle" data-case-toggle aria-expanded="false" aria-controls="game-case-menu" aria-label="'+caseLabel+' 사례 목차 열기" hidden><span><span class="case-menu-label-wide">사례 </span>목차</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>':'';
- const sectionNav=category==='index.html'?'<div class="category-subnav '+(hasCaseMenu?'project-subnav ':'')+'wrap"><nav aria-label="게임개발 세부 메뉴">'+[['index.html','전체 프로젝트'],['gamelab.html','게임랩'],['tasktown.html','TaskTown'],['resume.html','이력서']].map(([href,text])=>'<a href="'+href+'"'+(href===page?' aria-current="page"':'')+'>'+text+'</a>').join('')+'</nav>'+caseToggle+'</div>':category==='planning.html'?'<div class="category-subnav goods-subnav wrap"><nav aria-label="굿즈 기획·제작 세부 메뉴">'+goods.stages.map(stage=>'<a href="#'+escapeHtml(stage.id)+'">'+escapeHtml(stage.number)+' '+escapeHtml(stage.title)+'</a>').join('')+'<a href="#goods-events">참가 활동</a></nav></div>':category==='design.html'?'<div class="category-subnav design-subnav wrap"><nav aria-label="디자인 및 홍보 세부 메뉴">'+designSections.map(([id,label],index)=>'<a href="#'+id+'"'+(index===0?' aria-current="location"':'')+'>'+label+'</a>').join('')+'</nav></div>':'';
+ const sectionNav=readerWork?'<nav class="webtoon-toolbar wrap" aria-label="작품 읽기 메뉴"><a href="design.html#public-'+escapeHtml(readerWork.id)+'">← 작품 목록</a><span>'+escapeHtml(readerWork.title)+'</span><a href="#reader-top">맨 위로 ↑</a></nav>':category==='index.html'?'<div class="category-subnav '+(hasCaseMenu?'project-subnav ':'')+'wrap"><nav aria-label="게임개발 세부 메뉴">'+[['index.html','전체 프로젝트'],['gamelab.html','게임랩'],['tasktown.html','TaskTown'],['resume.html','이력서']].map(([href,text])=>'<a href="'+href+'"'+(href===page?' aria-current="page"':'')+'>'+text+'</a>').join('')+'</nav>'+caseToggle+'</div>':category==='planning.html'?'<div class="category-subnav goods-subnav wrap"><nav aria-label="굿즈 기획·제작 세부 메뉴">'+goods.stages.map(stage=>'<a href="#'+escapeHtml(stage.id)+'">'+escapeHtml(stage.number)+' '+escapeHtml(stage.title)+'</a>').join('')+'<a href="#goods-events">참가 활동</a></nav></div>':category==='design.html'?'<div class="category-subnav design-subnav wrap"><nav aria-label="디자인 및 홍보 세부 메뉴">'+designSections.map(([id,label],index)=>'<a href="#'+id+'"'+(index===0?' aria-current="location"':'')+'>'+label+'</a>').join('')+'</nav></div>':'';
  const caseNav=hasCaseMenu?'<div class="category-subnav case-subnav wrap" id="game-case-menu" data-case-panel><nav aria-label="'+caseLabel+' 사례 목차">'+gameCaseMenus[page]+'</nav></div>':'';
  const gameNavigation=hasCaseMenu?'<div class="game-case-navigation" data-case-navigation>'+sectionNav+caseNav+'</div>':sectionNav;
  return '<!doctype html><html lang="ko"><head><meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="'+escapeHtml(contentSecurityPolicy)+'"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#f6f5f1"><title>'+escapeHtml(title)+' · 최희수</title><meta name="description" content="'+escapeHtml(description)+'"><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="theme.js"></script><link rel="stylesheet" href="'+assetURL('styles.css')+'"><script src="'+assetURL('app.js')+'" defer></script></head><body><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="nav wrap"><a class="brand" href="index.html">최희수<span>PORTFOLIO</span></a><nav aria-label="주요 메뉴">'+nav.map(([href,text])=>'<a href="'+href+'"'+(href===category?' aria-current="page"':'')+'>'+text+'</a>').join('')+'</nav><button type="button" class="theme-toggle" data-theme-toggle hidden><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4A8.7 8.7 0 0 1 10.6 3.4 8.7 8.7 0 1 0 20.6 13.4Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></div>'+gameNavigation+'</header><main id="main">'+body+'</main>'+footer+dialog+'</body></html>';
@@ -179,6 +180,13 @@ fs.writeFileSync(path.join(out,'resume.html'),shell('resume.html','이력서','�
 const designData=JSON.parse(fs.readFileSync(new URL('./design-content.json',import.meta.url),'utf8'));
 const designBody=renderDesignPortfolio(designData,{escapeHtml,ext,zoom})+'<script src="'+assetURL('design-portfolio.js')+'" defer></script>';
 fs.writeFileSync(path.join(out,'design.html'),shell('design.html','디자인 및 홍보','광진구청 정책·생활정보 웹툰과 홍보 일러스트. 내용 조사·대본·콘티·작화·편집·수정 대응과 공식 게시 기록.',designBody));
+const readerWorks=JSON.parse(fs.readFileSync(new URL('./webtoon-content.json',import.meta.url),'utf8')).works;
+if(readerWorks.length!==designData.works.length||new Set(readerWorks.map(work=>work.id)).size!==readerWorks.length)throw new Error('모든 작품의 읽기 자료를 확인하세요.');
+for(const work of designData.works){
+ const reading=readerWorks.find(item=>item.id===work.id);
+ if(!reading)throw new Error('작품 읽기 자료 누락: '+work.id);
+ fs.writeFileSync(path.join(out,publicReaderPath(work.id)),shell(publicReaderPath(work.id),work.title,work.description,renderPublicReader(work,reading,designData.works,{ext}),work));
+}
 // 굿즈 사례는 사진과 본문을 별도 자료 파일에서 추가합니다.
 const goods=JSON.parse(fs.readFileSync(new URL('./goods-content.json',import.meta.url),'utf8'));
 const goodsParagraphs=paragraphs=>paragraphs.map(text=>'<p>'+escapeHtml(text)+'</p>').join('');
@@ -221,12 +229,12 @@ const goodsEnd='<div class="category-return goods-return"><a class="text-link" h
 fs.writeFileSync(path.join(out,'planning.html'),shell('planning.html',goods.title,'봉래제와 온리전 참가 경험. 본인 일러스트·팀원 시안 피드백, 굿즈 제작·현장 판매와 온라인 판매·발송 과정.',goodsHeader+goodsCases+goodsEvents+goodsEnd));
 const history=JSON.parse(fs.readFileSync(new URL('./history-content.json',import.meta.url),'utf8'));
 fs.writeFileSync(path.join(out,'history.html'),shell('history.html',history.title,'최희수의 근무·교육 및 자격·활동 연혁. 매장 운영과 디자인·웹툰 제작, 게임 개발 교육과 자격 취득 내역을 정리합니다.',renderHistory(history)));
-console.log('7 pages generated.');
+console.log((7+readerWorks.length)+' pages generated.');
 
 
 // Reserve image space before lazy loading to keep section anchors stable.
 const mediaSizes=new Map(JSON.parse(fs.readFileSync(path.join(import.meta.dirname,'asset-sizes.json'),'utf8')).assets.map(a=>[a.file,a]));
-for(const file of ['index.html','gamelab.html','tasktown.html','resume.html','planning.html','design.html','history.html']){
+for(const file of ['index.html','gamelab.html','tasktown.html','resume.html','planning.html','design.html','history.html',...readerWorks.map(work=>publicReaderPath(work.id))]){
  let html=fs.readFileSync(path.join(out,file),'utf8');
  html=html.replace(/<img\b[^>]*src="assets\/([^"]+)"[^>]*>/g,(tag,file)=>{const a=mediaSizes.get(file);return !a?.width||/\bwidth=/.test(tag)?tag:tag.slice(0,-1)+' width="'+a.width+'" height="'+a.height+'">'});
  fs.writeFileSync(path.join(out,file),html);

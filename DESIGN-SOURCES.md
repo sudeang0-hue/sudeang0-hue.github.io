@@ -240,3 +240,32 @@
 | 2022-03 | 공식 표지 · 하단 연락처 제외 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/CcjdPUZpHEY/) |
 | 2022-02 | 공식 표지 · 하단 연락처 제외 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/CcXBd3ZJrnt/) |
 | 2022-01 | 공식 일러스트 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/Cb9jjojpqEe/) |
+
+## 작품별 세로 읽기 자료
+
+2026.10.23 보유 공식 게시 원고와 이전 대조 기록을 다시 확인해 20개 읽기 페이지로 연결했습니다. 대표 선택 장면 순서와 구분하여 원게시 순서를 사용합니다. 전체 150개 이미지(2022년 78개·2023년 72개)이며 컷수나 작품 편수라는 뜻은 아닙니다. 기존 공개 파일 58개를 재사용하고 원본과 같은 바이트의 안전한 파일 92개를 추가했습니다. 이미 승인된 표지 하단 재단본 5개 외에 새 이미지 편집은 없습니다. 원본·공개 사본 SHA256, 이미지 순서, 구조화 메타데이터 검수와 QR 도착지 기록은 비공개 검수 폴더에 보존합니다.
+
+| 작품 ID | 읽기 이미지 | 구성·확인 범위 | 게시 근거 |
+|---|---:|---|---|
+| 2023-10 | 1 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.instagram.com/gwangjin_office/p/C1BdBOlPSO2/) |
+| 2023-09 | 13 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?menuNo=201398&nttId=6184064) |
+| 2023-08 | 13 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?menuNo=201398&nttId=6156086) |
+| 2023-07 | 1 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?menuNo=201398&nttId=6155321) |
+| 2023-06 | 14 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?menuNo=201398&nttId=6100602) |
+| 2023-05 | 9 | 1~3화 · 화별 표지와 본문 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/main/contents.do?menuNo=201728) |
+| 2023-04 | 1 | 보유 1쪽 미리보기 · 전체 3쪽 미확보 | 공식 최종 게시본 미확인 · 보유 작업 |
+| 2023-03 | 8 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?menuNo=201398&nttId=6080419) |
+| 2023-02 | 2 | 보유 수정안 2종 · 완편 아님 | 공식 최종 게시본 미확인 · 보유 작업 |
+| 2023-01 | 10 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?menuNo=201398&nttId=6035386) |
+| 2022-10 | 10 | 공식 게시 이미지 순서 · 당시 QR 현재 비활성 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=6025481&menuNo=201398) |
+| 2022-09 | 10 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=6031845&menuNo=201398) |
+| 2022-08 | 4 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.instagram.com/gwangjin_office/p/CmDCoJ8PPnZ/) |
+| 2022-07 | 10 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=6025065&menuNo=201398) |
+| 2022-06 | 9 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=6017758&menuNo=201398) |
+| 2022-05 | 9 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=6011026&menuNo=201398) |
+| 2022-04 | 10 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=5424520&menuNo=201398) |
+| 2022-03 | 7 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=5418788&menuNo=201398) |
+| 2022-02 | 8 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.gwangjin.go.kr/portal/bbs/B0000264/view.do?nttId=5385984&menuNo=201398) |
+| 2022-01 | 1 | 공식 게시 이미지 순서 | [공식 게시 기록](https://www.instagram.com/gwangijini/p/Cb9jjojpqEe/) |
+
+2022년 음쓰제로의 신청 문의는 공식 안내에 명시된 사업 주관기관의 공개 문의처로 확인했습니다. 퀴즈 QR은 공식 광진구청 카카오채널이며, 반려동물 QR은 구청 동물등록 안내로 연결됩니다. 한파 원고의 QR은 현재 비활성 페이지로 연결되어 활성 안내로 소개하지 않습니다. 반려동물 등록증의 이름·전화·주소는 원고에 사용한 가상 예시이며 실제 신청자 자료가 아닙니다. 공식 공개 연락처·검증한 안내 QR과 개인 연락처·결제 QR을 구분했습니다.

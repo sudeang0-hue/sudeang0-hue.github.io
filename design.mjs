@@ -1,3 +1,6 @@
+import { checkedAssetPath } from './security.mjs';
+import { publicReaderPath } from './public-reader.mjs';
+
 export const designSections = [
   ['public-work', '공공기관 작업'],
   ['illustration-work', '일러스트 작업'],
@@ -5,12 +8,11 @@ export const designSections = [
 ];
 
 // 작품 데이터와 화면 구성을 분리해 공식 링크·집계 근거를 함께 관리합니다.
-export function renderDesignPortfolio(data, {escapeHtml: esc, ext, zoom}) {
+export function renderDesignPortfolio(data, {escapeHtml: esc, ext}) {
   if (!Array.isArray(data.works) || !data.works.length) throw new Error('공공기관 작품 목록이 필요합니다.');
   if (new Set(data.works.map(work => work.id)).size !== data.works.length) throw new Error('작품 ID가 중복됐습니다.');
   const paragraphs = texts => texts.map(text => '<p>'+esc(text)+'</p>').join('');
-  const photo = image => zoom(image.file, image.alt, image.caption, 'public-art');
-  const thumbnailPhoto = image => zoom(image.file, image.alt, image.caption, 'public-art public-thumbnail public-thumbnail--'+(image.view === 'top' ? 'top' : 'contain'));
+  const thumbnailPhoto = (image, work) => '<figure class="media public-art public-thumbnail public-thumbnail--'+(image.view === 'top' ? 'top' : 'contain')+'"><a class="public-reader-link" href="'+publicReaderPath(work.id)+'" aria-label="'+esc(work.title)+' 작품 읽기"><img src="assets/'+checkedAssetPath(image.file)+'" alt="'+esc(image.alt)+'" loading="lazy" decoding="async"></a><figcaption>'+esc(image.caption)+'<span class="public-reader-hint">작품 읽기 →</span></figcaption></figure>';
   const sourceLinks = work => {
     const primary = work.links.filter(link => link.platform === 'instagram');
     const extra = work.links.filter(link => link.platform !== 'instagram');
@@ -21,14 +23,12 @@ export function renderDesignPortfolio(data, {escapeHtml: esc, ext, zoom}) {
   const card = work => {
     const images = work.images || [];
     const thumbnail = work.thumbnail || images[0];
-    const gallery = images.filter(image => image.file !== thumbnail?.file);
     return '<article class="public-work-card" id="public-'+esc(work.id)+'" data-public-work data-year="'+esc(work.year)+'">'+
       '<header><p class="public-work-meta"><span>'+esc(work.year)+'</span><span>'+esc(work.kind)+'</span></p><h3>'+esc(work.title)+'</h3></header>'+
-      (thumbnail ? thumbnailPhoto(thumbnail) : '<div class="public-art-pending"><span>작업 자료 연결 준비 중</span></div>')+
+      (thumbnail ? thumbnailPhoto(thumbnail, work) : '<div class="public-art-pending"><span>작업 자료 연결 준비 중</span></div>')+
       '<p class="public-work-description">'+esc(work.description)+'</p>'+
       (work.detail ? '<p class="public-work-detail">'+esc(work.detail)+'</p>' : '')+
       sourceLinks(work)+
-      (gallery.length ? '<details class="public-gallery"><summary>선택 이미지 '+gallery.length+'장 더 보기</summary><div class="public-gallery-images">'+gallery.map(photo).join('')+'</div></details>' : '')+
       '</article>';
   };
   return '<div class="wrap design-portfolio"><section id="public-work" class="design-section public-project" aria-labelledby="public-project-title">'+

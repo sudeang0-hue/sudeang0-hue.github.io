@@ -552,14 +552,9 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
 .public-work-card h3{font-size:20px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere;margin:7px 0 16px}
 .public-work-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:11px;color:var(--muted);letter-spacing:.02em}
 .public-work-card .media{margin:0;min-width:0}
-.public-work-card .zoom-trigger{display:grid;place-items:center;width:100%;height:310px;background:var(--media);border:1px solid var(--line)}
 .public-work-card img{width:100%;height:100%;max-height:100%;object-fit:contain}
 .public-thumbnail{--public-thumbnail-size:310px}
-.public-work-card .public-thumbnail .zoom-trigger{height:var(--public-thumbnail-size)}
-/* 긴 원고는 첫 제목 영역만 보여주며 확대창에서는 전체 원본을 유지합니다. */
-.design-portfolio .public-thumbnail--top .zoom-trigger img{inset:0 auto auto 50%;width:min(100%,var(--public-thumbnail-size));height:auto;max-height:none;transform:translateX(-50%);object-position:50% 0%}
 .public-work-card figcaption{font-size:11px;line-height:1.7;margin-top:9px;color:var(--muted)}
-.public-work-card figcaption .zoom-hint{float:none;display:block;margin-top:3px}
 .public-work-description{font-size:14px;line-height:1.85;margin-top:17px}
 .public-work-detail{font-size:12px;line-height:1.8;color:var(--muted);margin-top:8px}
 .public-source-links{display:grid;gap:8px;margin-top:18px}
@@ -569,10 +564,6 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
 .public-extra-links>div{display:grid;gap:4px;padding:5px 0 10px}
 .public-extra-links .text-link{font-size:12px;padding:5px 0;justify-self:start;max-width:100%;overflow-wrap:anywhere}
 .public-source-pending{font-size:12px;color:var(--muted);line-height:1.8}
-.public-gallery{margin-top:17px;border-top:1px solid var(--line)}
-.public-gallery>summary{font-size:12px;cursor:pointer;padding:12px 0;min-height:42px;color:var(--green)}
-.public-gallery-images{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;padding-top:6px}
-.public-gallery-images .zoom-trigger{height:210px}
 .public-art-pending{height:310px;display:grid;place-items:center;border:1px dashed var(--line);background:var(--wash);color:var(--muted);font-size:13px}
 .design-next{padding:65px 0;min-height:55vh;border-top:1px solid var(--line);margin-top:60px}
 .design-next h2{font-size:36px;margin:16px 0 24px}
@@ -595,13 +586,64 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
  .public-process-steps p{font-size:13px}
  .public-work-grid{grid-template-columns:1fr;gap:32px}
  .public-work-card h3{font-size:19px}
- .public-work-card .zoom-trigger{height:300px}
  .public-thumbnail{--public-thumbnail-size:300px}
- .public-gallery-images .zoom-trigger{height:180px}
  .public-collection-note{font-size:13px}
  .public-work-filters button{padding:8px 16px}
  .design-next{padding:45px 0;min-height:60vh;margin-top:38px}
  .design-next h2{font-size:30px}
  .design-next p{font-size:14px}
 }
-@media print{.public-thumbnail{--public-thumbnail-size:190px}.public-work-filters,.public-social-links,.public-source-links,.design-subnav{display:none}.public-work-grid{display:block}.public-work-card{break-inside:avoid;margin-bottom:25px}.public-header-main{display:block}.public-work-card .zoom-trigger{height:190px}.design-next{min-height:0;margin-top:30px;padding:25px 0}.public-gallery:not([open]){display:none}}
+@media print{.public-thumbnail{--public-thumbnail-size:190px}.public-work-filters,.public-social-links,.public-source-links,.design-subnav{display:none}.public-work-grid{display:block}.public-work-card{break-inside:avoid;margin-bottom:25px}.public-header-main{display:block}.design-next{min-height:0;margin-top:30px;padding:25px 0}}
+
+/* 작품 카드는 이미지 확대 대신 원래 순서의 읽기 페이지로 연결합니다. */
+.public-reader-link{display:grid;place-items:center;position:relative;overflow:hidden;width:100%;height:var(--public-thumbnail-size);background:var(--media);border:1px solid var(--line);cursor:pointer}
+.public-work-card .public-reader-link img{position:static;width:100%;height:100%;max-height:100%;object-fit:contain}
+.design-portfolio .public-thumbnail--top .public-reader-link img{position:absolute;inset:0 auto auto 50%;width:min(100%,var(--public-thumbnail-size));height:auto;max-height:none;transform:translateX(-50%);object-position:50% 0%}
+.public-reader-hint{display:block;margin-top:3px;color:var(--green);font-size:11px;font-weight:600}
+.public-reader-link:hover{border-color:var(--green)}
+.webtoon-toolbar{min-height:49px;display:flex;gap:22px;align-items:center;border-top:1px solid var(--line);font-size:12px}
+.webtoon-toolbar a{flex:0 0 auto;padding:11px 0;color:var(--green);font-weight:600}
+.webtoon-toolbar>span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)}
+html:has(.webtoon-reader){scroll-padding-top:170px}
+.webtoon-reader{width:min(800px,calc(100% - 48px));margin:auto;scroll-margin-top:0}
+.webtoon-head{padding:42px 0 30px}
+.webtoon-head .eyebrow{margin-bottom:14px}
+.webtoon-head h1{font-size:clamp(28px,4vw,42px);line-height:1.4}
+.webtoon-description{margin-top:17px;font-size:14px;color:var(--muted)}
+.webtoon-scope{margin-top:16px;padding-left:13px;border-left:2px solid var(--line);font-size:12px;color:var(--muted);line-height:1.85}
+.webtoon-chapters{flex-wrap:wrap;gap:12px 26px;margin-top:21px;font-size:13px}
+.webtoon-chapters a{color:var(--green);border-bottom-color:var(--line)}
+.webtoon-chapter{scroll-margin-top:0}
+.webtoon-chapter h2{font-size:23px;margin:38px 0 18px}
+.webtoon-chapter-note{font-size:12px;color:var(--muted);margin:0 0 18px}
+.webtoon-pages{background:#fff}
+.webtoon-pages img{display:block;width:100%;height:auto;max-width:100%;margin:0}
+.webtoon-end{padding:32px 0 56px}
+.webtoon-credit{font-size:12px;color:var(--muted)}
+.webtoon-publications{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+.webtoon-publications h2{font-size:17px;margin-bottom:15px}
+.webtoon-publications nav{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-start;font-size:12px}
+.webtoon-publications .text-link{font-size:12px;max-width:100%;overflow-wrap:anywhere}
+.webtoon-publications p{font-size:12px;color:var(--muted)}
+.webtoon-adjacent{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:34px;padding-top:25px;border-top:1px solid var(--line);align-items:start}
+.webtoon-adjacent a{min-width:0;border:0;display:grid;gap:8px;padding:4px 0}
+.webtoon-adjacent a:last-child{text-align:right}
+.webtoon-adjacent span{font-size:11px;color:var(--muted)}
+.webtoon-adjacent strong{font-size:14px;line-height:1.7;font-weight:600}
+.webtoon-return{margin-top:26px}
+@media(max-width:640px){
+ .webtoon-toolbar{min-height:46px;gap:15px;font-size:11px}
+ .webtoon-toolbar>span{display:none}
+ .webtoon-toolbar a:last-child{margin-left:auto}
+ .webtoon-reader{width:100%}
+ .webtoon-head,.webtoon-end{padding-left:20px;padding-right:20px}
+ .webtoon-head{padding-top:28px;padding-bottom:24px}
+ .webtoon-head h1{font-size:28px}
+ .webtoon-description{font-size:13px;margin-top:14px}
+ .webtoon-chapter h2,.webtoon-chapter-note{margin-left:20px;margin-right:20px}
+ .webtoon-chapter h2{font-size:21px}
+ .webtoon-adjacent{width:100%;font-size:12px;gap:22px}
+ .webtoon-adjacent strong{font-size:13px}
+ .webtoon-publications nav{width:100%;gap:12px 20px}
+}
+@media print{.webtoon-toolbar,.webtoon-chapters,.webtoon-adjacent,.webtoon-return{display:none}.webtoon-reader{width:100%}.webtoon-head{padding-top:0}.webtoon-pages img{break-inside:avoid}.webtoon-chapter{break-inside:auto}}

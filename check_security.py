@@ -82,7 +82,9 @@ for file in sorted((ROOT / 'dist').glob('*.html')):
     if doc.referrer != ['no-referrer']:
         doc.errors.append('Expected no-referrer meta')
     results.append({'page': file.name, 'errors': doc.errors})
-assert len(results) == 7, 'Expected all seven pages'
+work_ids=[work['id'] for work in json.loads((ROOT/'design-content.json').read_text(encoding='utf-8'))['works']]
+expected={'index.html','gamelab.html','tasktown.html','resume.html','planning.html','design.html','history.html'} | {f'webtoon-{work_id}.html' for work_id in work_ids}
+assert {row['page'] for row in results} == expected, 'Expected all main and artwork pages'
 (ROOT / 'qa').mkdir(exist_ok=True)
 (ROOT / 'qa/security-checks.json').write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding='utf-8')
 print(json.dumps(results, ensure_ascii=False, indent=2))

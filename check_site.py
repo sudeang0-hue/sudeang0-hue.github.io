@@ -33,7 +33,19 @@ for file in sorted(root.glob('*.html')):
 print(json.dumps(results,ensure_ascii=False,indent=2))
 (Path(__file__).parent/'qa').mkdir(exist_ok=True)
 (Path(__file__).parent/'qa'/'static-checks.json').write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding='utf-8')
-assert {r['page'] for r in results} == {'index.html','gamelab.html','tasktown.html','resume.html','planning.html','design.html','history.html'}
+base_pages={'index.html','gamelab.html','tasktown.html','resume.html','planning.html','design.html','history.html'}
+work_ids=[work['id'] for work in json.loads((root.parent/'design-content.json').read_text(encoding='utf-8'))['works']]
+reader_pages={f'webtoon-{work_id}.html' for work_id in work_ids}
+assert {r['page'] for r in results} == base_pages | reader_pages
+design=(root/'design.html').read_text(encoding='utf-8')
+assert 'public-gallery' not in design and 'data-zoom' not in design
+for work_id in work_ids:
+    filename=f'webtoon-{work_id}.html'
+    assert f'href="{filename}"' in design
+    reader=(root/filename).read_text(encoding='utf-8')
+    assert f'data-reader-work="{work_id}"' in reader
+    assert f'href="design.html#public-{work_id}"' in reader
+    assert 'data-zoom' not in reader and '<div class="webtoon-pages">' in reader
 assert not any(r['errors'] for r in results)
 
 
