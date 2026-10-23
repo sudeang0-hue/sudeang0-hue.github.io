@@ -136,4 +136,4 @@ TaskTown 04절은 연결 책임·공유 Scene을 피한 코드 수정·사운드
 
 ## 디자인 및 홍보 · 공공기관 작업
 
-`design.html`에 공공기관 작업·일러스트 작업·디자인 작업의 고정 하위 메뉴를 둡니다. 공공기관 사례는 `design-content.json`과 `design.mjs`에서 관리하며, 2022~2023년 광진구청의 웹툰·일러스트·이벤트 선택 이미지와 공식 게시 링크를 연결합니다. 본인 담당 전 과정과 기관의 실제 배포 기록을 구분하고, 16개 주제·18개 회차와 최소 본문 컷수·SNS 연결 수의 집계 기준을 함께 제공합니다. 공개 조회수는 미표시라 추정하지 않습니다. 편집 방법은 [DESIGN-EDITING.md](DESIGN-EDITING.md), 근거는 [DESIGN-SOURCES.md](DESIGN-SOURCES.md)를 참고합니다.
+`design.html`에 공공기관 작업·일러스트 작업·디자인 작업의 고정 하위 메뉴를 둡니다. 공공기관 사례는 `design-content.json`과 `design.mjs`에서 관리하며, 2022~2023년 광진구청의 웹툰·일러스트·이벤트 선택 이미지와 공식 게시 링크를 연결합니다. 본인 담당 전 과정과 기관의 실제 배포 기록을 구분합니다. 공식 채널 링크 3개는 PC 제목 오른쪽에 배치하고 모바일에서는 소개 아래로 옮깁니다. 상단 대표 사진·통계·집계 기준은 표시하지 않으며 원자료와 근거 문서는 보존합니다. 사용 도구에는 Photoshop과 Illustrator를 표시합니다. 편집 방법은 [DESIGN-EDITING.md](DESIGN-EDITING.md), 근거는 [DESIGN-SOURCES.md](DESIGN-SOURCES.md)를 참고합니다.
