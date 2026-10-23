@@ -11,11 +11,15 @@ export function withGamelabBackground(html, assetURL) {
   const control = '<button type="button" class="gamelab-background-toggle" data-gamelab-background-toggle aria-controls="gamelab-background-video" aria-label="배경 영상 재생" title="배경 영상 재생" hidden><span aria-hidden="true" data-gamelab-background-icon>▶</span></button>';
   const resources = '<link rel="stylesheet" href="' + asset('gamelab-background.css') + '">'
     + '<script src="' + asset('gamelab-background.js') + '" defer></script>';
-  if (!html.includes('<main id="main">') || !html.includes('id="flow"')) {
+  const intro = /(<main id="main">)<div class="wrap">(<header class="page-head">)([\s\S]*?)(<dl class="meta-grid">[\s\S]*?<\/dl>)(<div class="links project-links">[\s\S]*?)<\/header>/;
+  if (!intro.test(html)) {
     throw new Error('게임랩 소개·본문 경계를 찾을 수 없습니다.');
   }
   return html.replace('</head>', resources + '</head>')
     .replace('<body', '<body data-gamelab-background-page')
-    .replace('<main id="main">', backdrop + '<main id="main">')
-    .replace('</body>', control + '</body>');
+    .replace(intro, (_, main, start, copy, metadata, links) => main + start
+      + '<div class="gamelab-intro" data-gamelab-intro>' + backdrop
+      + '<div class="wrap gamelab-intro-copy">' + copy + control + '</div>'
+      + '<div class="gamelab-intro-details"><div class="wrap">' + metadata + '</div></div>'
+      + '</div><div class="wrap">' + links + '</div></header><div class="wrap">');
 }

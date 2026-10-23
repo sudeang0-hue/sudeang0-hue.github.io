@@ -4,9 +4,9 @@
   const video = document.querySelector('[data-gamelab-background-video]');
   const control = document.querySelector('[data-gamelab-background-toggle]');
   const icon = document.querySelector('[data-gamelab-background-icon]');
-  const firstCase = document.getElementById('flow');
+  const intro = document.querySelector('[data-gamelab-intro]');
   const header = document.querySelector('.site-header');
-  if (!background || !video || !control || !firstCase || !header) return;
+  if (!background || !video || !control || !intro || !header) return;
 
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const mobile = matchMedia('(max-width: 768px)');
@@ -43,9 +43,10 @@
   }
 
   async function sync() {
-    // 고정 배경 자체가 아니라 첫 사례의 위치를 기준으로 소개 구간을 판단합니다.
-    inIntro = firstCase.getBoundingClientRect().top > header.getBoundingClientRect().bottom + 48;
-    background.classList.toggle('is-past-intro', !inIntro);
+    // 소개 영역이 헤더 뒤로 완전히 지나간 뒤 정지하며 마지막 프레임은 유지합니다.
+    const bounds = intro.getBoundingClientRect();
+    inIntro = bounds.bottom > header.getBoundingClientRect().bottom
+      && bounds.top < window.innerHeight;
     if (!shouldPlay()) {
       pause();
       return;
@@ -132,9 +133,8 @@
   connection?.addEventListener('change', applyPreference);
   if ('ResizeObserver' in window) {
     const observer = new ResizeObserver(schedule);
-    for (const node of [header, document.querySelector('.page-head'), document.querySelector('.hero-figure')]) {
-      if (node) observer.observe(node);
-    }
+    observer.observe(header);
+    observer.observe(intro);
   }
   sync();
 })();
