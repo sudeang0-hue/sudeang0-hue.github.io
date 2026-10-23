@@ -36,7 +36,10 @@ jobs:
           node --check dist/app.js
           node --check dist/theme.js
           node generate.mjs
+          node check_private_resume.mjs
+          node check_security.mjs
           python check_site.py
+          python check_security.py
       - name: Configure Pages
         if: github.event_name != 'pull_request'
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0

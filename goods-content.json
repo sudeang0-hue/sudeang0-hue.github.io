@@ -40,13 +40,13 @@
       "caption": "상품을 함께 진열한 다른 각도의 현장 사진."
     },
     {
-      "file": "goods-i007.jpg",
+      "file": "goods-i007-privacy.png",
       "alt": "제2회 봉래제 행사장과 여러 참가 부스의 현장 전경",
       "label": "행사 현장 · 분위기 기록",
       "caption": "제2회 봉래제의 여러 참가 부스와 관람객이 보이는 행사장 전경."
     },
     {
-      "file": "goods-i008.jpg",
+      "file": "goods-i008-privacy.png",
       "alt": "제2회 봉래제의 다른 방향 행사장 전경",
       "label": "행사 현장 · 분위기 기록",
       "caption": "부스와 관람객이 함께 보이는 행사 현장 기록."
@@ -329,7 +329,7 @@
       ],
       "images": [
         {
-          "file": "goods-i007.jpg",
+          "file": "goods-i007-privacy.png",
           "alt": "제2회 봉래제 행사장과 여러 참가 부스의 현장 전경",
           "label": "행사 현장 · 분위기 기록",
           "caption": "제2회 봉래제의 여러 참가 부스와 관람객이 보이는 행사장 전경."

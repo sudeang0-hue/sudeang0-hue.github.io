@@ -1,12 +1,14 @@
+import { tryGeneratePrivateResume } from './generate-private-resume.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { renderHistory } from './history.mjs';
 import { renderAIWorkflow } from './gamelab-ai.mjs';
+import { contentSecurityPolicy, escapeHtml, checkedExternalURL, checkedAssetPath } from './security.mjs';
 const out=path.join(import.meta.dirname,'dist');
 // 변경된 공통 파일을 이전 캐시와 구분합니다.
 const assetURL=file=>file+'?v='+createHash('sha256').update(fs.readFileSync(path.join(out,file))).digest('hex').slice(0,12);
-const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+
 const notion={main:'https://app.notion.com/p/5108337d16328272a5ea8175a56bbb89',intro:'https://app.notion.com/p/3948337d163280b198b5e08dfede269f',game:'https://app.notion.com/p/3f98337d163280e1b8faf226e7e62f92',task:'https://app.notion.com/p/3c98337d163281f8afbbec96f80933b9'};
 const ghGame='https://github.com/OZ-GAME-LAB/OZGL2_1';
 const ghTask='https://github.com/sudeang0-hue/NookDuck_TaskTown';
@@ -17,7 +19,10 @@ const brandFor=href=>{
  return host==='github.com'?'github':host==='app.notion.com'||host==='www.notion.so'||host.endsWith('.notion.site')?'notion':host==='store.steampowered.com'?'steam':host==='store.onstove.com'?'stove':null;
 };
 const brandIcon=brand=>brand?'<img class="link-icon brand-mono" src="assets/icons/'+brand+'.svg" width="18" height="18" alt="" aria-hidden="true">':'';
-const ext=(href,text,cls='text-link')=>'<a class="'+cls+' external-link" href="'+href+'" target="_blank" rel="noopener noreferrer">'+brandIcon(brandFor(href))+'<span>'+text+'</span><span class="external-arrow" aria-hidden="true">↗</span></a>';
+const ext=(href,text,cls='text-link')=>{
+ const url=checkedExternalURL(href);
+ return '<a class="'+escapeHtml(cls)+' external-link" href="'+escapeHtml(url)+'" target="_blank" rel="noopener noreferrer">'+brandIcon(brandFor(url))+'<span>'+escapeHtml(text)+'</span><span class="external-arrow" aria-hidden="true">↗</span></a>';
+};
 const storeLink=(project,platform)=>{
  const href=projectLinks[project]?.[platform];
  if(typeof href!=='string') throw new Error('Missing store link setting: '+project+'.'+platform);
@@ -28,8 +33,8 @@ const storeLink=(project,platform)=>{
  return ext(url.href,label,'text-link store-link');
 };
 const projectActions=(project,portfolio,code,codeLabel='GitHub')=>'<div class="links project-links">'+storeLink(project,'steam')+storeLink(project,'stove')+ext(portfolio,'전체 포트폴리오')+ext(code,codeLabel)+'</div>';
-const zoom=(file,alt,caption='',className='')=>'<figure class="media '+className+'"><button class="zoom-trigger" type="button" data-zoom data-caption="'+alt+'" aria-label="'+alt+' 크게 보기"><img src="assets/'+file+'" alt="'+alt+'" loading="lazy" decoding="async"></button><figcaption>'+caption+' <span class="zoom-hint">이미지 확대 ↗</span></figcaption></figure>';
-const mini=(file,alt,label)=>'<figure><span class="figure-tag">'+label+'</span><button class="zoom-trigger" type="button" data-zoom aria-label="'+alt+' 크게 보기"><img src="assets/'+file+'" alt="'+alt+'" loading="lazy"></button></figure>';
+const zoom=(file,alt,caption='',className='',captionPrefixHtml='')=>'<figure class="media '+escapeHtml(className)+'"><button class="zoom-trigger" type="button" data-zoom data-caption="'+escapeHtml(alt)+'" aria-label="'+escapeHtml(alt)+' 크게 보기"><img src="assets/'+checkedAssetPath(file)+'" alt="'+escapeHtml(alt)+'" loading="lazy" decoding="async"></button><figcaption>'+captionPrefixHtml+escapeHtml(caption)+' <span class="zoom-hint">이미지 확대 ↗</span></figcaption></figure>';
+const mini=(file,alt,label)=>'<figure><span class="figure-tag">'+escapeHtml(label)+'</span><button class="zoom-trigger" type="button" data-zoom aria-label="'+escapeHtml(alt)+' 크게 보기"><img src="assets/'+checkedAssetPath(file)+'" alt="'+escapeHtml(alt)+'" loading="lazy"></button></figure>';
 const section=(id,num,label,body)=>'<section class="case" id="'+id+'"><div class="case-label"><span class="num">'+num+'</span><h2>'+label+'</h2></div><div class="case-body">'+body+'</div></section>';
 const evidence=(links)=>'<div class="evidence">'+links.map(([url,text])=>ext(url,text,'')).join('')+'</div>';
 const footer='<section class="contact wrap"><div><h2>함께 만들 게임의 이야기를 기다립니다.</h2><p>최희수 · Portfolio</p></div><div class="links"><a class="text-link" href="mailto:sudeang_@naver.com">이메일 <span aria-hidden="true">↗</span></a>'+ext('https://github.com/sudeang0-hue','GitHub')+'</div></section><footer class="site-footer"><div class="wrap"><p>© 2026 최희수 · Portfolio</p><p>내용 기준 2026.10.21</p></div></footer>';
@@ -44,14 +49,14 @@ function shell(page,title,description,body){
  const sectionNav=category==='index.html'?'<div class="category-subnav '+(hasCaseMenu?'project-subnav ':'')+'wrap"><nav aria-label="게임개발 세부 메뉴">'+[['index.html','전체 프로젝트'],['gamelab.html','게임랩'],['tasktown.html','TaskTown'],['resume.html','이력서']].map(([href,text])=>'<a href="'+href+'"'+(href===page?' aria-current="page"':'')+'>'+text+'</a>').join('')+'</nav>'+caseToggle+'</div>':category==='planning.html'?'<div class="category-subnav goods-subnav wrap"><nav aria-label="굿즈 기획·제작 세부 메뉴">'+goods.stages.map(stage=>'<a href="#'+escapeHtml(stage.id)+'">'+escapeHtml(stage.number)+' '+escapeHtml(stage.title)+'</a>').join('')+'<a href="#goods-events">참가 활동</a></nav></div>':'';
  const caseNav=hasCaseMenu?'<div class="category-subnav case-subnav wrap" id="game-case-menu" data-case-panel><nav aria-label="'+caseLabel+' 사례 목차">'+gameCaseMenus[page]+'</nav></div>':'';
  const gameNavigation=hasCaseMenu?'<div class="game-case-navigation" data-case-navigation>'+sectionNav+caseNav+'</div>':sectionNav;
- return '<!doctype html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#f6f5f1"><title>'+title+' · 최희수</title><meta name="description" content="'+description+'"><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="theme.js"></script><link rel="stylesheet" href="'+assetURL('styles.css')+'"><script src="'+assetURL('app.js')+'" defer></script></head><body><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="nav wrap"><a class="brand" href="index.html">최희수<span>PORTFOLIO</span></a><nav aria-label="주요 메뉴">'+nav.map(([href,text])=>'<a href="'+href+'"'+(href===category?' aria-current="page"':'')+'>'+text+'</a>').join('')+'</nav><button type="button" class="theme-toggle" data-theme-toggle hidden><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4A8.7 8.7 0 0 1 10.6 3.4 8.7 8.7 0 1 0 20.6 13.4Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></div>'+gameNavigation+'</header><main id="main">'+body+'</main>'+footer+dialog+'</body></html>';
+ return '<!doctype html><html lang="ko"><head><meta charset="UTF-8"><meta http-equiv="Content-Security-Policy" content="'+escapeHtml(contentSecurityPolicy)+'"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#f6f5f1"><title>'+escapeHtml(title)+' · 최희수</title><meta name="description" content="'+escapeHtml(description)+'"><link rel="icon" href="favicon.svg" type="image/svg+xml"><script src="theme.js"></script><link rel="stylesheet" href="'+assetURL('styles.css')+'"><script src="'+assetURL('app.js')+'" defer></script></head><body><a class="skip" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="nav wrap"><a class="brand" href="index.html">최희수<span>PORTFOLIO</span></a><nav aria-label="주요 메뉴">'+nav.map(([href,text])=>'<a href="'+href+'"'+(href===category?' aria-current="page"':'')+'>'+text+'</a>').join('')+'</nav><button type="button" class="theme-toggle" data-theme-toggle hidden><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4A8.7 8.7 0 0 1 10.6 3.4 8.7 8.7 0 1 0 20.6 13.4Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></div>'+gameNavigation+'</header><main id="main">'+body+'</main>'+footer+dialog+'</body></html>';
 }
 const home='<div class="wrap"><section class="hero"><div><span class="eyebrow">GAME DEVELOPER · PORTFOLIO</span><h1>게임의 완성도를<br>함께 레벨업합니다.</h1></div><div class="hero-copy"><p><strong>게임 개발자 최희수입니다.</strong><br>'+profileIntro+'</p><div class="links"><a class="text-link" href="resume.html">이력서 보기 <span class="arrow" aria-hidden="true">↗</span></a>'+ext(notion.main,'Notion 원문')+'</div></div></section><div class="section-line"><span>SELECTED WORK / 대표 프로젝트</span><span>2026 · 팀 프로젝트 2선</span></div><section class="work-grid" aria-label="대표 프로젝트"><article><a class="work-image" style="display:block" href="gamelab.html" aria-label="용사때문에 레벨업 프로젝트 보기"><img src="assets/gamelab-portfolio-cover-wide-v2.png" alt="용사때문에 레벨업 · UI / 아트 리소스 — 피드백을 반영한 UI 리디자인부터 실제 게임 연동까지" width="1600" height="690" fetchpriority="high"></a><div class="work-top"><h2><a href="gamelab.html">용사때문에 레벨업</a></h2><a class="arrow" aria-label="게임랩 상세 보기" href="gamelab.html">↗</a></div><p class="work-meta"><span>2026.09 — 10 · 4인 팀</span><span>UI 설계·구현 / 아트 리소스 통합</span></p><p class="work-summary">Figma로 UI 흐름을 설계하고 화면을 리디자인했습니다. 작업 기준을 정리하고 리소스·UI 반복 제작에 자동화 도구를 활용했습니다.</p><p class="work-tags">Figma UI 설계 &nbsp; / &nbsp; UI 리디자인 &nbsp; / &nbsp; 작업 자동화</p></article><article><a class="work-image" style="display:block" href="tasktown.html" aria-label="TaskTown 프로젝트 보기"><img src="assets/tasktown-portfolio-cover-wide-v2.png" alt="TaskTown · Unity 개발 / 팀 기능 통합 — Windows 데스크톱 게임의 실행 구조와 기능 통합" width="1600" height="690" fetchpriority="high"></a><div class="work-top"><h2><a href="tasktown.html">TaskTown</a></h2><a class="arrow" aria-label="TaskTown 상세 보기" href="tasktown.html">↗</a></div><p class="work-meta"><span>2026.06 — 08 · 5인 팀</span><span>Unity 클라이언트 개발 팀장</span></p><p class="work-summary">클릭·타이핑으로 마을을 키우는 게임의 실행 흐름과 팀 기능 통합을 맡았습니다. 동시 작업을 고려해 수정 범위와 리뷰 항목을 정했습니다.</p><p class="work-tags">실행 흐름 &nbsp; / &nbsp; 팀 기능 통합 &nbsp; / &nbsp; 협업·리뷰</p></article></section><section class="principles"><div><span class="eyebrow">HOW I WORK</span><h2>문제에서 시작해<br>확인 가능한 결과로.</h2></div><div><div class="principle"><span class="num">01</span><h3>판단의 기준</h3><p>팀 피드백을 정보 계층·입력·상태 표현으로 나누고, 바꿀 것과 유지할 것을 정합니다.</p></div><div class="principle"><span class="num">02</span><h3>연결의 책임</h3><p>팀 기능의 연결 지점을 확인하고, 동시에 진행 중인 작업을 고려해 수정 범위를 정합니다.</p></div><div class="principle"><span class="num">03</span><h3>작업 기준과 자동화</h3><p>작업 기준을 문서로 정리하고, 반복 제작과 표시 검사는 도구로 처리합니다. 적용할 결과는 직접 검토합니다.</p></div></div></section></div>';
 fs.writeFileSync(path.join(out,'index.html'),shell('index.html','게임 개발 포트폴리오','최희수의 게임 개발 포트폴리오. 게임랩의 UI 설계·작업 자동화와 TaskTown의 팀 기능 통합·협업 경험.',home));
 
 const gameHead='<div class="wrap"><header class="page-head"><p class="breadcrumb"><a href="index.html">프로젝트</a> &nbsp;/&nbsp; 01. OZ GAMELAB</p><span class="eyebrow">GAME UI · INTEGRATION · ART RESOURCES</span><h1>용사때문에 레벨업</h1><p class="subtitle">로비·전투 UI를 교체하고<br>HUD 입력 오류와 결과 연출을 다듬었습니다.</p><p class="project-intro">유닛 배치·합성으로 용사 웨이브를 막는 그리드 디펜스 로그라이크입니다. 4인 팀에서 로비·성장·전투 UI를 재설계하고, 게임 데이터 연결과 아트 리소스 통합을 맡았습니다.</p><dl class="meta-grid"><div><dt>PERIOD / TEAM</dt><dd>2026.09.02 — 10.14 · 4인</dd></div><div><dt>MY ROLE</dt><dd>UI 설계·구현·연동·연출</dd></div><div><dt>TOOLS</dt><dd>Figma · Unity · C# · uGUI · TMP · DOTween</dd></div></dl>'+projectActions('gamelab',notion.game,ghGame+'/tree/4a102b39733ccf71b7cc05c59eb54ebd7709d975','GitHub')+'</header><figure class="hero-figure"><button type="button" class="zoom-trigger" data-zoom aria-label="게임랩 전투 화면 크게 보기"><img src="assets/gamelab-combat.png" alt="그리드 전장과 스킬 HUD가 연결된 실제 전투 화면" width="1920" height="1080" fetchpriority="high"></button><figcaption>2026.10.14 Unity Play Mode 촬영 · 팀의 전투·성장·스킬 시스템에 UI를 연결한 화면 <span class="zoom-hint">이미지 확대 ↗</span></figcaption></figure>';
 const figmaFlowURLs=node=>{
- const params=new URLSearchParams({'node-id':node.replace(':','-'),'starting-point-node-id':node,'scaling':'contain','content-scaling':'fixed','device-frame':'false'});
+ const params=new URLSearchParams({'node-id':node.replace(':','-'),'starting-point-node-id':node,'scaling':'contain','content-scaling':'fixed','device-frame':'false','hide-ui':'1','show-proto-sidebar':'0'});
  const file='Kz3TNcpjEhLXT7lGoCWinf';
  return {external:'https://www.figma.com/proto/'+file+'?'+params,embed:'https://embed.figma.com/proto/'+file+'?'+params+'&embed-host=sudeang-portfolio'};
 };
@@ -71,7 +76,7 @@ ${zoom('gamelab-figma-flow-overview.png','Figma 초기 UI 흐름 설계 · 로�
 </div></div>
 <div class="links figma-player-links"><a class="text-link external-link" data-figma-external href="${figmaLobby.external}" target="_blank" rel="noopener noreferrer">Figma에서 크게 재생 <span aria-hidden="true">↗</span></a>${ext('https://www.figma.com/design/Kz3TNcpjEhLXT7lGoCWinf?node-id=0-1','흐름 설계 원본 보기')}</div>
 <div class="figma-player-stage"><div class="figma-player-placeholder" data-figma-placeholder><span class="figma-play-mark" aria-hidden="true">▷</span><p>시작 화면을 고른 뒤 재생해 보세요.</p><button type="button" class="btn-quiet" data-figma-load hidden>프로토타입 재생</button><noscript><p>Figma 링크에서 프로토타입을 재생할 수 있습니다.</p></noscript></div>
-<iframe data-figma-frame title="게임랩 초기 UI 프로토타입 · 로비 흐름" loading="lazy" allow="fullscreen" allowfullscreen tabindex="0" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe></div>
+<iframe data-figma-frame title="게임랩 초기 UI 프로토타입 · 로비 흐름" loading="lazy" allow="fullscreen" allowfullscreen tabindex="0" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" hidden></iframe></div>
 <div class="figma-player-status"><p data-figma-note>화면 전환을 확인하는 초기 프로토타입으로, 예시 수치와 미정 화면이 포함되어 있습니다. 최종 디자인과 실제 게임 동작은 다음 Unity 구현 사례에서 확인할 수 있습니다. 작은 화면에서는 ‘크게 재생’을 이용해 주세요.</p><button type="button" class="btn-quiet" data-figma-reset hidden>선택한 흐름 처음부터</button></div>
 </div>
 
@@ -180,7 +185,7 @@ function goodsPhoto(photo,captionLabel=false){
  const assetPath=path.resolve(assetRoot,photo.file);
  if(!assetPath.startsWith(assetRoot+path.sep)||!fs.statSync(assetPath).isFile())throw new Error('굿즈 이미지 경로를 확인하세요.');
  const label=photo.label?'<span class="'+(captionLabel?'goods-slide-owner':'figure-tag')+'">'+escapeHtml(photo.label)+'</span>':'';
- const figure=zoom(escapeHtml(photo.file),escapeHtml(photo.alt),(captionLabel?label:'')+escapeHtml(photo.caption||''));
+ const figure=zoom(photo.file,photo.alt,photo.caption||'','',captionLabel?label:'');
  return !captionLabel&&label?figure.replace('<button class="zoom-trigger"',label+'<button class="zoom-trigger"'):figure;
 }
 function goodsPhotos(images,placeholder,layout='',slider){
@@ -222,3 +227,7 @@ for(const file of ['index.html','gamelab.html','tasktown.html','resume.html','pl
  fs.writeFileSync(path.join(out,file),html);
 }
 
+
+// 로컬 설정이 있을 때만 저장소 밖의 개인용 출력도 공통 원문으로 갱신합니다.
+const privateResume=tryGeneratePrivateResume();
+if(privateResume.generated) console.log('개인용 이력서도 갱신했습니다(저장소 밖 로컬 출력).');
