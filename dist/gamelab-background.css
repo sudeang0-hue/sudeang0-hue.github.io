@@ -1,0 +1,54 @@
+[data-gamelab-background-page] { isolation: isolate; }
+[data-gamelab-background-page] > main,
+[data-gamelab-background-page] > .contact,
+[data-gamelab-background-page] > .site-footer { position: relative; z-index: 1; }
+.gamelab-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: .18;
+  transition: opacity 180ms ease;
+}
+.gamelab-background-poster,
+.gamelab-background-video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+  background: transparent;
+}
+.gamelab-background-video { opacity: 0; }
+.gamelab-background.is-playing .gamelab-background-video { opacity: 1; }
+.gamelab-background.is-playing .gamelab-background-poster { visibility: hidden; }
+.gamelab-background.is-past-intro { opacity: 0; visibility: hidden; }
+:root[data-theme=dark] .gamelab-background { opacity: .16; }
+:root[data-theme=dark] .gamelab-background.is-past-intro { opacity: 0; }
+.gamelab-background-toggle {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1;
+}
+.gamelab-background-toggle[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  .gamelab-background { transition: none; }
+}
+@media print {
+  .gamelab-background,
+  .gamelab-background-toggle { display: none !important; }
+}

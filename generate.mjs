@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import { renderHistory } from './history.mjs';
 import { renderDesignPortfolio, designSections } from './design.mjs';
 import { renderAIWorkflow } from './gamelab-ai.mjs';
+import { withGamelabBackground } from './gamelab-background.mjs';
 import { contentSecurityPolicy, escapeHtml, checkedExternalURL, checkedAssetPath } from './security.mjs';
 const out=path.join(import.meta.dirname,'dist');
 // 변경된 공통 파일을 이전 캐시와 구분합니다.
@@ -155,7 +156,7 @@ const aiWorkflow=JSON.parse(fs.readFileSync(new URL('./gamelab-ai-workflow.json'
 const aiValidation=JSON.parse(fs.readFileSync(path.join(out,'assets',aiWorkflow.validationAsset),'utf8'));
 const game4=section('ai','05',aiWorkflow.title,renderAIWorkflow(aiWorkflow,aiValidation,{mini,evidence}));
 const gameEnd='<script src="'+assetURL('redesign-comparison.js')+'" defer></script><div class="next-project"><span>NEXT PROJECT</span><a href="tasktown.html">TaskTown <span aria-hidden="true">↗</span></a></div></div>';
-fs.writeFileSync(path.join(out,'gamelab.html'),shell('gamelab.html','용사때문에 레벨업','팀 피드백을 반영한 게임 UI 리디자인, HUD 오류 해결, 결과 연출과 AI 에이전트 작업 자동화.',gameHead+gameFlow+game1+game2+game3+game4+gameEnd));
+fs.writeFileSync(path.join(out,'gamelab.html'),withGamelabBackground(shell('gamelab.html','용사때문에 레벨업','팀 피드백을 반영한 게임 UI 리디자인, HUD 오류 해결, 결과 연출과 AI 에이전트 작업 자동화.',gameHead+gameFlow+game1+game2+game3+game4+gameEnd),assetURL));
 
 const taskHead='<div class="wrap"><header class="page-head"><p class="breadcrumb"><a href="index.html">프로젝트</a> &nbsp;/&nbsp; 02. TASKTOWN</p><span class="eyebrow">UNITY CLIENT · SYSTEM INTEGRATION</span><h1>TaskTown</h1><p class="subtitle">Scene 전환과 Tutorial 상태를 설계하고<br>공용 사운드와 팀 기능을 연결했습니다.</p><p class="project-intro">클릭과 타이핑을 재화와 마을 성장으로 연결한 Windows 데스크톱 컴패니언 게임입니다. 5인 팀의 개발 팀장으로 SceneFlow·Tutorial·Sound/BGM을 구현하고, 담당자가 다른 기능을 MainScene과 빌드에 통합했습니다.</p><dl class="meta-grid"><div><dt>PERIOD / TEAM</dt><dd>2026.06.29 — 08.12 · 5인</dd></div><div><dt>MY ROLE</dt><dd>Unity 클라이언트 개발 팀장</dd></div><div><dt>TOOLS</dt><dd>Unity · C# · Win32 · AudioMixer</dd></div></dl>'+projectActions('tasktown',notion.task,ghTask)+'<p class="caption">팀 출시 현황: STOVE 2026.09.07 출시 · Steam 출시 예정 · 2026.10.19 확인</p></header><figure class="hero-figure"><button type="button" class="zoom-trigger" data-zoom aria-label="TaskTown 실제 실행 화면 크게 보기"><img src="assets/tasktown-gameplay.png" alt="Windows 데스크톱 아래에 배치된 TaskTown 마을과 동물 주민들" width="2560" height="1440" fetchpriority="high"></button><figcaption>2026.08.25 실제 실행 캡처 · Windows 화면 위에서 함께 동작하는 데스크톱 게임 <span class="zoom-hint">이미지 확대 ↗</span></figcaption></figure>';
 const task1=section('scene','01','SceneFlow','<h3>전환 순서와 창 설정을 공통 흐름으로 묶었습니다.</h3><p class="diagram-intent">화면 전환 뒤에도 각 Scene에 맞는 해상도와 창 설정이 적용되도록, 전환 순서와 설정 적용 시점을 함께 관리했습니다.</p><p>Bootstrap에서 전역 Manager를 초기화하고 SceneCatalogSO로 Scene 전환 정보를 관리했습니다. 비동기 preload와 활성화 시점을 분리해 로딩 연출과 전환을 조정했습니다.</p>'+zoom('tasktown-scene.png','TaskTown SceneFlow와 Windows 창 설정 적용 순서','최초 실행·재건 이후 분기와 Windows 창 설정 적용 순서를 요약한 개념도','diagram')+'<div class="facts"><div><h4>본인 구현</h4><p>Scene 전환, Scene별 해상도·창 모드 설정, 전환 후 HWND 재탐색과 제어권 인계를 담당했습니다.</p></div><div><h4>팀 기능과 연결</h4><p>팀원의 TransparentWindow가 처리하는 투명도·Always-on-top·click-through 기능과 연결했습니다.</p></div></div>'+evidence([[ghTask+'/pull/30','공통 전환 구조 · PR #30'],[ghTask+'/pull/143','Difficulty 연결 · PR #143']]));
