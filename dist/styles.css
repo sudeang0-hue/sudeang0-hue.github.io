@@ -391,24 +391,24 @@ body:has(.goods-subnav,.case-subnav) :is(.case,.goods-events,.goods-event,#goods
 
 /* 실제 전후 캡처를 위아래로 맞추고 PC 2종·모바일 1종씩 함께 넘깁니다. */
 #redesign .case-body{min-width:0}
-.redesign-screen-comparison{margin:24px 0 18px;min-width:0}
-.redesign-screen-controls{display:flex;justify-content:flex-end;align-items:center;margin-bottom:12px}
+.redesign-screen-comparison{margin:16px 0 18px;min-width:0}
+.redesign-screen-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:10px}
+#redesign .redesign-screen-heading h4{margin:0}
+.redesign-screen-controls{display:flex;justify-content:flex-end;align-items:center;flex-shrink:0}
 .redesign-screen-controls[hidden]{display:none}
 .redesign-screen-arrows{display:flex;align-items:center;gap:8px}
 .redesign-screen-arrows button{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:transparent;font-size:19px}
 .redesign-screen-arrows button:hover{background:var(--wash)}
 .redesign-screen-arrows span{font-size:11px;color:var(--muted);margin-left:5px;min-width:54px}
-.redesign-screen-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-#redesign .redesign-screen-comparison .redesign-screen-note{font-size:12px;line-height:1.7;margin:0 0 18px;min-height:21px}
+.redesign-screen-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px}
+#redesign .redesign-screen-comparison .redesign-screen-note{font-size:12px;line-height:1.7;margin:0}
 .redesign-screen-note[hidden]{display:none}
 .redesign-screen-note strong{display:block;color:var(--ink);font-weight:600;margin-bottom:3px}
-.redesign-screen-row+.redesign-screen-row{margin-top:22px}
-.redesign-screen-label{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:9px}
+.redesign-screen-row+.redesign-screen-row{margin-top:14px}
+.redesign-screen-label{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:6px}
 .redesign-screen-label .figure-tag{margin:0}
 .redesign-screen-zoom{font-size:10px;color:var(--muted)}
 .redesign-screen-slide{margin:0;min-width:0}
-.redesign-screen-title{display:block;font-size:12px;line-height:1.6;margin-bottom:7px;font-weight:600;color:var(--ink)}
-.redesign-screen-slide figcaption{font-size:11px;line-height:1.65;margin-top:8px}
 .redesign-screen-frame{position:relative;overflow:hidden;width:100%;aspect-ratio:16/9;background:var(--media);display:grid;place-items:center;user-select:none;-webkit-user-select:none}
 .redesign-screen-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .redesign-screen-comparison[data-ready] .redesign-screen-window{overflow:hidden;touch-action:pan-y pinch-zoom}
@@ -417,10 +417,17 @@ body:has(.goods-subnav,.case-subnav) :is(.case,.goods-events,.goods-event,#goods
 .redesign-screen-comparison:not([data-ready]) .redesign-screen-slide+.redesign-screen-slide{margin-top:24px}
 .redesign-screen-window:focus-visible{outline:2px solid var(--focus);outline-offset:4px}
 @media(max-width:640px){
- .redesign-screen-notes{grid-template-columns:1fr;gap:0}
+ .redesign-screen-comparison{--comparison-chrome-height:218px}
+ .redesign-screen-heading{align-items:flex-start;flex-wrap:wrap;gap:8px}
+ #redesign .redesign-screen-heading h4{font-size:15px;line-height:1.5}
+ .redesign-screen-controls{margin-left:auto}
+ .redesign-screen-notes{grid-template-columns:1fr;gap:10px}
  .redesign-screen-comparison[data-ready] .redesign-screen-slide{flex-basis:100%;width:100%}
- .redesign-screen-row+.redesign-screen-row{margin-top:18px}
+ .redesign-screen-row+.redesign-screen-row{margin-top:12px}
  .redesign-screen-zoom{font-size:9px}
+}
+@media screen{
+ .redesign-screen-comparison[data-ready] .redesign-screen-frame{max-height:max(96px,calc((100vh - var(--section-header-height,134px) - var(--comparison-chrome-height,148px))/2));max-height:max(96px,calc((100svh - var(--section-header-height,134px) - var(--comparison-chrome-height,148px))/2))}
 }
 @media(prefers-reduced-motion:reduce){.redesign-screen-comparison[data-ready] .redesign-screen-track{transition:none}}
 @media print{

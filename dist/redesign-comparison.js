@@ -1,4 +1,4 @@
-// PC는 두 종류, 모바일은 한 종류를 보여주며 전후 화면을 한 종류씩 함께 넘깁니다.
+// PC는 두 종류, 모바일은 한 종류를 보여주며 마지막 다음에 첫 화면을 이어 붙입니다.
 document.querySelectorAll('[data-redesign-comparison]').forEach(root=>{
  const tracks=[...root.querySelectorAll('[data-comparison-track]')];
  const viewports=[...root.querySelectorAll('[data-comparison-viewport]')];
@@ -6,8 +6,12 @@ document.querySelectorAll('[data-redesign-comparison]').forEach(root=>{
  const observations=[...root.querySelectorAll('[data-comparison-note]')];
  const status=root.querySelector('[data-comparison-status]');
  const count=root.querySelector('[data-comparison-count]');
- const length=tracks[0]?.children.length??0;
- if(tracks.length!==2||!length||tracks[1].children.length!==length||!controls||!status||!count)return;
+ const originals=tracks[0]?[...tracks[0].children].filter(slide=>!slide.hasAttribute('data-comparison-copy')):[];
+ const length=originals.length;
+ if(tracks.length!==2||!length||!controls||!status||!count)return;
+ if(tracks.some(track=>[...track.children].filter(slide=>!slide.hasAttribute('data-comparison-copy')).length!==length))return;
+ // 복사 화면도 HTML 생성 단계에서 두어 기존 이미지 확대 이벤트를 그대로 연결합니다.
+ tracks.forEach(track=>track.querySelectorAll('[data-comparison-copy]').forEach(slide=>slide.hidden=false));
  let index=0;
  let visible=window.matchMedia('(max-width:640px)').matches?1:2;
  let drag=null;
@@ -16,7 +20,8 @@ document.querySelectorAll('[data-redesign-comparison]').forEach(root=>{
  function showScreen(value,announce=true,instant=false){
   const wrapped=value<0||value>=length;
   index=(value%length+length)%length;
-  const shownCount=Math.min(visible,length-index);
+  const shownCount=Math.min(visible,length);
+  const shownIndices=Array.from({length:shownCount},(_,offset)=>(index+offset)%length);
   root.dataset.comparisonIndex=String(index);
   root.dataset.comparisonVisible=String(shownCount);
   root.dataset.comparisonCapacity=String(visible);
@@ -26,17 +31,20 @@ document.querySelectorAll('[data-redesign-comparison]').forEach(root=>{
    const offset=slides[index].offsetLeft-slides[0].offsetLeft;
    track.style.transform=`translateX(${-offset}px)`;
    slides.forEach((slide,i)=>{
-    const shown=i>=index&&i<index+visible;
+    const shown=i>=index&&i<index+shownCount;
+    const source=Number(slide.dataset.comparisonSource);
     slide.inert=!shown;
     slide.setAttribute('aria-hidden',String(!shown));
     slide.setAttribute('role','group');
-    slide.setAttribute('aria-label',`${i+1} / ${length} · ${slide.dataset.comparisonTitle}`);
+    slide.setAttribute('aria-label',`${source+1} / ${length} · ${slide.dataset.comparisonTitle}`);
     if(shown){const image=slide.querySelector('img');if(image)image.loading='eager';}
    });
   });
-  observations.forEach((note,i)=>note.hidden=i<index||i>=index+visible);
-  count.textContent=`${index+1}${shownCount>1?'–'+(index+shownCount):''} / ${length}`;
-  if(announce)status.textContent=[...tracks[0].children].slice(index,index+visible).map(slide=>slide.dataset.comparisonTitle).join(' · ')+' 비교';
+  observations.forEach((note,i)=>note.hidden=!shownIndices.includes(i));
+  // 사진과 설명의 화면·읽기 순서를 함께 맞춥니다.
+  shownIndices.forEach(i=>{const note=observations[i];if(note)note.parentElement.appendChild(note);});
+  count.textContent=(shownCount===1?String(index+1):index+shownCount<=length?`${index+1}–${index+shownCount}`:shownIndices.map(i=>i+1).join(' · '))+` / ${length}`;
+  if(announce)status.textContent=shownIndices.map(i=>originals[i].dataset.comparisonTitle).join(' · ')+' 비교';
  }
  root.querySelector('[data-comparison-prev]')?.addEventListener('click',()=>showScreen(index-1));
  root.querySelector('[data-comparison-next]')?.addEventListener('click',()=>showScreen(index+1));
@@ -48,7 +56,7 @@ document.querySelectorAll('[data-redesign-comparison]').forEach(root=>{
    showScreen(event.key==='Home'?0:event.key==='End'?length-1:index+(event.key==='ArrowRight'?1:-1));
   });
   viewport.addEventListener('pointerdown',event=>{
-   if(!event.isPrimary||event.button!==0||event.target.closest('figcaption'))return;
+   if(!event.isPrimary||event.button!==0)return;
    drag={id:event.pointerId,x:event.clientX,y:event.clientY,viewport,captured:false};
   });
   viewport.addEventListener('dragstart',event=>event.preventDefault());

@@ -91,8 +91,13 @@ for(const screen of redesignScreens){
 }
 const redesignComparison=()=>{
  const controls='<div class="redesign-screen-controls" data-comparison-controls hidden><div class="redesign-screen-arrows"><button type="button" data-comparison-prev aria-label="이전 전후 비교 화면" aria-controls="redesign-before-screen redesign-after-screen">←</button><button type="button" data-comparison-next aria-label="다음 전후 비교 화면" aria-controls="redesign-before-screen redesign-after-screen">→</button><span data-comparison-count>1'+(redesignScreens.length>1?'–2':'')+' / '+redesignScreens.length+'</span></div></div>';
- const rows=['before','after'].map(side=>'<section class="redesign-screen-row" aria-label="'+(side==='before'?'Before 초기 화면':'After 리디자인 적용 화면')+'"><div class="redesign-screen-label"><span class="figure-tag">'+(side==='before'?'BEFORE / 초기 구성':'AFTER / 리디자인 적용')+'</span><span class="redesign-screen-zoom">클릭하면 원본 확대 ↗</span></div><div class="redesign-screen-window" data-comparison-viewport id="redesign-'+side+'-screen" tabindex="0" aria-label="'+(side==='before'?'Before':'After')+' 화면 · 좌우 방향키로 함께 넘기기"><div class="redesign-screen-track" data-comparison-track>'+redesignScreens.map(screen=>'<figure class="redesign-screen-slide" data-comparison-title="'+escapeHtml(screen.title)+'"><span class="redesign-screen-title">'+escapeHtml(screen.title)+'</span><button type="button" class="zoom-trigger redesign-screen-frame" data-zoom data-caption="'+escapeHtml(screen[side].alt)+'" aria-label="'+escapeHtml(screen[side].alt)+' 원본 크게 보기"><img src="assets/'+screen[side].file+'" alt="'+escapeHtml(screen[side].alt)+'" width="1920" height="1080" loading="lazy" decoding="async"></button><figcaption>'+escapeHtml(screen[side].caption)+'</figcaption></figure>').join('')+'</div></div></section>').join('');
- return '<div class="redesign-screen-comparison" data-redesign-comparison role="region" aria-label="UI 리디자인 전후 화면 비교">'+controls+'<div class="redesign-screen-notes">'+redesignScreens.map((screen,index)=>'<p class="redesign-screen-note" data-comparison-note'+(index>1?' hidden':'')+'><strong>'+escapeHtml(screen.title)+'</strong> '+escapeHtml(screen.note)+'</p>').join('')+'</div>'+rows+'<p class="sr-only" data-comparison-status role="status" aria-live="polite" aria-atomic="true"></p></div>';
+ const slide=(screen,index,copy=false)=>'<figure class="redesign-screen-slide" data-comparison-source="'+index+'" data-comparison-title="'+escapeHtml(screen.title)+'"'+(copy?' data-comparison-copy hidden':'')+'><button type="button" class="zoom-trigger redesign-screen-frame" data-zoom data-caption="'+escapeHtml(screen.image.alt)+'" aria-label="'+escapeHtml(screen.image.alt)+' 원본 크게 보기"><img src="assets/'+screen.image.file+'" alt="'+escapeHtml(screen.image.alt)+'" width="1920" height="1080" loading="lazy" decoding="async"></button></figure>';
+ const rows=['before','after'].map(side=>{
+  const screens=redesignScreens.map(screen=>({...screen,image:screen[side]}));
+  return '<section class="redesign-screen-row" aria-label="'+(side==='before'?'Before 초기 화면':'After 리디자인 적용 화면')+'"><div class="redesign-screen-label"><span class="figure-tag">'+(side==='before'?'BEFORE / 초기 구성':'AFTER / 리디자인 적용')+'</span><span class="redesign-screen-zoom">클릭하면 원본 확대 ↗</span></div><div class="redesign-screen-window" data-comparison-viewport id="redesign-'+side+'-screen" tabindex="0" aria-label="'+(side==='before'?'Before':'After')+' 화면 · 좌우 방향키로 함께 넘기기"><div class="redesign-screen-track" data-comparison-track>'+screens.map((screen,index)=>slide(screen,index)).join('')+(screens.length>1?slide(screens[0],0,true):'')+'</div></div></section>';
+ }).join('');
+ const notes='<div class="redesign-screen-notes">'+redesignScreens.map(screen=>'<p class="redesign-screen-note" data-comparison-note><strong>'+escapeHtml(screen.title)+'</strong> '+escapeHtml(screen.note)+'</p>').join('')+'</div>';
+ return '<div class="redesign-screen-comparison" data-redesign-comparison role="region" aria-label="UI 리디자인 전후 화면 비교"><div class="redesign-screen-heading"><h4 id="redesign-comparison-title">로비·전투·세부 화면 | 테마를 다듬고 디자인 기준을 통일했습니다.</h4>'+controls+'</div>'+rows+notes+'<p class="sr-only" data-comparison-status role="status" aria-live="polite" aria-atomic="true"></p></div>';
 };
 const game1=section('redesign','02','UI 리디자인',`
 <h3>실제 게임 리소스와 읽는 흐름에 맞춰 UI를 다시 설계했습니다.</h3>
@@ -101,12 +106,11 @@ const game1=section('redesign','02','UI 리디자인',`
 <p>여러 방향의 시안을 팀에 공유하며 중세·마왕군의 분위기를 유지하면서 실제 에셋과 어우러지는 것을 기준으로 잡았습니다. 장식과 텍스처의 밀도를 조정하고, 제목·설명·주요 행동을 구분했습니다.</p>
 
 <section class="redesign-block" aria-labelledby="redesign-comparison-title">
-<h4 id="redesign-comparison-title">로비·전투·세부 화면 | 테마를 다듬고 디자인 기준을 통일했습니다.</h4>
 ${redesignComparison()}
 <ul class="visual-notes">
-<li><strong>리소스의 일관성</strong> 기사 삽화를 실제 전투에 사용하는 픽셀 캐릭터로 교체했습니다.</li>
-<li><strong>읽는 순서</strong> 난이도 이름·캐릭터·설명을 카드의 위·중앙·아래로 나눠, 내용을 확인한 뒤 전투 준비로 이어지도록 구성했습니다.</li>
-<li><strong>공통 규칙</strong> 제목은 명조, 설명은 고딕으로 구분했습니다. 하단 메뉴도 원형 아이콘과 공통 바로 묶어 형태와 배치 기준을 맞췄습니다.</li>
+<li><strong>리소스의 일관성</strong> 판타지 세계의 마왕이라는 플레이어 설정에 맞춰 버건디와 고풍스러운 금색을 주조색으로 정하고, 화면마다 달랐던 색 조합을 통일했습니다.</li>
+<li><strong>읽는 순서</strong> 플레이어의 시선 흐름을 고려해 난이도 이름·캐릭터·설명을 카드의 위·중앙·아래로 나눴습니다. 내용을 확인한 뒤 전투 준비로 이어지도록 구성했습니다.</li>
+<li><strong>공통 규칙</strong> 기존 픽셀 서체의 가독성을 개선하기 위해 제목은 명조체, 설명은 고딕체로 구분했습니다. 하단 메뉴도 원형 아이콘과 공통 바로 묶어 형태와 배치 기준을 맞췄습니다.</li>
 </ul>
 </section>
 
