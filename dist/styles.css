@@ -648,3 +648,29 @@ html:has(.webtoon-reader){scroll-padding-top:170px}
  .webtoon-publications nav{width:100%;gap:12px 20px}
 }
 @media print{.webtoon-toolbar,.webtoon-chapters,.webtoon-adjacent,.webtoon-return{display:none}.webtoon-reader{width:100%}.webtoon-head{padding-top:0}.webtoon-pages img{break-inside:avoid}.webtoon-chapter{break-inside:auto}}
+
+
+/* 채용 검토: 본문은 어절을 유지하고 제목은 가능한 균형 있게 배치합니다. */
+:where(main p,main li,main h1,main h2,main h3,main h4,main dt,main dd,main figcaption,.contact h2){word-break:keep-all;line-break:strict}
+:where(main h1,main h2,main h3,.subtitle,.contact h2){text-wrap:balance}
+:where(main p,main li,main figcaption){text-wrap:pretty}
+.public-work-card h3{overflow-wrap:normal}
+:where(.hero,.page-head,.category-head,.case,.facts,.resume-section,.public-header-main,.public-process) > *{min-width:0}
+.hero-copy p+p{margin-top:14px}
+.hero-copy .profile-note{font-size:13px;color:var(--muted)}
+.hero h1{max-width:100%}
+.resume-head h1{font-size:clamp(28px,3.5vw,46px);line-height:1.35}
+.related-practice{display:grid;grid-template-columns:1.35fr 1fr;gap:40px;padding:34px 0 45px;border-bottom:1px solid var(--line)}
+.related-practice h2{font-size:24px;line-height:1.5;margin:0 0 14px}
+.related-practice p{font-size:14px;color:var(--muted);max-width:650px}
+.related-practice .links{align-content:center;align-items:center;margin:0}
+@media(max-width:640px){
+ .hero h1{max-width:100%;font-size:34px}
+ .related-practice{grid-template-columns:1fr;gap:21px;padding:28px 0}
+ .related-practice h2{font-size:22px}
+ .facts{grid-template-columns:1fr}
+ .page-head .subtitle{max-width:34em}
+ .public-work-card h3{font-size:19px}
+ .case-body h3{font-size:22px;line-height:1.55}
+}
+@media(max-width:360px){.hero h1{font-size:30px}}

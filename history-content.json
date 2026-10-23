@@ -1,7 +1,7 @@
 {
   "title": "연혁",
   "introduction": "매장 운영과 콘텐츠 제작, 게임 개발 교육과 굿즈 행사 참여를 통해 쌓은 경험입니다.",
-  "updatedAt": "2026-10-22",
+  "updatedAt": "2026-10-23",
   "sections": [
     {
       "id": "education",
@@ -26,7 +26,7 @@
           "end": "2026-08",
           "organization": "오즈코딩스쿨 게임 개발 부트캠프 5기",
           "role": "게임 개발 교육",
-          "description": "C#·Unity를 학습하며 2인·5인 협업 프로젝트를 수행했습니다. TaskTown의 Unity 개발 팀장으로 Scene 전환·Tutorial·공용 사운드 구현과 팀 기능 통합을 맡았습니다.",
+          "description": "C#·Unity를 학습하며 2인·5인 협업 프로젝트를 수행했습니다. TaskTown에서는 Unity 개발 팀장으로 씬 전환·튜토리얼·공용 사운드를 구현하고 팀원이 만든 기능을 연결했습니다.",
           "link": {
             "href": "tasktown.html",
             "label": "TaskTown 작업 보기"

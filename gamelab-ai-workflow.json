@@ -6,7 +6,7 @@
   "steps": [
     {
       "id": "rules",
-      "heading": "MD로 작업 기준 정리",
+      "heading": "문서로 작업 기준 정리",
       "body": "네이밍·수정 범위·검수 순서를 개인 Markdown 지침으로 정리해 Codex가 참고할 작업 기준을 세웠습니다.",
       "sourceIds": [
         "hudScope"
