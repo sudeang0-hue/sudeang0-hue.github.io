@@ -1,0 +1,78 @@
+{
+  "intervalMs": 5000,
+  "fadeMs": 1200,
+  "photos": [
+    {
+      "id": "D276",
+      "file": "assets/goods-background-01.webp",
+      "position": "50% 40%",
+      "label": "2인 장패드 인쇄선 설계",
+      "source": "Discord 본인 공유·공동 제작 준비 자료",
+      "width": 1280,
+      "height": 568
+    },
+    {
+      "id": "D312",
+      "file": "assets/goods-background-02.webp",
+      "position": "50% 45%",
+      "label": "2인 장패드 완성 도안",
+      "source": "Discord 팀원 공유·공동 제작 준비 자료",
+      "width": 1280,
+      "height": 513
+    },
+    {
+      "id": "D275",
+      "file": "assets/goods-background-03.webp",
+      "position": "50% 35%",
+      "label": "사쿠야 장패드 인쇄선 설계",
+      "source": "Discord 본인 공유·공동 제작 준비 자료",
+      "width": 724,
+      "height": 324
+    },
+    {
+      "id": "D313",
+      "file": "assets/goods-background-04.webp",
+      "position": "50% 45%",
+      "label": "사쿠야 장패드 완성 도안",
+      "source": "Discord 팀원 공유·공동 제작 준비 자료",
+      "width": 1280,
+      "height": 521
+    },
+    {
+      "id": "D311",
+      "file": "assets/goods-background-05.webp",
+      "position": "50% 45%",
+      "label": "아크릴 스탠드 제작 배치",
+      "source": "Discord 팀원 공유·공동 제작 준비 자료",
+      "width": 1280,
+      "height": 595
+    },
+    {
+      "id": "I005",
+      "file": "assets/goods-background-06.webp",
+      "position": "50% 62%",
+      "label": "아크릴 스탠드 실물",
+      "source": "봉래제 공동 부스 실물 진열 기록",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "id": "I003",
+      "file": "assets/goods-background-07.webp",
+      "position": "50% 60%",
+      "label": "엽서와 장패드 진열",
+      "source": "봉래제 공동 부스 실물 진열 기록",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "id": "I001",
+      "file": "assets/goods-background-08.webp",
+      "position": "50% 62%",
+      "label": "장패드 전체 실물",
+      "source": "봉래제 공동 부스 실물 진열 기록",
+      "width": 1280,
+      "height": 960
+    }
+  ]
+}

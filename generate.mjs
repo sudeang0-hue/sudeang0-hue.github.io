@@ -8,6 +8,7 @@ import { publicReaderPath, renderPublicReader } from './public-reader.mjs';
 import { renderAIWorkflow } from './gamelab-ai.mjs';
 import { withGamelabBackground } from './gamelab-background.mjs';
 import { withTasktownBackground } from './tasktown-background.mjs';
+import { withGoodsBackground } from './goods-background.mjs';
 import { contentSecurityPolicy, escapeHtml, checkedExternalURL, checkedAssetPath } from './security.mjs';
 const out=path.join(import.meta.dirname,'dist');
 // 변경된 공통 파일을 이전 캐시와 구분합니다.
@@ -226,7 +227,7 @@ const goodsEvents='<section class="goods-events" id="goods-events" aria-labelled
  return '<article class="goods-event" id="'+escapeHtml(event.id)+'"><p class="goods-event-date">'+escapeHtml(event.date)+'</p><h3>'+escapeHtml(event.title)+'</h3><p class="goods-event-role">'+escapeHtml(event.role)+'</p><p>'+escapeHtml(event.body)+'</p>'+goodsPhotos(event.images||[],'')+goodsGallery(event.gallery)+'</article>';
 }).join('')+'</div></section>';
 const goodsEnd='<div class="category-return goods-return"><a class="text-link" href="history.html#activities">활동 연혁 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="design.html">디자인 및 홍보 보기 <span aria-hidden="true">↗</span></a><a class="text-link goods-back-top" href="#goods-top" data-goods-top>맨 위로 <span aria-hidden="true">↑</span></a></div></div><script src="'+assetURL('goods-slider.js')+'" defer></script>';
-fs.writeFileSync(path.join(out,'planning.html'),shell('planning.html',goods.title,'봉래제와 온리전 참가 경험. 본인 일러스트·팀원 시안 피드백, 굿즈 제작·현장 판매와 온라인 판매·발송 과정.',goodsHeader+goodsCases+goodsEvents+goodsEnd));
+fs.writeFileSync(path.join(out,'planning.html'),withGoodsBackground(shell('planning.html',goods.title,'봉래제와 온리전 참가 경험. 본인 일러스트·팀원 시안 피드백, 굿즈 제작·현장 판매와 온라인 판매·발송 과정.',goodsHeader+goodsCases+goodsEvents+goodsEnd),assetURL));
 const history=JSON.parse(fs.readFileSync(new URL('./history-content.json',import.meta.url),'utf8'));
 fs.writeFileSync(path.join(out,'history.html'),shell('history.html',history.title,'최희수의 근무·교육 및 자격·활동 연혁. 매장 운영과 디자인·웹툰 제작, 게임 개발 교육과 자격 취득 내역을 정리합니다.',renderHistory(history)));
 console.log((7+readerWorks.length)+' pages generated.');

@@ -1,0 +1,94 @@
+.goods-background-intro {
+  position: relative;
+  isolation: isolate;
+}
+[data-goods-background-page] .goods-head {
+  position: relative;
+  padding-bottom: 132px;
+}
+.goods-background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: #181e1b;
+}
+.goods-background-photo {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
+}
+.goods-background-photo:first-child { opacity: 1; }
+.goods-background::before,
+.goods-background::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+.goods-background::before {
+  inset: 0;
+  background: rgb(0 0 0 / 40%);
+}
+/* 소개 하단보다 위에서 옅게 시작해 본문의 테마색으로 이어집니다. */
+.goods-background::after {
+  height: 260px;
+  bottom: -1px;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    color-mix(in srgb, var(--paper) 4%, transparent) 12%,
+    color-mix(in srgb, var(--paper) 10%, transparent) 29%,
+    color-mix(in srgb, var(--paper) 24%, transparent) 49%,
+    color-mix(in srgb, var(--paper) 50%, transparent) 62%,
+    color-mix(in srgb, var(--paper) 84%, transparent) 76%,
+    color-mix(in srgb, var(--paper) 97%, transparent) 90%,
+    var(--paper) 99%);
+}
+.goods-background-copy {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-shadow: 0 2px 8px rgb(0 0 0 / 70%);
+}
+.goods-background-copy .eyebrow { color: #c3e5cd; }
+.goods-background-copy .subtitle,
+.goods-background-copy .goods-introduction { color: #f1f4ef; }
+.goods-background-toggle {
+  position: absolute;
+  right: 0;
+  top: 25px;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / 45%);
+  border-radius: 50%;
+  background: rgb(0 0 0 / 45%);
+  color: #fff;
+  font-size: 15px;
+  line-height: 1;
+}
+.goods-background-toggle[hidden] { display: none; }
+@media (max-width: 640px) {
+  [data-goods-background-page] .goods-head { padding-bottom: 116px; }
+  .goods-background-copy .eyebrow { padding-right: 52px; }
+  .goods-background::after { height: 244px; }
+  .goods-background-toggle { top: 13px; }
+}
+@media print {
+  .goods-background,
+  .goods-background-toggle { display: none !important; }
+  [data-goods-background-page] .goods-head { padding-bottom: 44px; }
+  .goods-background-copy { color: var(--ink); text-shadow: none; }
+  .goods-background-copy .eyebrow { color: var(--green); }
+  .goods-background-copy .subtitle,
+  .goods-background-copy .goods-introduction { color: var(--muted); }
+}
