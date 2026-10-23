@@ -72,7 +72,7 @@
     }
   ],
   "countNotes": [
-    "보유 자료의 만화·인스타툰은 18개 정리 항목입니다. 이 가운데 공식 게시본이 확인된 16개 주제를 대상으로, 아동권리 1~3화를 각각 계산하면 18편입니다. 청소년 지원센터 수정 컷과 공식 최종 게시본이 확인되지 않은 민관협력 작업은 공식 회차 합계에서 제외했습니다. 퀴즈 이벤트와 식목일 일러스트도 별도입니다.",
+    "보유 자료의 만화·인스타툰은 18개 정리 항목입니다. 이 가운데 공식 게시본이 확인된 16개 주제를 대상으로, 아동권리 1~3화를 각각 계산하면 18편입니다. 청소년 지원센터 수정 컷과 서책 삽입용 민관협력 작업은 온라인 게시 회차 합계에서 제외했습니다. 퀴즈 이벤트와 식목일 일러스트도 별도입니다.",
     "본문 159컷 이상은 공식 게시본을 눈으로 확인한 최소치이며 기관이 공표한 제작량은 아닙니다. 정규 이야기 안의 정책 설명은 포함하고 표지·제목 배너·독립 이용안내·회차 끝 메시지 카드는 제외했습니다. 복합 구성이 있는 대사증후군·한파 작품은 각각 확인 가능한 최소 9개 단위만 반영했습니다. 이미지 파일 수와 컷수는 같지 않습니다.",
     "구청 작품 게시판에는 공개 조회수 항목이 없어 총합을 산출하지 않았습니다. 관련 행사 보도자료의 조회수, 화면에 표시되지 않는 소식지 HTML 주석 값, SNS 좋아요·댓글 수는 합산하지 않았습니다. 별도 조회수 자료를 확보하면 같은 기준과 확인일을 기록해 갱신합니다."
   ],
@@ -90,7 +90,7 @@
       "text": "작화와 문구를 검토하고 요청된 수정에 대응했습니다. 연도별 안내와 캐릭터 변경에 따른 수정 작업도 함께 정리했습니다."
     }
   ],
-  "collectionNote": "웹툰·만화 18개 정리 항목과 이벤트·일러스트를 함께 소개합니다. 작품의 표지를 누르면 원래 순서대로 읽을 수 있습니다. 공식 SNS와 구청 게시 링크도 함께 연결했습니다. 제작 연도와 실제 게시 연도는 다를 수 있습니다.",
+  "collectionNote": "웹툰·만화와 캐리커처, 캐릭터 응용 일러스트, 배경화면을 함께 소개합니다. 작품을 누르면 원고와 목업·적용 사례를 순서대로 볼 수 있습니다. 확인한 공식 게시본과 행사 사진은 작품별 링크로 연결했습니다. 제작 연도와 실제 게시 연도는 다를 수 있습니다.",
   "works": [
     {
       "id": "2023-10",
@@ -444,18 +444,18 @@
       "id": "2023-04",
       "title": "민관협력 사례공유회 결과보고집",
       "year": "2023",
-      "kind": "결과보고집 컷만화",
+      "kind": "서책 삽입 컷만화",
       "isComic": true,
       "official": false,
       "episodes": 1,
       "episodeDisplay": "1편",
       "panels": null,
       "minimumPanels": 10,
-      "panelDisplay": "10컷 이상",
-      "countBasis": "보유 완성본3페이지지만 원본파일3장 접근 불가. 1페이지 C:체크 미리보기에서10프레임 확인. 전체 합계는 null, 확인된10컷+로만 표시 가능. 공식 출판 여부 미확인.",
-      "publicationStatus": "공식 최종본 미확인",
-      "description": "민관협력 사례를 만화로 정리한 보유 작업의 미리보기입니다.",
-      "detail": "체크용 미리보기 1쪽입니다. 전체 3페이지 원본과 공식 최종 게시본은 추가 확인이 필요합니다.",
+      "panelDisplay": "서책 원고 3쪽",
+      "countBasis": "사용자 확인: 결과보고집 서책 삽입 작업, 공식 온라인 게시본 없음. E드라이브 완성 원고 3쪽을 직접 확인했고 컷수는 재집계하지 않았습니다.",
+      "publicationStatus": "결과보고집 서책 삽입 · 온라인 게시본 없음",
+      "description": "민관협력 사례공유회 결과보고집 서책에 삽입한 컷만화입니다.",
+      "detail": "서책에 삽입한 완성 원고 3쪽을 소개합니다. 별도의 공식 온라인 게시본은 없습니다.",
       "images": [
         {
           "file": "public-gj-2023-04-01.jpg",
@@ -465,12 +465,14 @@
       ],
       "links": [],
       "thumbnail": {
-        "file": "public-gj-2023-04-01.jpg",
+        "file": "public-gj-book-2023-04-01.jpg",
         "alt": "민관협력 사례공유회 결과보고집 · 대표 이미지",
-        "caption": "보유 작업 1쪽 미리보기 · 제작: 최희수",
+        "caption": "서책 삽입 원고 1쪽 · 제작: 최희수",
         "view": "contain",
-        "kind": "owned_page1_preview_no_title"
-      }
+        "kind": "owned_book_manuscript"
+      },
+      "publicationHeading": "서책 활용 기록",
+      "publicationNote": "서책 삽입 원고 3쪽 · 공식 온라인 게시본 없음"
     },
     {
       "id": "2023-03",
@@ -545,7 +547,7 @@
       "countBasis": "마지막 컷 수정안2종. 연속2컷 또는 전체1편으로 집계하지 않음. 공식 반영 여부 미확인.",
       "publicationStatus": "공식 최종본 미확인",
       "description": "청소년 지원센터 작품의 캐릭터를 교체하기 위해 제작한 수정안 기록입니다.",
-      "detail": "수정 컷 2안만 소개합니다. 전체 작품 편수와 공식 게시 확인 집계에서는 제외했습니다.",
+      "detail": "보유한 마지막 컷 수정안 2종입니다. 근무 기간의 공식 게시 자료를 다시 대조했지만 같은 그림의 원게시본은 아직 확인하지 못했습니다.",
       "images": [
         {
           "file": "public-gj-2023-02-01.png",
@@ -618,6 +620,157 @@
         "caption": "공식 게시 표지 · 제작: 최희수",
         "view": "contain",
         "kind": "first_cover"
+      }
+    },
+    {
+      "id": "2022-15",
+      "title": "구청 직원을 위한 커피트럭 캐리커처",
+      "year": "2022",
+      "kind": "캐리커처 · 현수막 활용",
+      "isComic": false,
+      "official": true,
+      "episodes": 0,
+      "episodeDisplay": "웹툰 집계 제외",
+      "panels": null,
+      "minimumPanels": null,
+      "panelDisplay": "일러스트·응용 작업",
+      "countBasis": "2022작업물 정리 확장.pdf 15쪽. 일러스트·목업·사진은 웹툰 편수와 컷수에서 제외.",
+      "publicationStatus": "공식 행사 사진 대조",
+      "publicationHeading": "제작·활용 기록",
+      "publicationNote": "2022년 포트폴리오 수록 · 보유 작업 자료",
+      "readerLabel": "작품 보기",
+      "description": "구청 직원 대상 커피트럭 행사에 사용할 캐리커처를 그렸습니다.",
+      "detail": "커피를 든 캐리커처와 현수막 적용안을 제작 기록으로 정리하고, 공식 행사 사진에서 실제 출력 모습을 확인했습니다.",
+      "images": [],
+      "links": [
+        {
+          "platform": "website",
+          "url": "https://www.gwangjin.go.kr/photo/bbs/B0000111/searchMainView.do?nttId=6018105&menuNo=1100119",
+          "label": "광진구청 공식 행사 사진 · 커피차"
+        }
+      ],
+      "thumbnail": {
+        "file": "public-gj-2022-coffee-caricature-banner-mockup.png",
+        "alt": "구청 직원을 위한 커피트럭 캐리커처 대표 이미지",
+        "caption": "캐리커처·현수막 적용안·차량 목업 · 본인 제작 기록",
+        "view": "contain",
+        "kind": "owned_2022_artwork"
+      }
+    },
+    {
+      "id": "2022-14",
+      "title": "구청장 SD 캐리커처",
+      "year": "2022",
+      "kind": "SD 캐리커처",
+      "isComic": false,
+      "official": false,
+      "episodes": 0,
+      "episodeDisplay": "웹툰 집계 제외",
+      "panels": null,
+      "minimumPanels": null,
+      "panelDisplay": "일러스트·응용 작업",
+      "countBasis": "2022작업물 정리 확장.pdf 14쪽. 일러스트·목업·사진은 웹툰 편수와 컷수에서 제외.",
+      "publicationStatus": "보유 작업 자료",
+      "publicationHeading": "제작·활용 기록",
+      "publicationNote": "2022년 포트폴리오 수록 · 보유 작업 자료",
+      "readerLabel": "작품 보기",
+      "description": "주민과 구청 직원에게 친근하게 다가갈 수 있도록 구청장의 SD 캐리커처를 제작했습니다.",
+      "detail": "인물의 얼굴 특징을 살리면서 작은 몸과 주먹을 쥔 동작으로 응원하는 모습을 표현했습니다.",
+      "images": [],
+      "links": [],
+      "thumbnail": {
+        "file": "public-gj-2022-sd-caricature.png",
+        "alt": "구청장 SD 캐리커처 대표 이미지",
+        "caption": "2022년 포트폴리오 수록 원화 · 제작: 최희수",
+        "view": "contain",
+        "kind": "owned_2022_artwork"
+      }
+    },
+    {
+      "id": "2022-13",
+      "title": "광이·진이 캐릭터 응용동작",
+      "year": "2022",
+      "kind": "캐릭터 응용 일러스트",
+      "isComic": false,
+      "official": false,
+      "episodes": 0,
+      "episodeDisplay": "웹툰 집계 제외",
+      "panels": null,
+      "minimumPanels": null,
+      "panelDisplay": "일러스트·응용 작업",
+      "countBasis": "2022작업물 정리 확장.pdf 11~13쪽. 일러스트·목업·사진은 웹툰 편수와 컷수에서 제외.",
+      "publicationStatus": "보유 작업 자료",
+      "publicationHeading": "제작·활용 기록",
+      "publicationNote": "2022년 포트폴리오 수록 · 보유 작업 자료",
+      "readerLabel": "작품 보기",
+      "description": "기존 공식 캐릭터인 광이·진이를 여러 상황과 직업에 맞는 동작으로 확장했습니다.",
+      "detail": "독서·우편·요리·미용 등 활용 상황을 고려해 의상과 소품, 표정을 바꿨습니다. 포트폴리오에 정리한 40종을 세 묶음으로 볼 수 있습니다.",
+      "images": [],
+      "links": [],
+      "thumbnail": {
+        "file": "public-gj-2022-character-variations-01-12.png",
+        "alt": "광이·진이 캐릭터 응용동작 대표 이미지",
+        "caption": "응용동작 01~12 · 기존 IP 활용 · 제작: 최희수",
+        "view": "contain",
+        "kind": "owned_2022_artwork"
+      }
+    },
+    {
+      "id": "2022-12",
+      "title": "즐거운 추석 연휴 · 광이·진이",
+      "year": "2022",
+      "kind": "기념일 일러스트",
+      "isComic": false,
+      "official": false,
+      "episodes": 0,
+      "episodeDisplay": "웹툰 집계 제외",
+      "panels": null,
+      "minimumPanels": null,
+      "panelDisplay": "일러스트·응용 작업",
+      "countBasis": "2022작업물 정리 확장.pdf 10쪽. 일러스트·목업·사진은 웹툰 편수와 컷수에서 제외.",
+      "publicationStatus": "보유 작업 자료",
+      "publicationHeading": "제작·활용 기록",
+      "publicationNote": "2022년 포트폴리오 수록 · 보유 작업 자료",
+      "readerLabel": "작품 보기",
+      "description": "추석을 주제로 보름달을 바라보는 광이·진이 일러스트를 제작했습니다.",
+      "detail": "기존 캐릭터에 한복과 명절 소품을 적용하고 달빛을 중심으로 장면을 구성했습니다.",
+      "images": [],
+      "links": [],
+      "thumbnail": {
+        "file": "public-gj-2022-chuseok-illustration.png",
+        "alt": "즐거운 추석 연휴 · 광이·진이 대표 이미지",
+        "caption": "2022.09 포트폴리오 수록 원화 · 제작: 최희수",
+        "view": "contain",
+        "kind": "owned_2022_artwork"
+      }
+    },
+    {
+      "id": "2022-11",
+      "title": "광진구민 배포용 여름 테마 배경화면",
+      "year": "2022",
+      "kind": "배경화면 · 목업",
+      "isComic": false,
+      "official": false,
+      "episodes": 0,
+      "episodeDisplay": "웹툰 집계 제외",
+      "panels": null,
+      "minimumPanels": null,
+      "panelDisplay": "일러스트·응용 작업",
+      "countBasis": "2022작업물 정리 확장.pdf 9쪽. 일러스트·목업·사진은 웹툰 편수와 컷수에서 제외.",
+      "publicationStatus": "보유 작업 자료",
+      "publicationHeading": "제작·활용 기록",
+      "publicationNote": "2022년 포트폴리오 수록 · 보유 작업 자료",
+      "readerLabel": "작품 보기",
+      "description": "주민 배포를 위한 여름 테마의 광이·진이 휴대폰 배경화면을 제작했습니다.",
+      "detail": "간식·수박·물놀이를 주제로 세로형 화면을 구성하고, 휴대폰에 적용한 모습을 목업으로 정리했습니다.",
+      "images": [],
+      "links": [],
+      "thumbnail": {
+        "file": "public-gj-2022-summer-wallpapers-and-mockups.png",
+        "alt": "광진구민 배포용 여름 테마 배경화면 대표 이미지",
+        "caption": "배경화면 3종과 휴대폰 목업 · 제작: 최희수",
+        "view": "contain",
+        "kind": "owned_2022_artwork"
       }
     },
     {
