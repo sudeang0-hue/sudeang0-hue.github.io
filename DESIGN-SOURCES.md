@@ -213,3 +213,30 @@
 ## 이미지 판독과 보호
 
 본문 컷은 시각 검토값입니다. 서로 다른 프레임을 세되 복합 몽타주에서 명확하지 않은 부분은 최소값만 반영했습니다. 선택 이미지의 작가 연락처·휴대전화·QR·실사 얼굴 유무를 검토했고, 해당 정보가 보이는 이미지는 이번 공개 사본에서 제외했습니다. 원본 및 자료 수집 당시의 상세 확인 기록은 개인 작업 폴더에 보존합니다.
+
+## 제목 썸네일의 출처와 처리
+
+2026.10.23 제목 표지·배너를 별도로 대조했습니다. 표지가 없는 자료는 본문/보유본이라고 구분하며 원본에 없던 표지나 문구를 만들지 않았습니다. 하단 연락처 재단은 사용자 승인에 따라 해당 5개 표지 사본에만 적용했습니다.
+
+| 작업 ID | 대표 자료 | 출처 |
+|---|---|---|
+| 2023-10 | 공식 원고 상단 제목 | [공식 게시 페이지](https://gwangjin.newstool.co.kr/view.php?eid=8826&aid=13717) |
+| 2023-09 | 공식 첫 제목 배너 | [공식 게시 페이지](https://gwangjin.newstool.co.kr/view.php?eid=8819&aid=13593) |
+| 2023-08 | 공식 첫 제목 배너 | [공식 게시 페이지](https://gwangjin.newstool.co.kr/view.php?eid=8808&aid=13395) |
+| 2023-07 | 공식 원고 상단 제목 | [공식 게시 페이지](https://blog.naver.com/PostView.naver?blogId=gwangjin_b&logNo=223208084522&directAccess=false) |
+| 2023-06 | 공식 첫 제목 배너 | [공식 게시 페이지](https://gwangjin.newstool.co.kr/view.php?eid=8791&aid=13042) |
+| 2023-05 | 공식 표지 | [공식 게시 페이지](https://blog.naver.com/PostView.naver?blogId=gwangjin_b&logNo=223289213559&directAccess=false) |
+| 2023-04 | 보유 1쪽 미리보기 | 공식 최종 게시본 미확인 · 보유 작업 |
+| 2023-03 | 공식 제목 카드 · 첫 표지 아님 | [공식 게시 페이지](https://blog.naver.com/PostView.naver?blogId=gwangjin_b&logNo=223098107411&directAccess=false) |
+| 2023-02 | 보유 수정안 | 공식 최종 게시본 미확인 · 보유 작업 |
+| 2023-01 | 공식 표지 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/CpJuHtUp7T4/) |
+| 2022-10 | 공식 표지 · 하단 연락처 제외 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/Cl2IbB2ShrZ/) |
+| 2022-09 | 첫 본문 컷 · 별도 표지 없음 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/Cn6EL7opzSe/) |
+| 2022-08 | 공식 표지 | [공식 게시 페이지](https://www.instagram.com/gwangjin_office/p/CmDCoJ8PPnZ/) |
+| 2022-07 | 공식 표지 · 하단 연락처 제외 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/ClS0rEOJzqb/) |
+| 2022-06 | 공식 표지 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/CjFLABHp4JE/) |
+| 2022-05 | 공식 표지 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/ChEOo9iJBIR/) |
+| 2022-04 | 공식 표지 · 하단 연락처 제외 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/CehlYI7JLN5/) |
+| 2022-03 | 공식 표지 · 하단 연락처 제외 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/CcjdPUZpHEY/) |
+| 2022-02 | 공식 표지 · 하단 연락처 제외 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/CcXBd3ZJrnt/) |
+| 2022-01 | 공식 일러스트 | [공식 게시 페이지](https://www.instagram.com/gwangijini/p/Cb9jjojpqEe/) |

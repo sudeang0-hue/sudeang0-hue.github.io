@@ -554,6 +554,10 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
 .public-work-card .media{margin:0;min-width:0}
 .public-work-card .zoom-trigger{display:grid;place-items:center;width:100%;height:310px;background:var(--media);border:1px solid var(--line)}
 .public-work-card img{width:100%;height:100%;max-height:100%;object-fit:contain}
+.public-thumbnail{--public-thumbnail-size:310px}
+.public-work-card .public-thumbnail .zoom-trigger{height:var(--public-thumbnail-size)}
+/* 긴 원고는 첫 제목 영역만 보여주며 확대창에서는 전체 원본을 유지합니다. */
+.design-portfolio .public-thumbnail--top .zoom-trigger img{inset:0 auto auto 50%;width:min(100%,var(--public-thumbnail-size));height:auto;max-height:none;transform:translateX(-50%);object-position:50% 0%}
 .public-work-card figcaption{font-size:11px;line-height:1.7;margin-top:9px;color:var(--muted)}
 .public-work-card figcaption .zoom-hint{float:none;display:block;margin-top:3px}
 .public-work-description{font-size:14px;line-height:1.85;margin-top:17px}
@@ -592,6 +596,7 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
  .public-work-grid{grid-template-columns:1fr;gap:32px}
  .public-work-card h3{font-size:19px}
  .public-work-card .zoom-trigger{height:300px}
+ .public-thumbnail{--public-thumbnail-size:300px}
  .public-gallery-images .zoom-trigger{height:180px}
  .public-collection-note{font-size:13px}
  .public-work-filters button{padding:8px 16px}
@@ -599,4 +604,4 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
  .design-next h2{font-size:30px}
  .design-next p{font-size:14px}
 }
-@media print{.public-work-filters,.public-social-links,.public-source-links,.design-subnav{display:none}.public-work-grid{display:block}.public-work-card{break-inside:avoid;margin-bottom:25px}.public-header-main{display:block}.public-work-card .zoom-trigger{height:190px}.design-next{min-height:0;margin-top:30px;padding:25px 0}.public-gallery:not([open]){display:none}}
+@media print{.public-thumbnail{--public-thumbnail-size:190px}.public-work-filters,.public-social-links,.public-source-links,.design-subnav{display:none}.public-work-grid{display:block}.public-work-card{break-inside:avoid;margin-bottom:25px}.public-header-main{display:block}.public-work-card .zoom-trigger{height:190px}.design-next{min-height:0;margin-top:30px;padding:25px 0}.public-gallery:not([open]){display:none}}

@@ -10,6 +10,7 @@ export function renderDesignPortfolio(data, {escapeHtml: esc, ext, zoom}) {
   if (new Set(data.works.map(work => work.id)).size !== data.works.length) throw new Error('작품 ID가 중복됐습니다.');
   const paragraphs = texts => texts.map(text => '<p>'+esc(text)+'</p>').join('');
   const photo = image => zoom(image.file, image.alt, image.caption, 'public-art');
+  const thumbnailPhoto = image => zoom(image.file, image.alt, image.caption, 'public-art public-thumbnail public-thumbnail--'+(image.view === 'top' ? 'top' : 'contain'));
   const sourceLinks = work => {
     const primary = work.links.filter(link => link.platform === 'instagram');
     const extra = work.links.filter(link => link.platform !== 'instagram');
@@ -19,14 +20,15 @@ export function renderDesignPortfolio(data, {escapeHtml: esc, ext, zoom}) {
   };
   const card = work => {
     const images = work.images || [];
-    const first = images[0];
+    const thumbnail = work.thumbnail || images[0];
+    const gallery = images.filter(image => image.file !== thumbnail?.file);
     return '<article class="public-work-card" id="public-'+esc(work.id)+'" data-public-work data-year="'+esc(work.year)+'">'+
       '<header><p class="public-work-meta"><span>'+esc(work.year)+'</span><span>'+esc(work.kind)+'</span></p><h3>'+esc(work.title)+'</h3></header>'+
-      (first ? photo(first) : '<div class="public-art-pending"><span>작업 자료 연결 준비 중</span></div>')+
+      (thumbnail ? thumbnailPhoto(thumbnail) : '<div class="public-art-pending"><span>작업 자료 연결 준비 중</span></div>')+
       '<p class="public-work-description">'+esc(work.description)+'</p>'+
       (work.detail ? '<p class="public-work-detail">'+esc(work.detail)+'</p>' : '')+
       sourceLinks(work)+
-      (images.length > 1 ? '<details class="public-gallery"><summary>선택 이미지 '+(images.length-1)+'장 더 보기</summary><div class="public-gallery-images">'+images.slice(1).map(photo).join('')+'</div></details>' : '')+
+      (gallery.length ? '<details class="public-gallery"><summary>선택 이미지 '+gallery.length+'장 더 보기</summary><div class="public-gallery-images">'+gallery.map(photo).join('')+'</div></details>' : '')+
       '</article>';
   };
   return '<div class="wrap design-portfolio"><section id="public-work" class="design-section public-project" aria-labelledby="public-project-title">'+

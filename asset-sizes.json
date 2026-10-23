@@ -584,6 +584,56 @@
       "file": "public-gj-2023-10-01.jpg",
       "width": 800,
       "height": 3540
+    },
+    {
+      "file": "public-gj-2023-09-title.jpg",
+      "width": 700,
+      "height": 221
+    },
+    {
+      "file": "public-gj-2023-08-title.jpg",
+      "width": 700,
+      "height": 216
+    },
+    {
+      "file": "public-gj-2023-06-title.jpg",
+      "width": 660,
+      "height": 208
+    },
+    {
+      "file": "public-gj-2022-10-title.png",
+      "width": 800,
+      "height": 722
+    },
+    {
+      "file": "public-gj-2022-09-title.jpg",
+      "width": 800,
+      "height": 800
+    },
+    {
+      "file": "public-gj-2022-07-title.png",
+      "width": 800,
+      "height": 756
+    },
+    {
+      "file": "public-gj-2022-05-title.jpg",
+      "width": 800,
+      "height": 800
+    },
+    {
+      "file": "public-gj-2022-04-title.png",
+      "width": 800,
+      "height": 687
+    },
+    {
+      "file": "public-gj-2022-03-title.png",
+      "width": 800,
+      "height": 696
+    },
+    {
+      "file": "public-gj-2022-02-title.png",
+      "width": 800,
+      "height": 706
     }
   ]
 }
