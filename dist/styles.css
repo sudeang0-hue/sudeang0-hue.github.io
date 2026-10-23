@@ -636,6 +636,7 @@ html:has(.webtoon-reader){scroll-padding-top:170px}
  .webtoon-toolbar>span{display:none}
  .webtoon-toolbar a:last-child{margin-left:auto}
  .webtoon-reader{width:100%}
+ .webtoon-pages{width:100%}
  .webtoon-head,.webtoon-end{padding-left:20px;padding-right:20px}
  .webtoon-head{padding-top:28px;padding-bottom:24px}
  .webtoon-head h1{font-size:28px}
