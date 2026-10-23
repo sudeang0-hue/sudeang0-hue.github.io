@@ -7,7 +7,7 @@
 `security.mjs`의 CSP를 모든 HTML의 리소스 로드보다 앞에 메타 태그로 넣습니다.
 
 - 스크립트·이미지·영상·폰트는 같은 사이트의 파일만 허용합니다.
-- Figma 프레임은 `https://embed.figma.com`과 재생 중 이동할 수 있는 `https://www.figma.com` 두 정확한 호스트만 허용하고, 재생 버튼을 누른 뒤 로드합니다.
+- Figma 프레임은 `https://embed.figma.com`과 재생 중 이동할 수 있는 `https://www.figma.com` 두 정확한 호스트만 허용합니다. 게임랩 페이지가 열리면 로비 프로토타입을 자동으로 불러오며, 사용자가 전투 흐름을 선택하면 해당 시작점으로 전환합니다.
 - 기존 인라인 배치와 슬라이드 동작을 위해 스타일에만 `unsafe-inline`을 허용합니다. 스크립트에는 허용하지 않습니다.
 - 네트워크 API 연결, 플러그인 개체, base URL 변경, 폼 제출은 차단합니다.
 - 공통 Referrer-Policy와 Figma 프레임은 `no-referrer`로 설정합니다.

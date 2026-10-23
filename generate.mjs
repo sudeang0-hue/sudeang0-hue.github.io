@@ -75,8 +75,8 @@ ${zoom('gamelab-figma-flow-overview.png','Figma 초기 UI 흐름 설계 · 로�
 <button type="button" data-figma-flow data-figma-label="전투 흐름" data-figma-src="${figmaBattle.embed.replaceAll('&','&amp;')}" data-figma-href="${figmaBattle.external.replaceAll('&','&amp;')}" aria-pressed="false">전투 흐름</button>
 </div></div>
 <div class="links figma-player-links"><a class="text-link external-link" data-figma-external href="${figmaLobby.external}" target="_blank" rel="noopener noreferrer">Figma에서 크게 재생 <span aria-hidden="true">↗</span></a>${ext('https://www.figma.com/design/Kz3TNcpjEhLXT7lGoCWinf?node-id=0-1','흐름 설계 원본 보기')}</div>
-<div class="figma-player-stage"><div class="figma-player-placeholder" data-figma-placeholder><span class="figma-play-mark" aria-hidden="true">▷</span><p>시작 화면을 고른 뒤 재생해 보세요.</p><button type="button" class="btn-quiet" data-figma-load hidden>프로토타입 재생</button><noscript><p>Figma 링크에서 프로토타입을 재생할 수 있습니다.</p></noscript></div>
-<iframe data-figma-frame title="게임랩 초기 UI 프로토타입 · 로비 흐름" loading="lazy" allow="fullscreen" allowfullscreen tabindex="0" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" hidden></iframe></div>
+<div class="figma-player-stage"><div class="figma-player-placeholder" data-figma-placeholder><span class="figma-play-mark" aria-hidden="true">▷</span><p>로비 흐름 프로토타입을 준비하고 있습니다.</p><button type="button" class="btn-quiet" data-figma-load hidden>프로토타입 재생</button><noscript><p>Figma 링크에서 프로토타입을 재생할 수 있습니다.</p></noscript></div>
+<iframe data-figma-frame title="게임랩 초기 UI 프로토타입 · 로비 흐름" loading="eager" allow="fullscreen" allowfullscreen tabindex="0" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" hidden></iframe></div>
 <div class="figma-player-status"><p data-figma-note>화면 전환을 확인하는 초기 프로토타입으로, 예시 수치와 미정 화면이 포함되어 있습니다. 최종 디자인과 실제 게임 동작은 다음 Unity 구현 사례에서 확인할 수 있습니다. 작은 화면에서는 ‘크게 재생’을 이용해 주세요.</p><button type="button" class="btn-quiet" data-figma-reset hidden>선택한 흐름 처음부터</button></div>
 </div>
 

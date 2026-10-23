@@ -26,12 +26,15 @@ if(figmaPlayer){
   if(button===selected) return;
   selected=button;showSelected();
  }));
- loadButton.addEventListener('click',()=>{
+ // 최초 자동 준비에서는 포커스를 빼앗지 않습니다. 직접 재생·재시작할 때만 이동합니다.
+ function startPrototype(moveFocus=false){
   started=true;placeholder.hidden=true;frame.hidden=false;resetButton.hidden=false;
-  showSelected();frame.focus();
- });
+  showSelected();
+  if(moveFocus) frame.focus();
+ }
+ loadButton.addEventListener('click',()=>startPrototype(true));
  resetButton.addEventListener('click',()=>{if(started){showSelected();frame.focus();}});
  figmaPlayer.querySelector('[data-figma-controls]').hidden=false;
  loadButton.hidden=false;
- showSelected();
+ startPrototype();
 }
