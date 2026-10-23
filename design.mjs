@@ -14,11 +14,11 @@ export function renderDesignPortfolio(data, {escapeHtml: esc, ext}) {
   const paragraphs = texts => texts.map(text => '<p>'+esc(text)+'</p>').join('');
   const thumbnailPhoto = (image, work) => '<figure class="media public-art public-thumbnail public-thumbnail--'+(image.view === 'top' ? 'top' : 'contain')+'"><a class="public-reader-link" href="'+publicReaderPath(work.id)+'" aria-label="'+esc(work.title)+' '+esc(work.readerLabel||'작품 읽기')+'"><img src="assets/'+checkedAssetPath(image.file)+'" alt="'+esc(image.alt)+'" loading="lazy" decoding="async"></a><figcaption>'+esc(image.caption)+'<span class="public-reader-hint">'+esc(work.readerLabel||'작품 읽기')+' →</span></figcaption></figure>';
   const sourceLinks = work => {
+    if (!work.links.length) return '';
     const primary = work.links.filter(link => link.platform === 'instagram');
     const extra = work.links.filter(link => link.platform !== 'instagram');
     return '<div class="public-source-links">'+primary.map(link => ext(link.url, link.label, 'text-link public-source-primary')).join('')+
-      (extra.length ? '<details class="public-extra-links"><summary>공식 홈페이지·배포 채널 '+extra.length+'곳</summary><div>'+extra.map(link => ext(link.url, link.label, 'text-link')).join('')+'</div></details>' : '')+
-      (!work.links.length ? '<p class="public-source-pending">'+esc(work.publicationNote||'공식 게시본 확인 중 · 보유 작업 자료')+'</p>' : '')+'</div>';
+      (extra.length ? '<details class="public-extra-links"><summary>공식 홈페이지·배포 채널 '+extra.length+'곳</summary><div>'+extra.map(link => ext(link.url, link.label, 'text-link')).join('')+'</div></details>' : '')+'</div>';
   };
   const card = work => {
     const images = work.images || [];
