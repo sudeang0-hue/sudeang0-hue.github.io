@@ -1,0 +1,85 @@
+{
+  "title": "일러스트 작업",
+  "headline": "캐릭터의 표정과 분위기를 그림에 담습니다.",
+  "introduction": "인물과 소품을 함께 구성한 개인 일러스트, 캐릭터 팬아트, 합동 달력 참여작을 모았습니다. 완성한 그림은 작품집과 굿즈로도 이어졌습니다.",
+  "profile": "https://www.instagram.com/bbiyak_bean/",
+  "works": [
+    {
+      "id": "memory",
+      "title": "memory. 추억.",
+      "year": "2022 공개",
+      "kind": "개인 일러스트 · 작품집 수록",
+      "description": "웃는 인물과 여러 종류의 꽃을 함께 그린 일러스트입니다. 꽃잎과 머리카락, 리본의 질감을 구분하고 빛과 색으로 화면을 구성했습니다.",
+      "file": "illustration-memory.jpg",
+      "alt": "memory. 추억. — 푸른 머리의 인물과 다채로운 꽃을 그린 완성 일러스트",
+      "url": "https://www.instagram.com/p/CYTPfj_l8bu/"
+    },
+    {
+      "id": "calendar",
+      "title": "2024 환상소녀력 · 2월 일러스트",
+      "year": "2023 공개",
+      "kind": "합동 달력 참여작 · 동방프로젝트 팬아트",
+      "description": "합동 달력 프로젝트에서 2월 일러스트를 맡았습니다. 발렌타인데이에 맞춰 홍마관 캐릭터들이 함께 초콜릿과 케이크를 만드는 장면을 그렸습니다.",
+      "file": "illustration-calendar.jpg",
+      "alt": "2024 환상소녀력 2월 — 홍마관 캐릭터 네 명이 초콜릿과 케이크를 준비하는 장면",
+      "url": "https://www.instagram.com/p/CyvYH3kvbvp/"
+    },
+    {
+      "id": "flandre",
+      "title": "플랑도르 스칼렛",
+      "year": "2023 공개",
+      "kind": "동방프로젝트 팬아트",
+      "description": "붉은 의상과 여러 색의 날개 장식을 살린 전신 일러스트입니다. 완성한 그림은 봉래제 장패드에도 적용했습니다.",
+      "file": "illustration-flandre.jpg",
+      "alt": "플랑도르 스칼렛 — 붉은 의상과 보석 같은 날개 장식을 그린 전신 팬아트",
+      "url": "https://www.instagram.com/p/Co4aeEvv1NB/"
+    },
+    {
+      "id": "reimu",
+      "title": "하쿠레이 레이무",
+      "year": "2023 공개",
+      "kind": "동방프로젝트 팬아트",
+      "description": "붉은 리본과 소매, 손에 든 소품의 형태를 정리해 캐릭터의 특징을 표현했습니다.",
+      "file": "illustration-reimu.jpg",
+      "alt": "하쿠레이 레이무 — 붉은 리본과 의상, 손에 든 소품을 표현한 전신 팬아트",
+      "url": "https://www.instagram.com/p/CohT8acJE6z/"
+    },
+    {
+      "id": "marisa",
+      "title": "키리사메 마리사",
+      "year": "2023 공개",
+      "kind": "동방프로젝트 팬아트",
+      "description": "모자와 빗자루, 흩날리는 머리카락으로 움직임을 표현한 일러스트입니다. 봉래제 참가를 준비하며 그렸습니다.",
+      "file": "illustration-marisa.jpg",
+      "alt": "키리사메 마리사 — 빗자루를 타고 모자를 잡는 동작의 전신 팬아트",
+      "url": "https://www.instagram.com/p/CoeiAifPzcC/"
+    },
+    {
+      "id": "kumi",
+      "title": "곰·레서판다 모티프 일러스트",
+      "year": "2022 공개",
+      "kind": "캐릭터 일러스트",
+      "description": "동물의 둥근 귀와 발바닥, 털의 질감을 의상과 소품에 반영했습니다. 손을 들고 위협하는 표정과 동작을 함께 그렸습니다.",
+      "file": "illustration-kumi.jpg",
+      "alt": "곰·레서판다 모티프 — 동물 귀와 털 장식 의상을 입은 캐릭터와 작은 레서판다",
+      "url": "https://www.instagram.com/p/Cj4cJMzrWgJ/"
+    },
+    {
+      "id": "eunsol",
+      "title": "Eun sol",
+      "year": "2021 공개",
+      "kind": "개인 일러스트",
+      "description": "고양이를 안은 인물의 표정과 가까운 거리를 담았습니다. 부드러운 빛과 색의 번짐으로 장면의 분위기를 표현했습니다.",
+      "file": "illustration-eunsol.jpg",
+      "alt": "Eun sol — 고양이를 안은 인물의 표정과 부드러운 빛을 표현한 일러스트",
+      "url": "https://www.instagram.com/p/CX3HYxMlJjr/"
+    }
+  ],
+  "publication": {
+    "title": "2022 네오아카데미 명예의 전당 수록작품집",
+    "description": "〈memory. 추억.〉이 작품집에 수록되었습니다. 본인 그림이 실린 페이지를 촬영한 기록입니다.",
+    "file": "illustration-artbook.jpg",
+    "alt": "2022 네오아카데미 명예의 전당 수록작품집에 실린 memory. 추억. 페이지 사진",
+    "url": "https://www.instagram.com/p/Cowb4EgvST9/"
+  }
+}

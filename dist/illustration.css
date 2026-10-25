@@ -1,0 +1,82 @@
+/* 개인 일러스트는 기존 공공기관 카드·필터와 별도 배치합니다. */
+#illustration-work.illustration-portfolio{padding:64px 0 20px;margin-top:60px;border-top:1px solid var(--line);min-width:0}
+#illustration-work .illustration-heading{margin-bottom:30px}
+#illustration-work .illustration-heading .eyebrow{margin-bottom:14px}
+#illustration-work .illustration-heading h2{font-size:clamp(30px,3.3vw,42px);line-height:1.4;letter-spacing:-.045em}
+#illustration-work .illustration-headline{font-size:18px;line-height:1.75;color:var(--muted);max-width:46em;margin-top:14px}
+#illustration-work :is(article,header,.illustration-feature-copy,.illustration-description,.illustration-publication-copy){min-width:0}
+#illustration-work :is(p,h2,h3,figcaption){word-break:keep-all;overflow-wrap:break-word}
+#illustration-work :is(article[id],.illustration-publication){scroll-margin-top:0}
+#illustration-work .illustration-feature{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:start;gap:48px}
+#illustration-work .illustration-introduction{font-size:15px;color:var(--muted);line-height:1.9}
+#illustration-work .illustration-introduction p+p{margin-top:13px}
+#illustration-work .illustration-feature-detail{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
+#illustration-work .illustration-meta{display:flex;gap:8px 14px;flex-wrap:wrap;font-size:11px;line-height:1.7;color:var(--green);margin-bottom:8px}
+#illustration-work h3{font-size:23px;line-height:1.5;letter-spacing:-.035em}
+#illustration-work .illustration-description{font-size:14px;color:var(--muted);line-height:1.85;margin-top:14px}
+#illustration-work .illustration-description p+p{margin-top:10px}
+#illustration-work .illustration-source{font-size:12px;min-height:42px;line-height:1.6;margin-top:14px;max-width:100%;align-self:start}
+/* 공통 .design-portfolio 확대 이미지의 absolute 규칙을 이 구역에서 해제합니다. */
+#illustration-work .media.illustration-art{display:block;min-width:0;width:100%;margin:0}
+#illustration-work .media.illustration-art .zoom-trigger{position:relative;display:block;width:100%;height:auto;max-height:none;padding:0;border:0;overflow:hidden;background:transparent;line-height:0}
+#illustration-work .media.illustration-art .zoom-trigger img{position:static;inset:auto;display:block;transform:none;width:100%;height:auto;max-width:100%;max-height:none;object-fit:contain;object-position:center}
+#illustration-work .illustration-art figcaption{display:flex;justify-content:flex-end;gap:8px;font-size:10px;line-height:1.6;color:var(--green);margin-top:7px}
+#illustration-work .illustration-calendar{margin-top:48px;padding-top:30px;border-top:1px solid var(--line)}
+#illustration-work .illustration-calendar>header{margin-bottom:20px}
+#illustration-work .illustration-wide-detail{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+#illustration-work .illustration-wide-detail .illustration-description{max-width:750px}
+#illustration-work .illustration-wide-detail .illustration-source{flex:0 0 auto}
+#illustration-work .illustration-series{margin-top:48px;padding-top:30px;border-top:1px solid var(--line)}
+#illustration-work .illustration-group-heading{margin-bottom:26px}
+#illustration-work .illustration-group-heading .eyebrow{margin-bottom:8px}
+#illustration-work .illustration-group-heading h3{font-size:25px}
+#illustration-work .illustration-grid{display:grid;align-items:start;gap:32px}
+#illustration-work .illustration-grid--series{grid-template-columns:repeat(3,minmax(0,1fr))}
+#illustration-work .illustration-grid--series .media.illustration-art .zoom-trigger{aspect-ratio:4/5;background:#090909}
+#illustration-work .illustration-grid--series .media.illustration-art .zoom-trigger img{height:100%;object-fit:contain}
+#illustration-work .illustration-grid--pair{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:48px;padding-top:30px;border-top:1px solid var(--line);gap:36px}
+#illustration-work .illustration-card>header{margin-bottom:17px}
+#illustration-work .illustration-card h3{font-size:20px}
+#illustration-work .illustration-card .illustration-description{font-size:13px}
+#illustration-work .illustration-publication{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:42px;align-items:center;margin-top:48px;padding-top:32px;border-top:1px solid var(--line)}
+#illustration-work .illustration-publication .eyebrow{margin-bottom:12px}
+#illustration-work .illustration-publication h3{font-size:25px}
+#illustration-work .illustration-related-links{display:flex;align-items:center;gap:16px 28px;flex-wrap:wrap;margin-top:32px;padding-top:24px;border-top:1px solid var(--line)}
+#illustration-work .illustration-related-links .text-link{min-height:44px;font-size:13px;max-width:100%}
+@media(max-width:900px){
+ #illustration-work .illustration-feature{gap:28px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ #illustration-work .illustration-grid--series{gap:22px}
+ #illustration-work .illustration-publication{gap:28px}
+ #illustration-work .illustration-wide-detail{flex-wrap:wrap;gap:0}
+ #illustration-work .illustration-wide-detail .illustration-source{margin-top:8px}
+}
+@media(max-width:640px){
+ #illustration-work.illustration-portfolio{padding-top:40px;margin-top:38px}
+ #illustration-work .illustration-heading{margin-bottom:24px}
+ #illustration-work .illustration-headline{font-size:16px;line-height:1.8}
+ #illustration-work .illustration-feature{grid-template-columns:1fr;gap:22px}
+ #illustration-work .illustration-introduction{font-size:14px}
+ #illustration-work .illustration-feature-detail{margin-top:22px;padding-top:18px}
+ #illustration-work .illustration-feature-detail .illustration-source{margin-top:8px}
+ #illustration-work .illustration-description{font-size:13px;line-height:1.9}
+ #illustration-work .illustration-meta{font-size:11px;gap:6px 12px}
+ #illustration-work h3{font-size:22px}
+ #illustration-work :is(.illustration-grid--series,.illustration-grid--pair,.illustration-publication){grid-template-columns:1fr}
+ #illustration-work .illustration-grid{gap:34px}
+ #illustration-work .illustration-grid--series .media.illustration-art .zoom-trigger{aspect-ratio:auto}
+ #illustration-work .illustration-grid--series .media.illustration-art .zoom-trigger img{height:auto}
+ #illustration-work :is(.illustration-calendar,.illustration-series,.illustration-grid--pair,.illustration-publication){margin-top:36px;padding-top:25px}
+ #illustration-work .illustration-group-heading{margin-bottom:22px}
+ #illustration-work .illustration-group-heading h3,#illustration-work .illustration-publication h3{font-size:23px}
+ #illustration-work .illustration-card>header{margin-bottom:14px}
+ #illustration-work .illustration-card h3{font-size:21px}
+ #illustration-work .illustration-source{min-height:44px;font-size:13px}
+ #illustration-work .illustration-publication{gap:20px}
+ #illustration-work .illustration-related-links{align-items:flex-start;flex-direction:column;gap:8px;margin-top:26px}
+}
+@media print{
+ #illustration-work.illustration-portfolio{margin-top:30px;padding-top:25px}
+ #illustration-work :is(.illustration-source,.illustration-related-links,.illustration-art figcaption){display:none}
+ #illustration-work :is(.illustration-card,.illustration-publication){break-inside:avoid}
+ #illustration-work .illustration-grid--series{grid-template-columns:repeat(2,minmax(0,1fr))}
+}

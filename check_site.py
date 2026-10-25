@@ -38,7 +38,16 @@ work_ids=[work['id'] for work in json.loads((root.parent/'design-content.json').
 reader_pages={f'webtoon-{work_id}.html' for work_id in work_ids}
 assert {r['page'] for r in results} == base_pages | reader_pages
 design=(root/'design.html').read_text(encoding='utf-8')
-assert 'public-gallery' not in design and 'data-zoom' not in design
+public_section=design.split('id="public-work"',1)[1].split('id="illustration-work"',1)[0]
+assert 'public-gallery' not in public_section and 'data-zoom' not in public_section
+illustration=design.split('id="illustration-work"',1)[1].split('id="design-work"',1)[0]
+illustration_data=json.loads((root.parent/'illustration-content.json').read_text(encoding='utf-8'))
+assert illustration.count('data-zoom') == len(illustration_data['works'])+1
+for work in [*illustration_data['works'],illustration_data['publication']]:
+    assert f'src="assets/{work["file"]}"' in illustration
+    assert f'href="{work["url"]}"' in illustration
+assert 'data-public-work' not in illustration
+assert 'illustration.css?v=' in design
 for work_id in work_ids:
     filename=f'webtoon-{work_id}.html'
     assert f'href="{filename}"' in design

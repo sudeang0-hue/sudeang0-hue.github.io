@@ -150,3 +150,7 @@ TaskTown 04절은 연결 책임·공유 Scene을 피한 코드 수정·사운드
 ## 2026.10.23 채용 관점 문구·가독성 정리
 
 홈·이력서는 Unity 개발과 UI 디자인의 연결을 먼저 설명하고, 게임랩은 UI 설계·구현·자동화, TaskTown은 팀 기능 통합·협업을 강조합니다. 공공기관 제작 및 굿즈 사례는 실제 제작·적용 경험으로 연결합니다. 문구·검수·되돌리기 안내는 [PORTFOLIO-COPY-EDITING.md](PORTFOLIO-COPY-EDITING.md)를 참고합니다.
+
+## 개인 일러스트 포트폴리오
+
+`design.html#illustration-work`에서 완성 원화 7점·달력 참여·작품집 수록 사진과 Instagram 원문을 볼 수 있습니다. 내용과 이미지 교체는 [ILLUSTRATION-EDITING.md](ILLUSTRATION-EDITING.md)를 참고하세요.
