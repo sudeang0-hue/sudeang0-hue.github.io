@@ -1,3 +1,4 @@
+import { renderGraphicDesignPortfolio } from './graphic-design.mjs';
 import { renderIllustrationPortfolio } from './illustration.mjs';
 import { checkedAssetPath } from './security.mjs';
 import { publicReaderPath } from './public-reader.mjs';
@@ -9,7 +10,7 @@ export const designSections = [
 ];
 
 // 작품 데이터와 화면 구성을 분리해 공식 링크·집계 근거를 함께 관리합니다.
-export function renderDesignPortfolio(data, {escapeHtml: esc, ext, illustration}) {
+export function renderDesignPortfolio(data, {escapeHtml: esc, ext, illustration, graphicDesign}) {
   if (!Array.isArray(data.works) || !data.works.length) throw new Error('공공기관 작품 목록이 필요합니다.');
   if (new Set(data.works.map(work => work.id)).size !== data.works.length) throw new Error('작품 ID가 중복됐습니다.');
   const paragraphs = texts => texts.map(text => '<p>'+esc(text)+'</p>').join('');
@@ -37,6 +38,6 @@ export function renderDesignPortfolio(data, {escapeHtml: esc, ext, illustration}
     '<section class="public-process" aria-labelledby="public-role-title"><div><span class="eyebrow">MY CONTRIBUTION</span><h2 id="public-role-title">내용 조사·작화·수정을 직접 맡았습니다.</h2></div><div class="public-process-steps">'+data.process.map((step,i) => '<article><span class="num">0'+(i+1)+'</span><h3>'+esc(step.title)+'</h3><p>'+esc(step.text)+'</p></article>').join('')+'</div></section>'+
     '<section class="public-works" aria-labelledby="public-works-title"><div class="section-line"><span id="public-works-title">SELECTED WORK / 작품과 활용 기록</span><span>2022 — 2023</span></div><p class="public-collection-note">'+esc(data.collectionNote)+'</p><div class="public-work-filters" role="group" aria-label="제작 연도 선택" data-public-filters hidden><button type="button" data-public-filter="all" aria-pressed="true">전체</button><button type="button" data-public-filter="2023" aria-pressed="false">2023</button><button type="button" data-public-filter="2022" aria-pressed="false">2022</button><span data-public-result aria-live="polite"></span></div><div class="public-work-grid">'+data.works.map(card).join('')+'</div></section></section>'+
     renderIllustrationPortfolio(illustration,{escapeHtml:esc,ext})+
-    '<section id="design-work" class="design-section design-next" aria-labelledby="design-title"><span class="eyebrow">03 / DESIGN</span><h2 id="design-title">디자인 작업</h2><p>게임의 화면 흐름을 설계하고, 실제 에셋과 정보 가독성에 맞춰 UI를 다듬었습니다.</p><a class="text-link" href="gamelab.html#redesign">게임 UI 디자인 사례 보기 ↗</a></section>'+
+    renderGraphicDesignPortfolio(graphicDesign,{escapeHtml:esc})+
     '<div class="category-return"><a class="text-link" href="#public-work">공공기관 작업 처음으로 ↑</a><a class="text-link" href="history.html">활동·경력 연혁 보기 ↗</a></div></div>';
 }

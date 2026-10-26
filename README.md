@@ -154,3 +154,7 @@ TaskTown 04절은 연결 책임·공유 Scene을 피한 코드 수정·사운드
 ## 개인 일러스트 포트폴리오
 
 `design.html#illustration-work`에서 완성 원화 7점·달력 참여·작품집 수록 사진과 Instagram 원문을 볼 수 있습니다. 내용과 이미지 교체는 [ILLUSTRATION-EDITING.md](ILLUSTRATION-EDITING.md)를 참고하세요.
+
+## 개인 디자인 포트폴리오
+
+디자인 및 홍보의 ‘디자인 작업’에 Cashplaner, We,co, imagination, 휴가, Fun Question의 개인 콘셉트 사례를 구성했습니다. 설명과 재단 이미지 편집은 [GRAPHIC-DESIGN-EDITING.md](GRAPHIC-DESIGN-EDITING.md)를 참고하세요.

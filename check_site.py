@@ -48,6 +48,20 @@ for work in [*illustration_data['works'],illustration_data['publication']]:
     assert f'href="{work["url"]}"' in illustration
 assert 'data-public-work' not in illustration
 assert 'illustration.css?v=' in design
+
+graphic=design.split('id="design-work"',1)[1].split('<div class="category-return">',1)[0]
+graphic_data=json.loads((root.parent/'graphic-design-content.json').read_text(encoding='utf-8'))
+assert len(graphic_data['works']) == 5
+assert graphic.count('data-zoom') == sum(len(work['images']) for work in graphic_data['works'])
+for work in graphic_data['works']:
+    assert f'id="graphic-{work["id"]}"' in graphic
+    assert f'href="#graphic-{work["id"]}"' in graphic
+    for picture in work['images']:
+        assert f'src="assets/{picture["file"]}"' in graphic
+assert 'data-public-work' not in graphic and 'data-public-filter' not in graphic
+assert 'graphic-design.css?v=' in design
+assert '개인 콘셉트 작업' in graphic
+
 for work_id in work_ids:
     filename=f'webtoon-{work_id}.html'
     assert f'href="{filename}"' in design
