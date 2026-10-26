@@ -23,14 +23,14 @@
       ],
       "images": [
         {
-          "file": "design-cashplaner-start.webp",
-          "alt": "Cashplaner 로고와 청록·민트색 시작 화면을 적용한 휴대폰 목업",
-          "caption": "시작 화면 · 휴대폰 목업"
-        },
-        {
           "file": "design-cashplaner-screens.webp",
           "alt": "오늘의 소비와 지출 그래프를 배치한 메인 화면, 시작 화면, 로그인 화면 디자인",
           "caption": "메인 · 시작 · 로그인 화면"
+        },
+        {
+          "file": "design-cashplaner-start.webp",
+          "alt": "Cashplaner 로고와 청록·민트색 시작 화면을 적용한 휴대폰 목업",
+          "caption": "시작 화면 · 휴대폰 목업"
         }
       ],
       "sourcePages": [
@@ -60,14 +60,14 @@
       ],
       "images": [
         {
-          "file": "design-weco-sign.webp",
-          "alt": "We,co 로고를 건물 외벽 간판에 적용한 목업",
-          "caption": "간판 적용 목업"
-        },
-        {
           "file": "design-weco-paper.webp",
           "alt": "여러 색의 심벌과 유연한 글자 형태를 종이 질감 위에 표현한 We,co 로고 목업",
           "caption": "컬러 로고 · 종이 질감 목업"
+        },
+        {
+          "file": "design-weco-sign.webp",
+          "alt": "We,co 로고를 건물 외벽 간판에 적용한 목업",
+          "caption": "간판 적용 목업"
         },
         {
           "file": "design-weco-window.webp",
