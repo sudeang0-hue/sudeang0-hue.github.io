@@ -2,7 +2,7 @@
 .tasktown-intro {
   position: relative;
   isolation: isolate;
-  padding: 47px 0 12px;
+  padding: 36px 0 8px;
 }
 .tasktown-background {
   position: absolute;
@@ -19,7 +19,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgb(0 0 0 / 40%);
+  background: var(--project-scrim);
 }
 .tasktown-background-poster,
 .tasktown-background-video {
@@ -49,7 +49,7 @@
 .tasktown-intro-copy a:hover { color: #d5f4dd; }
 .tasktown-intro-details {
   position: relative;
-  padding-top: 56px;
+  padding-top: 32px;
 }
 /* 설명 뒤부터 옅게 시작하여 정보 영역까지 긴 구간에 걸쳐 테마색으로 이어집니다. */
 .tasktown-intro-details::before {
@@ -88,7 +88,9 @@
 }
 .tasktown-background-toggle[hidden] { display: none; }
 @media (max-width: 640px) {
-  .tasktown-intro { padding-top: 31px; }
+  .tasktown-intro { padding-top: 26px; }
+  .tasktown-intro-details { padding-top: 24px; }
+  .tasktown-intro-copy .project-intro { margin-top: 18px; }
   .tasktown-intro-copy .breadcrumb { padding-right: 52px; }
   .tasktown-background-toggle { top: -13px; }
 }

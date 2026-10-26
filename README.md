@@ -8,6 +8,8 @@
 
 수정·자동 배포·되돌리기 방법은 [DEPLOYMENT.md](DEPLOYMENT.md)를 참고합니다.
 
+2026.10.26 Hallmark 디자인 개선의 범위·편집 위치·검수 제한은 [HALLMARK-POLISH.md](HALLMARK-POLISH.md)에 정리했습니다.
+
 ## 페이지
 
 - `dist/index.html`: 게임개발 소개와 대표 프로젝트

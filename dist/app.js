@@ -98,6 +98,17 @@ if(sectionNavigation){
  const sections=[...sectionNavigation.querySelectorAll('a[href^="#"]')].map(link=>({link,section:document.getElementById(link.hash.slice(1))})).filter(item=>item.section);
  let headerHeight=0;
  let selectionFrame=null;
+ let lastSelected=null;
+ const horizontalMenu=sectionNavigation.classList.contains('goods-subnav')?sectionNavigation.querySelector('nav'):null;
+ // 메뉴의 가로 위치만 바꾸어 본문 스크롤과 키보드 초점을 유지합니다.
+ function revealMenuItem(link){
+  if(!horizontalMenu||!link||horizontalMenu.scrollWidth<=horizontalMenu.clientWidth)return;
+  const menuRect=horizontalMenu.getBoundingClientRect();
+  const itemRect=link.getBoundingClientRect();
+  const delta=itemRect.left<menuRect.left+6?itemRect.left-menuRect.left-6:itemRect.right>menuRect.right-6?itemRect.right-menuRect.right+6:0;
+  if(delta)horizontalMenu.scrollTo({left:horizontalMenu.scrollLeft+delta,behavior:'instant'});
+ }
+ horizontalMenu?.addEventListener('focusin',event=>revealMenuItem(event.target.closest('a')));
  function updateSectionSelection(){
   selectionFrame=null;
   // 고정 메뉴 바로 아래의 읽기 기준선을 통과한 마지막 항목을 표시합니다.
@@ -112,11 +123,16 @@ if(sectionNavigation){
    if(link===current)link.setAttribute('aria-current','location');
    else link.removeAttribute('aria-current');
   }
+  if(current!==lastSelected){
+   if(!horizontalMenu?.contains(document.activeElement)||!document.activeElement.matches(':focus-visible'))revealMenuItem(current);
+   lastSelected=current;
+  }
  }
  function scheduleSectionSelection(){
   if(selectionFrame===null)selectionFrame=requestAnimationFrame(updateSectionSelection);
  }
  function measureSectionHeader(){
+  lastSelected=null;
   headerHeight=Math.ceil(header?.getBoundingClientRect().height||0);
   document.documentElement.style.setProperty('--section-header-height',`${headerHeight}px`);
   document.documentElement.style.setProperty('--goods-header-height',`${headerHeight}px`);
@@ -131,3 +147,18 @@ if(sectionNavigation){
  window.addEventListener('pageshow',scheduleSectionSelection);
  document.fonts?.ready.then(scheduleSectionSelection);
 }
+
+
+// 인쇄에서는 접어 둔 제작 과정도 포함하고, 인쇄창을 닫으면 원래 상태로 복원합니다.
+const printDisclosures=[...document.querySelectorAll('.public-process-disclosure')];
+let printDisclosureStates=null;
+window.addEventListener('beforeprint',()=>{
+ if(printDisclosureStates)return;
+ printDisclosureStates=printDisclosures.map(detail=>detail.open);
+ printDisclosures.forEach(detail=>{detail.open=true});
+});
+window.addEventListener('afterprint',()=>{
+ if(!printDisclosureStates)return;
+ printDisclosures.forEach((detail,index)=>{detail.open=printDisclosureStates[index]});
+ printDisclosureStates=null;
+});
