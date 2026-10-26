@@ -181,7 +181,7 @@ fs.writeFileSync(path.join(out,'resume.html'),shell('resume.html','이력서','�
 const designData=JSON.parse(fs.readFileSync(new URL('./design-content.json',import.meta.url),'utf8'));
 const illustrationData=JSON.parse(fs.readFileSync(new URL('./illustration-content.json',import.meta.url),'utf8'));
 const graphicDesignData=JSON.parse(fs.readFileSync(new URL('./graphic-design-content.json',import.meta.url),'utf8'));
-const designBody=renderDesignPortfolio(designData,{escapeHtml,ext,zoom,illustration:illustrationData,graphicDesign:graphicDesignData})+'<script src="'+assetURL('design-portfolio.js')+'" defer></script>';
+const designBody=renderDesignPortfolio(designData,{escapeHtml,ext,zoom,illustration:illustrationData,graphicDesign:graphicDesignData})+'<script src="'+assetURL('design-portfolio.js')+'" defer></script><script src="'+assetURL('goods-slider.js')+'" defer></script>';
 fs.writeFileSync(path.join(out,'design.html'),shell('design.html','디자인 및 홍보','공공기관 웹툰·일러스트와 앱 UI, 브랜드·편집·패키지 디자인 포트폴리오. 작업 의도와 화면·지면 구성, 적용 목업을 함께 소개합니다.',designBody));
 const readerWorks=JSON.parse(fs.readFileSync(new URL('./webtoon-content.json',import.meta.url),'utf8')).works;
 if(readerWorks.length!==designData.works.length||new Set(readerWorks.map(work=>work.id)).size!==readerWorks.length)throw new Error('모든 작품의 읽기 자료를 확인하세요.');

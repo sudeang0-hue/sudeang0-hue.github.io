@@ -158,3 +158,8 @@ TaskTown 04절은 연결 책임·공유 Scene을 피한 코드 수정·사운드
 ## 개인 디자인 포트폴리오
 
 디자인 및 홍보의 ‘디자인 작업’에 Cashplaner, We,co, imagination, 휴가, Fun Question의 개인 콘셉트 사례를 구성했습니다. 설명과 재단 이미지 편집은 [GRAPHIC-DESIGN-EDITING.md](GRAPHIC-DESIGN-EDITING.md)를 참고하세요.
+
+
+### 디자인 이미지 슬라이드 (2026.10.26)
+
+디자인 작업의 5개 사례는 작품별 수동 슬라이드로 이미지와 목업을 표시합니다. 모바일도 한 장씩 버튼·가로 드래그로 전환하며, 굿즈의 기존 순환 스크립트를 공유합니다. Cashplaner의 게임 UI 연결과 색상·로고 이미지는 화면에서 제외했습니다. 수정 위치는 `GRAPHIC-DESIGN-EDITING.md`를 참고합니다.

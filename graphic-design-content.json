@@ -31,17 +31,8 @@
           "file": "design-cashplaner-screens.webp",
           "alt": "오늘의 소비와 지출 그래프를 배치한 메인 화면, 시작 화면, 로그인 화면 디자인",
           "caption": "메인 · 시작 · 로그인 화면"
-        },
-        {
-          "file": "design-cashplaner-identity.webp",
-          "alt": "Cashplaner의 청록·민트·노랑·주황 색상과 로고",
-          "caption": "색상과 로고"
         }
       ],
-      "related": {
-        "href": "gamelab.html#flow",
-        "label": "게임 UI 흐름 설계·구현 사례"
-      },
       "sourcePages": [
         32,
         33,

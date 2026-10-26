@@ -10,21 +10,28 @@ export function renderGraphicDesignPortfolio(data, { escapeHtml: esc }) {
     throw new Error('디자인 작품 ID는 중복되지 않는 영문·숫자·하이픈이어야 합니다.');
   }
 
-  const photo = (image, work, featured = false, wide = false) => {
+  const photo = (image, work, index, copy = false) => {
     const caption = image.caption || image.alt || work.title;
-    return '<figure class="media graphic-art' + (featured ? ' graphic-art--featured' : '') + (wide ? ' graphic-art--wide' : '') + '">' +
+    return '<figure class="media graphic-art goods-slide" data-goods-source="' + index + '"' + (copy ? ' data-goods-copy hidden' : '') + '>' +
       '<button class="zoom-trigger" type="button" data-zoom data-caption="' + esc(work.title + ' · ' + caption) + '" aria-label="' + esc(caption + ' 크게 보기') + '">' +
       '<img src="assets/' + checkedAssetPath(image.file) + '" alt="' + esc(image.alt || caption) + '" loading="lazy" decoding="async">' +
       '</button><figcaption><span>' + esc(image.caption || '') + '</span><span class="graphic-zoom-hint" aria-hidden="true">확대 ↗</span></figcaption></figure>';
   };
 
-  const relatedLink = related => {
-    if (!related) return '';
-    // 작업 사례 연결은 이 사이트 안의 HTML·앵커 주소만 허용합니다.
-    if (!/^[a-z0-9-]+\.html(?:#[a-z0-9-]+)?$/i.test(related.href || '')) {
-      throw new Error('디자인 관련 사례 링크는 사이트 내부 HTML 주소여야 합니다.');
-    }
-    return '<div class="graphic-related"><a class="text-link" href="' + esc(related.href) + '">' + esc(related.label) + ' <span aria-hidden="true">↗</span></a></div>';
+  // 굿즈에서 검증한 순환·드래그 로직을 같은 마크업으로 재사용합니다.
+  const slider = work => {
+    const images = work.images;
+    const copies = images.length > 1;
+    const slides = (copies ? photo(images.at(-1), work, images.length - 1, true) : '') +
+      images.map((image, index) => photo(image, work, index)).join('') +
+      (copies ? photo(images[0], work, 0, true) : '');
+    const label = work.title + ' 이미지';
+    return '<section class="goods-slider graphic-slider" data-goods-slider data-interval="0" role="region" aria-roledescription="슬라이드" aria-label="' + esc(label) + '">' +
+      '<div class="goods-slider-controls" hidden><span class="goods-slider-count" data-slide-count aria-hidden="true">1 / ' + images.length + '</span>' +
+      '<div class="goods-slider-buttons"><button type="button" data-slide-prev aria-label="' + esc(label + ' 이전 사진') + '">←</button>' +
+      '<button type="button" data-slide-next aria-label="' + esc(label + ' 다음 사진') + '">→</button></div></div>' +
+      '<div class="goods-slider-window" tabindex="0" aria-label="' + esc(label + ' · 좌우 방향키로 이동') + '"><div class="goods-slider-track">' + slides + '</div></div>' +
+      '<p class="sr-only" data-slide-status role="status" aria-live="polite" aria-atomic="true"></p></section>';
   };
 
   const metadata = work => {
@@ -37,15 +44,13 @@ export function renderGraphicDesignPortfolio(data, { escapeHtml: esc }) {
     if (!Array.isArray(work.images) || !work.images.length) {
       throw new Error('대표 이미지가 없는 디자인 작품입니다: ' + work.id);
     }
-    const extraImages = work.images.slice(1);
     const decisions = Array.isArray(work.decisions) ? work.decisions : [];
     return '<article class="graphic-project" id="graphic-' + work.id + '" aria-labelledby="graphic-' + work.id + '-title">' +
       '<header class="graphic-project-heading"><span class="graphic-project-number" aria-hidden="true">' + String(index + 1).padStart(2, '0') + '</span><div>' +
       '<p class="graphic-category">' + esc(work.category) + '</p><h3 id="graphic-' + work.id + '-title">' + esc(work.title) + '</h3></div></header>' +
       '<div class="graphic-feature"><div class="graphic-project-copy"><p class="graphic-summary">' + esc(work.summary) + '</p>' + metadata(work) +
       (decisions.length ? '<div class="graphic-decisions">' + decisions.map(decision => '<section><h4>' + esc(decision.title) + '</h4><p>' + esc(decision.text) + '</p></section>').join('') + '</div>' : '') +
-      relatedLink(work.related) + '</div>' + photo(work.images[0], work, true) + '</div>' +
-      (extraImages.length ? '<div class="graphic-gallery" aria-label="' + esc(work.title + ' 세부 이미지') + '">' + extraImages.map((image, imageIndex) => photo(image, work, false, extraImages.length % 2 === 1 && imageIndex === extraImages.length - 1)).join('') + '</div>' : '') +
+      '</div>' + slider(work) + '</div>' +
       '</article>';
   };
 

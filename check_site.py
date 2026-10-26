@@ -52,7 +52,12 @@ assert 'illustration.css?v=' in design
 graphic=design.split('id="design-work"',1)[1].split('<div class="category-return">',1)[0]
 graphic_data=json.loads((root.parent/'graphic-design-content.json').read_text(encoding='utf-8'))
 assert len(graphic_data['works']) == 5
-assert graphic.count('data-zoom') == sum(len(work['images']) for work in graphic_data['works'])
+assert graphic.count('data-zoom') == sum(len(work['images']) + (2 if len(work['images']) > 1 else 0) for work in graphic_data['works'])
+assert graphic.count('data-goods-slider') == len(graphic_data['works'])
+assert graphic.count('data-goods-copy') == 2 * sum(len(work['images']) > 1 for work in graphic_data['works'])
+assert 'graphic-gallery' not in graphic and 'graphic-related' not in graphic
+assert 'design-cashplaner-identity.webp' not in graphic
+assert 'goods-slider.js?v=' in design
 for work in graphic_data['works']:
     assert f'id="graphic-{work["id"]}"' in graphic
     assert f'href="#graphic-{work["id"]}"' in graphic
