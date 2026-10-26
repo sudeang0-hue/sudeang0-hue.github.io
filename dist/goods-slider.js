@@ -30,6 +30,8 @@ document.querySelectorAll('[data-goods-slider]').forEach(root => {
   let resizeFrame = 0;
   let wantsAuto = interval > 0 && !reducedMotion.matches;
   let inView = false;
+  let imagesActivated = false;
+  let imageObserver = null;
   let hovered = false;
   let pageActive = true;
   let timer = 0;
@@ -50,6 +52,25 @@ document.querySelectorAll('[data-goods-slider]').forEach(root => {
     timer = setTimeout(() => move(1, false), interval);
   }
 
+  // 긴 디자인 페이지의 화면 밖 원본은 lazy로 두고, 가까이 왔을 때 이웃 사진을 준비합니다.
+  function prepareImages() {
+    if (!imagesActivated) return;
+    slides.forEach((slide, i) => {
+      const source = Number(slide.dataset.goodsSource);
+      if (Math.abs(i - position) <= 1 || source === wrap(index + 1) || source === wrap(index - 1)) {
+        const image = slide.querySelector('img');
+        if (image) image.loading = 'eager';
+      }
+    });
+  }
+
+  function activateImages() {
+    if (imagesActivated) return;
+    imagesActivated = true;
+    imageObserver?.disconnect();
+    prepareImages();
+  }
+
   function render(announce = false, instant = false) {
     const focused = slides.find(slide => slide.contains(document.activeElement));
     root.dataset.slideIndex = String(index);
@@ -66,11 +87,8 @@ document.querySelectorAll('[data-goods-slider]').forEach(root => {
       slide.setAttribute('role', 'group');
       slide.setAttribute('aria-roledescription', '사진');
       slide.setAttribute('aria-label', `${source + 1} / ${length}`);
-      if (Math.abs(i - position) <= 1 || source === wrap(index + 1) || source === wrap(index - 1)) {
-        const image = slide.querySelector('img');
-        if (image) image.loading = 'eager';
-      }
     });
+    prepareImages();
     if (focused?.inert) {
       const equivalent = slides.find(slide => !slide.inert && slide.dataset.goodsSource === focused.dataset.goodsSource);
       (equivalent?.querySelector('button') ?? viewport).focus({preventScroll: true});
@@ -118,6 +136,7 @@ document.querySelectorAll('[data-goods-slider]').forEach(root => {
   }
 
   function move(direction, manual = true) {
+    if (manual) activateImages();
     pendingSteps += direction;
     announcePending ||= manual;
     pump();
@@ -126,6 +145,7 @@ document.querySelectorAll('[data-goods-slider]').forEach(root => {
   }
 
   function jump(value, announce = true) {
+    if (announce) activateImages();
     generation++;
     clearFinish();
     moving = false;
@@ -224,11 +244,18 @@ document.querySelectorAll('[data-goods-slider]').forEach(root => {
     jump(index + pendingSteps, false);
   });
   if ('IntersectionObserver' in window) {
+    imageObserver = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) activateImages();
+    }, {rootMargin: '400px 0px'});
+    imageObserver.observe(viewport);
     new IntersectionObserver(entries => {
       inView = entries[0].isIntersecting;
       syncAuto();
     }, {threshold: .2}).observe(root);
-  } else inView = true;
+  } else {
+    inView = true;
+    activateImages();
+  }
   controls.hidden = false;
   root.dataset.ready = '';
   jump(0, false);

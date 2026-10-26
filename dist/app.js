@@ -7,7 +7,19 @@ if(dialog){
  dialog.querySelector('.modal-close').addEventListener('click',()=>dialog.close());
  dialog.querySelector('[data-original]').addEventListener('click',event=>{const original=dialog.classList.toggle('is-original');event.currentTarget.textContent=original?'화면에 맞추기':'원본 크기';event.currentTarget.setAttribute('aria-pressed',String(original));});
  dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
- dialog.addEventListener('close',()=>imageOpener?.focus());
+ // 확대 중 화면 폭이 바뀌면 가려진 순환 복사본 대신 현재 사진으로 초점을 돌립니다.
+ dialog.addEventListener('close',()=>{
+  const available=element=>element?.isConnected&&!element.closest('[inert],[hidden],[aria-hidden="true"]')&&element.getClientRects().length>0;
+  let target=imageOpener;
+  if(!available(target)){
+   const viewport=imageOpener?.closest('[data-comparison-viewport], .goods-slider-window');
+   const buttons=viewport?[...viewport.querySelectorAll('[data-zoom]')].filter(available):[];
+   const source=imageOpener?.querySelector('img')?.getAttribute('src');
+   target=buttons.find(button=>button.querySelector('img')?.getAttribute('src')===source)||buttons[0]||viewport;
+  }
+  if(available(target))target.focus({preventScroll:true});
+  imageOpener=null;
+ });
 }
 document.querySelector('[data-print]')?.addEventListener('click',()=>window.print());
 function showStatus(message,ms=2500){document.querySelector('.toast')?.remove();const note=document.createElement('div');note.className='toast';note.setAttribute('role','status');note.textContent=message;document.body.append(note);setTimeout(()=>note.remove(),ms)}
@@ -42,7 +54,8 @@ if(caseNavigation){
   setCaseMenu(false);
   caseNavigation.addEventListener('pointerenter',event=>{
    clearTimeout(closeTimer);
-   if(event.pointerType!=='touch'&&hoverPointer.matches&&!suppressHover)setCaseMenu(true);
+   // 목차 버튼으로 직접 들어온 경우에는 click이 열림 상태를 결정합니다.
+   if(event.pointerType!=='touch'&&hoverPointer.matches&&!suppressHover&&!toggle.matches(':hover'))setCaseMenu(true);
   });
   caseNavigation.addEventListener('pointerleave',event=>{
    suppressHover=false;
