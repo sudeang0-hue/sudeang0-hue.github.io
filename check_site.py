@@ -116,7 +116,7 @@ assert 'data-history-select="education" aria-controls="education" aria-pressed="
 assert 'href="history.html" aria-current="page"' in history
 assert '게임개발 세부 메뉴' not in history
 
-assert 'src="history-carousel.js"' in history
+assert re.search(r'src="history-carousel\.js\?v=[0-9a-f]{12}"', history), 'History script needs a cache version'
 assert history.count('data-history-select=') == 3
 assert 'data-history-carousel' in history and 'class="history-track"' in history
 assert 'history-side' not in history

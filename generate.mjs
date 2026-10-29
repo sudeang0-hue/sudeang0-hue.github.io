@@ -234,7 +234,7 @@ const goodsEvents='<section class="goods-events" id="goods-events" aria-labelled
 const goodsEnd='<div class="category-return goods-return"><a class="text-link" href="history.html#activities">활동 연혁 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="design.html">디자인 및 홍보 보기 <span aria-hidden="true">↗</span></a><a class="text-link goods-back-top" href="#goods-top" data-goods-top>맨 위로 <span aria-hidden="true">↑</span></a></div></div><script src="'+assetURL('goods-slider.js')+'" defer></script>';
 fs.writeFileSync(path.join(out,'planning.html'),withGoodsBackground(shell('planning.html',goods.title,'봉래제와 온리전 참가 경험. 본인 일러스트·팀원 시안 피드백, 굿즈 제작·현장 판매와 온라인 판매·발송 과정.',goodsHeader+goodsCases+goodsEvents+goodsEnd),assetURL));
 const history=JSON.parse(fs.readFileSync(new URL('./history-content.json',import.meta.url),'utf8'));
-fs.writeFileSync(path.join(out,'history.html'),shell('history.html',history.title,'최희수의 교육 및 자격·활동·근무 연혁. 게임 개발 교육과 협업 프로젝트, 콘텐츠 제작과 매장 운영 경험을 정리합니다.',renderHistory(history)));
+fs.writeFileSync(path.join(out,'history.html'),shell('history.html',history.title,'최희수의 교육 및 자격·활동·근무 연혁. 게임 개발 교육과 협업 프로젝트, 콘텐츠 제작과 매장 운영 경험을 정리합니다.',renderHistory(history,assetURL)));
 console.log((8+readerWorks.length)+' pages generated.');
 
 
