@@ -166,9 +166,11 @@
     const fast = distance > 24 && distance / Math.max(1, performance.now() - gesture.time) > .4;
     animate(!cancelled && (distance >= Math.max(48, step() * .18) || fast));
   }
-  viewport.addEventListener('pointerup', event => release(event));
-  viewport.addEventListener('pointercancel', event => release(event, true));
+  // 드래그 판정 전에 영역을 벗어나도 누름 상태를 반드시 해제합니다.
+  window.addEventListener('pointerup', event => release(event));
+  window.addEventListener('pointercancel', event => release(event, true));
   viewport.addEventListener('lostpointercapture', event => release(event, true));
+  window.addEventListener('blur', () => { if (pointer) release({pointerId: pointer.id}, true); });
   viewport.addEventListener('dragstart', event => event.preventDefault());
   viewport.addEventListener('click', event => {
     if (performance.now() < suppressClickUntil) { event.preventDefault(); event.stopPropagation(); }

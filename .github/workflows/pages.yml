@@ -39,6 +39,7 @@ jobs:
           node --check dist/home.js
           node generate.mjs
           node check_home.mjs
+          node check_history.mjs
           node check_private_resume.mjs
           node check_security.mjs
           python check_site.py
