@@ -33,10 +33,38 @@ for file in sorted(root.glob('*.html')):
 print(json.dumps(results,ensure_ascii=False,indent=2))
 (Path(__file__).parent/'qa').mkdir(exist_ok=True)
 (Path(__file__).parent/'qa'/'static-checks.json').write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding='utf-8')
-base_pages={'index.html','gamelab.html','tasktown.html','resume.html','planning.html','design.html','history.html'}
+base_pages={'index.html','development.html','gamelab.html','tasktown.html','resume.html','planning.html','design.html','history.html'}
 work_ids=[work['id'] for work in json.loads((root.parent/'design-content.json').read_text(encoding='utf-8'))['works']]
 reader_pages={f'webtoon-{work_id}.html' for work_id in work_ids}
 assert {r['page'] for r in results} == base_pages | reader_pages
+
+# 제출된 홈페이지 주소와 기존 앵커를 유지하고, 게임 개발 목록을 별도 경로로 연결합니다.
+homepage=(root/'index.html').read_text(encoding='utf-8')
+development=(root/'development.html').read_text(encoding='utf-8')
+home_doc=Doc(); home_doc.feed(homepage)
+assert {'main','related-practice-title'} <= set(home_doc.ids), 'Existing homepage anchors must remain available'
+assert '<body class="home-page">' in homepage
+assert 'home.css?v=' in homepage and 'home.js?v=' in homepage
+assert 'href="index.html" aria-current="page"' in homepage
+assert '게임개발 세부 메뉴' not in homepage
+assert 'href="development.html" aria-current="page"' in development
+assert 'aria-label="게임개발 세부 메뉴"' in development
+assert '화면을 설계하고 게임으로 구현합니다.' in development
+for destination in ('development.html','design.html','planning.html'):
+    assert f'href="{destination}"' in homepage, f'Missing homepage destination: {destination}'
+for destination in ('gamelab.html','tasktown.html','resume.html'):
+    assert f'href="{destination}"' in development, f'Missing development destination: {destination}'
+    detail=(root/destination).read_text(encoding='utf-8')
+    assert 'href="development.html" aria-current="page"' in detail
+    if destination!='resume.html':
+        assert '<p class="breadcrumb"><a href="development.html">프로젝트</a>' in detail
+for file in sorted(root.glob('*.html')):
+    raw=file.read_text(encoding='utf-8')
+    menu=raw.split('<nav aria-label="주요 메뉴">',1)[1].split('</nav>',1)[0]
+    assert 'href="index.html"' in menu and 'href="development.html"' in menu, f'Missing home/development navigation: {file.name}'
+    if file.name!='index.html':
+        assert 'home.css?v=' not in raw and 'home.js?v=' not in raw, f'Homepage assets leaked into {file.name}'
+
 design=(root/'design.html').read_text(encoding='utf-8')
 public_section=design.split('id="public-work"',1)[1].split('id="illustration-work"',1)[0]
 assert 'public-gallery' not in public_section and 'data-zoom' not in public_section
