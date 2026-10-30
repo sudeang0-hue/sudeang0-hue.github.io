@@ -1,11 +1,12 @@
 [data-gamelab-background-page] .page-head { padding-top: 0; }
 .gamelab-intro {
-  --gamelab-stage-height: clamp(220px, 42vw, 620px);
+  --gamelab-stage-height: clamp(96px, calc(100svh - 550px), 340px);
   position: relative;
   isolation: isolate;
   padding: 0;
 }
 .gamelab-intro-stage { position: relative; height: var(--gamelab-stage-height); }
+.gamelab-intro-stage-controls { position: relative; }
 .gamelab-background {
   position: absolute;
   top: 0;
@@ -51,7 +52,6 @@
   padding-top: 28px;
   padding-bottom: 64px;
 }
-.gamelab-intro-copy .breadcrumb,
 .gamelab-intro-copy .subtitle,
 .gamelab-intro-copy .project-intro { color: #f1f4ef; }
 .gamelab-intro-copy .eyebrow { color: #c3e5cd; }
@@ -89,11 +89,21 @@
   line-height: 1;
 }
 .gamelab-background-toggle[hidden] { display: none; }
+@media (max-width: 760px) {
+  /* 작은 화면에서는 영상 아래로 테마색이 이어지고 모든 소개 문구는 그 아래에 놓입니다. */
+  .gamelab-intro-stage,
+  .gamelab-background { height: auto; aspect-ratio: 16 / 9; }
+  .gamelab-background { bottom: auto; background: var(--paper); }
+  .gamelab-background::after { background: linear-gradient(to bottom, transparent calc(100% - 64px), var(--paper) 100%); }
+  .gamelab-intro-copy { padding-top: 22px; padding-bottom: 24px; color: var(--ink); text-shadow: none; }
+  .gamelab-intro-copy .subtitle,
+  .gamelab-intro-copy .project-intro { color: var(--muted); }
+  .gamelab-intro-copy .eyebrow { color: var(--green); }
+  .gamelab-intro-details { padding-top: 0; }
+  .gamelab-intro-details::before { display: none; }
+}
 @media (max-width: 640px) {
-  .gamelab-intro-details { padding-top: 24px; }
-  .gamelab-intro-copy { padding-top: 22px; }
   .gamelab-intro-copy .project-intro { margin-top: 18px; }
-  .gamelab-intro-copy .breadcrumb { padding-right: 52px; }
 }
 .gamelab-reveal-ready [data-gamelab-reveal] {
   transition: opacity 650ms ease, transform 700ms cubic-bezier(.2,.7,.2,1);
@@ -115,7 +125,6 @@
   .gamelab-background-toggle,
   .gamelab-intro-details::before { display: none !important; }
   .gamelab-intro-copy { color: var(--ink); text-shadow: none; }
-  .gamelab-intro-copy .breadcrumb,
   .gamelab-intro-copy .subtitle,
   .gamelab-intro-copy .project-intro { color: var(--muted); }
   .gamelab-intro-copy .eyebrow { color: var(--green); }
