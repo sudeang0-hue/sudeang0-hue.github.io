@@ -51,6 +51,7 @@
  #illustration-work .illustration-wide-detail .illustration-source{margin-top:8px}
 }
 @media(max-width:640px){
+ #illustration-work .illustration-heading h2{letter-spacing:-.02em}
  #illustration-work.illustration-portfolio{padding-top:40px;margin-top:38px}
  #illustration-work .illustration-heading{margin-bottom:24px}
  #illustration-work .illustration-headline{font-size:16px;line-height:1.8}

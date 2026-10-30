@@ -719,3 +719,10 @@ html:has(.webtoon-reader){scroll-padding-top:170px}
  .public-process-disclosure>.public-process{display:grid!important}
  #public-works-title{font-size:18px;letter-spacing:0}
 }
+
+/* 모바일 카테고리 제목은 글자 사이를 여유 있게 두고 기관명 뒤에서 줄을 나눕니다. */
+.public-title-break{display:none}
+@media screen and (max-width:640px){
+ .hero h1,.public-head h1,.goods-head h1,.history-head h1{letter-spacing:-.02em}
+ .public-title-break{display:inline}
+}
