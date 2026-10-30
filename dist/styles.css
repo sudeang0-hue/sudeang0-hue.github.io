@@ -537,6 +537,10 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
 .public-social-links{display:flex;flex-direction:column;align-items:stretch;gap:10px;margin:0;padding-top:2px}
 .public-social-link{min-height:46px;padding:10px 18px;border:1px solid var(--green);border-radius:4px;color:var(--green);background:var(--surface);font-size:13px;font-weight:650;line-height:1.6;justify-content:space-between;white-space:nowrap}
 .public-social-link:first-child{background:var(--green);color:var(--paper)}
+.public-social-link{gap:8px}
+.public-channel-icon{display:block;width:20px;height:20px;flex:0 0 20px;object-fit:contain}
+.public-channel-label{flex:1}
+.public-channel-short{display:none}
 .public-process{display:grid;grid-template-columns:1fr 1.7fr;gap:50px;border-top:1px solid var(--line);padding:45px 0 48px}
 .public-process h2{font-size:25px;line-height:1.6;margin-top:14px}
 .public-process-steps{display:grid;gap:24px}
@@ -575,14 +579,20 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
 .design-next .text-link{display:inline-flex;margin-top:24px;font-size:14px;min-height:44px;align-items:center}
 .design-portfolio button:focus-visible,.design-portfolio summary:focus-visible,.design-portfolio a:focus-visible{outline:2px solid var(--focus);outline-offset:4px}
 @media(max-width:900px){.public-process{grid-template-columns:1fr;gap:26px}.public-work-grid{gap:35px 22px}}
-@media(max-width:760px){.public-header-main{grid-template-columns:1fr;gap:24px}.public-social-links{flex-direction:row;flex-wrap:wrap;gap:10px;padding-top:0}}
+@media(max-width:760px){
+ .public-header-main{grid-template-columns:1fr;gap:24px}
+ .public-social-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding-top:0}
+ .public-social-links .public-social-link{min-width:0;min-height:44px;padding:8px 6px;gap:4px;justify-content:center;font-size:12px;white-space:nowrap}
+ .public-channel-icon{width:16px;height:16px;flex-basis:16px}
+ .public-channel-label{flex:0 1 auto}
+ .public-channel-full,.public-social-link .external-arrow{display:none}
+ .public-channel-short{display:inline}
+}
 @media(max-width:640px){
  .design-subnav nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 12px;width:100%;font-size:11px}
  .design-subnav nav a{text-align:center;white-space:nowrap;min-height:42px;padding-left:0;padding-right:0}
  .public-head{padding-bottom:0}
  .public-intro{font-size:14px;line-height:1.9;margin-top:20px}
- .public-social-links{flex-direction:column;gap:9px}
- .public-social-link{font-size:12px;padding:10px 13px;white-space:normal}
  .public-process{padding:30px 0}
  .public-process h2{font-size:23px}
  .public-process-steps h3{font-size:15px}
@@ -706,8 +716,6 @@ html:has(.webtoon-reader){scroll-padding-top:170px}
  .hero-copy,.project-intro,.facts p{font-size:var(--read-body)}
  .public-header-main{gap:20px}
  .public-intro{font-size:var(--read-body);line-height:1.85;margin-top:16px}
- .public-social-links{gap:8px}
- .public-social-link{padding:8px 12px}
  .public-process-disclosure{margin-bottom:24px}
  .public-process-disclosure .public-process{padding-top:18px}
  #public-works-title{font-size:22px}

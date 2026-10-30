@@ -12,15 +12,21 @@
   "channels": [
     {
       "url": "https://www.instagram.com/gwangjin_office/",
-      "label": "광진구청 공식 인스타그램"
+      "label": "광진구청 공식 인스타그램",
+      "shortLabel": "광진구청",
+      "icon": "instagram"
     },
     {
       "url": "https://www.instagram.com/gwangijini/",
-      "label": "광이진이 인스타그램"
+      "label": "광이진이 인스타그램",
+      "shortLabel": "광이진이",
+      "icon": "instagram"
     },
     {
       "url": "https://www.gwangjin.go.kr/portal/bbs/B0000264/list.do?menuNo=201398",
-      "label": "구청 광진희망툰"
+      "label": "구청 광진희망툰",
+      "shortLabel": "희망툰",
+      "icon": "gwangjin"
     }
   ],
   "totals": {

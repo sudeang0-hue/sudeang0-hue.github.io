@@ -1,6 +1,11 @@
 {
   "assets": [
     {
+      "file": "icons/gwangjin.png",
+      "width": 378,
+      "height": 298
+    },
+    {
       "file": "gamelab-combat.png",
       "width": 1920,
       "height": 1080
