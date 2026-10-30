@@ -1,0 +1,25 @@
+/* 게임 프레임 비율에 맞춰 재생 영역의 불필요한 여백을 줄입니다. */
+#flow .figma-player-stage {
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  --figma-gutter-x: 48px;
+  --figma-gutter-y: 60px;
+}
+
+/* 현재 Figma 뷰어의 내부 여백(좌우 48px·상하 60px)을 바깥에서 보상합니다.
+   게임 프레임 전체가 16:9 표시 영역에 들어오도록 iframe만 넓힙니다. */
+#flow .figma-player-stage iframe {
+  inset: auto;
+  left: calc(-1 * var(--figma-gutter-x));
+  top: calc(-1 * var(--figma-gutter-y));
+  width: calc(100% + 2 * var(--figma-gutter-x));
+  height: calc(100% + 2 * var(--figma-gutter-y));
+}
+
+@media screen and (max-width: 640px) {
+  /* 모바일 .wrap의 좌우 20px 여백을 돌려줘 조작할 수 있는 폭을 확보합니다. */
+  #flow .figma-player {
+    margin-inline: -20px;
+    border-inline: 0;
+  }
+}

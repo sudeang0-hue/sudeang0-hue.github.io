@@ -10,6 +10,7 @@ export function withGamelabBackground(html, assetURL) {
     + ' data-mobile-src="' + asset('assets/gamelab-background-540p.mp4') + '"></video></div>';
   const control = '<button type="button" class="gamelab-background-toggle" data-gamelab-background-toggle aria-controls="gamelab-background-video" aria-label="배경 영상 재생" title="배경 영상 재생" hidden><span aria-hidden="true" data-gamelab-background-icon>▶</span></button>';
   const resources = '<link rel="stylesheet" href="' + asset('gamelab-background.css') + '">'
+    + '<link rel="stylesheet" href="' + asset('figma-prototype.css') + '">'
     + '<script src="' + asset('gamelab-background.js') + '" defer></script>'
     + '<script src="' + asset('gamelab-intro.js') + '" defer></script>'
     + '<script src="' + asset('goods-slider.js') + '" defer></script>';

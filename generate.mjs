@@ -68,8 +68,12 @@ const gameShowcase=goodsSlider(gamelabShowcase.images,{id:'goods-gamelab-showcas
 const gameHead='<div class="wrap"><header class="page-head"><span class="eyebrow">GAME UI · INTEGRATION · ART RESOURCES</span><h1>용사때문에 레벨업</h1><p class="subtitle">화면 흐름 설계부터 UI 리디자인·Unity 적용까지 맡았습니다.</p><p class="project-intro">유닛 배치·합성으로 용사 웨이브를 막는 그리드 디펜스 로그라이크입니다. 로비·성장·전투 화면에 팀의 게임 데이터를 연결하고, UI 입력 오류와 표시 문제를 수정했습니다.</p><dl class="meta-grid"><div><dt>PERIOD / TEAM</dt><dd>2026.09.02 — 10.14 · 4인</dd></div><div><dt>MY ROLE</dt><dd>UI 설계·구현·연동·연출</dd></div><div><dt>TOOLS</dt><dd>Figma · Unity · C# · uGUI · TMP · DOTween</dd></div></dl>'+projectActions('gamelab',notion.game,ghGame+'/tree/4a102b39733ccf71b7cc05c59eb54ebd7709d975','GitHub')+'</header>'+gameShowcase;
 const figmaFlowURLs=node=>{
  const params=new URLSearchParams({'node-id':node.replace(':','-'),'starting-point-node-id':node,'scaling':'contain','content-scaling':'fixed','device-frame':'false','hide-ui':'1','show-proto-sidebar':'0'});
+ const embedParams=new URLSearchParams(params);
+ embedParams.set('scaling','fit-width');
+ embedParams.set('footer','false');
+ embedParams.set('viewport-controls','true');
  const file='Kz3TNcpjEhLXT7lGoCWinf';
- return {external:'https://www.figma.com/proto/'+file+'?'+params,embed:'https://embed.figma.com/proto/'+file+'?'+params+'&embed-host=sudeang-portfolio'};
+ return {external:'https://www.figma.com/proto/'+file+'?'+params,embed:'https://embed.figma.com/proto/'+file+'?'+embedParams+'&embed-host=sudeang-portfolio'};
 };
 const figmaLobby=figmaFlowURLs('3:2');
 const figmaBattle=figmaFlowURLs('31:8');
@@ -224,9 +228,10 @@ function goodsSlider(images,config){
  };
  const count='<span class="goods-slider-count" data-slide-count aria-hidden="true">1 / '+images.length+'</span>';
  const heading='<p class="figure-tag">'+escapeHtml(config.heading)+'</p>';
- const title=config.compactHeader?'<div class="goods-slider-heading">'+heading+count+'</div>':heading;
+ const controls='<div class="goods-slider-controls" hidden><div class="goods-slider-buttons"><button type="button" data-slide-prev aria-label="'+escapeHtml(config.label)+' 이전 사진">←</button><button type="button" data-slide-next aria-label="'+escapeHtml(config.label)+' 다음 사진">→</button>'+ (config.interval?'<button type="button" data-slide-play aria-label="자동 넘김 일시정지" aria-pressed="true"><span data-play-icon aria-hidden="true">Ⅱ</span></button>':'')+'</div>'+(config.compactHeader?'':count)+'</div>';
+ const title=config.compactHeader?'<div class="goods-slider-heading">'+heading+count+controls+'</div>':heading;
  const slides=(images.length>1?slide(images.at(-1),images.length-1,true):'')+images.map((photo,index)=>slide(photo,index)).join('')+(images.length>1?slide(images[0],0,true):'');
- return '<section class="goods-slider" id="'+escapeHtml(config.id)+'" data-goods-slider data-interval="'+config.interval+'" role="region" aria-roledescription="슬라이드" aria-label="'+escapeHtml(config.label)+'">'+title+'<div class="goods-slider-window" tabindex="0" aria-label="'+escapeHtml(config.label)+' · 좌우 방향키로 이동"><div class="goods-slider-track">'+slides+'</div></div><div class="goods-slider-controls" hidden><div class="goods-slider-buttons"><button type="button" data-slide-prev aria-label="'+escapeHtml(config.label)+' 이전 사진">←</button><button type="button" data-slide-next aria-label="'+escapeHtml(config.label)+' 다음 사진">→</button>'+ (config.interval?'<button type="button" data-slide-play aria-label="자동 넘김 일시정지" aria-pressed="true"><span data-play-icon aria-hidden="true">Ⅱ</span></button>':'')+'</div>'+(config.compactHeader?'':count)+'</div><p class="sr-only" data-slide-status role="status" aria-live="polite" aria-atomic="true"></p></section>';
+ return '<section class="goods-slider" id="'+escapeHtml(config.id)+'" data-goods-slider data-interval="'+config.interval+'" role="region" aria-roledescription="슬라이드" aria-label="'+escapeHtml(config.label)+'">'+title+'<div class="goods-slider-window" tabindex="0" aria-label="'+escapeHtml(config.label)+' · 좌우 방향키로 이동"><div class="goods-slider-track">'+slides+'</div></div>'+(config.compactHeader?'':controls)+'<p class="sr-only" data-slide-status role="status" aria-live="polite" aria-atomic="true"></p></section>';
 }
 // 추가 자료는 기본 details로 열고 닫으며 이미지마다 담당 범위와 설명을 표시합니다.
 function goodsGallery(gallery){
