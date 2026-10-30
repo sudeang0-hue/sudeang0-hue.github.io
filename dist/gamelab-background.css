@@ -112,6 +112,10 @@
 .gamelab-reveal-ready [data-gamelab-reveal].is-reveal-pending { opacity: 0; transform: translateY(24px); }
 .gamelab-reveal-ready [data-gamelab-reveal].is-reveal-immediate { transition: none; }
 .gamelab-showcase { margin-bottom: 32px; }
+.gamelab-showcase .goods-slider-heading { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+.gamelab-showcase .goods-slider-heading .figure-tag { min-width: 0; margin: 0; line-height: 1.7; }
+.gamelab-showcase .goods-slider-heading .goods-slider-count { display: none; flex-shrink: 0; }
+.gamelab-showcase[data-ready] .goods-slider-heading .goods-slider-count { display: inline; }
 .gamelab-showcase[data-ready] .zoom-trigger { aspect-ratio: 16 / 9; max-height: none; }
 .gamelab-showcase img { object-fit: contain; }
 @media (prefers-reduced-motion: reduce) {
