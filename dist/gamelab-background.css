@@ -112,10 +112,18 @@
 .gamelab-reveal-ready [data-gamelab-reveal].is-reveal-pending { opacity: 0; transform: translateY(24px); }
 .gamelab-reveal-ready [data-gamelab-reveal].is-reveal-immediate { transition: none; }
 .gamelab-showcase { margin-bottom: 32px; }
-.gamelab-showcase .goods-slider-heading { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
-.gamelab-showcase .goods-slider-heading .figure-tag { min-width: 0; margin: 0; line-height: 1.7; }
+.gamelab-showcase .goods-slider-heading { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.gamelab-showcase .goods-slider-heading .figure-tag { min-width: 0; margin: 0; line-height: 1.7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .gamelab-showcase .goods-slider-heading .goods-slider-count { display: none; flex-shrink: 0; }
 .gamelab-showcase[data-ready] .goods-slider-heading .goods-slider-count { display: inline; }
+.gamelab-showcase .goods-slider-heading .goods-slider-controls { flex-shrink: 0; margin: 0 0 0 auto; padding: 0; border: 0; }
+.gamelab-showcase .goods-slider-heading .goods-slider-buttons { gap: 4px; }
+.gamelab-showcase .goods-slider-heading button { width: 36px; height: 40px; }
+@media (max-width: 360px) {
+  .gamelab-showcase .goods-slider-heading { gap: 4px; }
+  .gamelab-showcase .goods-slider-heading .goods-slider-buttons { gap: 2px; }
+  .gamelab-showcase .goods-slider-heading button { width: 30px; }
+}
 .gamelab-showcase[data-ready] .zoom-trigger { aspect-ratio: 16 / 9; max-height: none; }
 .gamelab-showcase img { object-fit: contain; }
 @media (prefers-reduced-motion: reduce) {
