@@ -1,0 +1,59 @@
+{
+  "label": "상점 전시용 게임 화면",
+  "interval": 1500,
+  "sources": [
+    {
+      "kind": "STOVE 전시용 촬영 원본",
+      "package": "STOVE_Showcase_20261014/Delivery/Images",
+      "captureDate": "2026-10-14",
+      "sourceNote": "동봉 안내의 권장 순서에 따른 실제 Unity Play Mode 화면 7장. 촬영용 마왕군·스킬 구성을 사용했습니다.",
+      "processing": "원본 해상도 1920×1080과 구도를 유지한 WebP 품질 90 사본. 원본 PNG는 변경하지 않았습니다.",
+      "originalFiles": [
+        "01_Combat.png",
+        "02_Army_Preparation.png",
+        "03_Meteor_Impact.png",
+        "04_Absolute_Zero.png",
+        "05_Boss_Entrance.png",
+        "06_Boss_Battle.png",
+        "07_Reward_Choice.png"
+      ]
+    }
+  ],
+  "images": [
+    {
+      "file": "gamelab-showcase-01.webp",
+      "alt": "마왕군 유닛과 용사가 맞붙는 전장 및 스킬 HUD",
+      "caption": "2026.10.14 Unity Play Mode · 마왕군과 용사의 전투"
+    },
+    {
+      "file": "gamelab-showcase-02.webp",
+      "alt": "그리드에 마왕군을 배치하고 직업 시너지를 확인하는 전투 준비 화면",
+      "caption": "2026.10.14 Unity Play Mode · 마왕군 배치와 직업 시너지"
+    },
+    {
+      "file": "gamelab-showcase-03.webp",
+      "alt": "전장 위에 운석 낙하 스킬을 시전하는 실제 게임 화면",
+      "caption": "2026.10.14 Unity Play Mode · 운석 낙하 시전"
+    },
+    {
+      "file": "gamelab-showcase-04.webp",
+      "alt": "절대 영도 스킬의 범위와 효과가 표시된 전투 화면",
+      "caption": "2026.10.14 Unity Play Mode · 절대 영도 시전"
+    },
+    {
+      "file": "gamelab-showcase-05.webp",
+      "alt": "10웨이브 보스 등장을 알리는 경고와 전장 화면",
+      "caption": "2026.10.14 Unity Play Mode · 10웨이브 보스 등장"
+    },
+    {
+      "file": "gamelab-showcase-06.webp",
+      "alt": "화염기사 보스와 마왕군이 전투하는 실제 게임 화면",
+      "caption": "2026.10.14 Unity Play Mode · 화염기사 보스 전투"
+    },
+    {
+      "file": "gamelab-showcase-07.webp",
+      "alt": "전투 후 마왕군과 배치 영역의 보상을 선택하는 화면",
+      "caption": "2026.10.14 Unity Play Mode · 마왕군·배치 영역 보상 선택"
+    }
+  ]
+}

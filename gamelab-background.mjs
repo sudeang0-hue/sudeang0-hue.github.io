@@ -10,7 +10,14 @@ export function withGamelabBackground(html, assetURL) {
     + ' data-mobile-src="' + asset('assets/gamelab-background-540p.mp4') + '"></video></div>';
   const control = '<button type="button" class="gamelab-background-toggle" data-gamelab-background-toggle aria-controls="gamelab-background-video" aria-label="배경 영상 재생" title="배경 영상 재생" hidden><span aria-hidden="true" data-gamelab-background-icon>▶</span></button>';
   const resources = '<link rel="stylesheet" href="' + asset('gamelab-background.css') + '">'
-    + '<script src="' + asset('gamelab-background.js') + '" defer></script>';
+    + '<script src="' + asset('gamelab-background.js') + '" defer></script>'
+    + '<script src="' + asset('gamelab-intro.js') + '" defer></script>'
+    + '<script src="' + asset('goods-slider.js') + '" defer></script>';
+  const revealCopy = copy => copy
+    .replace('<span class="eyebrow">', '<span class="eyebrow" data-gamelab-reveal>')
+    .replace('<h1>', '<h1 data-gamelab-reveal>')
+    .replace('<p class="subtitle">', '<p class="subtitle" data-gamelab-reveal>')
+    .replace('<p class="project-intro">', '<p class="project-intro" data-gamelab-reveal>');
   const intro = /(<main id="main">)<div class="wrap">(<header class="page-head">)([\s\S]*?)(<dl class="meta-grid">[\s\S]*?<\/dl>)(<div class="links project-links">[\s\S]*?)<\/header>/;
   if (!intro.test(html)) {
     throw new Error('게임랩 소개·본문 경계를 찾을 수 없습니다.');
@@ -19,7 +26,8 @@ export function withGamelabBackground(html, assetURL) {
     .replace('<body', '<body data-gamelab-background-page')
     .replace(intro, (_, main, start, copy, metadata, links) => main + start
       + '<div class="gamelab-intro" data-gamelab-intro>' + backdrop
-      + '<div class="wrap gamelab-intro-copy">' + copy + control + '</div>'
-      + '<div class="gamelab-intro-details"><div class="wrap">' + metadata + '</div></div>'
-      + '</div><div class="wrap">' + links + '</div></header><div class="wrap">');
+      + '<div class="wrap gamelab-intro-stage">' + control + '</div>'
+      + '<div class="wrap gamelab-intro-copy">' + revealCopy(copy) + '</div>'
+      + '<div class="gamelab-intro-details"><div class="wrap">' + metadata.replaceAll('<div>', '<div data-gamelab-reveal>') + '</div></div>'
+      + '</div><div class="wrap">' + links.replace(/<(a|span) class="text-link/g, '<$1 data-gamelab-reveal class="text-link') + '</div></header><div class="wrap">');
 }
