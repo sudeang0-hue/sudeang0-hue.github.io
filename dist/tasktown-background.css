@@ -1,13 +1,16 @@
 [data-tasktown-background-page] .page-head { padding-top: 0; }
 .tasktown-intro {
+  --tasktown-stage-height: clamp(96px, calc(100svh - 550px), 340px);
   position: relative;
   isolation: isolate;
-  padding: 36px 0 8px;
+  padding: 0;
 }
+.tasktown-intro-stage { position: relative; height: var(--tasktown-stage-height); }
+.tasktown-intro-stage-controls { position: relative; }
 .tasktown-background {
   position: absolute;
   top: 0;
-  bottom: 12px;
+  bottom: 0;
   left: 0;
   width: 100%;
   z-index: -1;
@@ -19,7 +22,11 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--project-scrim);
+  background: linear-gradient(to bottom,
+    rgb(10 18 13 / 4%) 0,
+    rgb(10 18 13 / 12%) calc(var(--tasktown-stage-height) * .65),
+    rgb(10 18 13 / 70%) var(--tasktown-stage-height),
+    #181e1b calc(var(--tasktown-stage-height) + 190px));
 }
 .tasktown-background-poster,
 .tasktown-background-video {
@@ -27,10 +34,11 @@
   inset: 0;
   display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
   max-height: none;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  object-position: top;
   background: transparent;
 }
 .tasktown-background-video { opacity: 0; }
@@ -41,40 +49,34 @@
   z-index: 1;
   color: #fff;
   text-shadow: 0 2px 8px rgb(0 0 0 / 65%);
+  padding-top: 28px;
+  padding-bottom: 64px;
 }
-.tasktown-intro-copy .breadcrumb,
 .tasktown-intro-copy .subtitle,
 .tasktown-intro-copy .project-intro { color: #f1f4ef; }
 .tasktown-intro-copy .eyebrow { color: #c3e5cd; }
 .tasktown-intro-copy a:hover { color: #d5f4dd; }
 .tasktown-intro-details {
   position: relative;
-  padding-top: 32px;
+  padding-top: 24px;
+  background: var(--paper);
 }
-/* 설명 뒤부터 옅게 시작하여 정보 영역까지 긴 구간에 걸쳐 테마색으로 이어집니다. */
+/* 글이 끝난 여백 안에서 테마색으로 연결하여 문구 위에 밝은 그라데이션이 겹치지 않게 합니다. */
 .tasktown-intro-details::before {
   content: "";
   position: absolute;
-  top: -128px;
-  bottom: -13px;
+  top: -64px;
+  height: 64px;
   left: 0;
   width: 100%;
   pointer-events: none;
-  background: linear-gradient(to bottom,
-    transparent 0%,
-    color-mix(in srgb, var(--paper) 4%, transparent) 32px,
-    color-mix(in srgb, var(--paper) 10%, transparent) 76px,
-    color-mix(in srgb, var(--paper) 24%, transparent) 128px,
-    color-mix(in srgb, var(--paper) 50%, transparent) 160px,
-    color-mix(in srgb, var(--paper) 84%, transparent) 196px,
-    color-mix(in srgb, var(--paper) 97%, transparent) calc(100% - 28px),
-    var(--paper) 98%);
+  background: linear-gradient(to bottom, transparent, var(--paper));
 }
 .tasktown-intro .meta-grid { position: relative; margin: 0; }
 .tasktown-background-toggle {
   position: absolute;
   right: 0;
-  top: -29px;
+  top: 16px;
   z-index: 2;
   width: 44px;
   height: 44px;
@@ -87,19 +89,42 @@
   line-height: 1;
 }
 .tasktown-background-toggle[hidden] { display: none; }
+@media (max-width: 760px) {
+  /* 작은 화면에서는 영상 아래로 테마색이 이어지고 모든 소개 문구는 그 아래에 놓입니다. */
+  .tasktown-intro-stage,
+  .tasktown-background { height: auto; aspect-ratio: 16 / 9; }
+  .tasktown-background { bottom: auto; background: var(--paper); }
+  .tasktown-background::after { background: linear-gradient(to bottom, transparent calc(100% - 64px), var(--paper) 100%); }
+  .tasktown-intro-copy { padding-top: 22px; padding-bottom: 24px; color: var(--ink); text-shadow: none; }
+  .tasktown-intro-copy .subtitle,
+  .tasktown-intro-copy .project-intro { color: var(--muted); }
+  .tasktown-intro-copy .eyebrow { color: var(--green); }
+  .tasktown-intro-details { padding-top: 0; }
+  .tasktown-intro-details::before { display: none; }
+}
 @media (max-width: 640px) {
-  .tasktown-intro { padding-top: 26px; }
-  .tasktown-intro-details { padding-top: 24px; }
   .tasktown-intro-copy .project-intro { margin-top: 18px; }
-  .tasktown-intro-copy .breadcrumb { padding-right: 52px; }
-  .tasktown-background-toggle { top: -13px; }
+}
+.tasktown-reveal-ready [data-tasktown-reveal] {
+  transition: opacity 650ms ease, transform 700ms cubic-bezier(.2,.7,.2,1);
+  transition-delay: var(--tasktown-reveal-delay, 0ms);
+}
+.tasktown-reveal-ready [data-tasktown-reveal].is-reveal-pending { opacity: 0; transform: translateY(24px); }
+.tasktown-reveal-ready [data-tasktown-reveal].is-reveal-immediate { transition: none; }
+.tasktown-showcase { margin-bottom: 32px; }
+.tasktown-showcase[data-ready] .zoom-trigger { aspect-ratio: 16 / 9; max-height: none; }
+.tasktown-showcase img { object-fit: contain; }
+@media (prefers-reduced-motion: reduce) {
+  .tasktown-reveal-ready [data-tasktown-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
 }
 @media print {
+  .tasktown-intro-stage { display: none; }
+  .tasktown-intro-copy { padding: 0; }
+  .tasktown-reveal-ready [data-tasktown-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
   .tasktown-background,
   .tasktown-background-toggle,
   .tasktown-intro-details::before { display: none !important; }
   .tasktown-intro-copy { color: var(--ink); text-shadow: none; }
-  .tasktown-intro-copy .breadcrumb,
   .tasktown-intro-copy .subtitle,
   .tasktown-intro-copy .project-intro { color: var(--muted); }
   .tasktown-intro-copy .eyebrow { color: var(--green); }

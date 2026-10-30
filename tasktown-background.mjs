@@ -10,7 +10,14 @@ export function withTasktownBackground(html, assetURL) {
     + ' data-mobile-src="' + asset('assets/tasktown-background-540p.mp4') + '"></video></div>';
   const control = '<button type="button" class="tasktown-background-toggle" data-tasktown-background-toggle aria-controls="tasktown-background-video" aria-label="배경 영상 재생" title="배경 영상 재생" hidden><span aria-hidden="true" data-tasktown-background-icon>▶</span></button>';
   const resources = '<link rel="stylesheet" href="' + asset('tasktown-background.css') + '">'
-    + '<script src="' + asset('tasktown-background.js') + '" defer></script>';
+    + '<script src="' + asset('tasktown-background.js') + '" defer></script>'
+    + '<script src="' + asset('tasktown-intro.js') + '" defer></script>'
+    + '<script src="' + asset('goods-slider.js') + '" defer></script>';
+  const revealCopy = copy => copy
+    .replace('<span class="eyebrow">', '<span class="eyebrow" data-tasktown-reveal>')
+    .replace('<h1>', '<h1 data-tasktown-reveal>')
+    .replace('<p class="subtitle">', '<p class="subtitle" data-tasktown-reveal>')
+    .replace('<p class="project-intro">', '<p class="project-intro" data-tasktown-reveal>');
   const intro = /(<main id="main">)<div class="wrap">(<header class="page-head">)([\s\S]*?)(<dl class="meta-grid">[\s\S]*?<\/dl>)(<div class="links project-links">[\s\S]*?)<\/header>/;
   if (!intro.test(html)) {
     throw new Error('TaskTown 소개·본문 경계를 찾을 수 없습니다.');
@@ -19,7 +26,8 @@ export function withTasktownBackground(html, assetURL) {
     .replace('<body', '<body data-tasktown-background-page')
     .replace(intro, (_, main, start, copy, metadata, links) => main + start
       + '<div class="tasktown-intro" data-tasktown-intro>' + backdrop
-      + '<div class="wrap tasktown-intro-copy">' + copy + control + '</div>'
-      + '<div class="tasktown-intro-details"><div class="wrap">' + metadata + '</div></div>'
-      + '</div><div class="wrap">' + links + '</div></header><div class="wrap">');
+      + '<div class="tasktown-intro-stage"><div class="wrap tasktown-intro-stage-controls">' + control + '</div></div>'
+      + '<div class="wrap tasktown-intro-copy">' + revealCopy(copy) + '</div>'
+      + '<div class="tasktown-intro-details"><div class="wrap">' + metadata.replaceAll('<div>', '<div data-tasktown-reveal>') + '</div></div>'
+      + '</div><div class="wrap">' + links.replace(/<(a|span) class="text-link/g, '<$1 data-tasktown-reveal class="text-link') + '</div></header><div class="wrap">');
 }
