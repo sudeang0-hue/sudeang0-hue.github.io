@@ -99,9 +99,11 @@
  .home-reel-caption>p:last-child {font-size:11px}
  .home-reel-navigation {width:150px;flex-basis:150px}
  .home-selected {margin-top:-26px;padding-bottom:45px}
+ .home-selected.wrap {width:100%;--home-work-gutter:24px}
+ .home-section-heading,.home-project-shortcuts {padding-inline:var(--home-work-gutter)}
  .home-section-heading {margin-bottom:23px}
  .home-work-cards {flex-direction:column;gap:18px}
- .home-work-card,.home-card-link {min-height:330px}
+ .home-work-card,.home-card-link {min-height:495px}
  /* 바깥 카드의 크기는 유지하고 내부만 확대해 스크롤 판정과 문서 높이를 고정합니다. */
  .home-work-cards.is-scroll-preview .home-work-visual {transform:scale(.94);transition:transform 550ms cubic-bezier(.22,.75,.2,1),box-shadow 550ms ease}
  .home-work-cards.is-scroll-preview .home-work-card.is-active .home-work-visual {transform:scale(1);box-shadow:0 12px 28px #07110b26}
@@ -114,6 +116,7 @@
  .home-practice {grid-template-columns:1fr;gap:30px;padding:38px 0 45px}
  .home-practice h2 {font-size:27px}
 }
+@media(max-width:640px) {.home-selected.wrap{--home-work-gutter:20px}}
 @media(max-width:480px) {
  .home-hero {padding-top:43px;padding-bottom:140px}
  .home-intro h1 {font-size:clamp(25px,7.6vw,36px)}
