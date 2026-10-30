@@ -32,7 +32,9 @@
  .development-copy {grid-column:1/-1;grid-row:3;font-size:14px;max-width:none}
  .development-work.wrap {width:100%;flex-direction:column;gap:30px;padding-bottom:44px}
  .development-card {flex:none}
- .development-card .work-image {height:495px}
+ /* 영상 원본 비율을 유지하고, 썸네일 전환 전후에도 판정 영역의 높이를 고정합니다. */
+ .development-card .work-image {height:auto;aspect-ratio:16/9}
+ .development-card .work-image video {object-fit:contain}
  .development-card-copy {padding:0 24px 20px}
  /* 바깥 카드 크기는 고정하고 안쪽만 확대해 선택 경계와 스크롤 높이를 유지합니다. */
  .development-work.is-scroll-preview .development-card-visual {transform:scale(.94);transition:transform 550ms cubic-bezier(.22,.75,.2,1)}
