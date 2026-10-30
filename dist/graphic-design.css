@@ -41,6 +41,7 @@
  #design-work .graphic-project-heading{gap:14px}
 }
 @media(max-width:640px){
+ #design-work .graphic-heading h2{letter-spacing:-.02em}
  #design-work.graphic-design-portfolio{padding-top:40px;margin-top:38px}
  #design-work .graphic-headline{font-size:18px;line-height:1.8;margin-top:14px}
  #design-work .graphic-introduction{font-size:14px;line-height:1.9;margin-top:14px}
