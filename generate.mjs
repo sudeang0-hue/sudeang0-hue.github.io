@@ -84,15 +84,15 @@ const gameFlow=section('flow','01','Figma UI 흐름 설계',`
 ${zoom('gamelab-figma-flow-overview.png','Figma 초기 UI 흐름 설계 · 로비·전투 화면 구성과 이동·팝업·복귀 연결','로비·전투 화면의 기능과 이동·복귀 경로를 연결한 초기 Figma 캔버스')}
 <div class="facts"><div><h4>로비의 탐색과 복귀</h4><p>특성·스킬 세팅·도감·설정은 로비 위에서 열고 닫는 팝업으로, 전투 준비는 별도 화면으로 이동하도록 구분했습니다.</p></div><div><h4>전투 전후의 정보 구성</h4><p>준비 화면의 전투 진입과 증강·승패 결과의 전환을 정리했습니다. 결과에는 시간·처치 수·배치 수·경험치와 로비 복귀 버튼을 배치했습니다.</p></div></div>
 
-<div class="figma-player" data-figma-player>
-<div class="figma-player-bar"><h4>Figma 프로토타입 직접 살펴보기</h4><div class="figma-flow-options" role="group" aria-label="프로토타입 시작 화면" data-figma-controls hidden>
+<div class="figma-player" data-figma-player id="figma-player">
+<div class="figma-player-bar"><h4 id="figma-player-title">Figma 프로토타입 직접 살펴보기</h4><div class="figma-player-actions"><div class="figma-flow-options" role="group" aria-label="프로토타입 시작 화면" data-figma-controls hidden>
 <button type="button" data-figma-flow data-figma-label="로비 흐름" data-figma-src="${figmaLobby.embed.replaceAll('&','&amp;')}" data-figma-href="${figmaLobby.external.replaceAll('&','&amp;')}" aria-pressed="true">로비 흐름</button>
 <button type="button" data-figma-flow data-figma-label="전투 흐름" data-figma-src="${figmaBattle.embed.replaceAll('&','&amp;')}" data-figma-href="${figmaBattle.external.replaceAll('&','&amp;')}" aria-pressed="false">전투 흐름</button>
-</div></div>
+</div><button type="button" class="btn-quiet figma-expand" data-figma-expand aria-controls="figma-player" aria-expanded="false" hidden>전체 화면 ↗</button></div></div>
 <div class="links figma-player-links"><a class="text-link external-link" data-figma-external href="${figmaLobby.external}" target="_blank" rel="noopener noreferrer">Figma에서 크게 재생 <span aria-hidden="true">↗</span></a>${ext('https://www.figma.com/design/Kz3TNcpjEhLXT7lGoCWinf?node-id=0-1','흐름 설계 원본 보기')}</div>
-<div class="figma-player-stage"><div class="figma-player-placeholder" data-figma-placeholder><span class="figma-play-mark" aria-hidden="true">▷</span><p>로비 흐름 프로토타입을 준비하고 있습니다.</p><button type="button" class="btn-quiet" data-figma-load hidden>프로토타입 재생</button><noscript><p>Figma 링크에서 프로토타입을 재생할 수 있습니다.</p></noscript></div>
-<iframe data-figma-frame title="게임랩 초기 UI 프로토타입 · 로비 흐름" loading="eager" allow="fullscreen" allowfullscreen tabindex="0" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" hidden></iframe></div>
-<div class="figma-player-status"><p data-figma-note>화면 전환을 확인하는 초기 프로토타입으로, 예시 수치와 미정 화면이 포함되어 있습니다. 최종 디자인과 실제 게임 동작은 다음 Unity 구현 사례에서 확인할 수 있습니다. 작은 화면에서는 ‘크게 재생’을 이용해 주세요.</p><button type="button" class="btn-quiet" data-figma-reset hidden>선택한 흐름 처음부터</button></div>
+<div class="figma-player-viewport" data-figma-viewport><div class="figma-player-stage"><div class="figma-player-placeholder" data-figma-placeholder><span class="figma-play-mark" aria-hidden="true">▷</span><p>로비 흐름 프로토타입을 준비하고 있습니다.</p><button type="button" class="btn-quiet" data-figma-load hidden>프로토타입 재생</button><noscript><p>Figma 링크에서 프로토타입을 재생할 수 있습니다.</p></noscript></div>
+<iframe data-figma-frame title="게임랩 초기 UI 프로토타입 · 로비 흐름" loading="eager" allow="fullscreen" allowfullscreen tabindex="0" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" hidden></iframe></div></div>
+<details class="figma-player-details"><summary>프로토타입 안내 · 다시 시작</summary><div class="figma-player-status"><p data-figma-note>화면 전환을 확인하는 초기 프로토타입으로, 예시 수치와 미정 화면이 포함되어 있습니다. 최종 디자인과 실제 게임 동작은 다음 Unity 구현 사례에서 확인할 수 있습니다. 작은 화면에서는 ‘전체 화면’ 버튼으로 확대해 주세요.</p><button type="button" class="btn-quiet" data-figma-reset hidden>선택한 흐름 처음부터</button></div></details>
 </div>
 
 
