@@ -16,10 +16,160 @@
   height: calc(100% + 2 * var(--figma-gutter-y));
 }
 
+#flow .figma-player-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#flow .figma-expand {
+  min-height: 44px;
+  padding: 9px 13px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+#flow .figma-player-viewport {
+  width: 100%;
+  min-width: 0;
+}
+
+#flow .figma-player-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#flow .figma-player-links a {
+  white-space: nowrap;
+}
+
+#flow .figma-player-details {
+  border-top: 1px solid var(--line);
+}
+
+#flow .figma-player-details summary {
+  min-height: 44px;
+  padding: 13px 20px;
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#flow .figma-player-details .figma-player-status {
+  margin: 0;
+}
+
 @media screen and (max-width: 640px) {
   /* 모바일 .wrap의 좌우 20px 여백을 돌려줘 조작할 수 있는 폭을 확보합니다. */
   #flow .figma-player {
     margin-inline: -20px;
     border-inline: 0;
+  }
+
+  #flow .figma-player-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  #flow .figma-flow-options {
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+
+  #flow .figma-flow-options button,
+  #flow .figma-expand {
+    padding-inline: 10px;
+  }
+
+  #flow .figma-player-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+  }
+
+  #flow .figma-player-links a {
+    width: fit-content;
+    max-width: 100%;
+    min-width: 0;
+    gap: 5px;
+    font-size: 12px;
+  }
+
+  #flow .figma-player-details summary {
+    padding-inline: 16px;
+  }
+}
+
+/* iframe을 옮기지 않고 같은 플레이어를 확장해 진행 중인 화면을 보존합니다. */
+#flow .figma-player.is-expanded {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  max-width: none;
+  margin: 0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  border: 0;
+  background: #000;
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+#flow .figma-player.is-expanded .figma-player-bar {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  background: var(--paper);
+}
+
+#flow .figma-player.is-expanded .figma-player-links,
+#flow .figma-player.is-expanded .figma-player-details {
+  display: none;
+}
+
+#flow .figma-player.is-expanded .figma-player-viewport {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+#flow .figma-player.is-expanded .figma-player-stage {
+  width: var(--figma-expanded-width, 100%);
+  max-width: 100%;
+  background: #000;
+}
+
+@media screen and (max-height: 500px) {
+  /* 가로 화면에서는 조작 버튼 한 줄만 남겨 게임에 높이를 돌려줍니다. */
+  #flow .figma-player.is-expanded .figma-player-bar h4 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  #flow .figma-player.is-expanded .figma-player-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media print {
+  #flow .figma-player-details,
+  #flow .figma-expand {
+    display: none;
   }
 }

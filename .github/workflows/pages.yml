@@ -41,12 +41,14 @@ jobs:
           node --check dist/gamelab-intro.js
           node --check dist/tasktown-intro.js
           node --check dist/goods-slider.js
+          node --check dist/figma-prototype.js
           node generate.mjs
           node check_home.mjs
           node check_home_interactions.mjs
           node check_development.mjs
           node check_goods_slider.mjs
           node check_gamelab_intro.mjs
+          node check_figma_prototype.mjs
           node check_history.mjs
           node check_private_resume.mjs
           node check_security.mjs
