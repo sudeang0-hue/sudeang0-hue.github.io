@@ -15,7 +15,11 @@
 /* 선택이 끝나면 이전 영상 프레임 대신 원래 섬네일을 바로 보여줍니다. */
 .development-card:not(.is-playing) .work-image video {transition:none}
 .development-card .work-image:focus-visible {outline-offset:-5px}
-@media(min-width:761px) {
+@media screen and (min-width:761px) {
+ /* 썸네일은 원본 비율로 채우고, 영상 재생 중에만 게임 화면 비율로 펼칩니다. */
+ .development-card .work-image {height:auto;aspect-ratio:160/69;transition:aspect-ratio 450ms cubic-bezier(.22,.75,.2,1)}
+ .development-card.is-playing .work-image {aspect-ratio:16/9}
+ .development-card .work-image video {object-fit:contain}
  .development-work.has-active .development-card {flex-grow:.78}
  .development-work.has-active .development-card.is-active {flex-grow:1.7}
 }
