@@ -14,6 +14,12 @@
 
 ## 작품별 근거
 
+### 공식 채널 버튼 아이콘 · 2026.10.30
+
+- 인스타그램: 채널 식별용 카메라 윤곽 SVG를 `design.mjs`에 구성했습니다.
+- 광진구청: [공식 상징물 안내](https://www.gwangjin.go.kr/portal/main/contents.do?menuNo=200199)의 [광진구 CI 다운로드](https://www.gwangjin.go.kr/portal/cmmn/file/fileDown.do?atchFileId=3fd879a5aa70bb48e900ecfd02fc3b200921e6e64db3b5f19c7681ac4812d2b4&fileSn=3) 안 `광진구CI/CI마크만(무배경).png` 원본을 `dist/assets/icons/gwangjin.png`로 사용합니다. 색상·비율·원본 픽셀은 보존합니다.
+
+
 ### 2022-01 · 식목일 일러스트
 
 공식 게시본 연결 · 웹툰 편수·컷수 집계 제외
