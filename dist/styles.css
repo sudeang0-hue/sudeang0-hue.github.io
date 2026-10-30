@@ -582,11 +582,15 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
 @media(max-width:760px){
  .public-header-main{grid-template-columns:1fr;gap:24px}
  .public-social-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding-top:0}
- .public-social-links .public-social-link{min-width:0;min-height:44px;padding:8px 6px;gap:4px;justify-content:center;font-size:12px;white-space:nowrap}
- .public-channel-icon{width:16px;height:16px;flex-basis:16px}
+ .public-social-links .public-social-link{min-width:0;min-height:48px;padding:8px 6px;gap:5px;justify-content:center;font-size:14px;white-space:nowrap}
+ .public-channel-icon{width:20px;height:20px;flex-basis:20px}
  .public-channel-label{flex:0 1 auto}
  .public-channel-full,.public-social-link .external-arrow{display:none}
  .public-channel-short{display:inline}
+}
+@media(max-width:360px){
+ .public-social-links .public-social-link{padding-inline:4px;gap:3px;font-size:13px}
+ .public-channel-icon{width:18px;height:18px;flex-basis:18px}
 }
 @media(max-width:640px){
  .design-subnav nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 12px;width:100%;font-size:11px}
