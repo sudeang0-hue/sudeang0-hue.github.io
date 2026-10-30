@@ -37,9 +37,11 @@ jobs:
           node --check dist/app.js
           node --check dist/theme.js
           node --check dist/home.js
+          node --check dist/development.js
           node generate.mjs
           node check_home.mjs
           node check_home_interactions.mjs
+          node check_development.mjs
           node check_history.mjs
           node check_private_resume.mjs
           node check_security.mjs

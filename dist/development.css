@@ -1,0 +1,53 @@
+/* 게임 개발 소개와 대표 프로젝트에만 적용합니다. */
+.development-hero {grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);grid-template-rows:auto 1fr;gap:20px 80px;align-items:start}
+.development-eyebrow {grid-column:1;grid-row:1;margin:0;line-height:27px}
+.development-lead {grid-column:2;grid-row:1;font-size:15px;line-height:27px}
+.development-lead strong {font-weight:650}
+.development-hero .development-title {grid-column:1;grid-row:2;align-self:center}
+.development-copy {grid-column:2;grid-row:2;max-width:none;padding:0}
+.development-work {display:flex;gap:32px;align-items:stretch}
+.development-card {flex:1 1 0;min-width:0;transition:flex-grow 650ms cubic-bezier(.22,.75,.2,1)}
+.development-card-visual {height:100%;background:var(--paper)}
+.development-card .work-image {display:block;height:300px;aspect-ratio:auto;isolation:isolate}
+.development-card .work-image img {object-fit:contain}
+.development-card .work-image video {position:absolute;inset:0;z-index:1;width:100%;height:100%;max-height:none;object-fit:cover;opacity:0;pointer-events:none;transition:opacity 350ms ease}
+.development-card.is-playing .work-image video {opacity:1}
+/* 선택이 끝나면 이전 영상 프레임 대신 원래 섬네일을 바로 보여줍니다. */
+.development-card:not(.is-playing) .work-image video {transition:none}
+.development-card .work-image:focus-visible {outline-offset:-5px}
+@media(min-width:761px) {
+ .development-work.has-active .development-card {flex-grow:.78}
+ .development-work.has-active .development-card.is-active {flex-grow:1.7}
+}
+@media(min-width:761px) and (max-width:1000px) {
+ .development-work.has-active .development-card {flex-grow:.9}
+ .development-work.has-active .development-card.is-active {flex-grow:1.35}
+}
+@media(max-width:900px) {.development-hero{column-gap:35px}.development-work{gap:24px}}
+@media(max-width:760px) {
+ .development-hero {grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto;gap:25px 20px}
+ .development-eyebrow {font-size:10px;line-height:1.8;letter-spacing:.1em;text-wrap:balance}
+ .development-lead {font-size:14px;line-height:1.8}
+ .development-hero .development-title {grid-column:1/-1;grid-row:2;justify-self:center;text-align:center;max-width:580px;font-size:clamp(30px,6vw,43px);line-height:1.4;letter-spacing:-.02em;padding:10px 0}
+ .development-copy {grid-column:1/-1;grid-row:3;font-size:14px;max-width:none}
+ .development-work.wrap {width:100%;flex-direction:column;gap:30px;padding-bottom:44px}
+ .development-card {flex:none}
+ .development-card .work-image {height:495px}
+ .development-card-copy {padding:0 24px 20px}
+ /* 바깥 카드 크기는 고정하고 안쪽만 확대해 선택 경계와 스크롤 높이를 유지합니다. */
+ .development-work.is-scroll-preview .development-card-visual {transform:scale(.94);transition:transform 550ms cubic-bezier(.22,.75,.2,1)}
+ .development-work.is-scroll-preview .development-card.is-active .development-card-visual {transform:scale(1)}
+}
+@media(max-width:640px) {.development-card-copy{padding-inline:20px}.development-section-line{gap:16px}}
+@media(prefers-reduced-motion:reduce) {
+ .development-work * {transition:none!important}
+ .development-work .development-card {flex-grow:1!important}
+ .development-work .development-card-visual {transform:none!important}
+}
+@media print {
+ .development-work {display:block}
+ .development-card {break-inside:avoid;margin-bottom:24px}
+ .development-card-visual {transform:none!important}
+ .development-card .work-image {height:auto;aspect-ratio:160/69}
+ .development-card .work-image video {display:none}
+}
