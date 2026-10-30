@@ -79,7 +79,7 @@ export function renderHome() {
     <section class="home-selected wrap" id="selected-work" aria-labelledby="selected-work-title">
       <header class="home-section-heading"><div><p class="home-eyebrow">SELECTED WORK</p><h2 id="selected-work-title">서로 다른 작업,<br class="home-mobile-break"> 하나로 이어지는 경험.</h2></div><p>관심 있는 분야에서<br>만드는 과정까지 살펴보세요.</p></header>
       <div class="home-work-cards" data-work-cards>
-        ${cards.map(card => `<article class="home-work-card" data-work-card="${card.id}">${media(card.chapters)}<div class="home-card-shade"></div><a class="home-card-link" href="${card.href}"><span class="home-card-category">${card.label}</span><div class="home-card-copy"><h3>${card.title}</h3><p class="home-card-description">${card.description}</p><p class="home-card-detail">${card.detail}</p><span class="home-card-cta">${card.link}<span aria-hidden="true">↗</span></span></div></a></article>`).join('')}
+        ${cards.map(card => `<article class="home-work-card" data-work-card="${card.id}"><div class="home-work-visual">${media(card.chapters)}<div class="home-card-shade"></div><a class="home-card-link" href="${card.href}"><span class="home-card-category">${card.label}</span><div class="home-card-copy"><h3>${card.title}</h3><p class="home-card-description">${card.description}</p><p class="home-card-detail">${card.detail}</p><span class="home-card-cta">${card.link}<span aria-hidden="true">↗</span></span></div></a></div></article>`).join('')}
       </div>
       <div class="home-project-shortcuts"><span>게임 프로젝트 바로가기</span><a href="gamelab.html">용사때문에 레벨업 <span aria-hidden="true">↗</span></a><a href="tasktown.html">TaskTown <span aria-hidden="true">↗</span></a></div>
     </section>

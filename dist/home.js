@@ -5,6 +5,7 @@
 
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+  const mobileCards = matchMedia('(max-width: 760px)');
   const connection = navigator.connection;
   const allowMotion = () => !reducedMotion.matches && !connection?.saveData;
   let pageActive = true;
@@ -160,9 +161,12 @@
   const cardSequences = cards.map(card => new MediaSequence(card.querySelector('[data-home-media]')));
   let hoveredCard = null;
   let focusedCard = null;
+  let scrollCard = null;
+  let cardScrollFrame = 0;
   let latestInput = 'pointer';
   function syncCards() {
-    const active = latestInput === 'pointer' ? hoveredCard || focusedCard : focusedCard || hoveredCard;
+    const active = mobileCards.matches ? scrollCard
+      : latestInput === 'pointer' ? hoveredCard || focusedCard : focusedCard || hoveredCard;
     cardGroup.classList.toggle('has-active', Boolean(active));
     cards.forEach((card, index) => {
       const selected = card === active;
@@ -181,6 +185,42 @@
       if (!card.contains(event.relatedTarget)) { focusedCard = null; syncCards(); }
     });
   });
+
+  function updateScrollCard() {
+    cardScrollFrame = 0;
+    let next = null;
+    if (mobileCards.matches) {
+      // 확대되지 않는 바깥 카드와 화면의 고정 기준선을 비교합니다.
+      const viewport = window.visualViewport;
+      const line = (viewport?.offsetTop || 0) + (viewport?.height || window.innerHeight) * .55;
+      const bounds = cards.map(card => card.getBoundingClientRect());
+      next = cards.find((card, index) => {
+        const top = index ? (bounds[index - 1].bottom + bounds[index].top) / 2 : bounds[index].top;
+        const bottom = index < cards.length - 1 ? (bounds[index].bottom + bounds[index + 1].top) / 2 : bounds[index].bottom;
+        return top <= line && line < bottom;
+      }) || null;
+    }
+    if (next !== scrollCard) { scrollCard = next; syncCards(); }
+  }
+  function queueScrollCard() {
+    if (mobileCards.matches && pageActive && !document.hidden && !cardScrollFrame) {
+      cardScrollFrame = requestAnimationFrame(updateScrollCard);
+    }
+  }
+  function syncCardMode() {
+    cancelAnimationFrame(cardScrollFrame);
+    hoveredCard = null;
+    cardGroup.classList.toggle('is-scroll-preview', mobileCards.matches);
+    updateScrollCard();
+    syncCards();
+  }
+  window.addEventListener('scroll', queueScrollCard, { passive: true });
+  window.addEventListener('resize', queueScrollCard);
+  window.addEventListener('load', queueScrollCard);
+  window.visualViewport?.addEventListener('resize', queueScrollCard);
+  window.visualViewport?.addEventListener('scroll', queueScrollCard, { passive: true });
+  document.fonts?.ready.then(queueScrollCard);
+  mobileCards.addEventListener('change', syncCardMode);
 
   if ('IntersectionObserver' in window) {
     const observationTargets = [hero, ...cards];
@@ -234,6 +274,10 @@
       cancelAnimationFrame(frame);
       frame = 0;
     }
+    if (document.hidden || !pageActive) {
+      cancelAnimationFrame(cardScrollFrame);
+      cardScrollFrame = 0;
+    } else queueScrollCard();
   }
   document.addEventListener('visibilitychange', syncAll);
   window.addEventListener('pagehide', () => { pageActive = false; finishTyping(); syncAll(); });
@@ -241,6 +285,7 @@
   reducedMotion.addEventListener('change', syncAll);
   connection?.addEventListener('change', syncAll);
   finePointer.addEventListener('change', () => { hoveredCard = null; syncCards(); });
+  syncCardMode();
   typeIntro();
   syncAll();
 })();

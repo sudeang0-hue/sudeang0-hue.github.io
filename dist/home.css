@@ -52,7 +52,8 @@
 .home-section-heading>p {color:var(--muted);font-size:13px;text-align:right}
 .home-mobile-break {display:none}
 .home-work-cards {display:flex;gap:15px;min-height:430px}
-.home-work-card {position:relative;isolation:isolate;overflow:hidden;flex:1 1 0;min-width:0;min-height:430px;color:var(--home-white);background:#152218;transition:flex-grow 650ms cubic-bezier(.22,.75,.2,1)}
+.home-work-card {position:relative;flex:1 1 0;min-width:0;min-height:430px;color:var(--home-white);transition:flex-grow 650ms cubic-bezier(.22,.75,.2,1)}
+.home-work-visual {position:relative;isolation:isolate;overflow:hidden;height:100%;background:#152218}
 .home-work-card .home-media {z-index:-2}
 .home-card-shade {position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(4,16,9,.96),rgba(4,16,9,.3) 65%,rgba(4,16,9,.25));pointer-events:none}
 .home-card-link {display:flex;flex-direction:column;justify-content:space-between;min-height:430px;height:100%;padding:25px;color:var(--home-white)}
@@ -101,6 +102,9 @@
  .home-section-heading {margin-bottom:23px}
  .home-work-cards {flex-direction:column;gap:18px}
  .home-work-card,.home-card-link {min-height:330px}
+ /* 바깥 카드의 크기는 유지하고 내부만 확대해 스크롤 판정과 문서 높이를 고정합니다. */
+ .home-work-cards.is-scroll-preview .home-work-visual {transform:scale(.94);transition:transform 550ms cubic-bezier(.22,.75,.2,1),box-shadow 550ms ease}
+ .home-work-cards.is-scroll-preview .home-work-card.is-active .home-work-visual {transform:scale(1);box-shadow:0 12px 28px #07110b26}
  .home-card-link {padding:25px}
  .home-card-copy h3 {font-size:28px}
  .home-card-copy h3 br {display:none}
@@ -130,5 +134,6 @@
 @media(prefers-reduced-motion:reduce) {
  .home-cinematic * {animation:none!important;transition:none!important;scroll-behavior:auto!important}
  .home-work-cards.has-active .home-work-card,.home-work-cards.has-active .home-work-card.is-active {flex-grow:1}
+ .home-work-cards.is-scroll-preview .home-work-visual {transform:none!important;box-shadow:none!important}
 }
-@media print {.home-hero-backdrop,.home-reel-navigation{display:none}.home-hero{color:#252b27;min-height:0;padding:20px 0}.home-description,.home-reel-caption>p:last-child{color:#626b63}.home-selected{margin:0}.home-work-cards{display:block}.home-work-card{break-inside:avoid}}
+@media print {.home-hero-backdrop,.home-reel-navigation{display:none}.home-hero{color:#252b27;min-height:0;padding:20px 0}.home-description,.home-reel-caption>p:last-child{color:#626b63}.home-selected{margin:0}.home-work-cards{display:block}.home-work-card{break-inside:avoid}.home-work-visual{transform:none!important;box-shadow:none!important}}
