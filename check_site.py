@@ -56,8 +56,11 @@ for destination in ('gamelab.html','tasktown.html','resume.html'):
     assert f'href="{destination}"' in development, f'Missing development destination: {destination}'
     detail=(root/destination).read_text(encoding='utf-8')
     assert 'href="development.html" aria-current="page"' in detail
-    if destination!='resume.html':
+    if destination=='tasktown.html':
         assert '<p class="breadcrumb"><a href="development.html">프로젝트</a>' in detail
+    if destination=='gamelab.html':
+        assert '01. OZ GAMELAB' not in detail
+        assert 'href="development.html">전체 프로젝트</a>' in detail
 for file in sorted(root.glob('*.html')):
     raw=file.read_text(encoding='utf-8')
     menu=raw.split('<nav aria-label="주요 메뉴">',1)[1].split('</nav>',1)[0]

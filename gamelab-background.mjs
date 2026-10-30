@@ -26,7 +26,7 @@ export function withGamelabBackground(html, assetURL) {
     .replace('<body', '<body data-gamelab-background-page')
     .replace(intro, (_, main, start, copy, metadata, links) => main + start
       + '<div class="gamelab-intro" data-gamelab-intro>' + backdrop
-      + '<div class="wrap gamelab-intro-stage">' + control + '</div>'
+      + '<div class="gamelab-intro-stage"><div class="wrap gamelab-intro-stage-controls">' + control + '</div></div>'
       + '<div class="wrap gamelab-intro-copy">' + revealCopy(copy) + '</div>'
       + '<div class="gamelab-intro-details"><div class="wrap">' + metadata.replaceAll('<div>', '<div data-gamelab-reveal>') + '</div></div>'
       + '</div><div class="wrap">' + links.replace(/<(a|span) class="text-link/g, '<$1 data-gamelab-reveal class="text-link') + '</div></header><div class="wrap">');

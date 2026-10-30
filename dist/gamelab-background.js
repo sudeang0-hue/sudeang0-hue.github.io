@@ -43,8 +43,8 @@
   }
 
   async function sync() {
-    // 소개 영역이 헤더 뒤로 완전히 지나간 뒤 정지하며 마지막 프레임은 유지합니다.
-    const bounds = intro.getBoundingClientRect();
+    // 실제 영상 영역이 헤더 뒤로 지나가면 정지하며 마지막 프레임은 유지합니다.
+    const bounds = background.getBoundingClientRect();
     inIntro = bounds.bottom > header.getBoundingClientRect().bottom
       && bounds.top < window.innerHeight;
     if (!shouldPlay()) {
