@@ -15,7 +15,9 @@ document.querySelectorAll('[data-goods-slider]').forEach(root => {
 
   // 정적 복사본도 app.js의 원본 확대 이벤트를 그대로 사용합니다.
   slides.forEach(slide => { if (slide.hasAttribute('data-goods-copy')) slide.hidden = false; });
-  const interval = Number(root.dataset.interval) === 2000 ? 2000 : 0;
+  const configuredInterval = Number(root.dataset.interval);
+  const interval = [1500, 2000].includes(configuredInterval) ? configuredInterval : 0;
+  const cycleTiming = root.dataset.intervalMode === 'cycle';
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const FINISH_FALLBACK_MS = 550;
   const wrap = value => (value % length + length) % length;
@@ -35,6 +37,7 @@ document.querySelectorAll('[data-goods-slider]').forEach(root => {
   let hovered = false;
   let pageActive = true;
   let timer = 0;
+  let cycleStartedAt = null;
   let drag = null;
   let suppressClickUntil = 0;
 
@@ -47,9 +50,19 @@ document.querySelectorAll('[data-goods-slider]').forEach(root => {
       play.setAttribute('aria-label', wantsAuto ? '자동 넘김 일시정지' : '자동 넘김 재생');
       play.querySelector('[data-play-icon]').textContent = wantsAuto ? 'Ⅱ' : '▶';
     }
-    if (!wantsAuto || !inView || !pageActive || document.hidden || hovered || moving || pendingSteps || drag || (root.matches(':focus-within') && document.activeElement !== play) || dialog?.open) return;
-    // 이동을 마친 사진을 2초 보여준 뒤 다음 사진으로 넘깁니다.
-    timer = setTimeout(() => move(1, false), interval);
+    if (!wantsAuto || !inView || !pageActive || document.hidden || hovered || drag || (root.matches(':focus-within') && document.activeElement !== play) || dialog?.open) {
+      // 다시 보거나 조작을 마치면 과거 시간과 관계없이 한 주기를 새로 기다립니다.
+      cycleStartedAt = null;
+      return;
+    }
+    if (moving || pendingSteps) return;
+    // 기본은 전환 후 표시 시간, cycle은 전환 시작 사이의 간격입니다.
+    const remaining = cycleTiming && cycleStartedAt !== null ? interval - (performance.now() - cycleStartedAt) : interval;
+    const delay = remaining > 0 ? remaining : interval;
+    timer = setTimeout(() => {
+      cycleStartedAt = performance.now();
+      move(1, false);
+    }, delay);
   }
 
   // 긴 디자인 페이지의 화면 밖 원본은 lazy로 두고, 가까이 왔을 때 이웃 사진을 준비합니다.
@@ -136,7 +149,7 @@ document.querySelectorAll('[data-goods-slider]').forEach(root => {
   }
 
   function move(direction, manual = true) {
-    if (manual) activateImages();
+    if (manual) { activateImages(); cycleStartedAt = null; }
     pendingSteps += direction;
     announcePending ||= manual;
     pump();
