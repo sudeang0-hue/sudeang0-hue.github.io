@@ -57,7 +57,9 @@ for destination in ('gamelab.html','tasktown.html','resume.html'):
     detail=(root/destination).read_text(encoding='utf-8')
     assert 'href="development.html" aria-current="page"' in detail
     if destination=='tasktown.html':
-        assert '<p class="breadcrumb"><a href="development.html">프로젝트</a>' in detail
+        assert '02. TASKTOWN' not in detail
+        assert '팀 출시 현황' not in detail and 'Steam 출시 예정' not in detail
+        assert 'href="development.html">전체 프로젝트</a>' in detail
     if destination=='gamelab.html':
         assert '01. OZ GAMELAB' not in detail
         assert 'href="development.html">전체 프로젝트</a>' in detail

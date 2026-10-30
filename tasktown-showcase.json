@@ -1,0 +1,95 @@
+{
+  "label": "TaskTown 상점 게임 화면",
+  "interval": 1500,
+  "sources": [
+    {
+      "kind": "STOVE 공식 상점 스크린샷",
+      "url": "https://store.onstove.com/ko/games/105590",
+      "checkedAt": "2026-10-30",
+      "sourceNote": "공식 상점에 공개된 스크린샷에서 서로 다른 게임 기능을 보여주는 6장을 선정했습니다. 아이콘·홍보 표지와 저해상도 축소 모드 화면은 제외했습니다.",
+      "processing": "원본 해상도 2560×1440과 색상·구도를 유지한 WebP 품질 90 사본입니다. 외부 원본은 변경하지 않았습니다.",
+      "screenshots": [
+        {
+          "file": "tasktown-showcase-01.webp",
+          "originalURL": "https://d2x8kymwjom7h7.cloudfront.net/live/application_no/SGS0104044/images/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-08-25%20153131_ts_1787639734948.png",
+          "width": 2560,
+          "height": 1440,
+          "originalBytes": 2471766,
+          "originalSha256": "85e492acbff8eb6adbb554d91c612f5684904f29add1054e3919d2730bef3f06"
+        },
+        {
+          "file": "tasktown-showcase-02.webp",
+          "originalURL": "https://d2x8kymwjom7h7.cloudfront.net/live/application_no/SGS0104044/images/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-08-25%20152900_ts_1787639679496.png",
+          "width": 2560,
+          "height": 1440,
+          "originalBytes": 2347507,
+          "originalSha256": "5eda1d9f886f99cd3b7637d1b7b5545012f4701536facd9121387062c24b61c9"
+        },
+        {
+          "file": "tasktown-showcase-03.webp",
+          "originalURL": "https://d2x8kymwjom7h7.cloudfront.net/live/application_no/SGS0104044/images/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-08-25%20153041_ts_1787639711219.png",
+          "width": 2560,
+          "height": 1440,
+          "originalBytes": 2793852,
+          "originalSha256": "a3b2dbecdbbc1cfb781f7781513474012f7b8f2722eccf9efb1cbf83071e2168"
+        },
+        {
+          "file": "tasktown-showcase-04.webp",
+          "originalURL": "https://d2x8kymwjom7h7.cloudfront.net/live/application_no/SGS0104044/images/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-08-25%20153629_ts_1787639816438.png",
+          "width": 2560,
+          "height": 1440,
+          "originalBytes": 2870992,
+          "originalSha256": "f6c3b25896a4a23e1ab10f5db991352dbe3f8e0a97be437e6331eefe60f2834b"
+        },
+        {
+          "file": "tasktown-showcase-05.webp",
+          "originalURL": "https://d2x8kymwjom7h7.cloudfront.net/live/application_no/SGS0104044/images/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-08-25%20154529_ts_1787640368254.png",
+          "width": 2560,
+          "height": 1440,
+          "originalBytes": 2689048,
+          "originalSha256": "66c4240a3c8c1db8ebecc8b44be8b4d39de6a5721b264a74bf424efa359cbb8b"
+        },
+        {
+          "file": "tasktown-showcase-06.webp",
+          "originalURL": "https://d2x8kymwjom7h7.cloudfront.net/live/application_no/SGS0104044/images/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202026-08-25%20154544_ts_1787640377985.png",
+          "width": 2560,
+          "height": 1440,
+          "originalBytes": 2442984,
+          "originalSha256": "1d0562e75d8009ed7d852096a28e139be05b6f17187293446676803716b069fe"
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "file": "tasktown-showcase-01.webp",
+      "alt": "Windows 바탕화면 위에 떠 있는 발바닥 모양 마을과 주민 초대 차량",
+      "caption": "공식 상점 화면 · 데스크톱 위의 마을"
+    },
+    {
+      "file": "tasktown-showcase-02.webp",
+      "alt": "메모장에서 타이핑하면서 데스크톱 마을의 재화를 모으는 화면",
+      "caption": "공식 상점 화면 · 타이핑과 게임 재화의 연결"
+    },
+    {
+      "file": "tasktown-showcase-03.webp",
+      "alt": "주민 초대와 도구 주문의 1회·10회 뽑기를 선택하는 화면",
+      "caption": "공식 상점 화면 · 주민 초대와 도구 주문"
+    },
+    {
+      "file": "tasktown-showcase-04.webp",
+      "alt": "입주민 목록에서 동물의 생산량과 전용 도구를 확인하고 도구를 배정하는 화면",
+      "caption": "공식 상점 화면 · 입주민 관리와 도구 배정"
+    },
+    {
+      "file": "tasktown-showcase-05.webp",
+      "alt": "마을 레벨업 조건과 클릭·타이핑·자동 생산 업그레이드를 확인하는 화면",
+      "caption": "공식 상점 화면 · 마을 성장과 업그레이드"
+    },
+    {
+      "file": "tasktown-showcase-06.webp",
+      "alt": "발견한 동물 주민과 미발견 주민을 구분해 보여주는 입주민 도감",
+      "caption": "공식 상점 화면 · 동물 주민 수집 도감"
+    }
+  ]
+}

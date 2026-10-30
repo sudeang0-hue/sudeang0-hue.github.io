@@ -3,7 +3,6 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 
 // 실제 소개 연출을 관찰·초점·설정 변경으로 검증합니다. 위치와 색은 브라우저에서 확인합니다.
-const source = fs.readFileSync(new URL('./dist/gamelab-intro.js', import.meta.url), 'utf8');
 class Element {
   constructor() {
     this.handlers = new Map();
@@ -24,9 +23,11 @@ class Element {
     for (const callback of this.handlers.get(type) || []) callback({target: this, ...event});
   }
   getBoundingClientRect() { return this.bounds; }
-  closest() { return this.revealParent || null; }
+  closest(selector) { return selector === this.revealSelector ? (this.revealParent || null) : null; }
 }
 
+for (const project of ['gamelab', 'tasktown']) {
+const source = fs.readFileSync(new URL(`./dist/${project}-intro.js`, import.meta.url), 'utf8');
 function setup({reduced = false, supported = true, pagePresent = true, length = 8, passedHeader = 0} = {}) {
   const page = new Element(), header = new Element(), motion = new Element();
   header.bounds = {bottom: 150};
@@ -51,19 +52,20 @@ function setup({reduced = false, supported = true, pagePresent = true, length = 
   const window = supported ? {IntersectionObserver: Observer} : {};
   vm.runInNewContext(source, {
     document: {
-      querySelector: selector => selector === '[data-gamelab-background-page]' ? (pagePresent ? page : null) : header,
-      querySelectorAll: () => items,
+      querySelector: selector => selector === `[data-${project}-background-page]` ? (pagePresent ? page : null) : selector === '.site-header' ? header : null,
+      querySelectorAll: selector => selector === `[data-${project}-reveal]` ? items : [],
     },
     window, IntersectionObserver: Observer, matchMedia: () => motion,
   });
   return {
     page, items, observers,
-    ready: () => page.classes.has('gamelab-reveal-ready'),
+    ready: () => page.classes.has(`${project}-reveal-ready`),
     pending: () => items.flatMap((item, index) => item.classes.has('is-reveal-pending') ? [index] : []),
-    delay: index => items[index].properties.get('--gamelab-reveal-delay'),
+    delay: index => items[index].properties.get(`--${project}-reveal-delay`),
     visible: entries => observers[0].callback(entries.map(([index, isIntersecting = true]) => ({target: items[index], isIntersecting}))),
     focus: index => {
       const link = new Element();
+      link.revealSelector = `[data-${project}-reveal]`;
       link.revealParent = index === null ? null : items[index];
       page.emit('focusin', {target: link});
     },
@@ -74,7 +76,7 @@ function setup({reduced = false, supported = true, pagePresent = true, length = 
 let passed = 0;
 function test(name, action) {
   try { action(); passed++; }
-  catch (error) { throw new Error(`${name}: ${error.message}`, {cause: error}); }
+  catch (error) { throw new Error(`${project} · ${name}: ${error.message}`, {cause: error}); }
 }
 
 test('대상 페이지나 소개 항목이 없으면 다른 문서에 영향을 주지 않음', () => {
@@ -131,7 +133,7 @@ test('키보드 초점으로 이동한 링크와 그 앞의 글은 지연 없이
   assert.deepEqual(state.pending(), [7]);
   for (const item of state.items.slice(0, 7)) {
     assert.equal(item.classes.has('is-reveal-immediate'), true);
-    assert.equal(item.properties.get('--gamelab-reveal-delay'), '0ms');
+    assert.equal(item.properties.get(`--${project}-reveal-delay`), '0ms');
     assert.equal(state.observers[0].observed.has(item), false);
   }
 });
@@ -151,11 +153,39 @@ test('중간에 모션 감소를 켜면 남은 항목과 지연을 즉시 해제
   assert.equal(state.observers[0].disconnected, true);
   for (const item of state.items) {
     assert.equal(item.classes.has('is-reveal-immediate'), true);
-    assert.equal(item.properties.get('--gamelab-reveal-delay'), '0ms');
+    assert.equal(item.properties.get(`--${project}-reveal-delay`), '0ms');
   }
   state.reduced(false);
   assert.equal(state.ready(), false);
   assert.deepEqual(state.pending(), []);
 });
 
-console.log(`게임랩 소개 등장·기본 표시·초점·모션 감소 검사 통과: ${passed}개`);
+console.log(`${project} 소개 등장·기본 표시·초점·모션 감소 검사 통과: ${passed}개`);
+}
+
+// 실제 생성 결과에도 실행 파일·등장 표식·상점 이미지 설정이 연결되는지 확인합니다.
+const tasktownHTML = fs.readFileSync(new URL('./dist/tasktown.html', import.meta.url), 'utf8');
+for (const script of ['tasktown-intro.js', 'goods-slider.js']) {
+  const matches = [...tasktownHTML.matchAll(/<script\b[^>]*src="([^"]+)"[^>]*>/g)]
+    .filter(match => match[1].split('?')[0] === script);
+  assert.equal(matches.length, 1, `TaskTown의 ${script}는 한 번 연결해야 합니다.`);
+}
+assert.match(tasktownHTML, /<body\b[^>]*data-tasktown-background-page/);
+for (const element of [
+  /<span class="eyebrow" data-tasktown-reveal>/,
+  /<h1 data-tasktown-reveal>TaskTown<\/h1>/,
+  /<p class="subtitle" data-tasktown-reveal>/,
+  /<p class="project-intro" data-tasktown-reveal>/,
+]) assert.match(tasktownHTML, element, 'TaskTown의 소개 항목에 등장 표식이 필요합니다.');
+
+const tasktownShowcase = JSON.parse(fs.readFileSync(new URL('./tasktown-showcase.json', import.meta.url), 'utf8'));
+assert.equal(tasktownShowcase.interval, 1500);
+assert.ok(tasktownShowcase.images.length > 1, '상점 슬라이드에 두 장 이상의 이미지가 필요합니다.');
+const sliderTag = tasktownHTML.match(/<section\b[^>]*id="goods-tasktown-showcase"[^>]*>/)?.[0];
+assert.ok(sliderTag, 'TaskTown 상점 슬라이더가 생성되어야 합니다.');
+assert.match(sliderTag, /data-interval="1500"/);
+assert.match(sliderTag, /data-interval-mode="cycle"/);
+for (const image of tasktownShowcase.images) {
+  assert.ok(tasktownHTML.includes(`src="assets/${image.file}"`), `상점 이미지 연결 누락: ${image.file}`);
+}
+console.log('TaskTown 소개 스크립트·표식 및 상점 슬라이더 생성 연결 검사 통과: 2개');

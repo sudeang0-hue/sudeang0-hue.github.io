@@ -39,6 +39,7 @@ jobs:
           node --check dist/home.js
           node --check dist/development.js
           node --check dist/gamelab-intro.js
+          node --check dist/tasktown-intro.js
           node --check dist/goods-slider.js
           node generate.mjs
           node check_home.mjs
