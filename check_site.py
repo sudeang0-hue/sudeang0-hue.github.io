@@ -144,8 +144,10 @@ goods=(root/'planning.html').read_text(encoding='utf-8')
 assert 'class="category-subnav goods-subnav wrap"' in goods
 assert 'aria-label="상품 기획·제작 세부 메뉴"' in goods
 assert 'aria-label="굿즈 사례 목차"' not in goods
-for section_id in ('goods-planning','goods-illustration','goods-production','goods-sales','goods-reflection','goods-events'):
+for section_id in ('goods-planning','goods-illustration','goods-sales','goods-reflection','goods-events'):
     assert f'href="#{section_id}"' in goods and f'id="{section_id}"' in goods
+assert '시안 협업' not in goods and 'href="#goods-production"' not in goods
+assert 'id="goods-production"' in goods, '기존 시안 협업 주소도 이어지는 상품 기록으로 이동해야 합니다.'
 
 # 게임 사례 목차는 프로젝트 메뉴에서 펼칠 수 있는 한 개의 패널로 유지합니다.
 for file_name, label, anchors in (
