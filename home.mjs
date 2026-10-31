@@ -47,7 +47,7 @@ function media(chapters, hero = false) {
 const cards = [
   { id: 'game', label: '01 / GAME DEVELOPMENT', title: '화면을 설계하고,<br>플레이로 연결합니다.', description: '게임랩 · TaskTown', detail: 'UI 설계·구현부터 팀 기능 통합까지.', href: 'development.html', link: '게임 개발 작업 보기', chapters: homeChapters.slice(0, 2) },
   { id: 'design', label: '02 / DESIGN & COMMUNICATION', title: '정보를 이야기로<br>전합니다.', description: '디자인 · 홍보 · 일러스트', detail: '공공홍보 콘텐츠와 개인 시각 작업.', href: 'design.html', link: '디자인·홍보 작업 보기', chapters: [homeChapters[2]] },
-  { id: 'goods', label: '03 / ILLUSTRATION & GOODS', title: '그림을 실물로<br>이어갑니다.', description: '굿즈 기획 · 제작', detail: '본인 일러스트에서 공동 부스 판매까지.', href: 'planning.html', link: '굿즈 기획·제작 보기', chapters: [homeChapters[3]] },
+  { id: 'goods', label: '03 / ILLUSTRATION & GOODS', title: '그림을 실물로<br>이어갑니다.', description: '상품 기획 · 제작', detail: '본인 일러스트에서 공동 부스 판매까지.', href: 'planning.html', link: '상품 기획·제작 보기', chapters: [homeChapters[3]] },
 ];
 
 export function renderHome() {
