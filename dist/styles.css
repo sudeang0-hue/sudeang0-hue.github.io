@@ -558,6 +558,8 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
 .public-more-works[open]>.public-more-button .public-less-label{display:inline}
 .public-more-works[open]>.public-more-button .public-work-chevron{transform:rotate(180deg)}
 .public-more-works>.public-work-grid{margin-top:32px}
+.public-more-collapse{margin-top:28px}
+.public-more-collapse[hidden]{display:none}
 .public-work-card{min-width:0;padding:0 0 25px;border-bottom:1px solid var(--line);scroll-margin-top:5px}
 .public-work-card[hidden]{display:none}
 .public-work-card h3{font-size:20px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere;margin:7px 0 16px}
