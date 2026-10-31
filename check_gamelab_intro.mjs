@@ -117,6 +117,23 @@ test('관찰 이벤트의 순서와 관계없이 같은 화면의 글은 문서 
   assert.equal(state.observers[0].observed.size, 4);
 });
 
+test('첫 프레임의 관찰 알림도 각 문구의 등장 애니메이션을 시작', () => {
+  const state = setup();
+  assert.ok(state.items.every(item => !item.classes.has('is-revealed')));
+  state.visible([[0], [1], [2], [3]]);
+  assert.ok(state.items.slice(0, 4).every(item => item.classes.has('is-revealed')));
+  assert.ok(state.items.slice(4).every(item => !item.classes.has('is-revealed')));
+  assert.deepEqual([0, 1, 2, 3].map(state.delay), ['0ms', '140ms', '280ms', '420ms']);
+});
+
+test('반복 관찰 알림이 진행 중인 순서와 지연을 초기화하지 않음', () => {
+  const state = setup();
+  state.visible([[0], [1], [2]]);
+  state.visible([[2], [1]]);
+  assert.equal(state.delay(2), '280ms');
+  assert.equal(state.delay(1), '140ms');
+});
+
 test('화면 밖 항목은 기다리고 한번 등장한 항목은 다시 숨기지 않음', () => {
   const state = setup();
   state.visible([[0], [1, false]]);
