@@ -285,6 +285,16 @@ body:has([data-history-carousel]){overflow-anchor:none}
 
 @media(max-width:640px){.goods-return{gap:18px 20px}}
 
+/* 모바일 상품 사진은 화면 끝까지 넓히고 설명과 조작부의 읽는 여백은 유지합니다. */
+@media screen and (max-width:640px){
+ body[data-goods-background-page] .goods-photos>.media{min-width:0}
+ body[data-goods-background-page] .goods-photos .zoom-trigger,
+ body[data-goods-background-page] .goods-slider-window{width:calc(100% + 40px);margin-inline:-20px}
+ body[data-goods-background-page] .goods-photos img{height:auto;max-height:none;aspect-ratio:auto}
+ body[data-goods-background-page] .goods-gallery .goods-tiles{grid-template-columns:minmax(0,1fr)}
+ body[data-goods-background-page] .goods-slider figcaption{padding-inline:20px}
+}
+
 /* 게임랩 리디자인: 원본 캡처를 보존하고 본문에서 오류 영역만 확대합니다. */
 #redesign .redesign-block{margin-top:40px;padding-top:28px;border-top:1px solid var(--line);min-width:0}
 #redesign .redesign-block h4{font-size:20px;line-height:1.55;margin:0 0 15px;letter-spacing:-.035em}
