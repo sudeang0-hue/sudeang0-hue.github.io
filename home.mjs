@@ -24,7 +24,7 @@ export const homeChapters = [
     ],
   },
   {
-    title: '봉래제 · 일러스트 굿즈', label: 'ILLUSTRATION · GOODS', href: 'planning.html', keyword: 2,
+    title: '일러스트 상품화 작업', label: 'ILLUSTRATION · GOODS', href: 'planning.html', keyword: 2,
     role: '동방 프로젝트 팬 창작 · 제작 발주 · 공동 부스 판매',
     scenes: [
       { image: 'goods-background-07.webp', position: '50% 60%', duration: 2000 },
