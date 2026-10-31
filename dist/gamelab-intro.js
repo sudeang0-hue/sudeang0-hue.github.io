@@ -27,7 +27,7 @@
     const visible = new Set(entries.filter(entry => entry.isIntersecting).map(entry => entry.target));
     let order = 0;
     items.forEach(item => {
-      if (visible.has(item) && item.classList.contains('is-reveal-pending')) reveal(item, order++ * 140);
+      if (visible.has(item) && item.classList.contains('is-reveal-pending')) reveal(item, order++ * 320);
     });
   }, {threshold: .12, rootMargin: '0px 0px -6% 0px'});
   items.filter(item => item.classList.contains('is-reveal-pending')).forEach(item => observer.observe(item));

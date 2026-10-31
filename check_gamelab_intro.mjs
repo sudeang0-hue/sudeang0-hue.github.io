@@ -112,7 +112,7 @@ test('복원된 스크롤에서 이미 헤더 위로 지나간 글을 다시 숨
 test('관찰 이벤트의 순서와 관계없이 같은 화면의 글은 문서 순서로 등장', () => {
   const state = setup();
   state.visible([[3], [1], [0], [2]]);
-  assert.deepEqual([0, 1, 2, 3].map(state.delay), ['0ms', '140ms', '280ms', '420ms']);
+  assert.deepEqual([0, 1, 2, 3].map(state.delay), ['0ms', '320ms', '640ms', '960ms']);
   assert.deepEqual(state.pending(), [4, 5, 6, 7]);
   assert.equal(state.observers[0].observed.size, 4);
 });
@@ -123,15 +123,15 @@ test('첫 프레임의 관찰 알림도 각 문구의 등장 애니메이션을 
   state.visible([[0], [1], [2], [3]]);
   assert.ok(state.items.slice(0, 4).every(item => item.classes.has('is-revealed')));
   assert.ok(state.items.slice(4).every(item => !item.classes.has('is-revealed')));
-  assert.deepEqual([0, 1, 2, 3].map(state.delay), ['0ms', '140ms', '280ms', '420ms']);
+  assert.deepEqual([0, 1, 2, 3].map(state.delay), ['0ms', '320ms', '640ms', '960ms']);
 });
 
 test('반복 관찰 알림이 진행 중인 순서와 지연을 초기화하지 않음', () => {
   const state = setup();
   state.visible([[0], [1], [2]]);
   state.visible([[2], [1]]);
-  assert.equal(state.delay(2), '280ms');
-  assert.equal(state.delay(1), '140ms');
+  assert.equal(state.delay(2), '640ms');
+  assert.equal(state.delay(1), '320ms');
 });
 
 test('화면 밖 항목은 기다리고 한번 등장한 항목은 다시 숨기지 않음', () => {
