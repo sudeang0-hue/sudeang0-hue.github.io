@@ -9,6 +9,8 @@
 - `dist/graphic-design.css`: 해당 영역에만 적용하는 PC·모바일·인쇄 스타일
 - `asset-sizes.json`: 이미지 크기. 그림을 교체하면 실제 크기로 함께 갱신합니다.
 
+각 작품의 본문 끝에 ‘세부사항 펼치기/접기’를 표시합니다. 제작·담당·도구·규격(`graphic-meta`)은 기본 닫힘 `details` 안에 두고, 본문과 디자인 판단 설명은 바로 읽을 수 있게 표시합니다. 별도 스크립트 없이 클릭·키보드로 조작합니다.
+
 수정 후 `node generate.mjs`, `python check_site.py`, `node check_security.mjs`, `python check_security.py`로 생성·검사합니다. `dist/design.html`은 생성 결과이므로 직접 편집하지 않습니다.
 
 ## 근거와 담당 범위
