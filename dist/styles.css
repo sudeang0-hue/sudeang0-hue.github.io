@@ -564,6 +564,13 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
 .public-work-card figcaption{font-size:11px;line-height:1.7;margin-top:9px;color:var(--muted)}
 .public-work-description{font-size:14px;line-height:1.85;margin-top:17px}
 .public-work-detail{font-size:12px;line-height:1.8;color:var(--muted);margin-top:8px}
+.public-work-disclosure{margin-top:17px}
+.public-work-disclosure>.public-work-description{display:block;list-style:none;cursor:pointer;margin:0;min-height:44px}
+.public-work-disclosure>summary::-webkit-details-marker{display:none}
+.public-work-chevron{display:inline-block;width:18px;height:18px;vertical-align:-3px;margin-left:4px;fill:none;stroke:var(--green);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.public-work-disclosure[open] .public-work-chevron{transform:rotate(180deg)}
+.public-work-notes{padding-top:4px}
+.public-work-credit{font-size:12px;line-height:1.8;color:var(--muted);margin-top:8px}
 .public-source-links{display:grid;gap:8px;margin-top:18px}
 .public-source-primary{display:inline-flex;justify-self:start;min-height:40px;align-items:center;font-size:12px;color:var(--green)}
 .public-extra-links{font-size:12px;color:var(--muted)}
@@ -604,6 +611,12 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
  .public-work-grid{grid-template-columns:1fr;gap:32px}
  .public-work-card h3{font-size:19px}
  .public-thumbnail{--public-thumbnail-size:300px}
+ /* 공공기관 작품만 화면 끝까지 넓히고, 설명은 기존 본문 여백에 둡니다. */
+ #public-work .public-work-card .public-thumbnail{width:calc(100% + 40px);margin-inline:-20px}
+ #public-work .public-reader-link{height:auto;border-inline:0}
+ #public-work .public-thumbnail--contain .public-reader-link img{height:auto;max-height:none}
+ #public-work .public-thumbnail--top .public-reader-link{aspect-ratio:1}
+ .design-portfolio #public-work .public-thumbnail--top .public-reader-link img{width:100%}
  .public-collection-note{font-size:13px}
  .public-work-filters button{padding:8px 16px}
  .design-next{padding:45px 0;min-height:60vh;margin-top:38px}
@@ -616,7 +629,6 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
 .public-reader-link{display:grid;grid-template-rows:minmax(0,1fr);place-items:center;position:relative;overflow:hidden;width:100%;height:var(--public-thumbnail-size);background:var(--media);border:1px solid var(--line);cursor:pointer}
 .public-work-card .public-reader-link img{position:static;width:100%;height:100%;max-height:100%;object-fit:contain}
 .design-portfolio .public-thumbnail--top .public-reader-link img{position:absolute;inset:0 auto auto 50%;width:min(100%,var(--public-thumbnail-size));height:auto;max-height:none;transform:translateX(-50%);object-position:50% 0%}
-.public-reader-hint{display:block;margin-top:3px;color:var(--green);font-size:11px;font-weight:600}
 .public-reader-link:hover{border-color:var(--green)}
 .webtoon-toolbar{min-height:49px;display:flex;gap:22px;align-items:center;border-top:1px solid var(--line);font-size:12px}
 .webtoon-toolbar a{flex:0 0 auto;padding:11px 0;color:var(--green);font-weight:600}
@@ -700,8 +712,6 @@ html:has(.webtoon-reader){scroll-padding-top:170px}
  .resume-item time,.cert-list small,.evidence a,.caption,figcaption,.zoom-hint,.public-reader-hint,.public-work-card figcaption,.meta-grid dt{font-size:var(--read-label)}
  .redesign-screen-zoom{font-size:var(--read-label)}
  .meta-grid dt{letter-spacing:0}
- .public-intro-actions{margin-top:20px}
- .public-intro-actions .btn-quiet{display:inline-flex;align-items:center;min-height:44px;border-color:var(--green);color:var(--green);font-size:14px}
  .public-process-disclosure{margin:0 0 28px;border-bottom:1px solid var(--line)}
  .public-process-disclosure>summary{min-height:52px;padding:13px 0;cursor:pointer;color:var(--green);font-size:14px;font-weight:600}
  .public-process-disclosure>summary:hover{color:var(--ink)}
@@ -725,7 +735,7 @@ html:has(.webtoon-reader){scroll-padding-top:170px}
  #public-works-title{font-size:22px}
 }
 @media print{
- .public-intro-actions,.public-process-disclosure>summary{display:none}
+ .public-process-disclosure>summary{display:none}
  .public-process-disclosure{border:0;margin:0}
  .public-process-disclosure::details-content{content-visibility:visible;display:contents}
  .public-process-disclosure>.public-process{display:grid!important}
