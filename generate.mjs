@@ -212,7 +212,7 @@ function goodsPhoto(photo,captionLabel=false){
  const assetPath=path.resolve(assetRoot,photo.file);
  if(!assetPath.startsWith(assetRoot+path.sep)||!fs.statSync(assetPath).isFile())throw new Error('굿즈 이미지 경로를 확인하세요.');
  const label=photo.label?'<span class="'+(captionLabel?'goods-slide-owner':'figure-tag')+'">'+escapeHtml(photo.label)+'</span>':'';
- const figure=zoom(photo.file,photo.alt,photo.caption||'','',captionLabel?label:'');
+ const figure=zoom(photo.file,photo.alt,photo.caption||'','',captionLabel?label:'').replace(' <span class="zoom-hint">이미지 확대 ↗</span>','');
  return !captionLabel&&label?figure.replace('<button class="zoom-trigger"',label+'<button class="zoom-trigger"'):figure;
 }
 function goodsPhotos(images,placeholder,layout='',slider){
