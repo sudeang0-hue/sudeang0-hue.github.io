@@ -136,7 +136,7 @@ for cert_id in ('cert-computer-graphics','cert-itq-excel','cert-itq-powerpoint',
 # 굿즈 목차는 상단 하위 메뉴 한 곳에서 각 본문 영역으로 연결합니다.
 goods=(root/'planning.html').read_text(encoding='utf-8')
 assert 'class="category-subnav goods-subnav wrap"' in goods
-assert 'aria-label="굿즈 기획·제작 세부 메뉴"' in goods
+assert 'aria-label="상품 기획·제작 세부 메뉴"' in goods
 assert 'aria-label="굿즈 사례 목차"' not in goods
 for section_id in ('goods-planning','goods-illustration','goods-production','goods-sales','goods-reflection','goods-events'):
     assert f'href="#{section_id}"' in goods and f'id="{section_id}"' in goods
