@@ -38,6 +38,7 @@ jobs:
           node --check dist/theme.js
           node --check dist/home.js
           node --check dist/development.js
+          node --check dist/design-portfolio.js
           node --check dist/gamelab-intro.js
           node --check dist/tasktown-intro.js
           node --check dist/goods-slider.js

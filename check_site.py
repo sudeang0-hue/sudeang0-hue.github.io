@@ -73,6 +73,12 @@ for file in sorted(root.glob('*.html')):
 design=(root/'design.html').read_text(encoding='utf-8')
 public_section=design.split('id="public-work"',1)[1].split('id="illustration-work"',1)[0]
 assert 'public-gallery' not in public_section and 'data-zoom' not in public_section
+assert 'data-public-filter' not in public_section and '제작 연도 선택' not in public_section
+featured, more = public_section.split('<details class="public-more-works" data-public-more>', 1)
+featured_ids=re.findall(r'id="public-(202[23]-\d{2})"',featured)
+assert featured_ids == work_ids[:6] and featured_ids[-1]=='2022-08'
+assert re.findall(r'id="public-(202[23]-\d{2})"',more) == work_ids[6:]
+assert '작품 더보기' in more
 illustration=design.split('id="illustration-work"',1)[1].split('id="design-work"',1)[0]
 illustration_data=json.loads((root.parent/'illustration-content.json').read_text(encoding='utf-8'))
 assert illustration.count('data-zoom') == len(illustration_data['works'])+1

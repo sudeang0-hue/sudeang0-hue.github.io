@@ -548,12 +548,16 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
 .public-process-steps h3{font-size:16px;line-height:1.7}
 .public-process-steps p{grid-column:2;color:var(--muted);font-size:14px;line-height:1.85;margin-top:5px}
 .public-collection-note{font-size:14px;line-height:1.9;color:var(--muted);max-width:880px;margin:17px 0 22px}
-.public-work-filters{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:22px 0 26px}
-.public-work-filters[hidden]{display:none}
-.public-work-filters button{min-height:42px;padding:8px 18px;background:transparent;border:1px solid var(--line);font-size:13px;color:var(--muted)}
-.public-work-filters button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--inverse)}
-.public-work-filters [data-public-result]{font-size:12px;color:var(--muted);margin-left:auto}
 .public-work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:44px 30px}
+.public-more-works{margin-top:28px}
+.public-more-button{display:flex;align-items:center;justify-content:center;gap:10px;list-style:none;width:fit-content;max-width:100%;min-height:48px;margin:0 auto;padding:10px 24px;border:1px solid var(--green);color:var(--green);font-size:14px;font-weight:600;cursor:pointer}
+.public-more-button::-webkit-details-marker{display:none}
+.public-more-button:hover{background:var(--wash)}
+.public-more-count{font-size:12px;font-weight:400;color:var(--muted)}
+.public-less-label,.public-more-works[open]>.public-more-button :is(.public-more-label,.public-more-count){display:none}
+.public-more-works[open]>.public-more-button .public-less-label{display:inline}
+.public-more-works[open]>.public-more-button .public-work-chevron{transform:rotate(180deg)}
+.public-more-works>.public-work-grid{margin-top:32px}
 .public-work-card{min-width:0;padding:0 0 25px;border-bottom:1px solid var(--line);scroll-margin-top:5px}
 .public-work-card[hidden]{display:none}
 .public-work-card h3{font-size:20px;line-height:1.65;word-break:keep-all;overflow-wrap:anywhere;margin:7px 0 16px}
@@ -615,12 +619,11 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
  #public-work .public-thumbnail--top .public-reader-link{aspect-ratio:1}
  .design-portfolio #public-work .public-thumbnail--top .public-reader-link img{width:100%}
  .public-collection-note{font-size:13px}
- .public-work-filters button{padding:8px 16px}
  .design-next{padding:45px 0;min-height:60vh;margin-top:38px}
  .design-next h2{font-size:30px}
  .design-next p{font-size:14px}
 }
-@media print{.public-thumbnail{--public-thumbnail-size:190px}.public-work-filters,.public-social-links,.public-source-links,.design-subnav{display:none}.public-work-grid{display:block}.public-work-card{break-inside:avoid;margin-bottom:25px}.public-header-main{display:block}.design-next{min-height:0;margin-top:30px;padding:25px 0}}
+@media print{.public-thumbnail{--public-thumbnail-size:190px}.public-social-links,.public-source-links,.design-subnav{display:none}.public-work-grid{display:block}.public-work-card{break-inside:avoid;margin-bottom:25px}.public-header-main{display:block}.design-next{min-height:0;margin-top:30px;padding:25px 0}}
 
 /* 작품 카드는 이미지 확대 대신 원래 순서의 읽기 페이지로 연결합니다. */
 .public-reader-link{display:grid;grid-template-rows:minmax(0,1fr);place-items:center;position:relative;overflow:hidden;width:100%;height:var(--public-thumbnail-size);background:var(--media);border:1px solid var(--line);cursor:pointer}
