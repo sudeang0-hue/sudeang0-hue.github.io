@@ -13,8 +13,11 @@
   page.classList.add('tasktown-reveal-ready');
 
   function reveal(item, delay = 0, immediate = false) {
+    if (!immediate && !item.classList.contains('is-reveal-pending')) return;
     item.style.setProperty('--tasktown-reveal-delay', `${delay}ms`);
     if (immediate) item.classList.add('is-reveal-immediate');
+    // 첫 화면에서 숨김·표시가 같은 프레임에 처리되어도 시작 상태부터 재생합니다.
+    else item.classList.add('is-revealed');
     item.classList.remove('is-reveal-pending');
     observer.unobserve(item);
   }

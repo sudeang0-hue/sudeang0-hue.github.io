@@ -105,12 +105,15 @@
 @media (max-width: 640px) {
   .gamelab-intro-copy .project-intro { margin-top: 18px; }
 }
-.gamelab-reveal-ready [data-gamelab-reveal] {
-  transition: opacity 650ms ease, transform 700ms cubic-bezier(.2,.7,.2,1);
-  transition-delay: var(--gamelab-reveal-delay, 0ms);
+.gamelab-reveal-ready [data-gamelab-reveal].is-revealed {
+  animation: gamelab-intro-reveal 700ms cubic-bezier(.2,.7,.2,1) var(--gamelab-reveal-delay, 0ms) both;
 }
-.gamelab-reveal-ready [data-gamelab-reveal].is-reveal-pending { opacity: 0; transform: translateY(24px); }
-.gamelab-reveal-ready [data-gamelab-reveal].is-reveal-immediate { transition: none; }
+.gamelab-reveal-ready [data-gamelab-reveal].is-reveal-pending { opacity: 0; transform: translateY(24px); transition: none; }
+.gamelab-reveal-ready [data-gamelab-reveal].is-reveal-immediate { animation: none; }
+@keyframes gamelab-intro-reveal {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .gamelab-showcase { margin-bottom: 32px; }
 .gamelab-showcase .goods-slider-heading { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
 .gamelab-showcase .goods-slider-heading .figure-tag { min-width: 0; margin: 0; line-height: 1.7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -127,12 +130,12 @@
 .gamelab-showcase[data-ready] .zoom-trigger { aspect-ratio: 16 / 9; max-height: none; }
 .gamelab-showcase img { object-fit: contain; }
 @media (prefers-reduced-motion: reduce) {
-  .gamelab-reveal-ready [data-gamelab-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
+  .gamelab-reveal-ready [data-gamelab-reveal] { opacity: 1 !important; transform: none !important; transition: none; animation: none !important; }
 }
 @media print {
   .gamelab-intro-stage { display: none; }
   .gamelab-intro-copy { padding: 0; }
-  .gamelab-reveal-ready [data-gamelab-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
+  .gamelab-reveal-ready [data-gamelab-reveal] { opacity: 1 !important; transform: none !important; transition: none; animation: none !important; }
   .gamelab-background,
   .gamelab-background-toggle,
   .gamelab-intro-details::before { display: none !important; }
