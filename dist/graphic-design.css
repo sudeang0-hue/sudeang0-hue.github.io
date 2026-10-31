@@ -21,10 +21,10 @@
 #design-work .graphic-project h3{font-size:clamp(25px,2.5vw,32px);line-height:1.5;letter-spacing:-.04em}
 #design-work .graphic-feature{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:44px;align-items:start}
 #design-work .graphic-summary{font-size:16px;line-height:1.9;color:var(--ink)}
-#design-work .graphic-meta-disclosure>summary{display:block;list-style:none;cursor:pointer}
+#design-work .graphic-meta-disclosure>summary{display:block;position:relative;padding-right:28px;list-style:none;cursor:pointer}
 #design-work .graphic-meta-disclosure>summary::-webkit-details-marker{display:none}
-#design-work .graphic-meta-action{display:inline-flex;align-items:center;gap:6px;vertical-align:middle;min-height:44px;margin-left:6px;padding:6px 10px;border:1px solid var(--line);color:var(--green);font-size:12px;line-height:1.6;white-space:nowrap}
-#design-work .graphic-meta-disclosure>summary:hover .graphic-meta-action{border-color:var(--green);background:var(--wash)}
+#design-work .graphic-meta-action{display:inline-flex;position:absolute;right:0;bottom:3px;align-items:center;justify-content:center;width:24px;height:24px;color:var(--green);line-height:1}
+#design-work .graphic-meta-disclosure>summary:hover .graphic-meta-action{color:var(--ink)}
 #design-work .graphic-meta-action svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 #design-work .graphic-meta-hide,#design-work .graphic-meta-disclosure[open] .graphic-meta-show{display:none}
 #design-work .graphic-meta-disclosure[open] .graphic-meta-hide{display:inline}
