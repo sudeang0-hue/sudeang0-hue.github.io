@@ -23,11 +23,8 @@ export function renderDesignPortfolio(data, {escapeHtml: esc, ext, illustration,
   const channelLink = channel => '<a class="text-link public-social-link external-link" href="'+esc(checkedExternalURL(channel.url))+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(channel.label)+' (새 창)">'+channelIcons[channel.icon]+'<span class="public-channel-label"><span class="public-channel-full">'+esc(channel.label)+'</span><span class="public-channel-short">'+esc(channel.shortLabel)+'</span></span><span class="external-arrow" aria-hidden="true">↗</span></a>';
   const thumbnailPhoto = (image, work) => '<figure class="media public-art public-thumbnail public-thumbnail--'+(image.view === 'top' ? 'top' : 'contain')+'"><a class="public-reader-link" href="'+publicReaderPath(work.id)+'" aria-label="'+esc(work.title)+' '+esc(work.readerLabel||'작품 읽기')+'"><img src="assets/'+checkedAssetPath(image.file)+'" alt="'+esc(image.alt)+'" loading="lazy" decoding="async"></a></figure>';
   const sourceLinks = work => {
-    if (!work.links.length) return '';
     const primary = work.links.filter(link => link.platform === 'instagram');
-    const extra = work.links.filter(link => link.platform !== 'instagram');
-    return '<div class="public-source-links">'+primary.map(link => ext(link.url, link.label, 'text-link public-source-primary')).join('')+
-      (extra.length ? '<details class="public-extra-links"><summary>공식 홈페이지·배포 채널 '+extra.length+'곳</summary><div>'+extra.map(link => ext(link.url, link.label, 'text-link')).join('')+'</div></details>' : '')+'</div>';
+    return primary.length ? '<div class="public-source-links">'+primary.map(link => ext(link.url, link.label, 'text-link public-source-primary')).join('')+'</div>' : '';
   };
   const card = work => {
     const images = work.images || [];

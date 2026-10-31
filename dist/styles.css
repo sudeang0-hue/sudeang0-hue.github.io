@@ -571,12 +571,9 @@ html:has(.design-subnav){scroll-padding-top:calc(var(--section-header-height,148
 .public-work-disclosure[open] .public-work-chevron{transform:rotate(180deg)}
 .public-work-notes{padding-top:4px}
 .public-work-credit{font-size:12px;line-height:1.8;color:var(--muted);margin-top:8px}
-.public-source-links{display:grid;gap:8px;margin-top:18px}
-.public-source-primary{display:inline-flex;justify-self:start;min-height:40px;align-items:center;font-size:12px;color:var(--green)}
-.public-extra-links{font-size:12px;color:var(--muted)}
-.public-extra-links>summary{cursor:pointer;padding:9px 0;min-height:38px}
-.public-extra-links>div{display:grid;gap:4px;padding:5px 0 10px}
-.public-extra-links .text-link{font-size:12px;padding:5px 0;justify-self:start;max-width:100%;overflow-wrap:anywhere}
+.public-source-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(120px,100%),1fr));gap:8px 16px;margin-top:18px}
+.public-source-primary{display:inline-flex;justify-self:start;min-width:0;max-width:100%;min-height:40px;align-items:center;font-size:12px;color:var(--green)}
+.public-source-primary>span:not(.external-arrow){min-width:0;overflow-wrap:anywhere}
 .public-source-pending{font-size:12px;color:var(--muted);line-height:1.8}
 .public-art-pending{height:310px;display:grid;place-items:center;border:1px dashed var(--line);background:var(--wash);color:var(--muted);font-size:13px}
 .design-next{padding:65px 0;min-height:55vh;border-top:1px solid var(--line);margin-top:60px}
@@ -651,7 +648,11 @@ html:has(.webtoon-reader){scroll-padding-top:170px}
 .webtoon-credit{font-size:12px;color:var(--muted)}
 .webtoon-publications{margin-top:28px;padding-top:24px;border-top:1px solid var(--line)}
 .webtoon-publications h2{font-size:17px;margin-bottom:15px}
-.webtoon-publications nav{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-start;font-size:12px}
+.webtoon-publications nav{display:grid;gap:18px;font-size:12px}
+.webtoon-instagram-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(120px,100%),1fr));gap:12px 16px}
+.webtoon-instagram-links .text-link{min-width:0;justify-self:start}
+.webtoon-instagram-links .text-link>span:not(.external-arrow){min-width:0;overflow-wrap:anywhere}
+.webtoon-distribution-links{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-start}
 .webtoon-publications .text-link{font-size:12px;max-width:100%;overflow-wrap:anywhere}
 .webtoon-publications p{font-size:12px;color:var(--muted)}
 .webtoon-adjacent{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:34px;padding-top:25px;border-top:1px solid var(--line);align-items:start}

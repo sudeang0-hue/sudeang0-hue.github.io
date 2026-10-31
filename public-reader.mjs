@@ -11,6 +11,10 @@ export function renderPublicReader(work, reading, works, { ext }) {
   const index = works.findIndex(item => item.id === work.id);
   const previous = works[index-1];
   const next = works[index+1];
+  const instagram = work.links.filter(link => link.platform === 'instagram');
+  const distribution = work.links.filter(link => link.platform !== 'instagram');
+  const publicationLinks = (instagram.length ? '<div class="webtoon-instagram-links">'+instagram.map(link=>ext(link.url,link.label)).join('')+'</div>' : '')+
+    (distribution.length ? '<div class="webtoon-distribution-links">'+distribution.map(link=>ext(link.url,link.label)).join('')+'</div>' : '');
   const chapterMenu = reading.chapters.length > 1 ? '<nav class="webtoon-chapters" aria-label="작품 회차">'+reading.chapters.map((chapter,i) => '<a href="#reader-chapter-'+(i+1)+'">'+esc(chapter.title)+'</a>').join('')+'</nav>' : '';
   const chapters = reading.chapters.map((chapter,i) => {
     if (!chapter.pages?.length) throw new Error('읽기 이미지가 필요합니다: '+work.id);
@@ -21,5 +25,5 @@ export function renderPublicReader(work, reading, works, { ext }) {
   }).join('');
   const adjacent = (other,label,arrow) => other ? '<a href="'+publicReaderPath(other.id)+'"><span>'+label+' '+arrow+'</span><strong>'+esc(other.title)+'</strong></a>' : '<span class="webtoon-adjacent-empty" aria-hidden="true"></span>';
   return '<article class="webtoon-reader" id="reader-top" data-reader-work="'+esc(work.id)+'"><header class="webtoon-head"><p class="eyebrow">'+esc(work.year)+' · '+esc(work.kind)+'</p><h1>'+esc(work.title)+'</h1><p class="webtoon-description">'+esc(work.description)+'</p>'+(reading.note?'<p class="webtoon-scope">'+esc(reading.note)+'</p>':'')+chapterMenu+'</header>'+chapters+
-    '<footer class="webtoon-end"><p class="webtoon-credit">제작: 최희수 · '+esc(work.kind)+'</p>'+(work.links.length?'<div class="webtoon-publications"><h2>'+esc(work.publicationHeading||'공식 게시 기록')+'</h2><nav aria-label="'+esc(work.title)+' 관련 링크">'+work.links.map(link=>ext(link.url,link.label)).join('')+'</nav></div>':'')+'<nav class="webtoon-adjacent" aria-label="다른 작품 읽기">'+adjacent(previous,'이전 작품','←')+adjacent(next,'다음 작품','→')+'</nav><a class="text-link webtoon-return" href="design.html#public-'+esc(work.id)+'">작품 목록으로 돌아가기 ←</a></footer></article>';
+    '<footer class="webtoon-end"><p class="webtoon-credit">제작: 최희수 · '+esc(work.kind)+'</p>'+(work.links.length?'<div class="webtoon-publications"><h2>'+esc(work.publicationHeading||'공식 게시 기록')+'</h2><nav aria-label="'+esc(work.title)+' 관련 링크">'+publicationLinks+'</nav></div>':'')+'<nav class="webtoon-adjacent" aria-label="다른 작품 읽기">'+adjacent(previous,'이전 작품','←')+adjacent(next,'다음 작품','→')+'</nav><a class="text-link webtoon-return" href="design.html#public-'+esc(work.id)+'">작품 목록으로 돌아가기 ←</a></footer></article>';
 }
