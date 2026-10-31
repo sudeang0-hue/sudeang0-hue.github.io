@@ -48,9 +48,9 @@ export function renderGraphicDesignPortfolio(data, { escapeHtml: esc }) {
     return '<article class="graphic-project" id="graphic-' + work.id + '" aria-labelledby="graphic-' + work.id + '-title">' +
       '<header class="graphic-project-heading"><span class="graphic-project-number" aria-hidden="true">' + String(index + 1).padStart(2, '0') + '</span><div>' +
       '<p class="graphic-category">' + esc(work.category) + '</p><h3 id="graphic-' + work.id + '-title">' + esc(work.title) + '</h3></div></header>' +
-      '<div class="graphic-feature"><div class="graphic-project-copy"><details class="graphic-meta-disclosure"><summary class="graphic-summary">' + esc(work.summary) + ' <span class="graphic-meta-action"><span class="graphic-meta-show sr-only">세부사항 펼치기</span><span class="graphic-meta-hide sr-only">세부사항 접기</span><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="m5 7 5 5 5-5"/></svg></span></summary>' + metadata(work) + '</details>' +
+      '<div class="graphic-feature"><div class="graphic-project-copy"><details class="graphic-meta-disclosure"><summary class="graphic-summary">' + esc(work.summary) + ' <span class="graphic-meta-action"><span class="graphic-meta-show sr-only">세부사항 펼치기</span><span class="graphic-meta-hide sr-only">세부사항 접기</span><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="m5 7 5 5 5-5"/></svg></span></summary>' + metadata(work) +
       (decisions.length ? '<div class="graphic-decisions">' + decisions.map(decision => '<section><h4>' + esc(decision.title) + '</h4><p>' + esc(decision.text) + '</p></section>').join('') + '</div>' : '') +
-      '</div>' + slider(work) + '</div>' +
+      '</details></div>' + slider(work) + '</div>' +
       '</article>';
   };
 
