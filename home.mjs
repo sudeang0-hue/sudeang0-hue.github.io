@@ -56,13 +56,14 @@ export function renderHome() {
       <div class="home-hero-backdrop">${media(homeChapters, true)}<div class="home-hero-shade"></div></div>
       <div class="wrap home-hero-content">
         <div class="home-intro" data-home-intro>
-          <p class="home-eyebrow">CHOI HEESU · DESIGN & DEVELOPMENT</p>
+          <p class="home-eyebrow">CHOI HEESU <span>Unity 클라이언트 · 게임 UI</span></p>
           <h1 id="home-title" aria-label="디자인과 개발 사이, 경험을 잇습니다.">
             <span class="home-title-space" aria-hidden="true"><span>디자인과 개발 사이,</span><em>경험을 잇습니다.</em></span>
             <span class="home-title-typed" aria-hidden="true"><span data-type-line>디자인과 개발 사이,</span><em data-type-line>경험을 잇습니다.</em></span>
           </h1>
           <div class="home-intro-follow">
             <p class="home-description">Unity 개발과 디자인을 연결하는 최희수입니다.<br>화면의 정보와 플레이의 흐름을 함께 다듬습니다.</p>
+            <a class="home-credential" href="tasktown.html"><span>TaskTown · 5인 팀 개발 팀장</span><strong>Steam·STOVE 출시 <span aria-hidden="true">↗</span></strong></a>
             <ul class="home-keywords" aria-label="대표 역량"><li class="is-current">UI 설계</li><li>Unity 구현</li><li>시각적 전달</li></ul>
             <div class="home-actions"><a class="home-primary" href="#selected-work">대표 작업 살펴보기 <span aria-hidden="true">↓</span></a><a class="home-resume-link" href="resume.html">이력서 보기 <span aria-hidden="true">↗</span></a></div>
           </div>
