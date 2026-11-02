@@ -16,12 +16,18 @@ export function renderPublicReader(work, reading, works, { ext }) {
   const publicationLinks = (instagram.length ? '<div class="webtoon-instagram-links">'+instagram.map(link=>ext(link.url,link.label)).join('')+'</div>' : '')+
     (distribution.length ? '<div class="webtoon-distribution-links">'+distribution.map(link=>ext(link.url,link.label)).join('')+'</div>' : '');
   const chapterMenu = reading.chapters.length > 1 ? '<nav class="webtoon-chapters" aria-label="작품 회차">'+reading.chapters.map((chapter,i) => '<a href="#reader-chapter-'+(i+1)+'">'+esc(chapter.title)+'</a>').join('')+'</nav>' : '';
+  const readerImage = (image, chapter, pageIndex, eager) => {
+    const alt = image.alt||work.title+' · '+chapter.title+' '+(pageIndex+1)+'번째 이미지';
+    const picture = '<img src="assets/'+checkedAssetPath(image.previewFile||image.file)+'" alt="'+esc(alt)+'" loading="'+(eager?'eager':'lazy')+'" decoding="async"'+(eager?' fetchpriority="high"':'')+'>';
+    // 화면용 이미지를 읽고, 필요한 때만 별도 탭에서 원본을 내려받습니다.
+    return image.previewFile ? '<a class="zoom-trigger" href="assets/'+checkedAssetPath(image.file)+'" target="_blank" rel="noopener noreferrer" aria-label="'+esc(alt)+' 원본 크게 보기 (새 창)">'+picture+'</a>' : picture;
+  };
   const chapters = reading.chapters.map((chapter,i) => {
     if (!chapter.pages?.length) throw new Error('읽기 이미지가 필요합니다: '+work.id);
     return '<section class="webtoon-chapter" id="reader-chapter-'+(i+1)+'" aria-label="'+esc(chapter.title)+'">'+
       (reading.chapters.length > 1 ? '<h2>'+esc(chapter.title)+'</h2>' : '')+
       (chapter.note ? '<p class="webtoon-chapter-note">'+esc(chapter.note)+'</p>' : '')+
-      '<div class="webtoon-pages">'+chapter.pages.map((image,pageIndex) => '<img src="assets/'+checkedAssetPath(image.file)+'" alt="'+esc(image.alt||work.title+' · '+chapter.title+' '+(pageIndex+1)+'번째 이미지')+'" loading="'+(i===0&&pageIndex===0?'eager':'lazy')+'" decoding="async"'+(i===0&&pageIndex===0?' fetchpriority="high"':'')+'>').join('')+'</div></section>';
+      '<div class="webtoon-pages">'+chapter.pages.map((image,pageIndex) => readerImage(image,chapter,pageIndex,i===0&&pageIndex===0)).join('')+'</div></section>';
   }).join('');
   const adjacent = (other,label,arrow) => other ? '<a href="'+publicReaderPath(other.id)+'"><span>'+label+' '+arrow+'</span><strong>'+esc(other.title)+'</strong></a>' : '<span class="webtoon-adjacent-empty" aria-hidden="true"></span>';
   return '<article class="webtoon-reader" id="reader-top" data-reader-work="'+esc(work.id)+'"><header class="webtoon-head"><p class="eyebrow">'+esc(work.year)+' · '+esc(work.kind)+'</p><h1>'+esc(work.title)+'</h1><p class="webtoon-description">'+esc(work.description)+'</p>'+(reading.note?'<p class="webtoon-scope">'+esc(reading.note)+'</p>':'')+chapterMenu+'</header>'+chapters+

@@ -9,6 +9,7 @@ if(figmaPlayer){
  const buttons=[...figmaPlayer.querySelectorAll('[data-figma-flow]')];
  let selected=buttons.find(button=>button.getAttribute('aria-pressed')==='true')||buttons[0];
  let started=false;
+ let loadObserver=null;
  function checkedURL(value,host){
   const url=new URL(value);
   if(url.protocol!=='https:'||url.hostname!==host||!url.pathname.startsWith('/proto/')) throw new Error('Invalid Figma prototype URL');
@@ -23,20 +24,31 @@ if(figmaPlayer){
   if(started) frame.src=checkedURL(selected.dataset.figmaSrc,'embed.figma.com');
  }
  buttons.forEach(button=>button.addEventListener('click',()=>{
-  if(button===selected) return;
-  selected=button;showSelected();
+  if(button===selected){startPrototype();return;}
+  selected=button;
+  if(started)showSelected();else startPrototype();
  }));
  // 최초 자동 준비에서는 포커스를 빼앗지 않습니다. 직접 재생·재시작할 때만 이동합니다.
  function startPrototype(moveFocus=false){
-  started=true;placeholder.hidden=true;frame.hidden=false;resetButton.hidden=false;
-  showSelected();
+  if(!started){
+   started=true;loadObserver?.disconnect();
+   placeholder.hidden=true;frame.hidden=false;resetButton.hidden=false;
+   showSelected();
+  }
   if(moveFocus) frame.focus();
  }
  loadButton.addEventListener('click',()=>startPrototype(true));
  resetButton.addEventListener('click',()=>{if(started){showSelected();frame.focus();}});
  figmaPlayer.querySelector('[data-figma-controls]').hidden=false;
  loadButton.hidden=false;
- startPrototype();
+ showSelected();
+ // 첫 화면의 게임 영상·소개를 먼저 읽고, 프로토타입에 가까워졌을 때만 외부 리소스를 준비합니다.
+ if(typeof IntersectionObserver==='function'){
+  loadObserver=new IntersectionObserver(entries=>{
+   if(entries.some(entry=>entry.target===figmaPlayer&&entry.isIntersecting))startPrototype();
+  },{rootMargin:'320px 0px'});
+  loadObserver.observe(figmaPlayer);
+ }
 
  const expandButton=figmaPlayer.querySelector('[data-figma-expand]');
  const viewport=figmaPlayer.querySelector('[data-figma-viewport]');
@@ -77,6 +89,7 @@ if(figmaPlayer){
 
   function openExpanded(){
    if(expanded)return;
+   startPrototype();
    expanded={
     x:window.scrollX,y:window.scrollY,top:figmaPlayer.getBoundingClientRect().top,
     landscape:window.innerWidth>window.innerHeight,

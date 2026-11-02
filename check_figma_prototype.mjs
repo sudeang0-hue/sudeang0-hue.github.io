@@ -47,7 +47,7 @@ class Element {
  focus(options){this.document.activeElement=this;this.focusOptions=options;this.emit('focus');}
 }
 
-function setup({supported=true,observer=true,present=true,expandPresent=true,viewportPresent=true}={}){
+function setup({supported=true,observer=true,loadingObserver=true,present=true,expandPresent=true,viewportPresent=true}={}){
  const document=new Element(),window=new Element();
  const make=(tag='div')=>{const element=new Element(tag,supported);element.document=document;return element;};
  const html=make('html'),body=make('body'),siteHeader=make('header'),main=make('main'),footer=make('footer');
@@ -86,9 +86,16 @@ function setup({supported=true,observer=true,present=true,expandPresent=true,vie
   observe(element){this.targets.add(element);}
   disconnect(){this.targets.clear();this.disconnects++;}
  }
- vm.runInNewContext(source,{document,window,URL,ResizeObserver:observer?Observer:undefined});
- return {document,window,html,body,siteHeader,main,footer,section,intro,player,after,beforeInert,viewport,frame,load,reset,external,expand,flows,observers,scrolls,
+ const loadingObservers=[];
+ class LoadingObserver {
+  constructor(callback,options){this.callback=callback;this.options=options;this.targets=new Set();this.disconnects=0;loadingObservers.push(this);}
+  observe(element){this.targets.add(element);}
+  disconnect(){this.targets.clear();this.disconnects++;}
+ }
+ vm.runInNewContext(source,{document,window,URL,ResizeObserver:observer?Observer:undefined,IntersectionObserver:loadingObserver?LoadingObserver:undefined});
+ return {document,window,html,body,siteHeader,main,footer,section,intro,player,after,beforeInert,viewport,frame,placeholder,load,reset,external,expand,flows,observers,loadingObservers,scrolls,
   srcWrites:()=>srcWrites,expanded:()=>player.classes.has('is-expanded'),
+  approach:visible=>loadingObservers[0]?.callback([{target:player,isIntersecting:visible}]),
   guards:()=>player.children.filter(element=>element.tagName==='SPAN'),
   click:()=>expand.emit('click'),key:(key,shiftKey=false)=>document.emit('keydown',{key,shiftKey}),
  };
@@ -96,16 +103,44 @@ function setup({supported=true,observer=true,present=true,expandPresent=true,vie
 let passed=0;
 function test(name,action){try{action();passed++;}catch(error){throw new Error(`${name}: ${error.message}`,{cause:error});}}
 
-test('첫 자동 준비는 초점을 빼앗지 않고 기존 시작 화면을 재생',()=>{
+test('페이지 진입 시 외부 iframe 요청 없이 선택 흐름과 외부 링크를 준비',()=>{
  const s=setup();
- assert.equal(s.srcWrites(),1);assert.match(s.frame.src,/node-id=0/);
+ assert.equal(s.srcWrites(),0);assert.equal(s.frame.hidden,true);assert.equal(s.placeholder.hidden,false);
+ assert.equal(s.load.hidden,false);assert.equal(s.reset.hidden,true);assert.match(s.external.href,/node-id=0/);
  assert.equal(s.document.activeElement,s.siteHeader);assert.equal(s.expand.hidden,false);
  assert.equal(s.guards().length,2);assert.ok(s.guards().every(guard=>guard.hidden));
 });
 
-test('inert 또는 확대 마크업이 없으면 기존 재생만 유지',()=>{
+test('화면 근접 시에만 자동 준비하고 반복 알림으로 iframe을 재시작하지 않음',()=>{
+ const s=setup();s.approach(false);assert.equal(s.srcWrites(),0);
+ s.approach(true);assert.equal(s.srcWrites(),1);assert.match(s.frame.src,/node-id=0/);
+ assert.equal(s.document.activeElement,s.siteHeader);assert.equal(s.frame.hidden,false);assert.equal(s.placeholder.hidden,true);
+ assert.equal(s.reset.hidden,false);assert.equal(s.loadingObservers[0].targets.size,0);
+ s.approach(true);s.approach(false);s.approach(true);assert.equal(s.srcWrites(),1);
+});
+
+test('직접 재생은 근접 알림을 기다리지 않고 로드하며 중복 클릭에도 현재 흐름 유지',()=>{
+ const s=setup();s.load.emit('click');assert.equal(s.srcWrites(),1);assert.equal(s.document.activeElement,s.frame);
+ s.load.emit('click');s.approach(true);assert.equal(s.srcWrites(),1);
+});
+
+test('초기 흐름 버튼과 다른 흐름 버튼 모두 즉시 선택한 프로토타입을 재생',()=>{
+ for(const index of [0,1]){
+  const s=setup();s.flows[index].emit('click');assert.equal(s.srcWrites(),1);
+  assert.match(s.frame.src,new RegExp(`node-id=${index}`));assert.match(s.external.href,new RegExp(`node-id=${index}`));
+  s.approach(true);s.flows[index].emit('click');assert.equal(s.srcWrites(),1);
+ }
+});
+
+test('IntersectionObserver가 없어도 직접 재생과 확대 동작으로 시작 가능',()=>{
+ const direct=setup({loadingObserver:false});assert.equal(direct.srcWrites(),0);
+ direct.load.emit('click');assert.equal(direct.srcWrites(),1);
+ const expanded=setup({loadingObserver:false});expanded.click();assert.equal(expanded.srcWrites(),1);assert.equal(expanded.expanded(),true);
+});
+
+test('inert 또는 확대 마크업이 없으면 지연 로딩과 기존 흐름 전환을 유지',()=>{
  for(const options of [{supported:false},{expandPresent:false},{viewportPresent:false}]){
-  const s=setup(options);assert.equal(s.expand.hidden,true);assert.equal(s.srcWrites(),1);assert.equal(s.guards().length,0);
+  const s=setup(options);assert.equal(s.expand.hidden,true);assert.equal(s.srcWrites(),0);assert.equal(s.guards().length,0);
   s.flows[1].emit('click');assert.match(s.frame.src,/node-id=1/);
  }
  const absent=setup({present:false});assert.equal(absent.srcWrites(),0);assert.equal(absent.guards().length,0);
@@ -201,7 +236,7 @@ test('확대 중 흐름 전환·재시작은 동작하고 닫기 자체는 선�
 
 test('기존 HTTPS·호스트·프로토타입 경로 검증은 유지',()=>{
  for(const bad of ['http://embed.figma.com/proto/file','https://example.com/proto/file','https://embed.figma.com/design/file']){
-  const s=setup();s.flows[1].dataset.figmaSrc=bad;
+  const s=setup();s.approach(true);s.flows[1].dataset.figmaSrc=bad;
   assert.throws(()=>s.flows[1].emit('click'),/Invalid Figma prototype URL/);assert.equal(s.srcWrites(),1);
  }
 });

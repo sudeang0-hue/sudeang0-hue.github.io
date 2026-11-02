@@ -505,14 +505,17 @@
           "pages": [
             {
               "file": "public-gj-book-2023-04-01.jpg",
+              "previewFile": "public-gj-book-2023-04-01-preview.webp",
               "alt": "민관협력 사례공유회 결과보고집 · 서책 삽입 원고 1쪽"
             },
             {
               "file": "public-gj-book-2023-04-02.jpg",
+              "previewFile": "public-gj-book-2023-04-02-preview.webp",
               "alt": "민관협력 사례공유회 결과보고집 · 서책 삽입 원고 2쪽"
             },
             {
               "file": "public-gj-book-2023-04-03.jpg",
+              "previewFile": "public-gj-book-2023-04-03-preview.webp",
               "alt": "민관협력 사례공유회 결과보고집 · 서책 삽입 원고 3쪽"
             }
           ]
