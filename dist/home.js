@@ -239,6 +239,19 @@
   const fullText = lines.map(line => [...line.textContent]);
   const follow = intro.querySelector('.home-intro-follow');
   let typeTimer;
+  function firstIntroVisit() {
+    try {
+      const key = 'portfolio-home-intro-v1';
+      const storage = window.sessionStorage;
+      if (storage.getItem(key) === '1') return false;
+      // 연출 도중 페이지를 떠나도 같은 방문에서는 다시 기다리지 않도록 먼저 기록합니다.
+      storage.setItem(key, '1');
+      return true;
+    } catch {
+      // 저장소를 사용할 수 없는 환경에서는 내용을 바로 표시합니다.
+      return false;
+    }
+  }
   function finishTyping() {
     clearTimeout(typeTimer);
     lines.forEach((line, index) => { line.textContent = fullText[index].join(''); line.classList.remove('is-writing'); });
@@ -246,7 +259,7 @@
     follow.inert = false;
   }
   function typeIntro() {
-    if (!allowMotion()) return;
+    if (!firstIntroVisit() || !allowMotion() || document.hidden) { finishTyping(); return; }
     intro.classList.add('is-typing');
     follow.inert = true;
     lines.forEach(line => { line.textContent = ''; });
