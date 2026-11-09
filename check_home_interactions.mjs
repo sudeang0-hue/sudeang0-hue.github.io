@@ -58,7 +58,7 @@ function media(chapters) {
   return root;
 }
 
-function setup({ width = 390, reduced = false, saveData = false, start = 500 } = {}) {
+function setup({ width = 390, reduced = false, saveData = false, start = 500, storage = new Map(), storageFailure = '' } = {}) {
   const home = new Element(), hero = new Element(), group = new Element(), intro = new Element();
   const heroMedia = media(homeChapters);
   hero.map['[data-home-media]'] = heroMedia;
@@ -85,6 +85,19 @@ function setup({ width = 390, reduced = false, saveData = false, start = 500 } =
   window.visualViewport = new Element();
   window.visualViewport.height = 1000;
   window.visualViewport.offsetTop = 0;
+  Object.defineProperty(window, 'sessionStorage', { get: () => {
+    if (storageFailure === 'access') throw new Error('Storage access denied');
+    return {
+      getItem: key => {
+        if (storageFailure === 'read') throw new Error('Storage read denied');
+        return storage.get(key) ?? null;
+      },
+      setItem: (key, value) => {
+        if (storageFailure === 'write') throw new Error('Storage write denied');
+        storage.set(key, value);
+      },
+    };
+  } });
   connection.saveData = saveData;
   const queries = new Map();
   const matchMedia = query => {
@@ -121,7 +134,17 @@ function setup({ width = 390, reduced = false, saveData = false, start = 500 } =
     await Promise.resolve();
   };
   const state = {
-    cards, group, document, window, connection, setStart, step, visible,
+    cards, group, document, window, connection, setStart, step, visible, intro, lines, storage,
+    follow: intro.map['.home-intro-follow'],
+    finishTimers: () => {
+      let count = 0;
+      while (timers.size) {
+        assert.ok(++count < 100, '타이핑 타이머가 종료되어야 합니다.');
+        const [id, callback] = timers.entries().next().value;
+        timers.delete(id);
+        callback();
+      }
+    },
     active: () => cards.flatMap((card, index) => card.classes.has('is-active') ? [index] : []),
     videos: index => cards[index].media.layers.map(layer => layer.map.video),
     image: index => cards[index].media.layers.find(layer => layer.classes.has('is-visible')).map.img.src,
@@ -149,6 +172,71 @@ function onlyActive(state, index) {
   assert.equal(state.group.classes.has('has-active'), index !== null);
 }
 const allPaused = state => state.cards.every((_, index) => state.videos(index).every(video => video.paused));
+const fullIntro = ['디자인과 개발 사이,', '경험을 잇습니다.'];
+function introIsReady(state) {
+  assert.equal(state.intro.classes.has('is-typing'), false);
+  assert.equal(state.follow.inert, false);
+  assert.deepEqual(state.lines.map(line => line.textContent), fullIntro);
+}
+
+await test('첫 방문에는 타이핑을 시작하고 끝나면 설명을 표시', async () => {
+  const state = setup();
+  assert.equal(state.intro.classes.has('is-typing'), true);
+  assert.equal(state.follow.inert, true);
+  assert.deepEqual(state.lines.map(line => line.textContent), ['', '']);
+  state.finishTimers();
+  introIsReady(state);
+});
+await test('같은 방문에서 홈을 다시 열면 타이핑 없이 바로 표시', async () => {
+  const storage = new Map();
+  const first = setup({ storage });
+  first.finishTimers();
+  const revisit = setup({ storage });
+  introIsReady(revisit);
+  revisit.finishTimers();
+  introIsReady(revisit);
+});
+await test('첫 타이핑이 끝나기 전에 이동해도 재방문 연출을 반복하지 않음', async () => {
+  const storage = new Map();
+  const first = setup({ storage });
+  assert.equal(first.intro.classes.has('is-typing'), true);
+  const revisit = setup({ storage });
+  introIsReady(revisit);
+});
+await test('뒤로 가기 캐시에서 복귀해도 제목이 지워지거나 다시 타이핑되지 않음', async () => {
+  const state = setup();
+  state.window.emit('pagehide');
+  introIsReady(state);
+  state.window.emit('pageshow');
+  state.finishTimers();
+  introIsReady(state);
+});
+await test('새 방문에서는 타이핑이 다시 한 번 실행', async () => {
+  const previous = setup();
+  previous.finishTimers();
+  const newVisit = setup();
+  assert.equal(newVisit.intro.classes.has('is-typing'), true);
+  newVisit.finishTimers();
+  introIsReady(newVisit);
+});
+await test('모션 감소·데이터 절약 첫 방문은 바로 표시하고 재방문에도 반복하지 않음', async () => {
+  for (const option of [{ reduced: true }, { saveData: true }]) {
+    const storage = new Map();
+    const first = setup({ ...option, storage });
+    introIsReady(first);
+    first.finishTimers();
+    introIsReady(first);
+    introIsReady(setup({ storage }));
+  }
+});
+await test('방문 저장소 접근·읽기·쓰기 차단은 오류 없이 내용을 즉시 표시', async () => {
+  for (const storageFailure of ['access', 'read', 'write']) {
+    const state = setup({ storageFailure });
+    introIsReady(state);
+    state.finishTimers();
+    introIsReady(state);
+  }
+});
 
 await test('첫 로드와 순방향·역방향 스크롤은 한 카드만 선택', async () => {
   const state = setup();
@@ -287,4 +375,4 @@ await test('모션 감소·데이터 절약 최초 진입은 영상 다운로드
   }
 });
 
-console.log(`홈 고정 기준선·모바일 자동 재생·PC 입력·페이지 복귀·모션 설정 회귀 검사 통과: ${passed}개`);
+console.log(`홈 첫 방문 연출·모바일 자동 재생·PC 입력·페이지 복귀·모션 설정 회귀 검사 통과: ${passed}개`);

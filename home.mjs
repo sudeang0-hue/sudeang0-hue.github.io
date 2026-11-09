@@ -65,8 +65,8 @@ export function renderHome() {
             <p class="home-description">Unity 개발과 디자인을 연결하는 최희수입니다.<br>화면의 정보와 플레이의 흐름을 함께 다듬습니다.</p>
             <a class="home-credential" href="tasktown.html"><span>TaskTown · 5인 팀 개발 팀장</span><strong>Steam·STOVE 출시 <span aria-hidden="true">↗</span></strong></a>
             <ul class="home-keywords" aria-label="대표 역량"><li class="is-current">UI 설계</li><li>Unity 구현</li><li>시각적 전달</li></ul>
-            <div class="home-actions"><a class="home-primary" href="#selected-work">대표 작업 살펴보기 <span aria-hidden="true">↓</span></a><a class="home-resume-link" href="resume.html">이력서 보기 <span aria-hidden="true">↗</span></a></div>
           </div>
+          <div class="home-actions"><a class="home-primary" href="#selected-work">대표 작업 살펴보기 <span aria-hidden="true">↓</span></a><a class="home-resume-link" href="resume.html">이력서 보기 <span aria-hidden="true">↗</span></a></div>
         </div>
         <div class="home-reel">
           <div class="home-reel-caption"><p class="home-reel-label" data-chapter-label>${homeChapters[0].label}</p><a href="gamelab.html" data-chapter-link><strong data-chapter-title>${homeChapters[0].title}</strong><span aria-hidden="true">↗</span></a><p data-chapter-role>${homeChapters[0].role}</p></div>
