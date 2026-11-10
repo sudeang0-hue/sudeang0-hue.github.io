@@ -7,6 +7,7 @@
 .redesign-change-map{display:none;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:1}
 .redesign-change-mark{position:absolute;border:2px solid #f6dc84;box-shadow:0 0 0 1px #1c201db3,0 0 12px #f6dc8429;border-radius:3px}
 .redesign-change-mark>span{position:absolute;left:0;top:0;display:grid;place-items:center;min-width:22px;height:22px;padding:0 4px;background:#f6dc84;color:#20241f;font-size:12px;font-weight:700;line-height:1}
+.redesign-change-leader{display:none}
 #redesign .redesign-change-list{display:none;list-style:none;padding:0;margin:12px 0 0;gap:10px}
 #redesign .redesign-change-list li{display:grid;grid-template-columns:24px 1fr;align-items:start;gap:8px;margin:0;font-size:12px;line-height:1.7}
 .redesign-change-number{display:grid;place-items:center;width:24px;height:24px;border:1px solid var(--green);color:var(--green);font-weight:600;line-height:1}
@@ -21,6 +22,14 @@
  #redesign .redesign-change-toolbar p{flex:1;min-width:155px;font-size:12px}
  #redesign .redesign-change-list li{font-size:14px}
  .redesign-change-toggle{font-size:14px}
+}
+/* 이미지 폭을 거의 유지하면서 슬라이드 안에 번호 공간을 확보합니다. 가로 회전도 포함합니다. */
+@media screen and (max-width:640px), screen and (max-width:1024px) and (max-height:500px){
+ .redesign-screen-comparison[data-ready] .redesign-screen-window{width:calc(100% + 20px);margin-left:-20px}
+ .redesign-screen-comparison[data-ready] .redesign-screen-slide{padding-left:28px}
+ .redesign-screen-comparison[data-ready] .redesign-screen-frame{overflow:visible}
+ .redesign-change-mark>span{left:var(--callout-left);top:var(--callout-top);width:22px;padding:0}
+ .redesign-change-leader{display:block;position:absolute;left:var(--leader-left);top:var(--leader-top);width:var(--leader-width);height:1px;background:#f6dc84;box-shadow:0 0 1px #1c201d;transform:rotate(var(--leader-angle));transform-origin:left center}
 }
 @media(prefers-reduced-motion:reduce){.is-showing-changes .redesign-change-mark,.is-showing-changes .redesign-change-list li{animation:none}}
 @media print{.redesign-change-toolbar,.redesign-change-map{display:none!important}}
