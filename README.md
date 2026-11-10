@@ -1,5 +1,13 @@
 # 최희수 포트폴리오
 
+## 2026.11.11 작업 과정 연출
+
+게임랩의 `#redesign-comparison`에서 ‘변경점 보기’를 누르면 After 이미지의 변경 지점과 설명이 0.32초 간격으로 나타납니다. 좌표와 문구는 `gamelab-highlights.json`, 출력과 검증은 `redesign-highlights.mjs`, 표시 동작은 `dist/redesign-highlights.js`와 CSS에서 관리합니다. 좌표는 원본 이미지 전체의 백분율이며, contain 표시의 바깥 여백은 제외합니다. 비교 화면 이동·폭 변경·모션 감소 설정을 지원하고 원본 확대는 유지합니다.
+
+상품 페이지의 `#goods-journey`는 같은 플랑드르 장패드의 도안·채색 → 실물 → 판매 현장을 탭으로 연결합니다. `goods-journey.json`의 사진·설명·기여 표기를 `goods-journey.mjs`에서 출력하고 전용 CSS·JS로 표시합니다. 채색 진행 자료와 최종 인쇄 도안을 구분하고 공동 진열 사진의 팀원 상품도 명시합니다. 클릭·좌우 방향키·Home/End로 전환하며, 스크립트가 없으면 세 단계가 모두 표시됩니다. 기존 원본 이미지와 상세 기록은 유지합니다.
+
+검사: `node check_redesign_highlights.mjs`, `node check_goods_journey.mjs`. 새 문구·사진을 바꿀 때에는 같은 상품인지, 실제 변경 근거가 있는지와 좌표 정렬을 PC·모바일에서 함께 확인합니다.
+
 홈 / 게임 개발 / 디자인 및 홍보 / 굿즈 기획·제작 / 연혁 순서의 공통 메뉴를 사용하는 주요 페이지 8개와 작품 읽기 페이지 25개로 구성한 정적 사이트입니다.
 
 공개 주소: https://sudeang0-hue.github.io/
