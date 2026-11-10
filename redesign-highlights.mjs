@@ -17,7 +17,7 @@ export function validateHighlights(screens, highlights) {
 export function renderChangeMarkers(points) {
   return '<span class="redesign-change-map" aria-hidden="true">' + points.map((point, index) => {
     const [x, y, width, height] = point.rect;
-    return `<span class="redesign-change-mark" style="left:${x}%;top:${y}%;width:${width}%;height:${height}%;--change-order:${index}"><span>${index + 1}</span></span>`;
+    return `<span class="redesign-change-mark" style="left:${x}%;top:${y}%;width:${width}%;height:${height}%;--change-order:${index}"><i class="redesign-change-leader"></i><span>${index + 1}</span></span>`;
   }).join('') + '</span>';
 }
 
