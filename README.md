@@ -61,6 +61,8 @@
 
 `project-links.json`의 `gamelab` 또는 `tasktown` 아래 `steam`, `stove`에 해당 게임의 HTTPS 상점 주소를 입력한 뒤 `node generate.mjs`를 실행하고 새 버전을 공개합니다. 빈 문자열 `""`은 ‘준비 중’으로 표시되며 클릭되지 않습니다. 주소를 채우면 같은 위치가 자동으로 실제 링크로 바뀝니다. TaskTown의 기존 주소는 미리 연결되어 있습니다.
 
+게임랩의 STOVE 상점은 2026.11.06 출시를 확인해 연결했습니다. `gamelab.naverLounge`는 네이버 게임 라운지 주소이며, 상세 페이지 상단의 기존 링크 뒤에 표시합니다. PC에서는 링크가 너비에 맞춰 줄바꿈되고 모바일에서는 라운지를 별도 행에 표시합니다.
+
 예: 게임랩 Steam 주소가 준비되면 `gamelab.steam`의 `""` 안에 주소만 넣습니다. Notion·GitHub 링크와 서비스별 아이콘은 공통 링크 표시에서 관리합니다. 아이콘 원본과 출처는 `dist/assets/icons/`, `ICON-SOURCES.md`에 있습니다.
 
 ## 확인과 공개

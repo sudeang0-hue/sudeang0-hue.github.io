@@ -63,6 +63,11 @@ for destination in ('gamelab.html','tasktown.html','resume.html'):
     if destination=='gamelab.html':
         assert '01. OZ GAMELAB' not in detail
         assert 'href="development.html">전체 프로젝트</a>' in detail
+        project_links=json.loads((root.parent/'project-links.json').read_text(encoding='utf-8'))['gamelab']
+        assert f'href="{project_links["stove"]}"' in detail
+        assert f'href="{project_links["naverLounge"]}"' in detail and '네이버 게임 라운지' in detail
+        assert 'aria-label="STOVE 상점 링크 준비 중"' not in detail
+        assert 'aria-label="Steam 상점 링크 준비 중"' in detail
 for file in sorted(root.glob('*.html')):
     raw=file.read_text(encoding='utf-8')
     menu=raw.split('<nav aria-label="주요 메뉴">',1)[1].split('</nav>',1)[0]
