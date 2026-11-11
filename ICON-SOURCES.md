@@ -8,6 +8,7 @@
 | `dist/assets/icons/github.svg` | [Simple Icons 공식 원본](https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/github.svg), 원본 유지 |
 | `dist/assets/icons/notion.svg` | [Simple Icons 공식 원본](https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/notion.svg), 원본 유지 |
 | `dist/assets/icons/stove.svg` | [STOVE 공식 SVG 아이콘 글꼴](https://d2x8kymwjom7h7.cloudfront.net/live/application_no/STATIC/common/stds-font-icon-v2/stds-font-icon.svg)의 `v2-stove-symbol-fill` (U+EA51) path. 원본 윤곽을 유지하고 좌표계를 SVG 표시 방향으로 변환 |
+| `dist/assets/icons/naver-game.svg` | [네이버 게임 공식 단색 아이콘](https://ssl.pstatic.net/static/nng/resource/common/mask-icon.svg), 원본 유지. [공식 사이트](https://game.naver.com/)의 `rel="mask-icon"`에서 확인(2026-11-11). 게임패드와 말풍선 형태의 서비스 심벌 |
 
 STOVE 글꼴과 glyph 매핑은 [공식 스토어](https://store.onstove.com/ko)의 [헤더 스타일시트](https://store.onstove.com/_nuxt_store_v2/gnb.BH3P86XT.css)에서 확인했습니다.
 

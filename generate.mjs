@@ -23,7 +23,7 @@ const profileIntro='Figma로 화면 흐름과 정보 배치를 설계하고, C#�
 const projectLinks=JSON.parse(fs.readFileSync(new URL('./project-links.json',import.meta.url),'utf8'));
 const brandFor=href=>{
  const host=new URL(href).hostname;
- return host==='github.com'?'github':host==='app.notion.com'||host==='www.notion.so'||host.endsWith('.notion.site')?'notion':host==='store.steampowered.com'?'steam':host==='store.onstove.com'?'stove':null;
+ return host==='github.com'?'github':host==='app.notion.com'||host==='www.notion.so'||host.endsWith('.notion.site')?'notion':host==='store.steampowered.com'?'steam':host==='store.onstove.com'?'stove':host==='game.naver.com'?'naver-game':null;
 };
 const brandIcon=brand=>brand?'<img class="link-icon brand-mono" src="assets/icons/'+brand+'.svg" width="18" height="18" alt="" aria-hidden="true">':'';
 const ext=(href,text,cls='text-link')=>{
