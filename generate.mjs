@@ -39,7 +39,14 @@ const storeLink=(project,platform)=>{
  if(url.protocol!=='https:'||url.hostname!==(platform==='steam'?'store.steampowered.com':'store.onstove.com')) throw new Error('Use the official HTTPS store URL: '+project+'.'+platform);
  return ext(url.href,label,'text-link store-link');
 };
-const projectActions=(project,portfolio,code,codeLabel='GitHub')=>'<div class="links project-links">'+storeLink(project,'steam')+storeLink(project,'stove')+ext(portfolio,'전체 포트폴리오')+ext(code,codeLabel)+'</div>';
+const loungeLink=project=>{
+ const href=projectLinks[project]?.naverLounge;
+ if(!href) return '';
+ const url=new URL(checkedExternalURL(href));
+ if(url.hostname!=='game.naver.com'||!url.pathname.startsWith('/lounge/')) throw new Error('Use the official Naver Game lounge URL: '+project);
+ return ext(url.href,'네이버 게임 라운지','text-link community-link');
+};
+const projectActions=(project,portfolio,code,codeLabel='GitHub')=>'<div class="links project-links">'+storeLink(project,'steam')+storeLink(project,'stove')+ext(portfolio,'전체 포트폴리오')+ext(code,codeLabel)+loungeLink(project)+'</div>';
 const zoom=(file,alt,caption='',className='',captionPrefixHtml='')=>'<figure class="media '+escapeHtml(className)+'"><button class="zoom-trigger" type="button" data-zoom data-caption="'+escapeHtml(alt)+'" aria-label="'+escapeHtml(alt)+' 크게 보기"><img src="assets/'+checkedAssetPath(file)+'" alt="'+escapeHtml(alt)+'" loading="lazy" decoding="async"></button><figcaption>'+captionPrefixHtml+escapeHtml(caption)+' <span class="zoom-hint">이미지 확대 ↗</span></figcaption></figure>';
 const mini=(file,alt,label)=>'<figure><span class="figure-tag">'+escapeHtml(label)+'</span><button class="zoom-trigger" type="button" data-zoom aria-label="'+escapeHtml(alt)+' 크게 보기"><img src="assets/'+checkedAssetPath(file)+'" alt="'+escapeHtml(alt)+'" loading="lazy"></button></figure>';
 const section=(id,num,label,body)=>'<section class="case" id="'+id+'"><div class="case-label"><span class="num">'+num+'</span><h2>'+label+'</h2></div><div class="case-body">'+body+'</div></section>';

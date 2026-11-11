@@ -144,3 +144,6 @@
   .gamelab-intro-copy .project-intro { color: var(--muted); }
   .gamelab-intro-copy .eyebrow { color: var(--green); }
 }
+/* 상점·포트폴리오·커뮤니티 링크는 화면 너비에 맞춰 자연스럽게 이어집니다. */
+@media(min-width:641px){[data-gamelab-background-page] .project-links{display:flex;flex-wrap:wrap}}
+@media(max-width:640px){[data-gamelab-background-page] .project-links .community-link{grid-column:1 / -1}}
