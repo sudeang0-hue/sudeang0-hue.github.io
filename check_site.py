@@ -70,6 +70,9 @@ for destination in ('gamelab.html','tasktown.html','resume.html'):
         assert 'aria-label="Steam 상점 링크 준비 중"' in detail
         assert detail.index('class="links project-links"') < detail.index('class="gamelab-trailer"') < detail.index('id="goods-gamelab-showcase"')
         assert '<h2 id="gamelab-trailer-title">게임 트레일러</h2>' in detail
+        assert 'src="assets/gamelab-trailer-1080p.mp4" type="video/mp4"' in detail
+        assert 'poster="assets/gamelab-trailer-poster.jpg"' in detail
+        assert 'gamelab-trailer.js?v=' in detail
 for file in sorted(root.glob('*.html')):
     raw=file.read_text(encoding='utf-8')
     menu=raw.split('<nav aria-label="주요 메뉴">',1)[1].split('</nav>',1)[0]

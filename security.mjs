@@ -15,12 +15,6 @@ export const contentSecurityPolicy = [
   'upgrade-insecure-requests',
 ].join('; ');
 
-// 트레일러를 표시하는 게임랩에서만 해당 영상의 삽입 주소를 허용합니다.
-export const gamelabTrailerEmbedURL = 'https://www.youtube-nocookie.com/embed/5l2vEWyUouU';
-export const gamelabContentSecurityPolicy = contentSecurityPolicy.replace(
-  /(frame-src [^;]+)/, '$1 ' + gamelabTrailerEmbedURL,
-);
-
 export const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 }[char]));

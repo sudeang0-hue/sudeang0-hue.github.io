@@ -13,6 +13,7 @@ export function withGamelabBackground(html, assetURL) {
     + '<link rel="stylesheet" href="' + asset('figma-prototype.css') + '">'
     + '<script src="' + asset('gamelab-background.js') + '" defer></script>'
     + '<script src="' + asset('gamelab-intro.js') + '" defer></script>'
+    + '<script src="' + asset('gamelab-trailer.js') + '" defer></script>'
     + '<script src="' + asset('goods-slider.js') + '" defer></script>';
   const revealCopy = copy => copy
     .replace('<span class="eyebrow">', '<span class="eyebrow" data-gamelab-reveal>')

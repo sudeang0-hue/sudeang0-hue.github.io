@@ -117,9 +117,27 @@
 .gamelab-showcase { margin-bottom: 32px; }
 .gamelab-trailer { margin-bottom: 36px; }
 .gamelab-trailer h2 { margin: 0 0 12px; font-size: 18px; line-height: 1.5; letter-spacing: 0; }
-.gamelab-trailer iframe { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; min-height: 200px; border: 0; background: #000; }
+.gamelab-trailer-player { position: relative; aspect-ratio: 16 / 9; background: #000; overflow: hidden; }
+.gamelab-trailer-player video { display: block; width: 100%; height: 100%; max-height: none; aspect-ratio: 16 / 9; object-fit: contain; background: #000; }
+.gamelab-trailer-player:fullscreen { width: 100%; height: 100%; max-width: none; margin: 0; aspect-ratio: auto; }
+body.has-trailer-fullscreen { overflow: hidden; }
+.gamelab-trailer-player.is-expanded { position: fixed; inset: 0; z-index: 100; width: 100%; height: 100%; height: 100dvh; max-width: none; margin: 0; aspect-ratio: auto; }
+.trailer-controls { position: absolute; inset: auto 12px 12px; display: flex; align-items: center; gap: 8px; transition: opacity .2s; }
+.trailer-controls[hidden] { display: none; }
+.trailer-controls button { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; padding: 10px; border: 1px solid #ffffff80; border-radius: 50%; color: #fff; background: #101813bf; cursor: pointer; }
+.trailer-controls button:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.trailer-controls button[data-trailer-mute] { margin-left: auto; }
+.trailer-controls button[hidden] { display: none; }
+.trailer-controls svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.trailer-controls .trailer-play-icon { fill: currentColor; stroke: none; }
+.trailer-pause-icon, .trailer-muted-icon { display: none; }
+.gamelab-trailer-player.is-playing .trailer-play-icon, .gamelab-trailer-player.is-muted .trailer-sound-icon { display: none; }
+.gamelab-trailer-player.is-playing .trailer-pause-icon, .gamelab-trailer-player.is-muted .trailer-muted-icon { display: block; }
+.gamelab-trailer-player.is-playing:not(.show-controls) .trailer-controls { opacity: 0; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .trailer-controls { transition: none; } }
 @media screen and (max-width: 640px) {
-  .gamelab-trailer iframe { width: calc(100% + 40px); margin-inline: -20px; }
+  .gamelab-trailer-player:not(.is-expanded):not(:fullscreen) { width: calc(100% + 40px); margin-inline: -20px; }
+  .trailer-controls { inset: auto 8px 8px; }
 }
 .gamelab-showcase .goods-slider-heading { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
 .gamelab-showcase .goods-slider-heading .figure-tag { min-width: 0; margin: 0; line-height: 1.7; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
