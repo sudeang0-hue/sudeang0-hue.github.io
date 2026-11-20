@@ -14,10 +14,15 @@ EXPECTED_POLICY = {
     'form-action': ["'none'"], 'upgrade-insecure-requests': [],
 }
 FRAME_SANDBOX = {'allow-scripts', 'allow-same-origin', 'allow-popups', 'allow-popups-to-escape-sandbox'}
+TRAILER_EMBED = 'https://www.youtube-nocookie.com/embed/5l2vEWyUouU'
+TRAILER_SRC = TRAILER_EMBED + '?playsinline=1&rel=0'
+TRAILER_ALLOW = {'autoplay', 'encrypted-media', 'picture-in-picture', 'fullscreen'}
 
 class SecurityDocument(HTMLParser):
-    def __init__(self):
+    def __init__(self, page):
         super().__init__()
+        self.page = page
+        self.trailer_count = 0
         self.errors, self.policy, self.referrer = [], [], []
         self.in_script = False
         self.inline_script = []
@@ -51,13 +56,31 @@ class SecurityDocument(HTMLParser):
             if not {'noopener', 'noreferrer'}.issubset(set(a.get('rel', '').split())):
                 self.errors.append('New tab needs noopener noreferrer')
         if tag == 'iframe':
-            if a.get('referrerpolicy') != 'no-referrer':
-                self.errors.append('Iframe referrer policy')
-            if set(a.get('sandbox', '').split()) != FRAME_SANDBOX:
-                self.errors.append('Iframe sandbox')
-            if a.get('src'):
-                parsed = urlsplit(a['src'])
-                if parsed.scheme != 'https' or parsed.hostname != 'embed.figma.com':
+            parsed = urlsplit(a.get('src', ''))
+            if parsed.hostname == 'www.youtube-nocookie.com':
+                self.trailer_count += 1
+                if self.page != 'gamelab.html':
+                    self.errors.append('YouTube trailer is only allowed on gamelab.html')
+                if a.get('src') != TRAILER_SRC:
+                    self.errors.append('Unexpected YouTube trailer URL')
+                if a.get('title') != '용사때문에 레벨업 게임 트레일러':
+                    self.errors.append('YouTube trailer title')
+                if a.get('loading') != 'lazy':
+                    self.errors.append('YouTube trailer must load lazily')
+                if a.get('referrerpolicy') != 'strict-origin-when-cross-origin':
+                    self.errors.append('YouTube trailer referrer policy')
+                if {value.strip() for value in a.get('allow', '').split(';') if value.strip()} != TRAILER_ALLOW:
+                    self.errors.append('YouTube trailer permissions')
+                if 'allowfullscreen' not in a:
+                    self.errors.append('YouTube trailer fullscreen permission')
+                if 'sandbox' in a or 'srcdoc' in a:
+                    self.errors.append('Unexpected YouTube trailer sandbox or inline document')
+            else:
+                if a.get('referrerpolicy') != 'no-referrer':
+                    self.errors.append('Iframe referrer policy')
+                if set(a.get('sandbox', '').split()) != FRAME_SANDBOX:
+                    self.errors.append('Iframe sandbox')
+                if a.get('src') and (parsed.scheme != 'https' or parsed.hostname != 'embed.figma.com'):
                     self.errors.append('Unexpected iframe origin')
     def handle_data(self, data):
         if self.in_script:
@@ -67,21 +90,29 @@ class SecurityDocument(HTMLParser):
             if ''.join(self.inline_script).strip():
                 self.errors.append('Inline script blocked by policy')
             self.in_script = False
+    def validate(self):
+        if len(self.policy) != 1:
+            self.errors.append('Expected one CSP')
+        else:
+            directives = [item.strip().split() for item in self.policy[0].split(';') if item.strip()]
+            parsed = {parts[0]: parts[1:] for parts in directives}
+            expected_policy = dict(EXPECTED_POLICY)
+            if self.page == 'gamelab.html':
+                expected_policy['frame-src'] = EXPECTED_POLICY['frame-src'] + [TRAILER_EMBED]
+            if len(parsed) != len(directives) or parsed != expected_policy:
+                self.errors.append('Unexpected CSP directives')
+        if self.referrer != ['no-referrer']:
+            self.errors.append('Expected no-referrer meta')
+        if self.trailer_count != (1 if self.page == 'gamelab.html' else 0):
+            self.errors.append('Expected one YouTube trailer only on gamelab.html')
+        return self.errors
 
 results = []
 for file in sorted((ROOT / 'dist').glob('*.html')):
-    doc = SecurityDocument()
+    doc = SecurityDocument(file.name)
     doc.feed(file.read_text(encoding='utf-8'))
-    if len(doc.policy) != 1:
-        doc.errors.append('Expected one CSP')
-    else:
-        directives = [item.strip().split() for item in doc.policy[0].split(';') if item.strip()]
-        parsed = {parts[0]: parts[1:] for parts in directives}
-        if len(parsed) != len(directives) or parsed != EXPECTED_POLICY:
-            doc.errors.append('Unexpected CSP directives')
-    if doc.referrer != ['no-referrer']:
-        doc.errors.append('Expected no-referrer meta')
-    results.append({'page': file.name, 'errors': doc.errors})
+    doc.close()
+    results.append({'page': file.name, 'errors': doc.validate()})
 work_ids=[work['id'] for work in json.loads((ROOT/'design-content.json').read_text(encoding='utf-8'))['works']]
 expected={'index.html','development.html','gamelab.html','tasktown.html','resume.html','planning.html','design.html','history.html'} | {f'webtoon-{work_id}.html' for work_id in work_ids}
 assert {row['page'] for row in results} == expected, 'Expected all main and artwork pages'

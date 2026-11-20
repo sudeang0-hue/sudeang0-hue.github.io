@@ -8,10 +8,12 @@
 
 - 스크립트·이미지·영상·폰트는 같은 사이트의 파일만 허용합니다.
 - Figma 프레임은 `https://embed.figma.com`과 재생 중 이동할 수 있는 `https://www.figma.com` 두 정확한 호스트만 허용합니다. 게임랩 페이지가 열리면 로비 프로토타입을 자동으로 불러오며, 사용자가 전투 흐름을 선택하면 해당 시작점으로 전환합니다.
+- 게임랩 페이지에서만 `frame-src`에 `https://www.youtube-nocookie.com/embed/5l2vEWyUouU` 경로를 추가합니다. 소개 아래의 ‘게임 트레일러’는 이 영상 하나만 표시하며, `?playsinline=1&rel=0`으로 불러옵니다. 다른 페이지에는 YouTube 프레임을 허용하지 않습니다.
 - 기존 인라인 배치와 슬라이드 동작을 위해 스타일에만 `unsafe-inline`을 허용합니다. 스크립트에는 허용하지 않습니다.
 - 네트워크 API 연결, 플러그인 개체, base URL 변경, 폼 제출은 차단합니다.
-- 공통 Referrer-Policy와 Figma 프레임은 `no-referrer`로 설정합니다.
+- 공통 Referrer-Policy와 Figma 프레임은 `no-referrer`로 설정합니다. 위 YouTube 프레임에만 `strict-origin-when-cross-origin`을 지정해 외부 플레이어에 사이트 출처를 전달합니다. 이는 [YouTube 임베드의 출처 식별 요구사항](https://developers.google.com/youtube/terms/required-minimum-functionality#embedded-player-api-client-identity)을 위한 예외이며 페이지 전체 정책은 바꾸지 않습니다.
 - Figma sandbox는 스크립트·자기 출처·사용자 링크 팝업에 필요한 권한만 허용합니다. 팝업 외의 상위 창 이동·다운로드·카메라·마이크·위치 권한은 부여하지 않습니다.
+- YouTube는 제공된 임베드 방식에 맞춰 `sandbox`를 적용하지 않습니다. `allow`는 `autoplay`, `encrypted-media`, `picture-in-picture`, `fullscreen`으로 한정하고 전체화면을 허용합니다. `loading="lazy"`로 불러오며 자동 재생은 요청하지 않습니다.
 
 CSP와 referrer 메타는 페이지에 적용하는 정책입니다. GitHub Pages 서버 응답 헤더를 수정한 것은 아닙니다. 메타 CSP에서 지원하지 않는 `frame-ancestors`는 넣지 않았고, X-Frame-Options·X-Content-Type-Options·Permissions-Policy 같은 HTTP 헤더를 설정했다고 주장하지 않습니다. 서버 헤더가 추가로 필요하면 이를 지원하는 호스팅 또는 응답 프록시 구성을 별도로 검토합니다.
 
@@ -21,7 +23,7 @@ CSP와 referrer 메타는 페이지에 적용하는 정책입니다. GitHub Page
 
 ## 검수
 
-`node generate.mjs`, `python check_site.py`, `python check_security.py` 순서로 실행합니다. GitHub Actions에서도 생성 후 두 검사를 통과해야 배포할 수 있습니다. 사진 확대·슬라이드·테마·인쇄·Figma의 로비/전투 재생은 브라우저에서 함께 확인합니다.
+`node generate.mjs`, `python check_site.py`, `python check_security.py` 순서로 실행합니다. GitHub Actions에서도 생성 후 두 검사를 통과해야 배포할 수 있습니다. 보안 검사는 페이지별 CSP와 기존 Figma 규칙을 확인하고, 게임랩의 트레일러가 정확히 한 개이며 URL·참조 정책·권한·제목·지연 로드 설정이 지정값인지 검사합니다. 트레일러 누락·중복·다른 페이지 삽입과 허용 범위 변경은 거부합니다. 사진 확대·슬라이드·테마·인쇄·Figma의 로비/전투 재생과 트레일러의 재생·전체화면·모바일 비율은 브라우저에서 함께 확인합니다.
 
 공개 사진의 얼굴·메시지·인쇄 계정명과 외부 Notion/Figma의 공유 범위는 코드 검사만으로 판단할 수 없습니다. 사진을 교체해도 과거 커밋의 원본은 별도로 남으므로 공개 이력 정리 여부를 함께 검토합니다. 비밀번호·토큰·원본 백업·지원 문서는 저장소에 넣지 않습니다.
 
