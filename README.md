@@ -1,5 +1,9 @@
 # 최희수 포트폴리오
 
+## 2026.11.20 게임랩 트레일러
+
+게임랩 소개와 상점 이미지 슬라이드 사이에 ‘게임 트레일러’ 제목과 YouTube 플레이어를 표시합니다. 영상 주소는 `security.mjs`의 `gamelabTrailerEmbedURL`, 표시 위치는 `generate.mjs`의 `gameTrailer`, 비율과 여백은 `dist/gamelab-background.css`에서 관리합니다. 영상은 사용자가 눌러 재생하고, 모바일에서는 컨트롤을 표시할 최소 높이를 확보합니다. 영상 주소를 바꿀 때에는 `check_security.py`의 허용 주소도 함께 검토합니다.
+
 ## 2026.11.11 게임랩 변경점 연출
 
 게임랩의 `#redesign-comparison`에서 ‘변경점 보기’를 누르면 After 이미지의 변경 지점과 설명이 0.32초 간격으로 나타납니다. 좌표와 문구는 `gamelab-highlights.json`, 출력과 검증은 `redesign-highlights.mjs`, 표시 동작은 `dist/redesign-highlights.js`와 CSS에서 관리합니다. 좌표는 원본 이미지 전체의 백분율이며, contain 표시의 바깥 여백은 제외합니다. 비교 화면 이동·폭 변경·모션 감소 설정을 지원하고 원본 확대는 유지합니다.
