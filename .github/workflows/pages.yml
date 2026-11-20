@@ -40,6 +40,7 @@ jobs:
           node --check dist/development.js
           node --check dist/design-portfolio.js
           node --check dist/gamelab-intro.js
+          node --check dist/gamelab-trailer.js
           node --check dist/tasktown-intro.js
           node --check dist/goods-slider.js
           node --check dist/figma-prototype.js
@@ -51,6 +52,7 @@ jobs:
           node check_goods_slider.mjs
           node check_redesign_highlights.mjs
           node check_gamelab_intro.mjs
+          node check_gamelab_trailer.mjs
           node check_figma_prototype.mjs
           node check_history.mjs
           node check_private_resume.mjs
