@@ -28,7 +28,7 @@ class Element {
     if (!this.handlers.has(type)) this.handlers.set(type, []);
     this.handlers.get(type).push(callback);
   }
-  emit(type, event = {}) { for (const callback of this.handlers.get(type) || []) callback({ target: this, ...event }); }
+  emit(type, event = {}) { for (const callback of this.handlers.get(type) || []) callback({ type, target: this, ...event }); }
   querySelector(selector) { return this.map[selector] || null; }
   querySelectorAll(selector) { return this.arrays[selector] || []; }
   contains(element) { return element === this || this.children.some(child => child.contains(element)); }
@@ -76,6 +76,8 @@ function setup({ width = 390, reduced = false, saveData = false, start = 500, st
   intro.map['.home-intro-follow'] = new Element();
   home.map = { '[data-home-hero]': hero, '[data-work-cards]': group, '[data-home-intro]': intro };
   for (const name of ['progress', 'label', 'title', 'role', 'link', 'count', 'prev', 'next']) home.map[`[data-chapter-${name}]`] = new Element();
+  const chapterLink = home.map['[data-chapter-link]'];
+  chapterLink.href = homeChapters[0].href;
   home.arrays['.home-keywords li'] = [new Element(), new Element(), new Element()];
   const document = new Element(), window = new Element(), connection = new Element();
   document.map['[data-home]'] = home;
@@ -135,6 +137,7 @@ function setup({ width = 390, reduced = false, saveData = false, start = 500, st
   };
   const state = {
     cards, group, document, window, connection, setStart, step, visible, intro, lines, storage,
+    hero, heroMedia, chapterLink, progress: home.map['[data-chapter-progress]'], next: home.map['[data-chapter-next]'],
     follow: intro.map['.home-intro-follow'],
     finishTimers: () => {
       let count = 0;
@@ -172,6 +175,9 @@ function onlyActive(state, index) {
   assert.equal(state.group.classes.has('has-active'), index !== null);
 }
 const allPaused = state => state.cards.every((_, index) => state.videos(index).every(video => video.paused));
+async function advance(state, ms) {
+  for (let elapsed = 0; elapsed < ms; elapsed += 200) await state.step(Math.min(200, ms - elapsed));
+}
 const fullIntro = ['디자인과 개발 사이,', '경험을 잇습니다.'];
 function introIsReady(state) {
   assert.equal(state.intro.classes.has('is-typing'), false);
@@ -236,6 +242,72 @@ await test('방문 저장소 접근·읽기·쓰기 차단은 오류 없이 내�
     state.finishTimers();
     introIsReady(state);
   }
+});
+
+await test('대표 제목의 호버와 키보드 초점이 모두 벗어나야 남은 시간부터 전환', async () => {
+  for (const leaveHoverFirst of [true, false]) {
+    const state = setup({ width: 1360 });
+    const { chapterLink } = state;
+    state.visible(state.hero, true);
+    await advance(state, 8000);
+    chapterLink.emit('pointerenter', { pointerType: 'mouse' });
+    await advance(state, 11000);
+    assert.equal(chapterLink.href, homeChapters[0].href);
+    assert.equal(state.progress.style.transform, 'scaleX(0.8)');
+    assert.equal(state.heroMedia.layers[0].map.video.paused, false);
+    state.document.activeElement = chapterLink;
+    chapterLink.emit('focus');
+    const blur = () => { state.document.activeElement = null; chapterLink.emit('blur'); };
+    const leave = () => chapterLink.emit('pointerleave', { pointerType: 'mouse' });
+    if (leaveHoverFirst) leave(); else blur();
+    await advance(state, 11000);
+    assert.equal(chapterLink.href, homeChapters[0].href);
+    if (leaveHoverFirst) blur(); else leave();
+    await advance(state, 1800);
+    assert.equal(chapterLink.href, homeChapters[0].href);
+    await advance(state, 200);
+    assert.equal(chapterLink.href, homeChapters[1].href);
+  }
+});
+await test('다음 이미지 준비 중 제목을 선택해도 링크가 바뀌지 않음', async () => {
+  const state = setup({ width: 1360 });
+  const image = state.heroMedia.layers[1].map.img;
+  let finishDecode;
+  image.decode = () => new Promise(resolve => { finishDecode = resolve; });
+  state.visible(state.hero, true);
+  await advance(state, 10000);
+  state.chapterLink.emit('focus');
+  finishDecode();
+  await state.step();
+  assert.equal(state.chapterLink.href, homeChapters[0].href);
+  image.decode = () => Promise.resolve();
+  state.chapterLink.emit('blur');
+  await state.step();
+  assert.equal(state.chapterLink.href, homeChapters[1].href);
+});
+await test('모바일 터치는 자동 전환을 막지 않고 외장 키보드 선택은 멈춤', async () => {
+  const state = setup({ width: 390 });
+  state.visible(state.hero, true);
+  state.chapterLink.emit('pointerenter', { pointerType: 'touch' });
+  await advance(state, 10000);
+  assert.equal(state.chapterLink.href, homeChapters[1].href);
+  state.chapterLink.emit('focus');
+  await advance(state, 11000);
+  assert.equal(state.chapterLink.href, homeChapters[1].href);
+  state.chapterLink.emit('blur');
+  await advance(state, 10000);
+  assert.equal(state.chapterLink.href, homeChapters[2].href);
+});
+await test('모션 감소 설정에서 초점 해제 후에도 자동 정지, 다음 버튼은 수동 전환', async () => {
+  const state = setup({ width: 1360, reduced: true });
+  state.visible(state.hero, true);
+  state.chapterLink.emit('focus');
+  state.chapterLink.emit('blur');
+  await advance(state, 11000);
+  assert.equal(state.chapterLink.href, homeChapters[0].href);
+  state.next.emit('click');
+  await state.step();
+  assert.equal(state.chapterLink.href, homeChapters[1].href);
 });
 
 await test('첫 로드와 순방향·역방향 스크롤은 한 카드만 선택', async () => {

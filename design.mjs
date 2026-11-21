@@ -49,5 +49,5 @@ export function renderDesignPortfolio(data, {escapeHtml: esc, ext, illustration,
     '<section class="public-works" aria-labelledby="public-works-title"><div class="section-line"><h2 id="public-works-title">작품과 활용 기록</h2><span>2022 — 2023</span></div><p class="public-collection-note">'+esc(data.collectionNote)+'</p>'+workList+'</section></section>'+
     renderIllustrationPortfolio(illustration,{escapeHtml:esc,ext})+
     renderGraphicDesignPortfolio(graphicDesign,{escapeHtml:esc})+
-    '<div class="category-return"><a class="text-link" href="#public-work">공공기관 작업 처음으로 ↑</a><a class="text-link" href="history.html">활동·경력 연혁 보기 ↗</a></div></div>';
+    '<div class="category-return"><a class="text-link" href="#public-work">공공기관 작업 처음으로 ↑</a><a class="text-link" href="history.html#history-gwangjin-webtoon">광진구청 근무 경력 보기 ↗</a></div></div>';
 }
