@@ -38,6 +38,8 @@ function setup({playMode = 'success', fullscreenMode = 'success', audioMode = 's
   const volumeGroup = new Element(), volumePanel = new Element(), volume = new Element(), volumeMessage = new Element();
   const document = new Element(), window = new Element();
   document.body = new Element();
+  window.scrollY = 0;
+  window.scrollTo = ({top}) => { window.scrollY = top; };
   document.fullscreenElement = null;
   controls.hidden = true;
   video.controls = true;
@@ -262,6 +264,79 @@ await test('전체화면 거절·미지원 시 화면 안에서 확장하고 버
     assert.equal(state.document.body.classes.has('has-trailer-fullscreen'), false);
     assert.equal(state.fullscreen.attrs.get('aria-label'), '트레일러 전체 화면');
     assert.equal(state.fullscreen.focusCalls, 2);
+  }
+});
+
+await test('확대 중 재생·미디어 오류가 나면 본문으로 복귀하고 기본 영상에 초점을 돌림', async () => {
+  for (const fullscreenMode of ['success', 'reject', 'absent']) {
+    for (const failure of ['play', 'media']) {
+      const state = setup({fullscreenMode, playMode: 'reject'});
+      await state.fullscreen.emit('click');
+      if (failure === 'media') await state.video.emit('error');
+      else await state.play.emit('click');
+      assert.equal(state.document.fullscreenElement, null);
+      assert.equal(state.player.classes.has('is-expanded'), false);
+      assert.equal(state.document.body.classes.has('has-trailer-fullscreen'), false);
+      assert.equal(state.video.controls, true);
+      assert.equal(state.controls.hidden, true);
+      assert.equal(state.video.focusCalls, 1);
+    }
+  }
+});
+
+await test('대체 전체화면 오류·닫기 버튼·Escape 후 확대 직전의 스크롤 위치를 복원함', async () => {
+  const state = setup({fullscreenMode: 'absent'});
+  for (const [index, close] of ['button', 'escape', 'error'].entries()) {
+    const originalTop = 740 + index * 140;
+    state.window.scrollY = originalTop;
+    await state.fullscreen.emit('click');
+    state.window.scrollY -= 118;
+    if (close === 'button') await state.fullscreen.emit('click');
+    if (close === 'escape') await state.document.emit('keydown', {key: 'Escape'});
+    if (close === 'error') await state.video.emit('error');
+    assert.equal(state.window.scrollY, originalTop);
+  }
+});
+
+await test('오류 후 기본 전체화면 종료가 거절되어도 닫기 버튼으로 다시 나갈 수 있음', async () => {
+  const state = setup();
+  await state.fullscreen.emit('click');
+  const exit = state.document.exitFullscreen;
+  state.document.exitFullscreen = async () => { throw new Error('Exit denied'); };
+  await state.video.emit('error');
+  assert.equal(state.document.fullscreenElement, state.player);
+  assert.equal(state.controls.hidden, false);
+  assert.equal(state.fullscreen.hidden, false);
+  assert.equal(state.play.hidden, true);
+  assert.equal(state.mute.hidden, true);
+  assert.equal(state.fullscreen.attrs.get('aria-label'), '트레일러 전체 화면 종료');
+  state.document.exitFullscreen = exit;
+  await state.fullscreen.emit('click');
+  assert.equal(state.document.fullscreenElement, null);
+  assert.equal(state.controls.hidden, true);
+  assert.equal(state.video.focusCalls, 1);
+});
+
+await test('전체화면 진입 대기 중 미디어 오류가 나면 늦은 응답으로 다시 확대하지 않음', async () => {
+  for (const accepted of [true, false]) {
+    const state = setup();
+    let finishRequest;
+    state.player.requestFullscreen = () => new Promise((resolve, reject) => {
+      finishRequest = async () => {
+        if (!accepted) { reject(new Error('Fullscreen denied')); return; }
+        state.document.fullscreenElement = state.player;
+        await state.document.emit('fullscreenchange');
+        resolve();
+      };
+    });
+    const pending = state.fullscreen.emit('click');
+    await state.video.emit('error');
+    await finishRequest();
+    await pending;
+    assert.equal(state.video.controls, true);
+    assert.equal(state.controls.hidden, true);
+    assert.equal(state.document.fullscreenElement, null);
+    assert.equal(state.document.body.classes.has('has-trailer-fullscreen'), false);
   }
 });
 

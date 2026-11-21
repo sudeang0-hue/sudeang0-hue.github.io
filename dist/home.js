@@ -15,7 +15,7 @@
 
   // 화면에 보이는 배경과 선택한 카드만 같은 시계로 재생합니다.
   function wake() {
-    if (!frame && pageActive && !document.hidden && sequences.some(sequence => sequence.running)) {
+    if (!frame && pageActive && !document.hidden && sequences.some(sequence => sequence.advancing)) {
       lastTime = performance.now();
       frame = requestAnimationFrame(tick);
     }
@@ -25,7 +25,7 @@
     const delta = Math.min(now - lastTime, 200);
     lastTime = now;
     sequences.forEach(sequence => sequence.tick(delta));
-    if (sequences.some(sequence => sequence.running)) frame = requestAnimationFrame(tick);
+    if (sequences.some(sequence => sequence.advancing)) frame = requestAnimationFrame(tick);
   }
 
   class MediaSequence {
@@ -44,6 +44,7 @@
       this.wanted = false;
       this.visible = true;
       this.running = false;
+      this.autoHeld = false;
       this.pending = false;
       sequences.push(this);
       this.configureVideo(this.layers[0], this.scenes[0]);
@@ -91,10 +92,21 @@
       this.preloadImage = new Image();
       this.preloadImage.src = `assets/${next.image}`;
     }
-    async show(index) {
+    get advancing() { return this.running && !this.autoHeld; }
+    holdAutomatic(held) {
+      this.autoHeld = held;
+      if (held && this.pending === 'auto') {
+        // 다음 장면의 이미지가 준비되는 중이어도 선택한 링크는 그대로 둡니다.
+        this.version++;
+        this.pending = false;
+        this.targetIndex = this.index;
+      }
+      if (!held) wake();
+    }
+    async show(index, trigger) {
       const version = ++this.version;
       this.targetIndex = index;
-      this.pending = true;
+      this.pending = trigger;
       const scene = this.scenes[index];
       const nextLayerIndex = 1 - this.layerIndex;
       const layer = this.layers[nextLayerIndex];
@@ -125,7 +137,7 @@
     selectChapter(direction) {
       const current = this.scenes[this.targetIndex].chapterIndex;
       const chapter = (current + direction + this.chapters.length) % this.chapters.length;
-      this.show(this.scenes.findIndex(scene => scene.chapterIndex === chapter));
+      this.show(this.scenes.findIndex(scene => scene.chapterIndex === chapter), 'manual');
     }
     progress() {
       const chapter = this.scenes[this.index].chapterIndex;
@@ -135,24 +147,35 @@
       this.onProgress?.(Math.min((passed + this.elapsed) / duration, 1));
     }
     tick(delta) {
-      if (!this.running || this.pending) return;
+      if (!this.advancing || this.pending) return;
       this.elapsed += delta;
       this.progress();
-      if (this.elapsed >= this.scenes[this.index].duration) this.show((this.index + 1) % this.scenes.length);
+      if (this.elapsed >= this.scenes[this.index].duration) this.show((this.index + 1) % this.scenes.length, 'auto');
     }
   }
 
   const hero = home.querySelector('[data-home-hero]');
   const progress = home.querySelector('[data-chapter-progress]');
+  const chapterLink = home.querySelector('[data-chapter-link]');
   const heroSequence = new MediaSequence(hero.querySelector('[data-home-media]'), (chapter, index) => {
     home.querySelector('[data-chapter-label]').textContent = chapter.label;
     home.querySelector('[data-chapter-title]').textContent = chapter.title;
     home.querySelector('[data-chapter-role]').textContent = chapter.role;
-    home.querySelector('[data-chapter-link]').href = chapter.href;
+    chapterLink.href = chapter.href;
     home.querySelector('[data-chapter-count]').textContent = `${String(index + 1).padStart(2, '0')} / 04`;
     home.querySelectorAll('.home-keywords li').forEach((item, keyword) => item.classList.toggle('is-current', keyword === chapter.keyword));
   }, value => { progress.style.transform = `scaleX(${value})`; });
   heroSequence.wanted = true;
+  let titleHovered = false;
+  function updateTitleHover(event) {
+    if (event.pointerType !== 'mouse') return;
+    titleHovered = event.type === 'pointerenter';
+    heroSequence.holdAutomatic(titleHovered || document.activeElement === chapterLink);
+  }
+  chapterLink.addEventListener('pointerenter', updateTitleHover);
+  chapterLink.addEventListener('pointerleave', updateTitleHover);
+  chapterLink.addEventListener('focus', () => heroSequence.holdAutomatic(true));
+  chapterLink.addEventListener('blur', () => heroSequence.holdAutomatic(titleHovered));
   home.querySelector('[data-chapter-prev]').addEventListener('click', () => heroSequence.selectChapter(-1));
   home.querySelector('[data-chapter-next]').addEventListener('click', () => heroSequence.selectChapter(1));
 

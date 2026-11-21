@@ -15,6 +15,7 @@
   let hideTimer;
   let keyboardFocus = false;
   let expanded = false;
+  let scrollBeforeExpand = 0;
   let volumeOpen = false;
   let volumeHover = false;
   let volumeAdjusting = false;
@@ -91,20 +92,27 @@
     showControls();
   };
   const syncFullscreen = () => {
-    fullscreen.setAttribute('aria-label', expanded || document.fullscreenElement === player ? '트레일러 전체 화면 종료' : '트레일러 전체 화면');
+    const nativeFullscreen = document.fullscreenElement === player;
+    fullscreen.setAttribute('aria-label', expanded || nativeFullscreen ? '트레일러 전체 화면 종료' : '트레일러 전체 화면');
+    if (video.controls) controls.hidden = !nativeFullscreen;
     showControls();
   };
   const setExpanded = value => {
+    if (expanded === value) return;
+    if (value) scrollBeforeExpand = window.scrollY;
     expanded = value;
     player.classList.toggle('is-expanded', value);
     document.body.classList.toggle('has-trailer-fullscreen', value);
     syncFullscreen();
-    if (!value) fullscreen.focus({ preventScroll: true });
+    if (!value) {
+      (video.controls ? video : fullscreen).focus({ preventScroll: true });
+      window.scrollTo({ top: scrollBeforeExpand, behavior: 'instant' });
+    }
   };
   const showControls = () => {
     clearTimeout(hideTimer);
     player.classList.add('show-controls');
-    if (!video.paused && !keyboardFocus && !volumeHover && !volumeAdjusting) {
+    if (!video.controls && !video.paused && !keyboardFocus && !volumeHover && !volumeAdjusting) {
       hideTimer = setTimeout(() => {
         setVolumeOpen(false);
         player.classList.remove('show-controls');
@@ -117,10 +125,28 @@
     syncVolume();
     showControls();
   };
+  const exitPlayerFullscreen = async () => {
+    try {
+      await document.exitFullscreen();
+      if (video.controls) video.focus({ preventScroll: true });
+    } catch {
+      // 종료가 거절되면 브라우저가 전체 화면을 해제할 때까지 닫기 버튼을 유지합니다.
+      showControls();
+    }
+  };
   const nativeFallback = () => {
-    clearTimeout(hideTimer);
-    controls.hidden = true;
+    const focusInControls = controls.contains(document.activeElement);
     video.controls = true;
+    play.hidden = true;
+    mute.hidden = true;
+    setVolumeOpen(false);
+    if (expanded) {
+      setExpanded(false);
+      return;
+    }
+    syncFullscreen();
+    if (document.fullscreenElement === player) return exitPlayerFullscreen();
+    if (focusInControls) video.focus({ preventScroll: true });
   };
   const togglePlayback = async () => {
     if (video.controls) return;
@@ -132,7 +158,7 @@
     try { await video.play(); } catch (error) {
       // 로딩 중 정상 일시정지로 취소된 재생 요청은 오류로 처리하지 않습니다.
       if (error.name === 'AbortError') sync();
-      else nativeFallback();
+      else await nativeFallback();
     }
   };
   play.addEventListener('click', togglePlayback);
@@ -182,7 +208,8 @@
   window.addEventListener('pointerup', stopVolumeAdjustment);
   window.addEventListener('pointercancel', stopVolumeAdjustment);
   ['play', 'pause', 'ended', 'volumechange'].forEach(type => video.addEventListener(type, sync));
-  video.addEventListener('error', nativeFallback);
+  // 단일 MP4 소스에서 발생하고 버블링되지 않는 로딩 오류도 처리합니다.
+  video.addEventListener('error', nativeFallback, true);
   player.addEventListener('pointermove', showControls);
   controls.addEventListener('focusin', event => {
     keyboardFocus = event.target.matches(':focus-visible');
@@ -202,13 +229,15 @@
   fullscreen.hidden = false;
   fullscreen.addEventListener('click', async () => {
     if (expanded) { setExpanded(false); return; }
+    if (document.fullscreenElement === player) return exitPlayerFullscreen();
     try {
-      if (document.fullscreenElement) await document.exitFullscreen();
-      else if (player.requestFullscreen) await player.requestFullscreen();
-      else setExpanded(true);
+      if (player.requestFullscreen) {
+        await player.requestFullscreen();
+        if (video.controls && document.fullscreenElement === player) await exitPlayerFullscreen();
+      } else if (!video.controls) setExpanded(true);
     } catch {
       // 전체 화면 API를 제한하는 모바일·앱 브라우저에서는 화면 안에서 확장합니다.
-      setExpanded(true);
+      if (!video.controls) setExpanded(true);
     }
   });
   document.addEventListener('fullscreenchange', syncFullscreen);
@@ -230,4 +259,5 @@
   sync();
   video.controls = false;
   controls.hidden = false;
+  if (video.error) nativeFallback();
 })();
